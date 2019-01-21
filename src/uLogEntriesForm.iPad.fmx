@@ -1,0 +1,103 @@
+inherited Form1_iPad: TForm1_iPad
+  ClientHeight = 1004
+  ClientWidth = 768
+  DesignerMasterStyle = 3
+  inherited TabControl1: TTabControl
+    Size.Width = 768.000000000000000000
+    Size.Height = 960.000000000000000000
+    Sizes = (
+      768s
+      911s)
+    inherited TabItem1: TTabItem
+      Size.Width = 768.000000000000000000
+      ExplicitSize.cx = 320.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      inherited ToolBar2: TToolBar
+        Size.Width = 768.000000000000000000
+      end
+      inherited Image1: TImage
+        Size.Width = 768.000000000000000000
+        Size.Height = 5312.000000000000000000
+      end
+      inherited Panel1: TPanel
+        Position.Y = 589.000000000000000000
+        Size.Width = 768.000000000000000000
+        inherited ListBox1: TListBox
+          Size.Width = 768.000000000000000000
+          Viewport.Width = 763.000000000000000000
+          Viewport.Height = 322.000000000000000000
+          inherited ListBoxGroupHeader1: TListBoxGroupHeader
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Size.Width = 763.000000000000000000
+          end
+          inherited ListBoxItem1: TListBoxItem
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            inherited Switch1: TSwitch
+              Position.Y = 8.000000000000000000
+              Size.Height = 35.000000000000000000
+            end
+          end
+          inherited ListBoxItem2: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 66.000000000000000000
+          end
+          inherited ListBoxItem3: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 110.000000000000000000
+          end
+          inherited ListBoxGroupHeader2: TListBoxGroupHeader
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Position.Y = 154.000000000000000000
+            Size.Width = 763.000000000000000000
+          end
+          inherited ListBoxItem4: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 176.000000000000000000
+          end
+          inherited ListBoxItem5: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 220.000000000000000000
+          end
+          inherited ListBoxItem6: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 264.000000000000000000
+          end
+          inherited ListBoxItem7: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 308.000000000000000000
+          end
+          inherited ListBoxItem8: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 352.000000000000000000
+          end
+          inherited ListBoxItem9: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 396.000000000000000000
+          end
+          inherited ListBoxItem10: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 440.000000000000000000
+          end
+          inherited ListBoxItem11: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 484.000000000000000000
+          end
+          inherited ListBoxItem12: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 528.000000000000000000
+          end
+          inherited ListBoxItem13: TListBoxItem
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            Position.Y = 572.000000000000000000
+          end
+        end
+      end
+    end
+  end
+  inherited ToolBar1: TToolBar
+    Size.Width = 768.000000000000000000
+    inherited lblToolBar: TLabel
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+end

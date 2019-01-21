@@ -1,0 +1,30 @@
+inherited Form1_LgXhdpiTb: TForm1_LgXhdpiTb
+  ClientHeight = 829
+  ClientWidth = 480
+  DesignerMasterStyle = 3
+  inherited TabControl1: TTabControl
+    Size.Width = 480.000000000000000000
+    Size.Height = 781.000000000000000000
+    Sizes = (
+      480s
+      732s
+      480s
+      732s)
+    inherited TabItem1: TTabItem
+      Size.Width = 240.000000000000000000
+      ExplicitSize.cx = 320.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+    end
+    inherited TabItem2: TTabItem
+      Size.Width = 240.000000000000000000
+      ExplicitSize.cx = 320.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+    end
+  end
+  inherited ToolBar1: TToolBar
+    Size.Width = 480.000000000000000000
+    inherited Camera: TLabel
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+end
