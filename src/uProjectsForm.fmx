@@ -1,0 +1,294 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 480
+  ClientWidth = 341
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object TabControl1: TTabControl
+    Align = Client
+    Size.Width = 341.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+    TabHeight = 49.000000000000000000
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = None
+    Sizes = (
+      341s
+      480s
+      341s
+      480s)
+    object tabProjectsList: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'tabProjectsList'
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      object ToolBar1: TToolBar
+        Size.Width = 341.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object speedButtonAdd: TSpeedButton
+          Align = Left
+          Size.Width = 44.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'addtoolbutton'
+          Text = 'speedButtonAdd'
+          OnClick = speedButtonAddClick
+        end
+        object Label1: TLabel
+          Align = Client
+          StyledSettings = [Family, FontColor]
+          Size.Width = 297.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'toollabel'
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          Text = 'Projects'
+          TabOrder = 2
+        end
+      end
+      object listViewProjects: TListView
+        ItemAppearanceClassName = 'TDynamicAppearance'
+        ItemEditAppearanceClassName = 'TDynamicAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        Align = Client
+        Size.Width = 341.000000000000000000
+        Size.Height = 436.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+          item
+            AppearanceObjectName = 'Proj_Id'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 16.000000000000000000
+            Appearance.Font.StyleExt = {00070000000000000004000000}
+            Appearance.Width = 207.000000000000000000
+            Appearance.Height = 28.000000000000000000
+            Appearance.PlaceOffset.Y = 16.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'Proj_Title'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 18.000000000000000000
+            Appearance.Font.StyleExt = {00070000000000000004000000}
+            Appearance.Width = 247.000000000000000000
+            Appearance.PlaceOffset.X = -8.000000000000000000
+            Appearance.PlaceOffset.Y = 72.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'Proj_Description'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 16.000000000000000000
+            Appearance.Font.StyleExt = {00060000000100000004000000}
+            Appearance.WordWrap = True
+            Appearance.Width = 328.000000000000000000
+            Appearance.Height = 139.000000000000000000
+            Appearance.PlaceOffset.X = -8.000000000000000000
+            Appearance.PlaceOffset.Y = 120.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'More'
+            AppearanceClassName = 'TAccessoryObjectAppearance'
+            Appearance.Width = 65.000000000000000000
+            Appearance.PlaceOffset.X = 246.000000000000000000
+          end>
+        ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+          item
+            AppearanceObjectName = 'Text1'
+            AppearanceClassName = 'TTextObjectAppearance'
+          end>
+        ItemAppearanceObjects.FooterObjects.Text.Width = 312.000000000000000000
+        ItemAppearanceObjects.FooterObjects.Text.PlaceOffset.X = -8.000000000000000000
+        ItemAppearanceObjects.FooterObjects.Text.PlaceOffset.Y = 144.000000000000000000
+      end
+    end
+    object tabProjectsEdit: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'tabProjectsEdit'
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      object ToolBar2: TToolBar
+        Size.Width = 341.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object speedButtonBack: TSpeedButton
+          Action = changeTabActionList
+          Align = Left
+          Enabled = True
+          ImageIndex = -1
+          Size.Width = 44.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'arrowlefttoolbutton'
+        end
+        object speedButtonSave: TSpeedButton
+          Align = Right
+          Position.X = 297.000000000000000000
+          Size.Width = 44.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbutton'
+          Text = 'speedButtonSave'
+        end
+        object speedButtonDelete: TSpeedButton
+          Align = Right
+          Position.X = 253.000000000000000000
+          Size.Width = 44.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'trashtoolbutton'
+          Text = 'speedButtonDelete'
+        end
+        object Label2: TLabel
+          Align = Client
+          Size.Width = 209.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Projects Edits'
+          TabOrder = 3
+        end
+      end
+      object labelProjectsID: TLabel
+        Position.X = 8.000000000000000000
+        Position.Y = 56.000000000000000000
+        Text = 'Projects ID'
+        TabOrder = 1
+      end
+      object editProjectsID: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 2
+        Position.X = 8.000000000000000000
+        Position.Y = 80.000000000000000000
+        Size.Width = 265.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object labelProjectsTitle: TLabel
+        Position.X = 8.000000000000000000
+        Position.Y = 120.000000000000000000
+        Size.Width = 121.000000000000000000
+        Size.Height = 21.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Projects Title'
+        TabOrder = 3
+      end
+      object editProjectsTitle: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 4
+        Position.X = 8.000000000000000000
+        Position.Y = 144.000000000000000000
+        Size.Width = 265.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object labelProjectsDescription: TLabel
+        Position.X = 16.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 177.000000000000000000
+        Size.Height = 21.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Projects Description'
+        TabOrder = 5
+      end
+      object Memo2: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Position.X = 16.000000000000000000
+        Position.Y = 240.000000000000000000
+        Size.Width = 257.000000000000000000
+        Size.Height = 193.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Viewport.Width = 253.000000000000000000
+        Viewport.Height = 189.000000000000000000
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Left = 40
+    Top = 408
+    object changeTabActionList: TChangeTabAction
+      Category = 'Tab'
+      Tab = tabProjectsList
+    end
+    object changeTabActionEdit: TChangeTabAction
+      Category = 'Tab'
+      Tab = tabProjectsEdit
+    end
+  end
+  object PrototypeBindSource1: TPrototypeBindSource
+    AutoActivate = True
+    AutoPost = False
+    FieldDefs = <
+      item
+        Name = 'UIntField1'
+        FieldType = ftInteger
+        Generator = 'UIntegers'
+        ReadOnly = False
+      end
+      item
+        Name = 'ColorsName1'
+        Generator = 'ColorsNames'
+        ReadOnly = False
+      end
+      item
+        Name = 'LoremIpsum1'
+        Generator = 'LoremIpsum'
+        ReadOnly = False
+      end>
+    ScopeMappings = <>
+    Left = 152
+    Top = 368
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 276
+    Top = 397
+    object LinkFillControlToField1: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = listViewProjects
+      Track = True
+      FillDataSource = PrototypeBindSource1
+      AutoFill = True
+      FillExpressions = <
+        item
+          SourceMemberName = 'UIntField1'
+          ControlMemberName = 'Proj_Id'
+        end
+        item
+          SourceMemberName = 'ColorsName1'
+          ControlMemberName = 'Proj_Title'
+        end>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+end
