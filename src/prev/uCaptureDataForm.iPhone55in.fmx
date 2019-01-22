@@ -17,14 +17,14 @@ inherited Form1_iPhone55in: TForm1_iPhone55in
       end
       inherited Image1: TImage
         Size.Width = 414.000000000000000000
-        Size.Height = 1415.000000000000000000
+        Size.Height = 1504.000000000000000000
       end
       inherited Panel1: TPanel
         Position.Y = 301.000000000000000000
         Size.Width = 414.000000000000000000
         inherited ListBox1: TListBox
           Size.Width = 414.000000000000000000
-          Viewport.Width = 409.000000000000000000
+          Viewport.Width = 414.000000000000000000
           Viewport.Height = 322.000000000000000000
           inherited ListBoxGroupHeader1: TListBoxGroupHeader
             TextSettings.Font.StyleExt = {00070000000000000004000000}

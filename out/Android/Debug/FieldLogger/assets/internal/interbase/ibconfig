@@ -1,0 +1,356 @@
+## InterBase configuration parameters
+## The default value for each entry is listed to the right.
+## To activate an entry, uncomment it and supply the desired value.
+
+#ADMIN_DB                  "admin.ib"
+## Platforms: All
+## Specifies a filename for the InterBase security database.
+## Needed only if you do not want to use the default name, admin.ib.
+## The security database must reside in the InterBase home directory.
+
+#APPDATA_DIRECTORY         "C:\ProgramData\Embarcadero\InterBase\gds_db"
+## Directory path MUST be enclosed in double quotes.
+## The above value is an example, and your choice may vary based
+## on the underlying OS platform version.
+## Platforms: All
+## Specifies a directory where InterBase data files (requiring read-write)
+## access are located. This includes database files admin.ib, 
+## examples/ sub-folder, ext/ sub-folder, secure/ sub-folder to support
+## SSL/OTW configuration, license/ sub-folder to deliver licenses required
+## for InterBase runtime, and, other temporary files InterBase creates 
+## to support its runtime engine (.lck and .env files, interbase.log etc.)
+## This was primarily introduced to support Windows UAC driven
+## driven requirements when installing under "Program Files" area, but
+## can also be applied to isolate InterBase "writable" files into 
+## a separate location on other supported Editions and/or OS platforms 
+
+#CPU_AFFINITY              
+## Platforms: Windows
+## 32-bit values only allowed. Only the first 32 processors can be set
+## On a SMP system, sets which processors can be used
+## by the InterBase server. The value is taken from a bit vector in
+## which each bit represents a processor. Thus, to use only the first 
+## processor, the value is 1. To use both the first and second processors, 
+## the value is 3. To use the second and third, the value is 6. 
+## Default is to use all processors (when entry is commented out).
+
+#CONNECTION_TIMEOUT 	   180
+## Platforms: All
+## Seconds to wait before concluding an attempt to connect has failed.
+
+#DATABASE_CACHE_PAGES 	   2048
+## Platforms: All
+## Server-wide default for the number of database pages 
+## to allocate in memory per database.
+## Can be overridden for a database by new client connections.
+
+#DATABASE_ODS_VERSION 	   17
+## Platforms: All
+## Version: starting in InterBase XE7 
+## The database server/engine will automatically create/restore
+## databases to this major ODS version number, if specified.
+## Valid ODS major versions are in the range 13 to 16
+## Default major ODS version is the latest version supported by the product
+
+#DEADLOCK_TIMEOUT	   10 
+## Platforms: All
+## Seconds before an ungranted lock causes a scan to check for deadlocks.
+
+#DUMMY_PACKET_INTERVAL	0 
+## Platforms: All
+## Seconds to wait on a silent client connection before the 
+## server sends dummy packets to request acknowledgment.
+## The default value of 0 will not send any dummy keepalive packets
+## to the client from the server. 
+## Versions of InterBase before 7.1 used to have this set at 
+## 60 seconds, by default. This has now been modified to have a default
+## of 0 (zero) seconds due to a memory leak bug in one of the Windows
+## system drivers for socket connections.
+## Alternatively, you can set the interval value for a specific client
+## by using the isc_dpb_dummy_packet_interval DPB parameter while doing
+## a connection.
+
+#ENABLE_HYPERTHREADING             1
+## Platforms: Windows, for InterBase 32-bit Edition(s) only
+## Specifies whether Intel Hyper-threading technology enabled logical
+## processors should be enabled
+## Valid values are: 1 (enable), 0 (disable)
+## Default: 0 (disable)
+
+#ENABLE_PARTIAL_INDEX_SELECTIVITY   1
+## Platforms: All
+## Starting with InterBase XE7 and ODS 16, multi-segment index definitions
+## track per segment selectivity statistics. This config parameter specifies
+## whether the SQL Optimizer should use this selectivity data to optimize retrieval.
+## This setting is engine-wide, so it applies to all queries submitted to an active engine.
+## When disabled, the SQL optimizer will treat the index with a single selectivity value
+## that is not segment specific, as per InterBase versions prior.
+## Valid values are: 1 (enable), 0 (disable)
+## Default: 1 (enable)
+
+#EXTERNAL_FILE_DIRECTORY
+## Platforms: All
+## The default directory for an external table's file is <interbase_home>/ext.
+## Using this parameter, you can list additional directories where
+## external files can reside.
+## For security reasons, do not put other files in this directory.
+## Directory path MUST be enclosed in double quotes.
+## For e.g.
+##    EXTERNAL_FILE_DIRECTORY "C:\Temp"
+##    EXTERNAL_FILE_DIRECTORY "/tmpdir"
+## List multiple entries one per line; directories are 
+## used in the order specified.
+
+#EXTERNAL_FUNCTION_DIRECTORY
+## Platforms: All
+## The default directory for UDF libraries is <interbase_home>/UDF.
+## Using this parameter, you can list additional directories where
+## UDF libraries should be loaded from.
+## For security reasons, do not put other files in this directory.
+## Directory path MUST be enclosed in double quotes.
+## For e.g.
+##    EXTERNAL_FUNCTION_DIRECTORY "C:\Temp"
+##    EXTERNAL_FUNCTION_DIRECTORY "/tmpdir"
+## List multiple entries one per line; directories are 
+## used in the order specified.
+
+#LOCK_ACQUIRE_SPINS 	   0
+## Platforms: All
+## Number of spins during a busy wait on the lock table mutex.
+## Relevant only on SMP machines.
+
+#LOCK_HASH_SLOTS 	   997
+## Platforms: All
+## Tune lock hash list; more hash slots mean shorter hash chains. 
+## Not necessary except under very high load. 
+## Prime number values are recommended.
+
+#MAX_DB_VIRMEM_USE		   90
+## Platforms: Windows
+## Define an upper percentage limit of how much of the available virtual memory
+## InterBase can use for its large memory allocations like those
+## of database cache etc. This is set as a percentage of total
+## virtual memory available to the process.
+## This can be used to set the limit to a lower level if you observe
+## that other critical memory allocations such as file I/O buffers,
+## file handles, socket buffers etc. need the user space.
+## Valid range that can be set is between 50 and 100
+## Please note that setting this to 100 indicates that InterBase can 
+## use up all available virtual memory for its database cache etc. This is 
+## not recommended.
+## For e.g.
+##   setting this to 90 (the default), indicates that on a 2GB virtual
+##   address space, InterBase process will only use up 1.8GB of the 
+##   available virtual memory for database cache allocations; the rest will
+##   be available for other critical memory allocations.
+
+#MAX_THREADS		   1000000
+## Platforms: All
+## Controls the maximum number of threads that can be active 
+## at one time within the InterBase engine. The listed value
+## applies to a system with multiple licensed CPUs. For a
+## single CPU system, the value defaults to 1 which eliminates
+## the synchronization overhead required by multiple CPUs.
+
+#MAX_ASSISTANTS	           1
+## Platforms: All
+## Controls the maximum number of threads that can be active
+## assisting other threads with their tasks. This number should
+## be less than the number of CPUs on which InterBase can run.
+
+#MEMORY_RECLAMATION 300 
+## Platforms: All 
+## Number of seconds between attempts to return unused memory to OS. 
+## This parameter enables better co-existence with neighboring processes 
+## by not monopolizing memory. It cannot guarantee that other processes 
+## will behave in kind. 
+## 
+## 0 = disable memory reclamation 
+## 1 = memory reclamation on attach of first database 
+## 2 = memory reclamation on detach of last database 
+## 3 = 1 + 2 above 
+## > 15 = number of seconds between memory reclamations 
+
+#PAGE_CACHE_EXPANSION 256 
+## Platforms: All 
+## Number of MB of memory to expand page buffer cache until upper limit 
+## is reached. The upper limit can be a database-specific setting or the 
+## DATABASE_CACHE_PAGES parameter. The page buffer cache is expanded 
+## when there are no more free buffers, which occurs when all buffers have 
+## been loaded with a database page. This parameter is used to smooth the 
+## memory allocation of page buffers to match demand generated by client load. 
+## 
+## 0 = allocate all page buffers on first database attach 
+## > 0 = expand this many MBs at a time until all page buffers allocated 
+
+#SERVER_CLIENT_MAPPING 	   4096
+## Platforms: Windows
+## Size in bytes of one client portion of the memory mapped 
+## file used for interprocess communication.
+## Valid values are 1024, 2048, 4096, 8192
+
+#SERVER_PRIORITY_CLASS 	   1
+## Platforms: Windows
+## Priority of the InterBase service on Windows
+## The value 1 is low priority, 2 is high priority. 
+
+#SERVER_WORKING_SIZE_MAX   0
+## Platforms: Windows
+## Threshold above which the OS is requested to swap out all memory.
+## Default is system-determined
+
+#SERVER_WORKING_SIZE_MIN   0
+## Platforms: Windows
+## Threshold below which the OS is requested to swap out no memory
+## Default is system-determined
+
+#SOLARIS_BOUND_THREADS     0
+## Platforms: Solaris
+## When set to 1 each user-level thread is bound to a LWP thread. 
+## The default of 0 creates user-level threads unbound and causes 
+## a user-level scheduler to map them to available LWPs.
+ 
+#SOLARIS_SYNC_SCOPE        0
+## Platforms: Solaris
+## When set to 1 threads use process-level synchronization variables. 
+## The default of 0 causes thread-level synchronization variables to be used. 
+
+#SORTMEM_BUFFER_SIZE	   1048500
+## Platforms: All
+## Specifies the size of a sort buffer in memory
+## Versions of InterBase before 7.1 used to have a static value
+## of approx. 128 KB. This is now configurable per server using
+## this parameter. The default value is just about 1 MB. 
+## Setting this to a higher value will enable better performance 
+## in large sort-merge queries.
+
+#SQL_COMPILER_RECURSION    2000
+## Platforms: All
+## Specifies the call depth that the recursive descent parsing algorithm
+## will try during SQL compilation phase of statement preparation. If the
+## call depth would exceed this limit than a stack overflow is declared
+## and returned as an error. Note that this is an artificial stack
+## overflow detection and not a hardware detected stack overflow.
+
+#STARTING_TRANSACTION_ID 	   0
+## Platforms: All
+## Version: starting in InterBase XE7 
+## ODS version: 16+
+## The database server/engine will automatically create/restore
+## databases with this transaction ID as the starting number.
+## If you want to restore your database(s) to test with very high
+## transaction ID numbers, to evaluate 48-bit transaction ID support,
+## set this value and restart InterBase.
+## Valid values include any value >= 0, that can be represented in a 
+## 48-bit Integer data type.
+## Default starting transaction ID on database create/restore is 0
+
+#SWEEP_QUANTUM		   250
+## Platforms: All
+## Specifies the maximum number of records that a garbage collector
+## thread or a sweeper thread is allowed to work before yielding 
+## control back to the worker threads.
+
+#SWEEP_YIELD_TIME	   1
+## Platforms: All
+## Specifies the time, in milliseconds, the sweeper or 
+## garbage collector thread sleeps.
+
+#TCP_REMOTE_BUFFER         8192
+## Platforms: All
+## TCP/IP buffer size for send and receive buffers. This applies to 
+## both client and server programs. 
+## Default is 8192 bytes. Valid range is 1448 to 32768
+
+#TMP_DIRECTORY 
+## Platforms: All
+## Directory to use for storing temporary files (such as sort files).
+## Default is the value of environment variables INTERBASE_TMP or TMP, 
+## in that order; otherwise /tmp on UNIX or C:\temp on Windows.
+## If you have lots of space in your default temporary folders as above,
+## then there is no need to mention any further directory listings here.
+## Specify directory path and number of bytes available in the directory. 
+## Directory path MUST be enclosed in double quotes.
+## Format for entry is as follows.
+##     TMP_DIRECTORY <MaxBytes> <AbsoluteDirectoryPath>
+##     MaxBytes should be a number indicating maximum space in bytes 
+##       to be used in the directory. 
+##       The value is limited to a 32-bit unsigned integer in versions <= 12.0
+##       The value is limited to a 64-bit unsigned integer in versions > 12.0
+##       The value should accommodate any updated SORTMEM_BUFFER_SIZE 
+##       setting above so as not to receive "not enough memory" error.
+##       Valid range: 1048500 to 4294967295 (2^32 - 1) in versions <= 12.0
+##       Valid range: 1048500 to (2^64 - 1) in versions > 12.0
+## For e.g.
+##     TMP_DIRECTORY 500400300 "C:\Temp"
+##     TMP_DIRECTORY 1500400300 "/tmpdir"
+## List multiple entries, one per line; directories are 
+## used in the order specified.
+
+#USER_QUANTUM		   1000
+## Platforms: All
+## Specifies the maximum number of records that a worker thread 
+## (thread running an user query) is allowed to work before 
+## yielding control back to other threads.
+
+#V4_EVENT_MEM_SIZE 	   1048576
+## Platforms: All
+## Bytes of shared memory allocated for event manager.
+## Default is 1048576 on 32bit Editions of InterBase; 2097152 on 64bit Editions.
+
+#V4_LOCK_GRANT_ORDER 	   1
+## Platforms: All
+## 1 means locks are granted first come, first served.
+## 0 means emulate InterBase V3.3 behavior, where locks are granted 
+## as soon as they are available; can result in lock request starvation.
+
+#V4_LOCK_MEM_SIZE 	   1048576
+## Platforms: All
+## Bytes of shared memory allocated for lock manager.
+## Default is 1048576 on 32bit Editions of InterBase; 2097152 on 64bit Editions.
+
+#V4_LOCK_SEM_COUNT	   32
+## Platforms: All
+## Number of semaphores for interprocess communication 
+## (Classic architecture only).
+
+#V4_LOCK_SIGNAL 	   16
+## Platforms: All
+## UNIX signal to use for interprocess communication 
+## (Classic architecture only).
+
+#V4_SOLARIS_STALL_VALUE    60
+## Platforms: Solaris
+## Number of seconds a server process waits before retrying 
+## for the lock table mutex.
+
+#WINDOWS_LOCAL_CONNECT_RETRIES    0
+## Platforms: Windows
+## Number of retries a client attempts to connect to local
+## InterBase server process. There is a 1 millisecond wait
+## before each retry. Terminal Services clients sometimes
+## fail to connect on first attempt during heavy contention.
+
+#LOOPBACK_CONNECTION      "none"
+## Platforms: All
+## Local database pathnames connect using a TCP/IP loopback
+## connection depending on the value of the parameter; the
+## parameter value is case-senstive.
+## A value of "all" makes all connections loopback.
+## A value of "tss" is Windows-specific and causes connections
+## originating from a Terminal Services session to loopback.
+## Any other value disables loopback connection for local paths.
+
+#THREAD_STACK_SIZE_MB    2
+## Platforms: ALL
+## Default: 2 (2 MB) on 32 bit Editions
+## Default: 6 (6 MB) on 64 bit Editions
+## This parameter controls the user configurable value for thread stack size
+## The value is in multiple of MBs per thread.
+## Valid range is 1MB to 32MB. If set beyond this range, value resets to default value
+## You should not have to change this parameter for normal use of InterBase. 
+## In extremely rare cases of abnormal termination of the process, 
+## the reason might be thread stack space constraints due to high levels 
+## of recursive calls (of stored procedures and such). 
+## Feel free to increase this value then.
+

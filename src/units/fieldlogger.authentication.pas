@@ -7,14 +7,14 @@ uses
 type
   TAuthentication = class
   public
-    class function Authenticate( conn: TFDConnection; Username: string; Password: string; Queries: array of TFDQuery ): boolean;
+    class function Authenticate(conn: TFDConnection; Username, Password: string; Queries: array of TFDQuery; Tables: array of TFDTable): boolean;
   end;
 
 implementation
 
 { TAuthentication }
 
-class function TAuthentication.Authenticate(conn: TFDConnection; Username, Password: string; Queries: array of TFDQuery): boolean;
+class function TAuthentication.Authenticate(conn: TFDConnection; Username, Password: string; Queries: array of TFDQuery; Tables: array of TFDTable): boolean;
 var
   idx: int32;
 begin
@@ -36,6 +36,18 @@ begin
       Queries[idx].Connection := conn;
       Queries[idx].Active := True;
       if not Queries[idx].Active then begin
+        exit;
+      end;
+    end;
+    Result := True;
+    if length(Tables)=0 then begin
+      exit;
+    end;
+    Result := False; // unless;
+    for idx := 0 to pred(Length(Tables)) do begin
+      Tables[idx].Connection := conn;
+      Tables[idx].Active := True;
+      if not Tables[idx].Active then begin
         exit;
       end;
     end;

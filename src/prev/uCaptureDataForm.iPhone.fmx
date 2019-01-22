@@ -24,7 +24,7 @@ inherited Form1_iPhone: TForm1_iPhone
         Size.Width = 320.000000000000000000
         inherited ListBox1: TListBox
           Size.Width = 320.000000000000000000
-          Viewport.Width = 315.000000000000000000
+          Viewport.Width = 320.000000000000000000
           Viewport.Height = 322.000000000000000000
           inherited ListBoxGroupHeader1: TListBoxGroupHeader
             TextSettings.Font.StyleExt = {00070000000000000004000000}

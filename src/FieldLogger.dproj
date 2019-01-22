@@ -6,7 +6,7 @@
         <MainSource>FieldLogger.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>1119</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -53,6 +53,12 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Android' and '$(Cfg_1)'=='true') or '$(Cfg_1_Android)'!=''">
+        <Cfg_1_Android>true</Cfg_1_Android>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
         <Cfg_1_Win32>true</Cfg_1_Win32>
         <CfgParent>Cfg_1</CfgParent>
@@ -94,7 +100,6 @@
         <AUP_ACCESS_COARSE_LOCATION>true</AUP_ACCESS_COARSE_LOCATION>
         <AUP_ACCESS_FINE_LOCATION>true</AUP_ACCESS_FINE_LOCATION>
         <AUP_CALL_PHONE>true</AUP_CALL_PHONE>
-        <AUP_CAMERA>true</AUP_CAMERA>
         <AUP_INTERNET>true</AUP_INTERNET>
         <AUP_READ_EXTERNAL_STORAGE>true</AUP_READ_EXTERNAL_STORAGE>
         <AUP_WRITE_EXTERNAL_STORAGE>true</AUP_WRITE_EXTERNAL_STORAGE>
@@ -103,6 +108,7 @@
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
         <SanitizedProjectName>FieldLogger</SanitizedProjectName>
         <DCC_UnitSearchPath>..\out\$(Platform)\$(Config);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <FeatureFilesAdded>Interbase;Firebird</FeatureFilesAdded>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;tethering;DataSnapFireDAC;bindcompfmx;FmxTeeUI;fmx;FireDACIBDriver;FireDACDBXDriver;dbexpress;IndyCore;dsnap;emsclient;DataSnapCommon;FireDACCommon;RESTBackendComponents;soapserver;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;IndyIPCommon;bindcompdbx;IndyIPServer;IndySystem;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;FMXTee;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;FireDACDSDriver;rtl;DbxClientDriver;ibxbindings;CustomIPTransport;bindcomp;IndyIPClient;dbxcds;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;$(DCC_UsePackage)</DCC_UsePackage>
@@ -286,6 +292,12 @@
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Android)'!=''">
+        <AUP_ACCESS_LOCATION_EXTRA_COMMANDS>true</AUP_ACCESS_LOCATION_EXTRA_COMMANDS>
+        <AUP_READ_GSERVICES>true</AUP_READ_GSERVICES>
+        <VerInfo_Build>1</VerInfo_Build>
+        <AUP_CAMERA>true</AUP_CAMERA>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -350,13 +362,127 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="$(BDS)\Redist\osx64\libcgsqlite3.dylib" Class="DependencyModule">
-                    <Platform Name="OSX64">
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\interbase\license.txt" Configuration="Release" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                <DeployFile LocalName="..\out\Android\Debug\AndroidManifest.xml" Configuration="Debug" Class="ProjectAndroidManifest">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\android\interbase\ibconfig" Configuration="Debug" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\interbase\intl\gdsintl.dll" Configuration="Debug" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\intl\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\interbase\oss_license_notice.txt" Configuration="Release" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Configuration="Debug" Class="Android_SplashImage426">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios64_device\interbase\license.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\out\Android\Debug\styles.xml" Configuration="Debug" Class="AndroidSplashStyles">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios64_device\interbase\oss_license_notice.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\interbase\intl\gdsintl.dll" Configuration="Release" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\intl\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\interbase\ADMIN.IB" Configuration="Debug" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Debug" Class="File">
                     <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_device\interbase\interbase.msg" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\interbase\oss_license_notice.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\android\interbase\interbase.msg" Configuration="Release" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\out\Win32\Debug\FieldLogger.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>FieldLogger.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\interbase\ADMIN.IB" Configuration="Debug" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -365,8 +491,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\interbase\admin.ib" Configuration="Release" Class="File">
                     <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -375,9 +502,640 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\out\Win32\Debug\FieldLogger.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\license.txt" Configuration="Debug" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\license.txt" Configuration="Release" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_device\interbase\admin.ib" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\interbase\oss_license_notice.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\android\interbase\ibconfig" Configuration="Release" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\libibtogo.dylib" Configuration="Debug" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\out\Android\Debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile">
+                    <Platform Name="Android">
+                        <RemoteName>classes.dex</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\interbase\interbase.msg" Configuration="Release" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Configuration="Debug" Class="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\out\Android\Debug\splash_image_def.xml" Configuration="Debug" Class="AndroidSplashImageDef">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Release" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\android\interbase\admin.ib" Configuration="Release" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Debug" Class="File">
                     <Platform Name="Win32">
-                        <RemoteName>FieldLogger.exe</RemoteName>
+                        <RemoteDir>interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\interbase\interbase.msg" Configuration="Debug" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios64_device\interbase\interbase.msg" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\ibtogo64.dll" Configuration="Debug" Class="File">
+                    <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Debug" Class="Android_LauncherIcon48">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\interbase.msg" Configuration="Debug" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\ibtogo64.dll" Configuration="Release" Class="File">
+                    <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios64_device\interbase\ibconfig" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\libibtogo.dylib" Configuration="Release" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios64_device\interbase\interbase.msg" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\interbase\ibconfig" Configuration="Release" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\out\Android\Debug\libFieldLogger.so" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Android">
+                        <RemoteName>libFieldLogger.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_device\interbase\license.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Debug" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\interbase\license.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Release" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\android\interbase\interbase.msg" Configuration="Debug" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_device\interbase\admin.ib" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\osx64\libcgsqlite3.dylib" Class="DependencyModule">
+                    <Platform Name="OSX64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\libibtogo.dylib" Configuration="Release" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\ibconfig" Configuration="Release" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\ibconfig" Configuration="Debug" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\admin.ib" Configuration="Debug" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios64_device\interbase\license.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Release" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\intl\gdsintl" Configuration="Debug" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\intl\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Configuration="Debug" Class="Android_LauncherIcon36">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Release" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\interbase\license.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_device\interbase\oss_license_notice.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\interbase\intl\gdsintl.dll" Configuration="Release" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\intl\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\ibtogo.dll" Configuration="Debug" Class="File">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\interbase\interbase.msg" Configuration="Debug" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Configuration="Debug" Class="Android_LauncherIcon72">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\admin.ib" Configuration="Release" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\interbase\oss_license_notice.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\libibtogo.dylib" Configuration="Debug" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Release" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\ibtogo.dll" Configuration="Release" Class="File">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\interbase.msg" Configuration="Release" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\interbase\interbase.msg" Configuration="Release" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\interbase\ADMIN.IB" Configuration="Release" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile">
+                    <Platform Name="Android">
+                        <RemoteName>libFieldLogger.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_device\interbase\license.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Release" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios64_device\interbase\admin.ib" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\android\interbase\oss_license_notice.txt" Configuration="Release" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\android\interbase\oss_license_notice.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Configuration="Debug" Class="Android_LauncherIcon144">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteName>libFieldLogger.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\android\interbase\license.txt" Configuration="Release" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\android\interbase\license.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\oss_license_notice.txt" Configuration="Release" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\interbase\license.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\interbase\interbase.msg" Configuration="Debug" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_device\interbase\ibconfig" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Configuration="Debug" Class="Android_LauncherIcon96">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\oss_license_notice.txt" Configuration="Debug" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\interbase\interbase.msg" Configuration="Release" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win64_togo\interbase\oss_license_notice.txt" Configuration="Release" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Release" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\interbase\ADMIN.IB" Configuration="Release" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_device\interbase\interbase.msg" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Configuration="Debug" Class="Android_SplashImage960">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\interbase\oss_license_notice.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios64_device\interbase\ibconfig" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\osx32_togo\interbase\intl\gdsintl" Configuration="Release" Class="File">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\interbase\intl\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\interbase\intl\gdsintl.dll" Configuration="Debug" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\intl\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Debug" Class="AndroidGDBServer">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_device\interbase\oss_license_notice.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios64_device\interbase\admin.ib" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\out\Android\Debug\styles-v21.xml" Configuration="Debug" Class="AndroidSplashStylesV21">
+                    <Platform Name="Android">
+                        <RemoteName>styles.xml</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Configuration="Debug" Class="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios64_device\interbase\oss_license_notice.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\interbase\ibconfig" Configuration="Debug" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Release" Class="File">
+                    <Platform Name="Win64">
+                        <RemoteDir>interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Debug" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\interbase\admin.ib" Configuration="Debug" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_ibtogo.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\reg_iblite.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\license\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_sim\interbase\license.txt" Configuration="Release" Class="File">
+                    <Platform Name="iOSSimulator">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\ios_device\interbase\ibconfig" Configuration="Release" Class="File">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>StartUp\Documents\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\android\interbase\admin.ib" Configuration="Debug" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\interbase\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(IBREDISTDIR)\win32_togo\interbase\license.txt" Configuration="Release" Class="File">
+                    <Platform Name="Win32">
+                        <RemoteDir>interbase\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

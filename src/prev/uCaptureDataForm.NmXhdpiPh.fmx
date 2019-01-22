@@ -30,7 +30,7 @@ inherited Form1_NmXhdpiPh: TForm1_NmXhdpiPh
         Size.Width = 400.000000000000000000
         inherited ListBox1: TListBox
           Size.Width = 400.000000000000000000
-          Viewport.Width = 395.000000000000000000
+          Viewport.Width = 400.000000000000000000
           Viewport.Height = 322.000000000000000000
           inherited ListBoxGroupHeader1: TListBoxGroupHeader
             TextSettings.Font.StyleExt = {00070000000000000004000000}
