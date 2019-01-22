@@ -20,13 +20,10 @@ uses
 
 type
   TfrmMain = class(TForm)
+    CameraComponent1: TCameraComponent;
     tbcMain: TTabControl;
     tabWelcome: TTabItem;
-    tabSignin: TTabItem;
-    tabData: TTabItem;
-    tabDetail: TTabItem;
     sbSterling: TStyleBook;
-    conn: TFDConnection;
     BackgroundRect: TRectangle;
     BackgroundImage: TImage;
     BackgroundGaussianBlurEffect: TGaussianBlurEffect;
@@ -65,6 +62,7 @@ type
     DrawerMultiView: TMultiView;
     DrawerBackgroundRect: TRectangle;
     TopImage: TImage;
+    tabSignin: TTabItem;
     Image1: TImage;
     GaussianBlurEffect1: TGaussianBlurEffect;
     VertScrollBox1: TVertScrollBox;
@@ -85,9 +83,12 @@ type
     Image2: TImage;
     Layout1: TLayout;
     WelcomeLabel: TLabel;
-    qryProjectsDetail: TFDQuery;
-    BindSourceDB1: TBindSourceDB;
-    BindingsList1: TBindingsList;
+    tabProjects: TTabItem;
+    listViewProjects: TListView;
+    ToolBar1: TToolBar;
+    speedButtonAdd: TSpeedButton;
+    Label1: TLabel;
+    tabProjectDetail: TTabItem;
     edtProjID: TEdit;
     edtProjTitle: TEdit;
     Label3: TLabel;
@@ -99,32 +100,9 @@ type
     spedProjEdit: TSpeedButton;
     spedProjDelete: TSpeedButton;
     Label6: TLabel;
-    qryProjectsDetailPROJ_ID: TIntegerField;
-    qryProjectsDetailPROJ_TITLE: TStringField;
-    qryProjectsDetailPROJ_DESC: TMemoField;
-    qryProjectsDetailPICTURE: TBlobField;
-    qryProjectsDetailTIMEDATESTAMP: TSQLTimeStampField;
-    LinkFillControlToField: TLinkFillControlToField;
-    tBCEntries: TTabControl;
-    tabProjects: TTabItem;
-    TabItem2: TTabItem;
-    listViewProjects: TListView;
-    ToolBar1: TToolBar;
-    speedButtonAdd: TSpeedButton;
-    Label1: TLabel;
-    LinkFillControlToField1: TLinkFillControlToField;
-    tblProjects: TFDTable;
-    dsProjectsDetail: TDataSource;
-    BindSourceDB2: TBindSourceDB;
-    LinkControlToField1: TLinkControlToField;
-    LinkControlToField2: TLinkControlToField;
-    LinkControlToField3: TLinkControlToField;
-    Image3: TImage;
-    ToolBar2: TToolBar;
-    btnAddEntry: TButton;
-    CameraComponent1: TCameraComponent;
-    Button1: TButton;
-    Button2: TButton;
+    lstEntries: TListView;
+    tabEntryDetail: TTabItem;
+    imgPicture: TImage;
     ScrollBox1: TScrollBox;
     Rectangle1: TRectangle;
     GradientAnimation1: TGradientAnimation;
@@ -180,12 +158,18 @@ type
     GradientAnimation14: TGradientAnimation;
     Label30: TLabel;
     lblAdminArea: TLabel;
-    tblEntries: TFDTable;
-    BindSourceDB3: TBindSourceDB;
+    ToolBar2: TToolBar;
+    btnAddEntry: TButton;
+    Button1: TButton;
+    Button2: TButton;
+    BindSourceDB1: TBindSourceDB;
+    BindingsList1: TBindingsList;
+    BindSourceDB2: TBindSourceDB;
+    LinkListControlToField1: TLinkListControlToField;
+    LinkListControlToField2: TLinkListControlToField;
+    LinkPropertyToFieldBitmap: TLinkPropertyToField;
     LinkPropertyToFieldText: TLinkPropertyToField;
     LinkPropertyToFieldText2: TLinkPropertyToField;
-    LinkPropertyToFieldBitmap: TLinkPropertyToField;
-    procedure FormCreate(Sender: TObject);
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure SignInRectBTNClick(Sender: TObject);
     procedure listViewProjectsItemClick(const Sender: TObject;
@@ -196,6 +180,9 @@ type
     procedure TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
     procedure btnAddEntryClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure lstEntriesItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -208,34 +195,33 @@ var
 implementation
 uses
   fieldlogger.databaseutil,
-  fieldlogger.authentication;
+  fieldlogger.authentication, modMain;
 
 {$R *.fmx}
 
 procedure TfrmMain.btnAddEntryClick(Sender: TObject);
 begin
-  tblEntries.Prior;
+  dmMain.qryEntries.Prior;
 end;
 
 procedure TfrmMain.Button1Click(Sender: TObject);
 begin
-  tblEntries.Next;
+  dmMain.qryEntries.Next;
 end;
 
-procedure TfrmMain.FormCreate(Sender: TObject);
+procedure TfrmMain.FormShow(Sender: TObject);
 begin
   //- Ensure we're on the welcome tab
   tbcMain.ActiveTab := tabWelcome;
-  tbcEntries.ActiveTab := tabProjects;
   //- Configure our connection to the database.
-  TDatabaseUtils.ConfigureConnection(conn);
+  TDatabaseUtils.ConfigureConnection(dmMain.conn);
   //- Ensure the database file already exists, if not, create it.
   if not FileExists(TDatabaseUtils.DataFilename) then begin
-    TDatabaseUtils.CreateDatabase(conn);
+    TDatabaseUtils.CreateDatabase(dmMain.conn);
   end;
   //- Connect to the database.
-  conn.Connected := True;
-  if not conn.Connected then begin
+  dmMain.conn.Connected := True;
+  if not dmMain.conn.Connected then begin
     raise
       Exception.Create('Unable to connect to database: '+TDatabaseUtils.DataFilename);
   end;
@@ -243,12 +229,18 @@ end;
 
 procedure TfrmMain.listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
 begin
-  tbcMain.SetActiveTabWithTransition(tabDetail,TTabTransition.Slide,TTabTransitionDirection.Normal);
+  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Normal);
 end;
 
 procedure TfrmMain.LoginBackgroundRectClick(Sender: TObject);
 begin
   tbcMain.SetActiveTabWithTransition(tabSignin,TTabTransition.Slide,TTabTransitionDirection.Normal);
+end;
+
+procedure TfrmMain.lstEntriesItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Normal);
 end;
 
 procedure TfrmMain.PasswordEditKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
@@ -263,8 +255,8 @@ end;
 procedure TfrmMain.SignInRectBTNClick(Sender: TObject);
 begin
   SignInText.Text := 'Autenticating...';
-  if TAuthentication.Authenticate(conn,UsernameEdit.Text,PasswordEdit.Text,[qryProjectsDetail],[tblProjects,tblEntries]) then begin
-    tbcMain.SetActiveTabWithTransition(tabData,TTabTransition.Slide,TTabTransitionDirection.Normal);
+  if TAuthentication.Authenticate(dmMain.conn,UsernameEdit.Text,PasswordEdit.Text,[dmMain.qryProjects,dmMain.qryEntries]) then begin
+    tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Normal);
   end else begin
     SignInText.Text := 'SIGN IN';
     ShowMessage('Invalid UserName/Password or Connection to IBLite database');
@@ -273,7 +265,7 @@ end;
 
 procedure TfrmMain.spedProjBackClick(Sender: TObject);
 begin
-  tbcMain.SetActiveTabWithTransition(tabData,TTabTransition.Slide,TTabTransitionDirection.Normal);
+  tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Normal);
 end;
 
 procedure TfrmMain.TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);

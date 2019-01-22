@@ -39,26 +39,27 @@ begin
     //- Create LOG_ENTRIES table
     qry.SQL.Clear;
     qry.SQL.Add(' CREATE TABLE "LOG_ENTRIES" ( ');
+    qry.SQL.Add('   "LOG_ID"	INTEGER NOT NULL, ');
     qry.SQL.Add('   "PROJ_ID"	INTEGER NOT NULL, ');
-    qry.SQL.Add('   "PICTURE"	BLOB SUB_TYPE 0 SEGMENT SIZE 80 NOT NULL, ');
+    qry.SQL.Add('   "PICTURE"	BLOB SUB_TYPE 0 SEGMENT SIZE 80, ');
     qry.SQL.Add('   "LONGITUDE"	FLOAT, ');
     qry.SQL.Add('   "LATITUDE"	FLOAT, ');
     qry.SQL.Add('   "TIMEDATESTAMP"	TIMESTAMP, ');
-    qry.SQL.Add('   "OR_X"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "OR_Y"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "OR_Z"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "OR_DISTANCE"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "HEADING_X"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "HEADING_Y"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "HEADING_Z"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "V_X"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "V_Y"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "V_Z"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "ANGLE_X"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "ANGLE_Y"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "ANGLE_Z"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "MOTION"	FLOAT NOT NULL, ');
-    qry.SQL.Add('   "SPEED"	FLOAT NOT NULL, ');
+    qry.SQL.Add('   "OR_X"	FLOAT, ');
+    qry.SQL.Add('   "OR_Y"	FLOAT, ');
+    qry.SQL.Add('   "OR_Z"	FLOAT, ');
+    qry.SQL.Add('   "OR_DISTANCE"	FLOAT, ');
+    qry.SQL.Add('   "HEADING_X"	FLOAT, ');
+    qry.SQL.Add('   "HEADING_Y"	FLOAT, ');
+    qry.SQL.Add('   "HEADING_Z"	FLOAT, ');
+    qry.SQL.Add('   "V_X"	FLOAT, ');
+    qry.SQL.Add('   "V_Y"	FLOAT, ');
+    qry.SQL.Add('   "V_Z"	FLOAT, ');
+    qry.SQL.Add('   "ANGLE_X"	FLOAT, ');
+    qry.SQL.Add('   "ANGLE_Y"	FLOAT, ');
+    qry.SQL.Add('   "ANGLE_Z"	FLOAT, ');
+    qry.SQL.Add('   "MOTION"	FLOAT, ');
+    qry.SQL.Add('   "SPEED"	FLOAT, ');
     qry.SQL.Add('   "NOTE"	BLOB SUB_TYPE TEXT SEGMENT SIZE 80 ');
     qry.SQL.Add('   ); ');
     qry.ExecSQL;
@@ -71,6 +72,11 @@ begin
     qry.SQL.Add('    PRIMARY KEY ("PROJ_ID") ');
     qry.SQL.Add('   ); ');
     qry.ExecSQL;
+    //- Apply primary key to LOG_ENTRIES
+    qry.SQL.Clear;
+    qry.SQL.Add('   ALTER TABLE "LOG_ENTRIES" ADD PRIMARY KEY ("LOG_ID"); ');
+    qry.ExecSQL;
+
     //- Apply foriegn key to LOG_ENTRIES
     qry.SQL.Clear;
     qry.SQL.Add('   ALTER TABLE "LOG_ENTRIES" ADD FOREIGN KEY ("PROJ_ID") REFERENCES ');
@@ -82,11 +88,21 @@ begin
     qry.ExecSQL;
     //- Apply auto id generator to projects table
     qry.SQL.Clear;
-    qry.SQL.Add(' CREATE TRIGGER "AUTOINC" FOR "PROJECTS" ');
+    qry.SQL.Add(' CREATE TRIGGER "AUTOINC_P" FOR "PROJECTS" ');
     qry.SQL.Add(' ACTIVE BEFORE INSERT POSITION 0 ');
     qry.SQL.Add(' AS ');
     qry.SQL.Add(' begin ');
     qry.SQL.Add('  new."PROJ_ID" = gen_id(GENAUTOINC,1); ');
+    qry.SQL.Add('end ');
+    qry.SQL.Add(' ; ');
+    qry.ExecSQL;
+    //- Apply auto id generator to projects table
+    qry.SQL.Clear;
+    qry.SQL.Add(' CREATE TRIGGER "AUTOINC_E" FOR "LOG_ENTRIES" ');
+    qry.SQL.Add(' ACTIVE BEFORE INSERT POSITION 0 ');
+    qry.SQL.Add(' AS ');
+    qry.SQL.Add(' begin ');
+    qry.SQL.Add('  new."LOG_ID" = gen_id(GENAUTOINC,1); ');
     qry.SQL.Add('end ');
     qry.SQL.Add(' ; ');
     qry.ExecSQL;
