@@ -5,8 +5,8 @@ SET SQL DIALECT 3;
  DEFAULT CHARACTER SET  */
 COMMIT;
 /* Users in Database (passwords need to be added)*/
-/* CREATE USER MANAGER SET PASSWORD /* Password needed */  SYSTEM USER NAME 'Manager';*/
-/* CREATE USER STAFF SET PASSWORD /* Password needed */  SYSTEM USER NAME 'Staff';*/
+/* CREATE USER MANAGER SET PASSWORD /* Password needed   SYSTEM USER NAME 'Manager';*/
+/* CREATE USER STAFF SET PASSWORD /* Password needed   SYSTEM USER NAME 'Staff';*/
 /*CONNECT '127.0.0.1/gds_db:Embedediblite' USER 'SYSDSO' PASSWORD 'Enter Password here'*/
 /* ALTER DATABASE SET SYSTEM ENCRYPTION PASSWORD 'Enter Password here';*/
 COMMIT;
