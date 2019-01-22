@@ -351,7 +351,7 @@ Coordinates=680,20,71,33
 Visible=False
 
 [BindSourceDB2]
-Coordinates=410,0,92,141
+Coordinates=410,0,92,123
 
 [qryProjectsPROJ_ID]
 Coordinates=112,1,115,33
