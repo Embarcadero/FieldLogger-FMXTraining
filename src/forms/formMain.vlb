@@ -7,6 +7,7 @@ Coordinates=1139,108,115,33
 
 [tabEntryDetail]
 Coordinates=499,638,84,33
+Visible=False
 
 [GradientAnimation4]
 Coordinates=380,638,112,33
@@ -15,37 +16,45 @@ Coordinates=380,638,112,33
 Coordinates=261,638,112,33
 
 [lblFeature]
-Coordinates=232,1,63,51
+Coordinates=580,530,63,51
 
 [HeaderToolBar]
 Coordinates=172,638,88,33
+Visible=False
 
 [LogoCircle]
 Coordinates=103,638,68,33
+Visible=False
 
 [spedProjDelete]
-Coordinates=600,340,89,51
+Coordinates=600,340,89,33
+Visible=False
 
 [GradientAnimation2]
 Coordinates=876,1,112,33
 
 [EventsImage]
-Coordinates=450,740,77,51
+Coordinates=450,740,77,33
+Visible=False
 
 [tabWelcome]
 Coordinates=24,638,75,33
+Visible=False
 
 [Label4]
-Coordinates=726,701,46,51
+Coordinates=726,701,46,33
+Visible=False
 
 [SignInText]
-Coordinates=35,216,66,51
+Coordinates=35,216,66,33
+Visible=False
 
 [BackgroundGaussianBlurEffect]
 Coordinates=1026,1,170,33
 
 [Label22]
-Coordinates=363,1,52,51
+Coordinates=363,1,52,33
+Visible=False
 
 [GradientAnimation9]
 Coordinates=876,53,112,33
@@ -67,27 +76,30 @@ Coordinates=876,261,69,33
 Visible=False
 
 [BackgroundImage]
-Coordinates=382,549,104,51
+Coordinates=382,549,104,33
+Visible=False
 
 [lblLongitude]
-Coordinates=1650,220,76,51
+Coordinates=360,120,76,51
 
 [Button1]
-Coordinates=599,491,53,51
+Coordinates=599,491,53,33
+Visible=False
 
 [EventsLayout]
 Coordinates=876,313,81,33
 Visible=False
 
 [TopImage]
-Coordinates=409,460,62,51
+Coordinates=409,460,62,33
+Visible=False
 
 [CenterLayout]
 Coordinates=876,365,80,33
 Visible=False
 
 [lblSubLocality]
-Coordinates=1260,700,84,51
+Coordinates=560,290,84,51
 
 [ToolBar1]
 Coordinates=876,417,58,33
@@ -98,30 +110,35 @@ Coordinates=876,469,82,33
 Visible=False
 
 [lblZipCode]
-Coordinates=599,141,67,51
+Coordinates=580,410,67,51
 
 [ToolBar3]
 Coordinates=876,521,58,33
 Visible=False
 
 [lblAdminArea]
-Coordinates=478,281,81,51
+Coordinates=478,281,81,33
+Visible=False
 
 [Image2]
-Coordinates=210,305,49,51
+Coordinates=210,305,49,33
+Visible=False
 
 [Label18]
 Coordinates=726,351,52,33
 Visible=False
 
 [Label30]
-Coordinates=478,351,52,51
+Coordinates=478,351,52,33
+Visible=False
 
 [btnAddEntry]
-Coordinates=56,549,76,51
+Coordinates=56,549,76,33
+Visible=False
 
 [LoginLabel]
-Coordinates=204,549,69,51
+Coordinates=204,549,69,33
+Visible=False
 
 [UsernameEdit]
 Coordinates=726,491,83,33
@@ -132,22 +149,27 @@ Coordinates=876,573,53,33
 Visible=False
 
 [SupportImage]
-Coordinates=400,727,83,51
+Coordinates=400,727,83,33
+Visible=False
 
 [Label1]
-Coordinates=677,638,46,51
+Coordinates=677,638,46,33
+Visible=False
 
 [Image1]
-Coordinates=341,727,49,51
+Coordinates=341,727,49,33
+Visible=False
 
 [LockImage]
-Coordinates=163,216,68,51
+Coordinates=163,216,68,33
+Visible=False
 
 [lblCountryCode]
-Coordinates=283,549,91,51
+Coordinates=550,230,91,51
 
 [EventsLabel]
-Coordinates=478,71,75,51
+Coordinates=478,71,75,33
+Visible=False
 
 [LearnCenterLayout]
 Coordinates=876,625,108,33
@@ -158,7 +180,7 @@ Coordinates=876,677,69,33
 Visible=False
 
 [lblLatitude]
-Coordinates=1610,290,66,51
+Coordinates=320,190,66,51
 
 [tabProjectDetail]
 Coordinates=857,727,92,33
@@ -174,6 +196,7 @@ Visible=False
 
 [Rectangle13]
 Coordinates=262,727,75,33
+Visible=False
 
 [Label28]
 Coordinates=726,281,52,33
@@ -185,9 +208,11 @@ Visible=False
 
 [tabProjects]
 Coordinates=183,727,70,33
+Visible=False
 
 [DrawerMultiView]
 Coordinates=84,727,96,33
+Visible=False
 
 [AdvocateLayout]
 Coordinates=1038,157,94,33
@@ -195,13 +220,15 @@ Visible=False
 
 [Rectangle2]
 Coordinates=0,694,69,33
+Visible=False
 
 [DrawerBackgroundRect]
 Coordinates=1038,209,131,33
 Visible=False
 
 [spedProjBack]
-Coordinates=478,1,83,51
+Coordinates=478,1,83,33
+Visible=False
 
 [HeaderBackgroundRect]
 Coordinates=1038,261,131,33
@@ -220,33 +247,38 @@ Coordinates=1038,417,89,33
 Visible=False
 
 [listViewProjects]
-Coordinates=1430,660,93,141
+Coordinates=120,510,93,141
 Visible=True
 
 [PasswordEdit]
-Coordinates=599,1,82,51
+Coordinates=599,1,82,33
+Visible=False
 
 [Label11]
-Coordinates=0,409,52,51
+Coordinates=0,409,52,33
+Visible=False
 
 [Label2]
-Coordinates=478,421,46,51
+Coordinates=478,421,46,33
+Visible=False
 
 [GradientAnimation5]
 Coordinates=1038,469,112,33
 
 [Label26]
-Coordinates=363,141,52,51
+Coordinates=363,141,52,33
+Visible=False
 
 [lblCountry]
-Coordinates=141,305,65,51
+Coordinates=580,470,65,51
 
 [SupportLabel]
 Coordinates=726,421,80,33
 Visible=False
 
 [LogoImage]
-Coordinates=478,211,69,51
+Coordinates=478,211,69,33
+Visible=False
 
 [GradientAnimation3]
 Coordinates=1038,521,112,33
@@ -261,14 +293,16 @@ Coordinates=1038,625,112,33
 Coordinates=1038,677,64,33
 
 [Rectangle6]
-Coordinates=1038,729,69,33
+Coordinates=960,448,69,33
+Visible=False
 
 [Label7]
 Coordinates=726,211,46,33
 Visible=False
 
 [Rectangle3]
-Coordinates=1038,781,69,33
+Coordinates=960,500,69,33
+Visible=False
 
 [FormSpacerLayout]
 Coordinates=1019,816,108,33
@@ -290,19 +324,22 @@ Coordinates=752,816,89,33
 Visible=False
 
 [WelcomeLabel]
-Coordinates=0,0,86,51
+Coordinates=0,0,86,33
+Visible=False
 
 [lblThoroughfare]
-Coordinates=232,141,93,51
+Coordinates=550,170,93,51
 
 [Label14]
-Coordinates=568,727,52,51
+Coordinates=568,727,52,33
+Visible=False
 
 [edtProjTitle]
-Coordinates=363,281,70,51
+Coordinates=363,281,70,33
+Visible=False
 
 [lblLocality]
-Coordinates=1270,630,65,51
+Coordinates=580,350,65,51
 
 [LogoLayout]
 Coordinates=673,816,73,33
@@ -317,10 +354,12 @@ Coordinates=594,816,74,33
 Visible=False
 
 [mmoProjDesc]
-Coordinates=491,549,83,51
+Coordinates=491,549,83,33
+Visible=False
 
 [edtProjID]
-Coordinates=960,380,60,51
+Coordinates=960,380,60,33
+Visible=False
 
 [Rectangle1]
 Coordinates=515,816,69,33
@@ -343,7 +382,8 @@ Coordinates=169,816,96,33
 Visible=False
 
 [Button2]
-Coordinates=104,216,53,51
+Coordinates=104,216,53,33
+Visible=False
 
 [LearnCircle]
 Coordinates=90,816,71,33
@@ -358,32 +398,38 @@ Coordinates=1234,105,69,33
 Visible=False
 
 [Label16]
-Coordinates=0,498,52,51
+Coordinates=0,498,52,33
+Visible=False
 
 [GradientAnimation1]
 Coordinates=1234,157,112,33
 
 [LearnImage]
-Coordinates=478,141,72,51
+Coordinates=478,141,72,33
+Visible=False
 
 [Label12]
-Coordinates=599,211,52,51
+Coordinates=599,211,52,33
+Visible=False
 
 [lblSubAdminArea]
-Coordinates=1040,550,100,51
+Coordinates=540,110,100,51
 
 [Label9]
-Coordinates=301,460,46,51
+Coordinates=301,460,46,33
+Visible=False
 
 [Rectangle12]
 Coordinates=1234,209,75,33
 Visible=False
 
 [Label24]
-Coordinates=350,460,52,51
+Coordinates=350,460,52,33
+Visible=False
 
 [Label20]
-Coordinates=133,460,52,51
+Coordinates=133,460,52,33
+Visible=False
 
 [EventsBackgroundRect]
 Coordinates=1234,261,130,33
@@ -393,7 +439,8 @@ Visible=False
 Coordinates=1234,313,118,33
 
 [MenuButton]
-Coordinates=26,70,74,51
+Coordinates=26,70,74,33
+Visible=False
 
 [SupportBackgroundRect]
 Coordinates=1234,365,136,33
@@ -403,7 +450,8 @@ Visible=False
 Coordinates=1234,417,115,33
 
 [spedProjEdit]
-Coordinates=363,71,77,51
+Coordinates=363,71,77,33
+Visible=False
 
 [Rectangle8]
 Coordinates=1234,469,69,33
@@ -430,36 +478,43 @@ Coordinates=1234,677,58,33
 Visible=False
 
 [HeaderLabel]
-Coordinates=489,727,76,51
+Coordinates=489,727,76,33
+Visible=False
 
 [SignUpLayout]
 Coordinates=1234,729,84,33
 Visible=False
 
 [Label3]
-Coordinates=580,549,46,51
+Coordinates=580,549,46,33
+Visible=False
 
 [AdvocateLabel]
-Coordinates=599,71,87,51
+Coordinates=599,71,87,33
+Visible=False
 
 [lblSubThoroughfare]
-Coordinates=950,180,112,51
+Coordinates=530,50,112,51
 
 [Label6]
-Coordinates=599,281,46,51
+Coordinates=599,281,46,33
+Visible=False
 
 [Rectangle9]
 Coordinates=1234,781,69,33
 Visible=False
 
 [UserImage]
-Coordinates=135,549,67,51
+Coordinates=135,549,67,33
+Visible=False
 
 [speedButtonAdd]
-Coordinates=627,727,97,51
+Coordinates=627,727,97,33
+Visible=False
 
 [Label5]
-Coordinates=23,305,46,51
+Coordinates=23,305,46,33
+Visible=False
 
 [SignupTextBTN]
 Coordinates=726,631,91,33
@@ -487,22 +542,22 @@ Coordinates=380,240,112,33
 Visible=False
 
 [BindSourceDB1]
-Coordinates=1490,120,93,465
+Coordinates=200,20,93,465
 
 [BindingsList1]
 Coordinates=291,399,82,33
 
 [BindSourceDB2]
-Coordinates=1560,680,97,123
+Coordinates=250,530,97,123
 
 [lstEntries]
-Coordinates=1320,120,89,177
+Coordinates=30,20,89,177
 Visible=True
 
 [dmMain.dsProjects]
 Coordinates=119,1,108,33
 
 [imgPicture]
-Coordinates=1660,140,67,51
+Coordinates=370,40,67,51
 Visible=True
 
