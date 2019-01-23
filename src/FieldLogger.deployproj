@@ -82,6 +82,16 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="..\out\Win64\Debug\FieldLogger.exe" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>FieldLogger\</RemoteDir>
+            <RemoteName>FieldLogger.exe</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
         <DeployFile Include="$(IBREDISTDIR)\win64_togo\interbase\license.txt" Condition="'$(Config)'=='Debug'">
             <RemoteDir>FieldLogger\interbase\</RemoteDir>
             <RemoteName>license.txt</RemoteName>

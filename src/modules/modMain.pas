@@ -16,6 +16,31 @@ type
     qryEntries: TFDQuery;
     conn: TFDConnection;
     dsProjects: TDataSource;
+    qryProjectsPROJ_ID: TIntegerField;
+    qryProjectsPROJ_TITLE: TStringField;
+    qryProjectsPROJ_DESC: TMemoField;
+    qryEntriesPROJ_ID: TIntegerField;
+    qryEntriesPICTURE: TBlobField;
+    qryEntriesLONGITUDE: TSingleField;
+    qryEntriesLATITUDE: TSingleField;
+    qryEntriesTIMEDATESTAMP: TSQLTimeStampField;
+    qryEntriesOR_X: TSingleField;
+    qryEntriesOR_Y: TSingleField;
+    qryEntriesOR_Z: TSingleField;
+    qryEntriesOR_DISTANCE: TSingleField;
+    qryEntriesHEADING_X: TSingleField;
+    qryEntriesHEADING_Y: TSingleField;
+    qryEntriesHEADING_Z: TSingleField;
+    qryEntriesV_X: TSingleField;
+    qryEntriesV_Y: TSingleField;
+    qryEntriesV_Z: TSingleField;
+    qryEntriesANGLE_X: TSingleField;
+    qryEntriesANGLE_Y: TSingleField;
+    qryEntriesANGLE_Z: TSingleField;
+    qryEntriesMOTION: TSingleField;
+    qryEntriesSPEED: TSingleField;
+    qryEntriesNOTE: TMemoField;
+    qryEntriesLOG_ID: TIntegerField;
   private
     { Private declarations }
   public

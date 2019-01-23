@@ -7,3 +7,18 @@ Coordinates=0,0,71,105
 [qryEntries]
 Coordinates=82,1,93,429
 
+[dsProjects]
+Coordinates=13,124,66,33
+
+[]
+Coordinates=194,157,110,33
+
+[qryProjectsPROJ_TITLE]
+Coordinates=194,1,133,33
+
+[qryProjectsPROJ_ID]
+Coordinates=194,53,115,33
+
+[qryProjectsPROJ_DESC]
+Coordinates=194,105,133,33
+

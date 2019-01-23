@@ -16,11 +16,15 @@ uses
   System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, FireDAC.Comp.DataSet, System.Actions, FMX.ActnList,
   FMX.ScrollBox, FMX.Memo, FMX.ListView, FMX.ListBox, FMX.MediaLibrary.Actions,
-  FMX.StdActns, FMX.Media, FMX.Ani;
+  FMX.StdActns, FMX.Media, FMX.Ani, System.Sensors, System.Sensors.Components;
 
 type
   TfrmMain = class(TForm)
     CameraComponent1: TCameraComponent;
+    BindSourceDB1: TBindSourceDB;
+    BindingsList1: TBindingsList;
+    BindSourceDB2: TBindSourceDB;
+    mmoCreateDatabase: TMemo;
     tbcMain: TTabControl;
     tabWelcome: TTabItem;
     sbSterling: TStyleBook;
@@ -89,18 +93,21 @@ type
     speedButtonAdd: TSpeedButton;
     Label1: TLabel;
     tabProjectDetail: TTabItem;
-    edtProjID: TEdit;
-    edtProjTitle: TEdit;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    mmoProjDesc: TMemo;
     ToolBar3: TToolBar;
     spedProjBack: TSpeedButton;
     spedProjEdit: TSpeedButton;
     spedProjDelete: TSpeedButton;
     Label6: TLabel;
+    Splitter1: TSplitter;
     lstEntries: TListView;
+    ToolBar4: TToolBar;
+    spedNewEntry: TSpeedButton;
+    Label4: TLabel;
+    Layout2: TLayout;
+    mmoProjDesc: TMemo;
+    Label3: TLabel;
+    Label5: TLabel;
+    edtProjTitle: TEdit;
     tabEntryDetail: TTabItem;
     imgPicture: TImage;
     ScrollBox1: TScrollBox;
@@ -159,32 +166,50 @@ type
     Label30: TLabel;
     lblAdminArea: TLabel;
     ToolBar2: TToolBar;
-    btnAddEntry: TButton;
-    Button1: TButton;
-    Button2: TButton;
-    BindSourceDB1: TBindSourceDB;
-    BindingsList1: TBindingsList;
-    BindSourceDB2: TBindSourceDB;
-    LinkListControlToField1: TLinkListControlToField;
-    LinkListControlToField2: TLinkListControlToField;
+    btnEntriesBack: TButton;
+    tabNewEntry: TTabItem;
+    Layout3: TLayout;
+    imgTakePicture: TImage;
+    btnTakePicture: TButton;
+    tabNewProject: TTabItem;
+    ToolBar5: TToolBar;
+    spedCancelNewProject: TSpeedButton;
+    Label8: TLabel;
+    Layout4: TLayout;
+    Layout5: TLayout;
+    mmoNewProjDescription: TMemo;
+    edtNewProjTitle: TEdit;
+    Label15: TLabel;
+    Layout6: TLayout;
+    btnDone: TButton;
+    LinkControlToField1: TLinkControlToField;
+    LinkControlToField2: TLinkControlToField;
     LinkPropertyToFieldBitmap: TLinkPropertyToField;
     LinkPropertyToFieldText: TLinkPropertyToField;
     LinkPropertyToFieldText2: TLinkPropertyToField;
+    LinkListControlToField1: TLinkListControlToField;
+    LinkListControlToField2: TLinkListControlToField;
+    LinkControlToField3: TLinkControlToField;
+    LinkControlToField4: TLinkControlToField;
+    LocationSensor1: TLocationSensor;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure SignInRectBTNClick(Sender: TObject);
-    procedure listViewProjectsItemClick(const Sender: TObject;
-      const AItem: TListViewItem);
+    procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
     procedure spedProjBackClick(Sender: TObject);
-    procedure PasswordEditKeyDown(Sender: TObject; var Key: Word;
-      var KeyChar: Char; Shift: TShiftState);
+    procedure PasswordEditKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
     procedure TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
-    procedure btnAddEntryClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure lstEntriesItemClick(const Sender: TObject;
-      const AItem: TListViewItem);
+    procedure lstEntriesItemClick(const Sender: TObject; const AItem: TListViewItem);
     procedure FormShow(Sender: TObject);
+    procedure spedNewEntryClick(Sender: TObject);
+    procedure btnEntriesBackClick(Sender: TObject);
+    procedure CameraComponent1SampleBufferReady(Sender: TObject; const ATime: TMediaTime);
+    procedure btnTakePictureClick(Sender: TObject);
+    procedure speedButtonAddClick(Sender: TObject);
+    procedure spedCancelNewProjectClick(Sender: TObject);
+    procedure btnDoneClick(Sender: TObject);
+    procedure LocationSensor1LocationChanged(Sender: TObject; const OldLocation, NewLocation: TLocationCoord2D);
   private
-    { Private declarations }
+    CurrentLocation: TLocationCoord2D;
   public
     { Public declarations }
   end;
@@ -194,42 +219,97 @@ var
 
 implementation
 uses
-  fieldlogger.databaseutil,
-  fieldlogger.authentication, modMain;
+  IOUtils,
+  fieldlogger.authentication,
+  modMain;
 
 {$R *.fmx}
 
-procedure TfrmMain.btnAddEntryClick(Sender: TObject);
+function DataFilename: string;
+const
+  cDatafileName = 'EMBEDDEDIBLITE.IB';
 begin
-  dmMain.qryEntries.Prior;
+  Result := TPath.GetDocumentsPath + TPath.DirectorySeparatorChar + cDatafileName;
 end;
 
-procedure TfrmMain.Button1Click(Sender: TObject);
+
+procedure TfrmMain.btnDoneClick(Sender: TObject);
 begin
-  dmMain.qryEntries.Next;
+  dmMain.qryProjects.FieldByName('PROJ_ID').AsInteger := 0;
+  dmMain.qryProjects.Post;
+  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+  //- Disable sensors
+  CameraComponent1.Active := False;
+  LocationSensor1.Active := False;
+end;
+
+procedure TfrmMain.btnEntriesBackClick(Sender: TObject);
+begin
+  tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+end;
+
+procedure TfrmMain.btnTakePictureClick(Sender: TObject);
+var
+  ms: TMemoryStream;
+begin
+  dmMain.qryEntries.Append;
+  ms := TMemoryStream.Create;
+  try
+    imgTakePicture.Bitmap.SaveToStream(ms);
+    ms.Position := 0;
+    dmMain.qryEntriesPICTURE.LoadFromStream(ms);
+  finally
+    ms.Free;
+  end;
+  dmMain.qryEntries.FieldByName('LATITUDE').AsFloat := CurrentLocation.Latitude;
+  dmMain.qryEntries.FieldByName('LONGITUDE').AsFloat := CurrentLocation.Longitude;
+  dmMain.qryEntries.FieldByName('LOG_ID').AsInteger := 0;
+  dmMain.qryEntries.Post;
+  tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+end;
+
+procedure TfrmMain.CameraComponent1SampleBufferReady(Sender: TObject; const ATime: TMediaTime);
+begin
+  CameraComponent1.SampleBufferToBitmap(imgTakePicture.Bitmap,TRUE);
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
+var
+  idx: uint32;
 begin
   //- Ensure we're on the welcome tab
   tbcMain.ActiveTab := tabWelcome;
   //- Configure our connection to the database.
-  TDatabaseUtils.ConfigureConnection(dmMain.conn);
+  dmMain.conn.LoginPrompt := False;
+  dmMain.conn.Params.Database := DataFilename;
   //- Ensure the database file already exists, if not, create it.
-  if not FileExists(TDatabaseUtils.DataFilename) then begin
-    TDatabaseUtils.CreateDatabase(dmMain.conn);
+  if not FileExists(DataFilename) then begin
+    dmMain.conn.Params.Values['CreateDatabase'] := BoolToStr(True,True);
+    dmMain.conn.Connected := True;
+    for idx := 0 to pred(mmoCreateDatabase.Lines.Count) do begin
+      if mmoCreateDatabase.Lines[idx].Trim<>'' then begin
+        dmMain.conn.ExecSQL(mmoCreateDatabase.Lines[idx].Trim);
+      end;
+    end;
+    dmMain.conn.Params.Values['CreateDatabase'] := BoolToStr(False,True);
+    dmMain.conn.Connected := False;
   end;
   //- Connect to the database.
   dmMain.conn.Connected := True;
   if not dmMain.conn.Connected then begin
     raise
-      Exception.Create('Unable to connect to database: '+TDatabaseUtils.DataFilename);
+      Exception.Create('Unable to connect to database: '+DataFilename);
   end;
 end;
 
 procedure TfrmMain.listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
 begin
   tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Normal);
+end;
+
+procedure TfrmMain.LocationSensor1LocationChanged(Sender: TObject; const OldLocation, NewLocation: TLocationCoord2D );
+begin
+  CurrentLocation := NewLocation;
 end;
 
 procedure TfrmMain.LoginBackgroundRectClick(Sender: TObject);
@@ -263,9 +343,30 @@ begin
   end;
 end;
 
+procedure TfrmMain.spedCancelNewProjectClick(Sender: TObject);
+begin
+  dmMain.qryProjects.Cancel;
+  tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+end;
+
+procedure TfrmMain.spedNewEntryClick(Sender: TObject);
+begin
+  //- Set sensors active.
+  CameraComponent1.Active := True;
+  LocationSensor1.Active := True;
+  //- Switch tab
+  tbcMain.SetActiveTabWithTransition(tabNewEntry,TTabTransition.Slide,TTabTransitionDirection.Normal);
+end;
+
 procedure TfrmMain.spedProjBackClick(Sender: TObject);
 begin
-  tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Normal);
+  tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+end;
+
+procedure TfrmMain.speedButtonAddClick(Sender: TObject);
+begin
+  dmMain.qryProjects.Insert;
+  tbcMain.SetActiveTabWithTransition(tabNewProject,TTabTransition.Slide,TTabTransitionDirection.Normal);
 end;
 
 procedure TfrmMain.TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
