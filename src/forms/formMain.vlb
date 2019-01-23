@@ -1,26 +1,17 @@
 ﻿[]
-Coordinates=80,370,52,51
-Visible=True
+Coordinates=1324,944,91,36
+Visible=False
 
 [CameraComponent1]
 Coordinates=1139,108,115,33
 
 [dmMain.qryEntries]
-Coordinates=380,220,107,33
+Coordinates=160,200,107,33
 Visible=False
 
 [dmMain.qryProjects]
-Coordinates=380,240,112,33
+Coordinates=360,100,112,33
 Visible=False
-
-[BindSourceDB1]
-Coordinates=200,20,93,465
-
-[BindingsList1]
-Coordinates=291,399,82,33
-
-[BindSourceDB2]
-Coordinates=200,490,97,177
 
 [dmMain.dsProjects]
 Coordinates=119,1,108,33
@@ -65,16 +56,8 @@ Visible=False
 Coordinates=231,865,76,33
 Visible=False
 
-[mmoProjDesc]
-Coordinates=380,650,83,51
-Visible=True
-
 [Rectangle3]
 Coordinates=152,865,69,33
-Visible=False
-
-[Label5]
-Coordinates=588,581,46,33
 Visible=False
 
 [lblSubThoroughfare]
@@ -87,10 +70,6 @@ Visible=False
 
 [SupportCircle]
 Coordinates=948,193,82,33
-Visible=False
-
-[Label1]
-Coordinates=1270,460,46,33
 Visible=False
 
 [SupportImage]
@@ -109,13 +88,6 @@ Coordinates=948,297,112,33
 
 [LogoLayout]
 Coordinates=948,349,73,33
-Visible=False
-
-[listViewProjects]
-Coordinates=50,490,93,141
-
-[ToolBar1]
-Coordinates=14,865,58,33
 Visible=False
 
 [HeaderBackgroundRect]
@@ -140,10 +112,6 @@ Visible=False
 
 [GradientAnimation10]
 Coordinates=948,557,118,33
-
-[ToolBar3]
-Coordinates=948,609,58,33
-Visible=False
 
 [Image1]
 Coordinates=800,200,49,33
@@ -177,12 +145,8 @@ Visible=False
 Coordinates=530,211,52,33
 Visible=False
 
-[edtProjTitle]
-Coordinates=370,530,70,51
-Visible=True
-
 [mmoNewProjDescription]
-Coordinates=370,590,136,51
+Coordinates=340,200,136,51
 Visible=True
 
 [Label9]
@@ -217,7 +181,7 @@ Coordinates=140,776,52,33
 Visible=False
 
 [lblLongitude]
-Coordinates=350,90,76,51
+Coordinates=50,370,76,51
 Visible=True
 
 [LearnCenterLayout]
@@ -236,14 +200,6 @@ Visible=False
 Coordinates=1135,264,131,33
 Visible=False
 
-[spedNewEntry]
-Coordinates=0,454,85,33
-Visible=False
-
-[ToolBar2]
-Coordinates=781,954,58,33
-Visible=False
-
 [Label30]
 Coordinates=194,687,52,33
 Visible=False
@@ -258,10 +214,6 @@ Visible=False
 
 [AdvocateCircle]
 Coordinates=682,954,89,33
-Visible=False
-
-[spedCancelNewProject]
-Coordinates=620,351,128,33
 Visible=False
 
 [Rectangle9]
@@ -289,18 +241,10 @@ Coordinates=445,954,74,33
 Visible=False
 
 [edtNewProjTitle]
-Coordinates=370,470,92,51
+Coordinates=340,80,92,51
 
 [Label22]
 Coordinates=530,1,52,33
-Visible=False
-
-[btnEntriesBack]
-Coordinates=1340,240,89,33
-Visible=False
-
-[spedProjDelete]
-Coordinates=459,141,89,33
 Visible=False
 
 [sbSterling]
@@ -339,10 +283,6 @@ Visible=False
 
 [Rectangle14]
 Coordinates=1135,368,75,33
-Visible=False
-
-[spedProjEdit]
-Coordinates=530,281,77,33
 Visible=False
 
 [LockImage]
@@ -400,10 +340,6 @@ Visible=False
 Coordinates=1135,836,128,33
 Visible=False
 
-[spedProjBack]
-Coordinates=105,687,83,33
-Visible=False
-
 [GaussianBlurEffect1]
 Coordinates=1135,888,115,33
 
@@ -415,16 +351,8 @@ Visible=False
 Coordinates=1135,940,69,33
 Visible=False
 
-[Label8]
-Coordinates=588,1,46,33
-Visible=False
-
 [Label26]
 Coordinates=530,581,52,33
-Visible=False
-
-[Label3]
-Coordinates=588,141,46,33
 Visible=False
 
 [LoginBackgroundRect]
@@ -433,14 +361,6 @@ Visible=False
 
 [imgTakePicture]
 Coordinates=794,141,91,33
-Visible=False
-
-[speedButtonAdd]
-Coordinates=794,771,97,33
-Visible=False
-
-[Label6]
-Coordinates=588,721,46,33
 Visible=False
 
 [Rectangle12]
@@ -474,14 +394,6 @@ Visible=False
 Coordinates=554,776,56,33
 Visible=False
 
-[ToolBar4]
-Coordinates=1076,1025,58,33
-Visible=False
-
-[Label4]
-Coordinates=1270,390,46,33
-Visible=False
-
 [tabProjectDetail]
 Coordinates=1304,105,92,33
 Visible=False
@@ -501,7 +413,7 @@ Coordinates=794,631,88,33
 Visible=False
 
 [lblLatitude]
-Coordinates=350,150,66,51
+Coordinates=60,430,66,51
 
 [lblLocality]
 Coordinates=794,491,65,33
@@ -512,10 +424,6 @@ Coordinates=1304,261,112,33
 
 [SupportBackgroundRect]
 Coordinates=1304,313,136,33
-Visible=False
-
-[Layout2]
-Coordinates=1017,1025,53,33
 Visible=False
 
 [BackgroundGaussianBlurEffect]
@@ -552,9 +460,6 @@ Coordinates=1304,521,112,33
 [Label28]
 Coordinates=199,776,52,33
 Visible=False
-
-[lstEntries]
-Coordinates=40,30,89,177
 
 [Label12]
 Coordinates=794,701,52,33
@@ -604,16 +509,12 @@ Visible=False
 Coordinates=386,776,76,33
 Visible=False
 
-[ToolBar5]
-Coordinates=533,1025,58,33
-Visible=False
-
 [lblAdminArea]
 Coordinates=705,865,81,33
 Visible=False
 
 [imgPicture]
-Coordinates=350,20,67,51
+Coordinates=60,310,67,51
 
 [EventsLayout]
 Coordinates=444,1025,81,33
@@ -638,4 +539,222 @@ Visible=False
 [dmMain.]
 Coordinates=930,70,149,33
 Visible=False
+
+[LocationSensor1]
+Coordinates=0,0,97,33
+
+[Layout8]
+Coordinates=625,1450,53,33
+Visible=False
+
+[Rectangle22]
+Coordinates=527,906,75,33
+Visible=False
+
+[Image7]
+Coordinates=140,932,49,33
+Visible=False
+
+[Circle2]
+Coordinates=221,1450,48,33
+Visible=False
+
+[Rectangle21]
+Coordinates=438,906,75,33
+Visible=False
+
+[Label4]
+Coordinates=59,1028,46,33
+Visible=False
+
+[Button5]
+Coordinates=332,990,53,33
+Visible=False
+
+[btnEntriesBack]
+Coordinates=118,1028,89,33
+Visible=False
+
+[spedCancelNewProject]
+Coordinates=612,788,128,33
+Visible=False
+
+[ToolBar3]
+Coordinates=1123,1252,58,33
+Visible=False
+
+[Layout7]
+Coordinates=369,906,53,33
+Visible=False
+
+[ToolBar2]
+Coordinates=880,906,58,33
+Visible=False
+
+[speedButtonAdd]
+Coordinates=1324,757,97,33
+Visible=False
+
+[Rectangle18]
+Coordinates=280,906,75,33
+Visible=False
+
+[Button2]
+Coordinates=994,1418,53,33
+Visible=False
+
+[Button4]
+Coordinates=190,695,53,33
+Visible=False
+
+[Rectangle23]
+Coordinates=191,906,75,33
+Visible=False
+
+[spedProjDelete]
+Coordinates=1324,680,89,33
+Visible=False
+
+[ToolBar8]
+Coordinates=811,906,58,33
+Visible=False
+
+[Label6]
+Coordinates=421,641,46,33
+Visible=False
+
+[ToolBar7]
+Coordinates=122,906,58,33
+Visible=False
+
+[Image4]
+Coordinates=181,772,49,33
+Visible=False
+
+[Rectangle16]
+Coordinates=1324,834,75,33
+Visible=False
+
+[Button6]
+Coordinates=240,772,53,33
+Visible=False
+
+[Rectangle15]
+Coordinates=1324,889,75,33
+Visible=False
+
+[Circle1]
+Coordinates=63,906,48,33
+Visible=False
+
+[Image3]
+Coordinates=273,990,49,33
+Visible=False
+
+[Image6]
+Coordinates=154,1450,49,33
+Visible=False
+
+[Label19]
+Coordinates=293,1240,52,33
+Visible=False
+
+[Rectangle17]
+Coordinates=1324,999,75,33
+Visible=False
+
+[GaussianBlurEffect4]
+Coordinates=1324,1054,115,33
+
+[Image5]
+Coordinates=1123,641,49,33
+Visible=False
+
+[ToolBar1]
+Coordinates=1324,1109,58,33
+Visible=False
+
+[GaussianBlurEffect2]
+Coordinates=1185,1124,115,33
+
+[mmoProjDesc]
+Coordinates=340,140,83,51
+
+[Label3]
+Coordinates=519,944,46,33
+Visible=False
+
+[spedProjBack]
+Coordinates=463,867,83,33
+Visible=False
+
+[Label5]
+Coordinates=362,1240,46,33
+Visible=False
+
+[Button1]
+Coordinates=204,990,53,33
+Visible=False
+
+[Label17]
+Coordinates=180,868,52,33
+Visible=False
+
+[Label10]
+Coordinates=421,718,52,33
+Visible=False
+
+[Rectangle24]
+Coordinates=1096,1124,75,33
+Visible=False
+
+[Label1]
+Coordinates=994,1208,46,33
+Visible=False
+
+[listViewProjects]
+Coordinates=30,30,93,141
+Visible=True
+
+[ToolBar6]
+Coordinates=1027,1124,58,33
+Visible=False
+
+[Button3]
+Coordinates=1123,718,53,33
+Visible=False
+
+[Rectangle20]
+Coordinates=938,1124,75,33
+Visible=False
+
+[GaussianBlurEffect3]
+Coordinates=799,1124,115,33
+
+[lstEntries]
+Coordinates=320,270,89,177
+
+[Rectangle19]
+Coordinates=710,1124,75,33
+Visible=False
+
+[edtProjTitle]
+Coordinates=340,20,70,51
+
+[Label13]
+Coordinates=249,868,52,33
+Visible=False
+
+[Layout9]
+Coordinates=1185,1047,53,33
+Visible=False
+
+[BindSourceDB1]
+Coordinates=160,30,97,177
+
+[BindingsList1]
+Coordinates=0,0,82,33
+
+[BindSourceDB2]
+Coordinates=180,270,93,483
 
