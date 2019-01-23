@@ -142,7 +142,7 @@ Coordinates=530,211,52,33
 Visible=False
 
 [mmoNewProjDescription]
-Coordinates=340,200,136,51
+Coordinates=440,150,136,51
 Visible=True
 
 [Label9]
@@ -237,7 +237,7 @@ Coordinates=445,954,74,33
 Visible=False
 
 [edtNewProjTitle]
-Coordinates=340,80,92,51
+Coordinates=450,80,92,51
 
 [Label22]
 Coordinates=530,1,52,33
@@ -623,6 +623,7 @@ Coordinates=1185,1124,115,33
 
 [mmoProjDesc]
 Coordinates=340,140,83,51
+Visible=True
 
 [Label3]
 Coordinates=519,944,46,33
@@ -683,7 +684,7 @@ Coordinates=1185,1047,53,33
 Visible=False
 
 [BindSourceDB1]
-Coordinates=160,30,97,177
+Coordinates=160,30,97,141
 
 [BindingsList1]
 Coordinates=0,0,82,33

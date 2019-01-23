@@ -203,8 +203,6 @@ type
     LinkPropertyToFieldBitmap: TLinkPropertyToField;
     LinkPropertyToFieldText: TLinkPropertyToField;
     LinkPropertyToFieldText2: TLinkPropertyToField;
-    LinkControlToField3: TLinkControlToField;
-    LinkControlToField4: TLinkControlToField;
     Label8: TLabel;
     Image8: TImage;
     GaussianBlurEffect5: TGaussianBlurEffect;
@@ -237,6 +235,7 @@ type
     Button6: TButton;
     Label15: TLabel;
     Label4: TLabel;
+    btnDeleteEntry: TSpeedButton;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure SignInRectBTNClick(Sender: TObject);
     procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
@@ -255,6 +254,7 @@ type
     procedure LocationSensor1LocationChanged(Sender: TObject; const OldLocation, NewLocation: TLocationCoord2D);
     procedure btnNewEntryCancelClick(Sender: TObject);
     procedure spedProjDeleteClick(Sender: TObject);
+    procedure btnDeleteEntryClick(Sender: TObject);
   private
     CurrentLocation: TLocationCoord2D;
   public
@@ -280,9 +280,17 @@ begin
 end;
 
 
+procedure TfrmMain.btnDeleteEntryClick(Sender: TObject);
+begin
+  dmMain.qryEntries.Delete;
+  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+end;
+
 procedure TfrmMain.btnDoneClick(Sender: TObject);
 begin
   dmMain.qryProjects.FieldByName('PROJ_ID').AsInteger := 0;
+  dmMain.qryProjects.FieldByName('PROJ_TITLE').AsString := edtNewProjTitle.Text;
+  dmMain.qryProjects.FieldByName('PROJ_DESC').AsString := mmoNewProjDescription.Lines.Text;
   dmMain.qryProjects.Post;
   tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
   //- Disable sensors
@@ -306,7 +314,7 @@ procedure TfrmMain.btnTakePictureClick(Sender: TObject);
 var
   ms: TMemoryStream;
 begin
-  dmMain.qryEntries.Append;
+  dmMain.qryEntries.Insert;
   ms := TMemoryStream.Create;
   try
     imgTakePicture.Bitmap.SaveToStream(ms);
@@ -315,10 +323,11 @@ begin
   finally
     ms.Free;
   end;
+  dmMain.qryEntries.FieldByName('LOG_ID').AsInteger := 0;
+  dmMain.qryEntries.FieldByName('PROJ_ID').AsInteger := dmMain.qryProjects.FieldByName('PROJ_ID').AsInteger;
   dmMain.qryEntries.FieldByName('LATITUDE').AsFloat := CurrentLocation.Latitude;
   dmMain.qryEntries.FieldByName('LONGITUDE').AsFloat := CurrentLocation.Longitude;
   dmMain.qryEntries.FieldByName('TIMEDATESTAMP').AsDateTime := Now;
-  dmMain.qryEntries.FieldByName('LOG_ID').AsInteger := 0;
   dmMain.qryEntries.Post;
   tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
   CameraComponent1.Active := False;
@@ -335,6 +344,7 @@ var
   idx: uint32;
 begin
   //- Ensure we're on the welcome tab
+  tbcMain.TabPosition := TTabPosition.None;
   tbcMain.ActiveTab := tabWelcome;
   //- Configure our connection to the database.
   dmMain.conn.LoginPrompt := False;

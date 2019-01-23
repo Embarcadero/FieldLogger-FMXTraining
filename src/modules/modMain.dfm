@@ -1,7 +1,7 @@
 object dmMain: TdmMain
   OldCreateOrder = False
-  Height = 547
-  Width = 706
+  Height = 374
+  Width = 422
   object qryProjects: TFDQuery
     Connection = conn
     SQL.Strings = (
