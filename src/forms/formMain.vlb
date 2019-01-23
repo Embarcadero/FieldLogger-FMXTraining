@@ -1,5 +1,5 @@
 ﻿[]
-Coordinates=1324,944,91,36
+Coordinates=661,491,52,33
 Visible=False
 
 [CameraComponent1]
@@ -42,10 +42,6 @@ Visible=False
 
 [tabSignin]
 Coordinates=310,865,61,33
-Visible=False
-
-[Layout3]
-Coordinates=0,743,53,33
 Visible=False
 
 [LogoImage]
@@ -309,10 +305,6 @@ Visible=False
 Coordinates=1135,420,88,33
 Visible=False
 
-[Layout6]
-Coordinates=1135,472,53,33
-Visible=False
-
 [Layout4]
 Coordinates=1135,524,53,33
 Visible=False
@@ -359,10 +351,6 @@ Visible=False
 Coordinates=1006,954,124,33
 Visible=False
 
-[imgTakePicture]
-Coordinates=794,141,91,33
-Visible=False
-
 [Rectangle12]
 Coordinates=1135,992,75,33
 Visible=False
@@ -386,14 +374,6 @@ Visible=False
 Coordinates=661,141,82,33
 Visible=False
 
-[Label15]
-Coordinates=661,491,52,33
-Visible=False
-
-[btnDone]
-Coordinates=554,776,56,33
-Visible=False
-
 [tabProjectDetail]
 Coordinates=1304,105,92,33
 Visible=False
@@ -407,10 +387,6 @@ Coordinates=1304,157,112,33
 
 [GradientAnimation13]
 Coordinates=1304,209,118,33
-
-[btnTakePicture]
-Coordinates=794,631,88,33
-Visible=False
 
 [lblLatitude]
 Coordinates=60,430,66,51
@@ -520,10 +496,6 @@ Coordinates=60,310,67,51
 Coordinates=444,1025,81,33
 Visible=False
 
-[Layout5]
-Coordinates=385,1025,53,33
-Visible=False
-
 [tabProjects]
 Coordinates=306,1025,70,33
 Visible=False
@@ -563,20 +535,8 @@ Visible=False
 Coordinates=438,906,75,33
 Visible=False
 
-[Label4]
-Coordinates=59,1028,46,33
-Visible=False
-
-[Button5]
-Coordinates=332,990,53,33
-Visible=False
-
 [btnEntriesBack]
 Coordinates=118,1028,89,33
-Visible=False
-
-[spedCancelNewProject]
-Coordinates=612,788,128,33
 Visible=False
 
 [ToolBar3]
@@ -585,10 +545,6 @@ Visible=False
 
 [Layout7]
 Coordinates=369,906,53,33
-Visible=False
-
-[ToolBar2]
-Coordinates=880,906,58,33
 Visible=False
 
 [speedButtonAdd]
@@ -615,10 +571,6 @@ Visible=False
 Coordinates=1324,680,89,33
 Visible=False
 
-[ToolBar8]
-Coordinates=811,906,58,33
-Visible=False
-
 [Label6]
 Coordinates=421,641,46,33
 Visible=False
@@ -635,10 +587,6 @@ Visible=False
 Coordinates=1324,834,75,33
 Visible=False
 
-[Button6]
-Coordinates=240,772,53,33
-Visible=False
-
 [Rectangle15]
 Coordinates=1324,889,75,33
 Visible=False
@@ -653,10 +601,6 @@ Visible=False
 
 [Image6]
 Coordinates=154,1450,49,33
-Visible=False
-
-[Label19]
-Coordinates=293,1240,52,33
 Visible=False
 
 [Rectangle17]
@@ -696,10 +640,6 @@ Visible=False
 Coordinates=204,990,53,33
 Visible=False
 
-[Label17]
-Coordinates=180,868,52,33
-Visible=False
-
 [Label10]
 Coordinates=421,718,52,33
 Visible=False
@@ -724,19 +664,12 @@ Visible=False
 Coordinates=1123,718,53,33
 Visible=False
 
-[Rectangle20]
-Coordinates=938,1124,75,33
-Visible=False
-
 [GaussianBlurEffect3]
 Coordinates=799,1124,115,33
 
 [lstEntries]
-Coordinates=320,270,89,177
-
-[Rectangle19]
-Coordinates=710,1124,75,33
-Visible=False
+Coordinates=350,270,89,177
+Visible=True
 
 [edtProjTitle]
 Coordinates=340,20,70,51
@@ -757,4 +690,125 @@ Coordinates=0,0,82,33
 
 [BindSourceDB2]
 Coordinates=180,270,93,483
+
+[Rectangle25]
+Coordinates=749,638,75,33
+Visible=False
+
+[Button7]
+Coordinates=854,568,53,33
+Visible=False
+
+[Image9]
+Coordinates=730,240,49,33
+Visible=False
+
+[Image8]
+Coordinates=534,519,49,33
+Visible=False
+
+[Rectangle20]
+Coordinates=983,78,75,33
+Visible=False
+
+[Layout2]
+Coordinates=854,148,53,33
+Visible=False
+
+[ToolBar2]
+Coordinates=854,645,58,33
+Visible=False
+
+[Rectangle19]
+Coordinates=983,612,75,33
+Visible=False
+
+[btnNewEntryCancel]
+Coordinates=662,358,111,33
+Visible=False
+
+[Layout5]
+Coordinates=820,840,53,33
+Visible=False
+
+[Label8]
+Coordinates=534,288,46,33
+Visible=False
+
+[Button6]
+Coordinates=534,764,53,33
+Visible=False
+
+[Rectangle28]
+Coordinates=930,870,75,33
+Visible=False
+
+[Layout3]
+Coordinates=730,1124,53,33
+
+[GaussianBlurEffect5]
+Coordinates=591,1124,115,33
+
+[btnTakePicture]
+Coordinates=330,578,88,33
+Visible=False
+
+[Label19]
+Coordinates=534,442,52,33
+Visible=False
+
+[spedCancelNewProject]
+Coordinates=983,1,128,33
+Visible=False
+
+[Circle3]
+Coordinates=770,250,48,33
+Visible=False
+
+[Rectangle27]
+Coordinates=934,1124,75,33
+
+[Label23]
+Coordinates=534,148,52,33
+Visible=False
+
+[ToolBar5]
+Coordinates=522,1124,58,33
+
+[GaussianBlurEffect6]
+Coordinates=383,1124,115,33
+
+[Label21]
+Coordinates=534,365,52,33
+Visible=False
+
+[imgTakePicture]
+Coordinates=330,501,91,33
+Visible=False
+
+[Button5]
+Coordinates=870,190,53,33
+Visible=False
+
+[Image10]
+Coordinates=801,190,55,33
+Visible=False
+
+[Label17]
+Coordinates=854,778,52,33
+Visible=False
+
+[ToolBar4]
+Coordinates=314,1124,58,33
+
+[Rectangle26]
+Coordinates=225,1124,75,33
+
+[Label15]
+Coordinates=560,310,52,33
+Visible=False
+
+[Label4]
+Coordinates=750,360,46,33
+Visible=False
 

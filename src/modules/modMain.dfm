@@ -149,7 +149,7 @@ object dmMain: TdmMain
   end
   object dsProjects: TDataSource
     DataSet = qryProjects
-    Left = 24
-    Top = 200
+    Left = 32
+    Top = 184
   end
 end

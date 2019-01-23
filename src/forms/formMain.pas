@@ -145,17 +145,10 @@ type
     Label30: TLabel;
     lblAdminArea: TLabel;
     tabNewEntry: TTabItem;
-    Layout3: TLayout;
-    imgTakePicture: TImage;
-    btnTakePicture: TButton;
     tabNewProject: TTabItem;
     Layout4: TLayout;
-    Layout5: TLayout;
     mmoNewProjDescription: TMemo;
     edtNewProjTitle: TEdit;
-    Label15: TLabel;
-    Layout6: TLayout;
-    btnDone: TButton;
     LocationSensor1: TLocationSensor;
     ToolBar6: TToolBar;
     Rectangle15: TRectangle;
@@ -177,15 +170,6 @@ type
     Label6: TLabel;
     Button4: TButton;
     btnEntriesBack: TButton;
-    ToolBar2: TToolBar;
-    Rectangle19: TRectangle;
-    Label17: TLabel;
-    Button5: TButton;
-    ToolBar8: TToolBar;
-    Rectangle20: TRectangle;
-    Label19: TLabel;
-    Button6: TButton;
-    spedCancelNewProject: TSpeedButton;
     Image3: TImage;
     GaussianBlurEffect2: TGaussianBlurEffect;
     Image4: TImage;
@@ -207,7 +191,6 @@ type
     Label5: TLabel;
     Rectangle23: TRectangle;
     lstEntries: TListView;
-    Label4: TLabel;
     Rectangle24: TRectangle;
     listViewProjects: TListView;
     BindSourceDB1: TBindSourceDB;
@@ -222,6 +205,38 @@ type
     LinkPropertyToFieldText2: TLinkPropertyToField;
     LinkControlToField3: TLinkControlToField;
     LinkControlToField4: TLinkControlToField;
+    Label8: TLabel;
+    Image8: TImage;
+    GaussianBlurEffect5: TGaussianBlurEffect;
+    ToolBar2: TToolBar;
+    Rectangle19: TRectangle;
+    Label17: TLabel;
+    Button5: TButton;
+    btnNewEntryCancel: TButton;
+    Layout3: TLayout;
+    imgTakePicture: TImage;
+    Rectangle25: TRectangle;
+    btnTakePicture: TButton;
+    Image10: TImage;
+    GaussianBlurEffect6: TGaussianBlurEffect;
+    Layout2: TLayout;
+    Rectangle20: TRectangle;
+    Circle3: TCircle;
+    Image9: TImage;
+    Layout5: TLayout;
+    Rectangle26: TRectangle;
+    Label21: TLabel;
+    ToolBar4: TToolBar;
+    Rectangle27: TRectangle;
+    Label23: TLabel;
+    Button7: TButton;
+    spedCancelNewProject: TSpeedButton;
+    ToolBar5: TToolBar;
+    Rectangle28: TRectangle;
+    Label19: TLabel;
+    Button6: TButton;
+    Label15: TLabel;
+    Label4: TLabel;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure SignInRectBTNClick(Sender: TObject);
     procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
@@ -238,6 +253,8 @@ type
     procedure spedCancelNewProjectClick(Sender: TObject);
     procedure btnDoneClick(Sender: TObject);
     procedure LocationSensor1LocationChanged(Sender: TObject; const OldLocation, NewLocation: TLocationCoord2D);
+    procedure btnNewEntryCancelClick(Sender: TObject);
+    procedure spedProjDeleteClick(Sender: TObject);
   private
     CurrentLocation: TLocationCoord2D;
   public
@@ -275,7 +292,14 @@ end;
 
 procedure TfrmMain.btnEntriesBackClick(Sender: TObject);
 begin
-  tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+end;
+
+procedure TfrmMain.btnNewEntryCancelClick(Sender: TObject);
+begin
+  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+  CameraComponent1.Active := False;
+  LocationSensor1.Active := False;
 end;
 
 procedure TfrmMain.btnTakePictureClick(Sender: TObject);
@@ -293,9 +317,12 @@ begin
   end;
   dmMain.qryEntries.FieldByName('LATITUDE').AsFloat := CurrentLocation.Latitude;
   dmMain.qryEntries.FieldByName('LONGITUDE').AsFloat := CurrentLocation.Longitude;
+  dmMain.qryEntries.FieldByName('TIMEDATESTAMP').AsDateTime := Now;
   dmMain.qryEntries.FieldByName('LOG_ID').AsInteger := 0;
   dmMain.qryEntries.Post;
   tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+  CameraComponent1.Active := False;
+  LocationSensor1.Active := False;
 end;
 
 procedure TfrmMain.CameraComponent1SampleBufferReady(Sender: TObject; const ATime: TMediaTime);
@@ -391,6 +418,11 @@ end;
 procedure TfrmMain.spedProjBackClick(Sender: TObject);
 begin
   tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+end;
+
+procedure TfrmMain.spedProjDeleteClick(Sender: TObject);
+begin
+  dmMain.qryProjects.Delete;
 end;
 
 procedure TfrmMain.speedButtonAddClick(Sender: TObject);
