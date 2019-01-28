@@ -283,6 +283,7 @@ end;
 procedure TfrmMain.btnDeleteEntryClick(Sender: TObject);
 begin
   dmMain.qryEntries.Delete;
+  dmMain.qryEntries.Refresh;
   tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
 end;
 
@@ -292,6 +293,7 @@ begin
   dmMain.qryProjects.FieldByName('PROJ_TITLE').AsString := edtNewProjTitle.Text;
   dmMain.qryProjects.FieldByName('PROJ_DESC').AsString := mmoNewProjDescription.Lines.Text;
   dmMain.qryProjects.Post;
+  dmMain.qryProjects.Refresh;
   tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
   //- Disable sensors
   CameraComponent1.Active := False;
@@ -314,7 +316,7 @@ procedure TfrmMain.btnTakePictureClick(Sender: TObject);
 var
   ms: TMemoryStream;
 begin
-  dmMain.qryEntries.Insert;
+  dmMain.qryEntries.Append;
   ms := TMemoryStream.Create;
   try
     imgTakePicture.Bitmap.SaveToStream(ms);
@@ -329,6 +331,7 @@ begin
   dmMain.qryEntries.FieldByName('LONGITUDE').AsFloat := CurrentLocation.Longitude;
   dmMain.qryEntries.FieldByName('TIMEDATESTAMP').AsDateTime := Now;
   dmMain.qryEntries.Post;
+  dmMain.qryEntries.Refresh;
   tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
   CameraComponent1.Active := False;
   LocationSensor1.Active := False;
