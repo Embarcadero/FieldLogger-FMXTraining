@@ -193,11 +193,8 @@ type
     lstEntries: TListView;
     Rectangle24: TRectangle;
     listViewProjects: TListView;
-    BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkListControlToField1: TLinkListControlToField;
-    LinkControlToField1: TLinkControlToField;
-    LinkControlToField2: TLinkControlToField;
     BindSourceDB2: TBindSourceDB;
     LinkListControlToField2: TLinkListControlToField;
     LinkPropertyToFieldBitmap: TLinkPropertyToField;
@@ -236,6 +233,9 @@ type
     Label15: TLabel;
     Label4: TLabel;
     btnDeleteEntry: TSpeedButton;
+    BindSourceDB3: TBindSourceDB;
+    LinkControlToField1: TLinkControlToField;
+    LinkControlToField2: TLinkControlToField;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure SignInRectBTNClick(Sender: TObject);
     procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
@@ -289,12 +289,15 @@ end;
 
 procedure TfrmMain.btnDoneClick(Sender: TObject);
 begin
+  dmMain.qryProjects.Insert;
   dmMain.qryProjects.FieldByName('PROJ_ID').AsInteger := 0;
   dmMain.qryProjects.FieldByName('PROJ_TITLE').AsString := edtNewProjTitle.Text;
   dmMain.qryProjects.FieldByName('PROJ_DESC').AsString := mmoNewProjDescription.Lines.Text;
   dmMain.qryProjects.Post;
   dmMain.qryProjects.Refresh;
-  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+  dmMain.qryProjects.Active := False; //- Force re-query for live bindings.
+  dmMain.qryProjects.Active := True;
+  tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
   //- Disable sensors
   CameraComponent1.Active := False;
   LocationSensor1.Active := False;
@@ -440,7 +443,8 @@ end;
 
 procedure TfrmMain.speedButtonAddClick(Sender: TObject);
 begin
-  dmMain.qryProjects.Insert;
+  edtNewProjTitle.Text := '';
+  mmoNewProjDescription.Text := '';
   tbcMain.SetActiveTabWithTransition(tabNewProject,TTabTransition.Slide,TTabTransitionDirection.Normal);
 end;
 

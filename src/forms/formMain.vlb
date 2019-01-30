@@ -1,5 +1,5 @@
 ﻿[]
-Coordinates=661,491,52,33
+Coordinates=580,410,93,123
 Visible=False
 
 [CameraComponent1]
@@ -10,11 +10,12 @@ Coordinates=160,200,107,33
 Visible=False
 
 [dmMain.qryProjects]
-Coordinates=360,100,112,33
+Coordinates=600,60,112,33
 Visible=False
 
 [dmMain.dsProjects]
-Coordinates=119,1,108,33
+Coordinates=600,70,108,105
+Visible=True
 
 [AdvocateCenterLayout]
 Coordinates=800,290,127,33
@@ -142,7 +143,7 @@ Coordinates=530,211,52,33
 Visible=False
 
 [mmoNewProjDescription]
-Coordinates=440,150,136,51
+Coordinates=800,190,136,51
 Visible=True
 
 [Label9]
@@ -237,7 +238,8 @@ Coordinates=445,954,74,33
 Visible=False
 
 [edtNewProjTitle]
-Coordinates=450,80,92,51
+Coordinates=840,130,92,51
+Visible=True
 
 [Label22]
 Coordinates=530,1,52,33
@@ -622,7 +624,7 @@ Visible=False
 Coordinates=1185,1124,115,33
 
 [mmoProjDesc]
-Coordinates=340,140,83,51
+Coordinates=470,130,83,51
 Visible=True
 
 [Label3]
@@ -654,7 +656,7 @@ Coordinates=994,1208,46,33
 Visible=False
 
 [listViewProjects]
-Coordinates=30,30,93,141
+Coordinates=10,60,93,141
 Visible=True
 
 [ToolBar6]
@@ -673,7 +675,7 @@ Coordinates=350,270,89,177
 Visible=True
 
 [edtProjTitle]
-Coordinates=340,20,70,51
+Coordinates=460,70,70,51
 
 [Label13]
 Coordinates=249,868,52,33
@@ -682,9 +684,6 @@ Visible=False
 [Layout9]
 Coordinates=1185,1047,53,33
 Visible=False
-
-[BindSourceDB1]
-Coordinates=160,30,97,141
 
 [BindingsList1]
 Coordinates=0,0,82,33
@@ -746,6 +745,7 @@ Visible=False
 
 [Layout3]
 Coordinates=730,1124,53,33
+Visible=False
 
 [GaussianBlurEffect5]
 Coordinates=591,1124,115,33
@@ -768,6 +768,7 @@ Visible=False
 
 [Rectangle27]
 Coordinates=934,1124,75,33
+Visible=False
 
 [Label23]
 Coordinates=534,148,52,33
@@ -775,6 +776,7 @@ Visible=False
 
 [ToolBar5]
 Coordinates=522,1124,58,33
+Visible=False
 
 [GaussianBlurEffect6]
 Coordinates=383,1124,115,33
@@ -801,9 +803,11 @@ Visible=False
 
 [ToolBar4]
 Coordinates=314,1124,58,33
+Visible=False
 
 [Rectangle26]
 Coordinates=225,1124,75,33
+Visible=False
 
 [Label15]
 Coordinates=560,310,52,33
@@ -812,4 +816,11 @@ Visible=False
 [Label4]
 Coordinates=750,360,46,33
 Visible=False
+
+[btnDeleteEntry]
+Coordinates=700,210,87,33
+Visible=False
+
+[BindSourceDB3]
+Coordinates=170,30,97,141
 
