@@ -14,8 +14,8 @@ Coordinates=600,60,112,33
 Visible=False
 
 [dmMain.dsProjects]
-Coordinates=600,70,108,105
-Visible=True
+Coordinates=600,70,108,33
+Visible=False
 
 [AdvocateCenterLayout]
 Coordinates=800,290,127,33
@@ -143,8 +143,8 @@ Coordinates=530,211,52,33
 Visible=False
 
 [mmoNewProjDescription]
-Coordinates=800,190,136,51
-Visible=True
+Coordinates=800,190,136,33
+Visible=False
 
 [Label9]
 Coordinates=850,480,46,33
@@ -238,8 +238,8 @@ Coordinates=445,954,74,33
 Visible=False
 
 [edtNewProjTitle]
-Coordinates=840,130,92,51
-Visible=True
+Coordinates=840,130,92,33
+Visible=False
 
 [Label22]
 Coordinates=530,1,52,33
