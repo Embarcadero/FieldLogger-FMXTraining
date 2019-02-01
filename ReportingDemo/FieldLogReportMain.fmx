@@ -1,0 +1,229 @@
+object Form53: TForm53
+  Left = 0
+  Top = 0
+  Caption = 'Form53'
+  ClientHeight = 648
+  ClientWidth = 759
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object TabControl1: TTabControl
+    Align = Client
+    Size.Width = 759.000000000000000000
+    Size.Height = 648.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 1
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    Sizes = (
+      759s
+      622s
+      759s
+      622s
+      759s
+      622s)
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 69.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem1'
+      ExplicitSize.cx = 69.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object Edit1: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 0
+        Position.X = 32.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 369.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 69.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem2'
+      ExplicitSize.cx = 69.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object Grid1: TGrid
+        CanFocus = True
+        ClipChildren = True
+        Position.X = 56.000000000000000000
+        Position.Y = 62.000000000000000000
+        Size.Width = 505.000000000000000000
+        Size.Height = 147.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        RowCount = 0
+        Viewport.Width = 501.000000000000000000
+        Viewport.Height = 122.000000000000000000
+      end
+      object Grid2: TGrid
+        CanFocus = True
+        ClipChildren = True
+        Position.X = 56.000000000000000000
+        Position.Y = 254.000000000000000000
+        Size.Width = 505.000000000000000000
+        Size.Height = 227.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        RowCount = 0
+        Viewport.Width = 501.000000000000000000
+        Viewport.Height = 202.000000000000000000
+      end
+      object Button1: TButton
+        Position.X = 584.000000000000000000
+        Position.Y = 286.000000000000000000
+        TabOrder = 2
+        Text = 'Button1'
+        OnClick = Button1Click
+      end
+      object NavigatorBindSourceDB1: TBindNavigator
+        Position.X = 88.000000000000000000
+        Position.Y = 32.000000000000000000
+        Size.Width = 240.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        DataSource = BindSourceDB1
+        xRadius = 4.000000000000000000
+        yRadius = 4.000000000000000000
+      end
+      object NavigatorBindSourceDB2: TBindNavigator
+        Position.X = 72.000000000000000000
+        Position.Y = 224.000000000000000000
+        Size.Width = 240.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        DataSource = BindSourceDB2
+        xRadius = 4.000000000000000000
+        yRadius = 4.000000000000000000
+      end
+    end
+    object TabItem3: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 69.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem3'
+      ExplicitSize.cx = 69.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object Memo1: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Lines.Strings = (
+          '<html><body>'
+          '<p>Here is text above the image</p>'
+          
+            '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAi' +
+            'CAYAAAA6RwvCAAAB60lEQVR4Xu2WW0sCQRSA+81drJ6i+4XIggqjoLxBpploYZqV' +
+            '3dQoyqKg/kPYurpqT6c5E4WcUWdmSbDw4YNld86Zb4c5c6ZnOvQGnUBP71YBOoGu' +
+            'COV/iAx632EiZMDkrgFDvnfhuw62RBxMYPOkDJmXD8i+foHP3rMyl6PjVdAW6XMX' +
+            'YPvS+hGgBDMWH0PjZGiLOPdNyDQQqGfl0BTiZGiLhK8rwsSU6E1FiJOhLRK/qwoT' +
+            'U44eqkKcDG2R2K18RVCWxsnQFnGny8LEFP+FJcTJ0BbB8kw91oTJvzl9qsGwX7+E' +
+            'tUWQkYABh/fiXsG9MRY0hPEq2BJBBjwFmIsUwXde5sxHi/wdHaeKbZHf5m+LOLwF' +
+            'GGd7AU/ZjVQJNo5LsMie8V3bew02uoWYyXvJVV2zo2DzC+UscLKxOh1ZKoJ/v8p6' +
+            'x9lz85JtBsa4kiX+EzQvpaUILnPgqnmnVSWcq0hXp6WIK1ESktplne0lml9ZxKNw' +
+            'nKuCZw3NrywyumNAvMEJqksyX+UVRfMriyBT4SIk8vZl8Nif2SsKeSlSEQT7B5Zt' +
+            '/R1VBt7idlkZ4+Wa5muEkgjSz+6hSwcm7650Ukqale1y3NTqPcoi32ByXOo1dj5g' +
+            'aeO1EAlmLf5uNmKv+WmLtIuuCKUrQvkEg1kQlUaoYPYAAAAASUVORK5CYII=" al' +
+            't="test image" />'
+          '<p>text after</p>'
+          '</body></html>')
+        Position.X = 24.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 361.000000000000000000
+        Size.Height = 449.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Viewport.Width = 357.000000000000000000
+        Viewport.Height = 429.000000000000000000
+      end
+      object WebBrowser1: TWebBrowser
+        Size.Width = 321.000000000000000000
+        Size.Height = 441.000000000000000000
+        Size.PlatformDefault = False
+        Position.X = 408.000000000000000000
+        Position.Y = 64.000000000000000000
+      end
+      object Button2: TButton
+        Position.X = 320.000000000000000000
+        Position.Y = 22.000000000000000000
+        TabOrder = 7
+        Text = 'Button2'
+        OnClick = Button2Click
+      end
+      object Button3: TButton
+        Position.X = 152.000000000000000000
+        Position.Y = 22.000000000000000000
+        TabOrder = 8
+        Text = 'Button3'
+        OnClick = Button3Click
+      end
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = dmFieldLogger.qProjects
+    ScopeMappings = <>
+    Left = 472
+    Top = 320
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 28
+    Top = 77
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = Grid1
+      Columns = <
+        item
+          MemberName = 'PROJ_ID'
+          Header = 'ID'
+        end
+        item
+          MemberName = 'PROJ_TITLE'
+          Header = 'Title'
+          Width = 100
+        end
+        item
+          MemberName = 'PROJ_DESC'
+          Header = 'Decription'
+          Width = 300
+        end>
+    end
+    object LinkGridToDataSourceBindSourceDB2: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      GridControl = Grid2
+      Columns = <>
+    end
+  end
+  object BindSourceDB2: TBindSourceDB
+    DataSet = dmFieldLogger.qLogEntries
+    ScopeMappings = <>
+    Left = 504
+    Top = 416
+  end
+end
