@@ -236,6 +236,7 @@ type
     BindSourceDB3: TBindSourceDB;
     LinkControlToField1: TLinkControlToField;
     LinkControlToField2: TLinkControlToField;
+    tabReport: TTabItem;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure SignInRectBTNClick(Sender: TObject);
     procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
