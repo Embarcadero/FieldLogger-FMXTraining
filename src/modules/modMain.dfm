@@ -14,16 +14,15 @@ object dmMain: TdmMain
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object qryProjectsPROJ_TITLE: TStringField
+    object qryProjectsPROJ_TITLE: TWideStringField
       FieldName = 'PROJ_TITLE'
       Origin = 'PROJ_TITLE'
-      Required = True
-      Size = 30
+      Size = 120
     end
-    object qryProjectsPROJ_DESC: TMemoField
+    object qryProjectsPROJ_DESC: TWideMemoField
       FieldName = 'PROJ_DESC'
       Origin = 'PROJ_DESC'
-      BlobType = ftMemo
+      BlobType = ftWideMemo
     end
   end
   object qryEntries: TFDQuery
@@ -45,6 +44,12 @@ object dmMain: TdmMain
         ParamType = ptInput
         Value = 1
       end>
+    object qryEntriesLOG_ID: TIntegerField
+      FieldName = 'LOG_ID'
+      Origin = 'LOG_ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
     object qryEntriesPROJ_ID: TIntegerField
       FieldName = 'PROJ_ID'
       Origin = 'PROJ_ID'
@@ -53,7 +58,6 @@ object dmMain: TdmMain
     object qryEntriesPICTURE: TBlobField
       FieldName = 'PICTURE'
       Origin = 'PICTURE'
-      Required = True
     end
     object qryEntriesLONGITUDE: TSingleField
       FieldName = 'LONGITUDE'
@@ -127,25 +131,26 @@ object dmMain: TdmMain
       FieldName = 'SPEED'
       Origin = 'SPEED'
     end
-    object qryEntriesNOTE: TMemoField
+    object qryEntriesNOTE: TWideMemoField
       FieldName = 'NOTE'
       Origin = 'NOTE'
-      BlobType = ftMemo
-    end
-    object qryEntriesLOG_ID: TIntegerField
-      FieldName = 'LOG_ID'
-      Origin = 'LOG_ID'
+      BlobType = ftWideMemo
     end
   end
   object conn: TFDConnection
     Params.Strings = (
-      'Database=C:\data\EMBEDDEDIBLITE.IB'
+      'Database=C:\Users\Jim\Documents\EMBEDDEDIBLITE-UTF8.IB'
       'User_Name=sysdba'
       'Password=masterkey'
-      'DriverID=IBLite')
+      'Protocol=TCPIP'
+      'Server=127.0.0.1'
+      'Port=3050'
+      'CharacterSet=UTF8'
+      'DriverID=IB')
+    Connected = True
     LoginPrompt = False
-    Left = 23
-    Top = 8
+    Left = 31
+    Top = 32
   end
   object dsProjects: TDataSource
     DataSet = qryProjects

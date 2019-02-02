@@ -5,9 +5,7 @@ object dmFieldLogger: TdmFieldLogger
   Width = 528
   object FDConnection1: TFDConnection
     Params.Strings = (
-      
-        'Database=C:\Users\Jim\Documents\GitHub\FieldLogger-FMXTraining\E' +
-        'MBEDDEDIBLITE.IB'
+      'Database=C:\Users\Jim\Documents\EMBEDDEDIBLITE.IB'
       'User_Name=sysdba'
       'Password=masterkey'
       'Protocol=TCPIP'
@@ -15,7 +13,7 @@ object dmFieldLogger: TdmFieldLogger
       'Port=3050'
       'CharacterSet=UTF8'
       'DriverID=IB')
-    Connected = True
+    ConnectedStoredUsage = []
     LoginPrompt = False
     Left = 112
     Top = 64
@@ -33,10 +31,9 @@ object dmFieldLogger: TdmFieldLogger
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object qProjectsPROJ_TITLE: TWideStringField
+    object qProjectsPROJ_TITLE: TStringField
       FieldName = 'PROJ_TITLE'
       Origin = 'PROJ_TITLE'
-      Required = True
       Size = 30
     end
     object qProjectsPROJ_DESC: TWideMemoField
@@ -62,20 +59,20 @@ object dmFieldLogger: TdmFieldLogger
         ParamType = ptInput
         Value = Null
       end>
+    object qLogEntriesLOG_ID: TIntegerField
+      FieldName = 'LOG_ID'
+      Origin = 'LOG_ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
     object qLogEntriesPROJ_ID: TIntegerField
       FieldName = 'PROJ_ID'
       Origin = 'PROJ_ID'
       Required = True
     end
-    object qLogEntriesNOTE: TWideMemoField
-      FieldName = 'NOTE'
-      Origin = 'NOTE'
-      BlobType = ftWideMemo
-    end
     object qLogEntriesPICTURE: TBlobField
       FieldName = 'PICTURE'
       Origin = 'PICTURE'
-      Required = True
     end
     object qLogEntriesLONGITUDE: TSingleField
       FieldName = 'LONGITUDE'
@@ -92,77 +89,67 @@ object dmFieldLogger: TdmFieldLogger
     object qLogEntriesOR_X: TSingleField
       FieldName = 'OR_X'
       Origin = 'OR_X'
-      Required = True
     end
     object qLogEntriesOR_Y: TSingleField
       FieldName = 'OR_Y'
       Origin = 'OR_Y'
-      Required = True
     end
     object qLogEntriesOR_Z: TSingleField
       FieldName = 'OR_Z'
       Origin = 'OR_Z'
-      Required = True
     end
     object qLogEntriesOR_DISTANCE: TSingleField
       FieldName = 'OR_DISTANCE'
       Origin = 'OR_DISTANCE'
-      Required = True
     end
     object qLogEntriesHEADING_X: TSingleField
       FieldName = 'HEADING_X'
       Origin = 'HEADING_X'
-      Required = True
     end
     object qLogEntriesHEADING_Y: TSingleField
       FieldName = 'HEADING_Y'
       Origin = 'HEADING_Y'
-      Required = True
     end
     object qLogEntriesHEADING_Z: TSingleField
       FieldName = 'HEADING_Z'
       Origin = 'HEADING_Z'
-      Required = True
     end
     object qLogEntriesV_X: TSingleField
       FieldName = 'V_X'
       Origin = 'V_X'
-      Required = True
     end
     object qLogEntriesV_Y: TSingleField
       FieldName = 'V_Y'
       Origin = 'V_Y'
-      Required = True
     end
     object qLogEntriesV_Z: TSingleField
       FieldName = 'V_Z'
       Origin = 'V_Z'
-      Required = True
     end
     object qLogEntriesANGLE_X: TSingleField
       FieldName = 'ANGLE_X'
       Origin = 'ANGLE_X'
-      Required = True
     end
     object qLogEntriesANGLE_Y: TSingleField
       FieldName = 'ANGLE_Y'
       Origin = 'ANGLE_Y'
-      Required = True
     end
     object qLogEntriesANGLE_Z: TSingleField
       FieldName = 'ANGLE_Z'
       Origin = 'ANGLE_Z'
-      Required = True
     end
     object qLogEntriesMOTION: TSingleField
       FieldName = 'MOTION'
       Origin = 'MOTION'
-      Required = True
     end
     object qLogEntriesSPEED: TSingleField
       FieldName = 'SPEED'
       Origin = 'SPEED'
-      Required = True
+    end
+    object qLogEntriesNOTE: TWideMemoField
+      FieldName = 'NOTE'
+      Origin = 'NOTE'
+      BlobType = ftWideMemo
     end
   end
   object dsProjects: TDataSource

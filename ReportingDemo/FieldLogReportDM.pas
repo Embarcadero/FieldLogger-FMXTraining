@@ -16,8 +16,11 @@ type
     qProjects: TFDQuery;
     qLogEntries: TFDQuery;
     dsProjects: TDataSource;
+    qProjectsPROJ_ID: TIntegerField;
+    qProjectsPROJ_TITLE: TStringField;
+    qProjectsPROJ_DESC: TWideMemoField;
+    qLogEntriesLOG_ID: TIntegerField;
     qLogEntriesPROJ_ID: TIntegerField;
-    qLogEntriesNOTE: TWideMemoField;
     qLogEntriesPICTURE: TBlobField;
     qLogEntriesLONGITUDE: TSingleField;
     qLogEntriesLATITUDE: TSingleField;
@@ -37,9 +40,7 @@ type
     qLogEntriesANGLE_Z: TSingleField;
     qLogEntriesMOTION: TSingleField;
     qLogEntriesSPEED: TSingleField;
-    qProjectsPROJ_ID: TIntegerField;
-    qProjectsPROJ_TITLE: TWideStringField;
-    qProjectsPROJ_DESC: TWideMemoField;
+    qLogEntriesNOTE: TWideMemoField;
     procedure DataModuleCreate(Sender: TObject);
     procedure qLogEntriesAfterInsert(DataSet: TDataSet);
   private

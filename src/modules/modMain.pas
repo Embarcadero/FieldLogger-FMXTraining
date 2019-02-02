@@ -8,7 +8,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.IB,
   FireDAC.Phys.IBLiteDef, FireDAC.FMXUI.Wait, Data.DB, FireDAC.Comp.Client,
-  FireDAC.Comp.DataSet;
+  FireDAC.Comp.DataSet, FireDAC.Phys.IBDef;
 
 type
   TdmMain = class(TDataModule)
@@ -17,8 +17,9 @@ type
     conn: TFDConnection;
     dsProjects: TDataSource;
     qryProjectsPROJ_ID: TIntegerField;
-    qryProjectsPROJ_TITLE: TStringField;
-    qryProjectsPROJ_DESC: TMemoField;
+    qryProjectsPROJ_TITLE: TWideStringField;
+    qryProjectsPROJ_DESC: TWideMemoField;
+    qryEntriesLOG_ID: TIntegerField;
     qryEntriesPROJ_ID: TIntegerField;
     qryEntriesPICTURE: TBlobField;
     qryEntriesLONGITUDE: TSingleField;
@@ -39,8 +40,7 @@ type
     qryEntriesANGLE_Z: TSingleField;
     qryEntriesMOTION: TSingleField;
     qryEntriesSPEED: TSingleField;
-    qryEntriesNOTE: TMemoField;
-    qryEntriesLOG_ID: TIntegerField;
+    qryEntriesNOTE: TWideMemoField;
   private
     { Private declarations }
   public

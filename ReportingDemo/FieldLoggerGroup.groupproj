@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{03CCD091-D9BF-4434-9BE6-9B0832BEDB20}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\src\FieldLogger.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FieldLoggerReporting.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="FieldLogger">
+        <MSBuild Projects="..\src\FieldLogger.dproj"/>
+    </Target>
+    <Target Name="FieldLogger:Clean">
+        <MSBuild Projects="..\src\FieldLogger.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FieldLogger:Make">
+        <MSBuild Projects="..\src\FieldLogger.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FieldLoggerReporting">
+        <MSBuild Projects="FieldLoggerReporting.dproj"/>
+    </Target>
+    <Target Name="FieldLoggerReporting:Clean">
+        <MSBuild Projects="FieldLoggerReporting.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FieldLoggerReporting:Make">
+        <MSBuild Projects="FieldLoggerReporting.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="FieldLogger;FieldLoggerReporting"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="FieldLogger:Clean;FieldLoggerReporting:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="FieldLogger:Make;FieldLoggerReporting:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
