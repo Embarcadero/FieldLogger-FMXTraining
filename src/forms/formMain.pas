@@ -16,7 +16,8 @@ uses
   System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, FireDAC.Comp.DataSet, System.Actions, FMX.ActnList,
   FMX.ScrollBox, FMX.Memo, FMX.ListView, FMX.ListBox, FMX.MediaLibrary.Actions,
-  FMX.StdActns, FMX.Media, FMX.Ani, System.Sensors, System.Sensors.Components;
+  FMX.StdActns, FMX.Media, FMX.Ani, System.Sensors, System.Sensors.Components,
+  fieldlogger.data;
 
 type
   TfrmMain = class(TForm)
@@ -193,13 +194,6 @@ type
     lstEntries: TListView;
     Rectangle24: TRectangle;
     listViewProjects: TListView;
-    BindingsList1: TBindingsList;
-    LinkListControlToField1: TLinkListControlToField;
-    BindSourceDB2: TBindSourceDB;
-    LinkListControlToField2: TLinkListControlToField;
-    LinkPropertyToFieldBitmap: TLinkPropertyToField;
-    LinkPropertyToFieldText: TLinkPropertyToField;
-    LinkPropertyToFieldText2: TLinkPropertyToField;
     Label8: TLabel;
     Image8: TImage;
     GaussianBlurEffect5: TGaussianBlurEffect;
@@ -233,9 +227,6 @@ type
     Label15: TLabel;
     Label4: TLabel;
     btnDeleteEntry: TSpeedButton;
-    BindSourceDB3: TBindSourceDB;
-    LinkControlToField1: TLinkControlToField;
-    LinkControlToField2: TLinkControlToField;
     tabReport: TTabItem;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure SignInRectBTNClick(Sender: TObject);
@@ -256,8 +247,15 @@ type
     procedure btnNewEntryCancelClick(Sender: TObject);
     procedure spedProjDeleteClick(Sender: TObject);
     procedure btnDeleteEntryClick(Sender: TObject);
+    procedure tbcMainChange(Sender: TObject);
+    procedure LoadProjectsTab;
+    procedure UpdateProject(Sender: TObject);
   private
     CurrentLocation: TLocationCoord2D;
+    CurrentProject: TProject;
+    CurrentLogEntry: uint32;
+    procedure LoadProjectDetailTab( ID: uint32 );
+    procedure LoadEntryDetail(LogID: uint32);
   public
     { Public declarations }
   end;
@@ -268,8 +266,21 @@ var
 implementation
 uses
   IOUtils,
+  strutils,
   fieldlogger.authentication,
   modMain;
+
+type
+ EConnectFailed = class(Exception)
+ public
+   constructor Create; reintroduce;
+ end;
+
+constructor EConnectFailed.Create;
+begin
+  inherited Create('Failed to connect to database.');
+end;
+
 
 {$R *.fmx}
 
@@ -282,26 +293,37 @@ end;
 
 
 procedure TfrmMain.btnDeleteEntryClick(Sender: TObject);
+var
+  LogData: ILogData;
 begin
-  dmMain.qryEntries.Delete;
-  dmMain.qryEntries.Refresh;
+  LogData := TLogData.Create(dmMain.conn);
+  if not assigned(LogData) then begin
+    raise EConnectFailed.Create();
+  end;
+  if not LogData.Delete([CurrentLogEntry]) then begin
+    raise
+      Exception.Create('Failed to delete log entry: '+CurrentLogEntry.ToString);
+  end;
   tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
 end;
 
 procedure TfrmMain.btnDoneClick(Sender: TObject);
+var
+  ProjectData: IProjectData;
+  Project: TProject;
+  ID: uint32;
 begin
-  dmMain.qryProjects.Insert;
-  dmMain.qryProjects.FieldByName('PROJ_ID').AsInteger := 0;
-  dmMain.qryProjects.FieldByName('PROJ_TITLE').AsString := edtNewProjTitle.Text;
-  dmMain.qryProjects.FieldByName('PROJ_DESC').AsString := mmoNewProjDescription.Lines.Text;
-  dmMain.qryProjects.Post;
-  dmMain.qryProjects.Refresh;
-  dmMain.qryProjects.Active := False; //- Force re-query for live bindings.
-  dmMain.qryProjects.Active := True;
-  tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
-  //- Disable sensors
-  CameraComponent1.Active := False;
-  LocationSensor1.Active := False;
+  //- Insert new project
+  ProjectData := TProjectData.Create(dmMain.conn);
+  if not assigned(ProjectData) then begin
+    raise EConnectFailed.Create;
+  end;
+  Project.Title := edtNewProjTitle.Text;
+  Project.Description := mmoNewProjDescription.Lines.Text;
+  ID := ProjectData.CreateProject(Project);
+  //- Switch tabs back to tabProjectDetail
+  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Normal);
+  LoadProjectDetailTab(ID);
 end;
 
 procedure TfrmMain.btnEntriesBackClick(Sender: TObject);
@@ -318,25 +340,24 @@ end;
 
 procedure TfrmMain.btnTakePictureClick(Sender: TObject);
 var
-  ms: TMemoryStream;
+  LogData: ILogData;
+  LogEntry: TLogEntry;
+  ID: uint32;
 begin
-  dmMain.qryEntries.Append;
-  ms := TMemoryStream.Create;
-  try
-    imgTakePicture.Bitmap.SaveToStream(ms);
-    ms.Position := 0;
-    dmMain.qryEntriesPICTURE.LoadFromStream(ms);
-  finally
-    ms.Free;
-  end;
-  dmMain.qryEntries.FieldByName('LOG_ID').AsInteger := 0;
-  dmMain.qryEntries.FieldByName('PROJ_ID').AsInteger := dmMain.qryProjects.FieldByName('PROJ_ID').AsInteger;
-  dmMain.qryEntries.FieldByName('LATITUDE').AsFloat := CurrentLocation.Latitude;
-  dmMain.qryEntries.FieldByName('LONGITUDE').AsFloat := CurrentLocation.Longitude;
-  dmMain.qryEntries.FieldByName('TIMEDATESTAMP').AsDateTime := Now;
-  dmMain.qryEntries.Post;
-  dmMain.qryEntries.Refresh;
+  LogData := TLogData.Create(dmMain.conn);
+  if not assigned(LogData) then begin
+    raise EConnectFailed.Create;
+  end; 
+  LogEntry.ProjectID := CurrentProject.ID;
+  LogEntry.Latitude := CurrentLocation.Latitude;
+  LogEntry.Longitude := CurrentLocation.Longitude;
+  LogEntry.TimeDateStamp := Now;
+  LogEntry.setPicture(imgTakePicture.Bitmap);
+  ID := LogData.CreateEntry(LogEntry);
+  //-     
   tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+   LoadEntryDetail(ID);
+  //- Disarm sensors.
   CameraComponent1.Active := False;
   LocationSensor1.Active := False;
 end;
@@ -344,6 +365,32 @@ end;
 procedure TfrmMain.CameraComponent1SampleBufferReady(Sender: TObject; const ATime: TMediaTime);
 begin
   CameraComponent1.SampleBufferToBitmap(imgTakePicture.Bitmap,TRUE);
+end;
+
+procedure TfrmMain.UpdateProject(Sender: TObject);
+var
+  ProjectData: IProjectData;
+  Project: TProject;
+begin
+  if CurrentProject.ID=0 then begin
+    exit;
+  end;
+  //- Only update if something actually changed.
+  if (Trim(CurrentProject.Title)=Trim(edtProjTitle.Text)) and
+     (Trim(CurrentProject.Description)=Trim(mmoProjDesc.Lines.Text)) then begin
+       exit;
+   end;
+  //- Current project changed, we better update it!
+  ProjectData := TProjectData.Create(dmMain.conn);
+  if not assigned(ProjectData) then begin
+    raise EConnectFailed.Create();
+  end;
+  Project.ID := CurrentProject.ID;
+  Project.Title := edtProjTitle.Text;
+  Project.Description := mmoProjDesc.Lines.Text;
+  if not ProjectData.Update([Project]) then begin
+    raise Exception.Create('Failed to update project data.');
+  end;
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
@@ -371,8 +418,7 @@ begin
   //- Connect to the database.
   dmMain.conn.Connected := True;
   if not dmMain.conn.Connected then begin
-    raise
-      Exception.Create('Unable to connect to database: '+DataFilename);
+    raise EConnectFailed.Create;
   end;
 end;
 
@@ -438,8 +484,17 @@ begin
 end;
 
 procedure TfrmMain.spedProjDeleteClick(Sender: TObject);
+var
+  ProjectData: IProjectData;
 begin
-  dmMain.qryProjects.Delete;
+  ProjectData := TProjectData.Create(dmMain.conn);
+  if not assigned(ProjectData) then begin
+    raise EConnectFailed.Create();
+  end;
+  if not ProjectData.Delete([CurrentProject.ID]) then begin
+    raise Exception.Create('Failed to delete project with ID '+CurrentProject.ID.ToString);
+  end;
+  tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
 end;
 
 procedure TfrmMain.speedButtonAddClick(Sender: TObject);
@@ -453,5 +508,159 @@ procedure TfrmMain.TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
 begin
   Image1.Bitmap.Assign(Image);
 end;
+
+procedure TfrmMain.LoadProjectsTab;
+var
+  ProjectData: IProjectData;
+  Projects: TArrayOfProject;
+  Item: TListViewItem;
+  idx: integer;
+begin
+  listViewProjects.Items.Clear;
+  ProjectData := TProjectData.Create(dmMain.conn);
+  if not assigned(ProjectData) then begin
+    raise EConnectFailed.Create;
+  end;
+  ProjectData.Read(Projects);
+  if Length(Projects)=0 then begin
+    exit;
+  end;
+  for idx := 0 to pred(Length(Projects)) do begin
+    Item := listViewProjects.Items.AddItem;
+    Item.Tag := Projects[idx].ID;
+    Item.Text := Projects[idx].Title;
+  end;
+end;
+
+procedure TfrmMain.LoadProjectDetailTab( ID: uint32 );
+var
+  ProjectData: IProjectData;
+  Projects: TArrayOfProject;
+  LogData: ILogData;
+  LogEntries: TArrayOfLogEntry;
+  idx: integer;
+  Item: TListViewItem;
+begin
+  //- Clear data
+  edtProjTitle.Text := '';
+  edtProjTitle.Enabled := False;
+  mmoProjDesc.Lines.Text := '';
+  mmoProjDesc.Enabled := False;
+  lstEntries.Items.Clear;
+  CurrentProject.ID := 0;
+  CurrentProject.Title := '';
+  CurrentProject.Description := '';
+  if ID=0 then begin
+    //- Check that there is a project selected.
+    if listViewProjects.ItemIndex<0 then begin
+      exit;
+    end;
+    CurrentProject.ID := listViewProjects.Items[listViewProjects.ItemIndex].Tag;
+  end else begin
+    CurrentProject.ID := ID;
+  end;
+  //- Get Project data
+  ProjectData := TProjectData.Create(dmMain.conn);
+  if not assigned(ProjectData) then begin
+    raise EConnectFailed.Create;
+  end;
+  if ProjectData.Read(Projects,CurrentProject.ID) <> 1 then begin
+    exit;
+  end;
+  edtProjTitle.Enabled := True;
+  mmoProjDesc.Enabled := True;
+  CurrentProject := Projects[0];
+  edtProjTitle.Text := CurrentProject.Title;
+  mmoProjDesc.Lines.Text := CurrentProject.Description;
+  //- Get log data for project
+  LogData := TLogData.Create(dmMain.conn);
+  if not assigned(LogData) then begin
+    raise EConnectFailed.Create;
+  end;
+  LogData.Read(LogEntries,CurrentProject.ID);
+  if Length(LogEntries)=0 then begin
+    exit;
+  end;
+  for idx := 0 to pred(Length(LogEntries)) do begin
+    Item := lstEntries.Items.AddItem;
+    Item.Tag := LogEntries[idx].ID;
+    Item.Text := DateTimeToStr( LogEntries[idx].TimeDateStamp );
+  end;
+end;
+
+procedure TfrmMain.LoadEntryDetail( LogID: uint32 );
+var
+  LogData: ILogData;
+  LogEntries: TArrayOfLogEntry;
+  Found: integer;
+  idx: integer;
+  Bitmap: TBitmap;
+begin
+  //- Init the tab
+  imgPicture.Bitmap.Clear(TAlphaColorRec.Null);
+  lblLongitude.Text := '???';
+  lblLatitude.Text := '???';
+  lblSubThoroughfare.Text := '???';
+  lblThoroughfare.Text := '???';
+  lblSubLocality.Text := '???';
+  lblSubAdminArea.Text := '???';
+  lblZipCode.Text := '???';
+  lblLocality.Text := '???';
+  lblFeature.Text := '???';
+  lblCountry.Text := '???';
+  lblCountryCode.Text := '???';
+  lblAdminArea.Text := '???';
+  //- Get data
+  LogData := TLogData.Create(dmMain.conn);
+  if not assigned(LogData) then begin
+    raise EConnectFailed.Create;
+  end;
+  LogData.Read(LogEntries,CurrentProject.ID);
+  if Length(LogEntries)=0 then begin
+    exit;
+  end;
+  //- Loop through and find the log entry we want
+  CurrentLogEntry := 0;
+  Found := 0;
+  for idx := 0 to pred(length(LogEntries)) do begin
+    if LogEntries[idx].ID=LogID then begin
+      CurrentLogEntry := LogEntries[idx].ID;
+      Found := idx;
+      break;
+    end;
+  end;
+  if CurrentLogEntry=0 then begin
+    exit;
+  end;
+  //- Load the entry to the form.
+  Bitmap := LogEntries[Found].getPicture;
+  try
+    imgPicture.Bitmap.Assign(Bitmap);    
+  finally
+    Bitmap.DisposeOf;
+  end;
+  lblLongitude.Text := LogEntries[Found].Longitude.ToString;
+  lblLatitude.Text := LogEntries[Found].Latitude.ToString;    
+end;
+
+procedure TfrmMain.tbcMainChange(Sender: TObject);
+begin
+  if tbcMain.ActiveTab=tabProjects then begin
+    LoadProjectsTab;
+  end else if tbcMain.ActiveTab=tabProjectDetail then begin
+    LoadProjectDetailTab(0);
+  end else if tbcMain.ActiveTab=tabNewProject then begin
+    edtNewProjTitle.Text := '';
+    mmoNewProjDescription.Lines.Text := '';
+  end else if tbcMain.ActiveTab=tabEntryDetail then begin
+    if lstEntries.ItemIndex>=0 then begin
+      CurrentLogEntry := lstEntries.Items[lstEntries.ItemIndex].Tag;
+      LoadEntryDetail(CurrentLogEntry);
+    end;
+  end;
+end;
+
+
+
 
 end.

@@ -1,17 +1,15 @@
 ﻿[]
-Coordinates=580,410,93,123
+Coordinates=0,0,82,33
 Visible=False
 
 [CameraComponent1]
 Coordinates=1139,108,115,33
 
 [dmMain.qryEntries]
-Coordinates=160,200,107,33
-Visible=False
+Coordinates=277,210,107,33
 
 [dmMain.qryProjects]
-Coordinates=600,60,112,33
-Visible=False
+Coordinates=722,70,112,33
 
 [dmMain.dsProjects]
 Coordinates=600,70,108,33
@@ -685,12 +683,6 @@ Visible=False
 Coordinates=1185,1047,53,33
 Visible=False
 
-[BindingsList1]
-Coordinates=0,0,82,33
-
-[BindSourceDB2]
-Coordinates=180,270,93,483
-
 [Rectangle25]
 Coordinates=749,638,75,33
 Visible=False
@@ -820,7 +812,4 @@ Visible=False
 [btnDeleteEntry]
 Coordinates=700,210,87,33
 Visible=False
-
-[BindSourceDB3]
-Coordinates=170,30,97,141
 

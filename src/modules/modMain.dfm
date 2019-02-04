@@ -139,7 +139,6 @@ object dmMain: TdmMain
   end
   object conn: TFDConnection
     Params.Strings = (
-      'Database=C:\Users\Jim\Documents\EMBEDDEDIBLITE-UTF8.IB'
       'User_Name=sysdba'
       'Password=masterkey'
       'Protocol=TCPIP'
@@ -147,7 +146,6 @@ object dmMain: TdmMain
       'Port=3050'
       'CharacterSet=UTF8'
       'DriverID=IB')
-    Connected = True
     LoginPrompt = False
     Left = 31
     Top = 32
