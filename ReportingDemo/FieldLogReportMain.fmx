@@ -13,7 +13,7 @@ object Form53: TForm53
     Size.Width = 759.000000000000000000
     Size.Height = 648.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 0
     TabPosition = PlatformDefault
     Sizes = (
@@ -50,7 +50,7 @@ object Form53: TForm53
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 69.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -60,66 +60,64 @@ object Form53: TForm53
       ExplicitSize.cx = 69.000000000000000000
       ExplicitSize.cy = 26.000000000000000000
       object Grid1: TGrid
+        Align = Top
         CanFocus = True
         ClipChildren = True
-        Position.X = 56.000000000000000000
-        Position.Y = 62.000000000000000000
-        Size.Width = 505.000000000000000000
+        Position.Y = 25.000000000000000000
+        Size.Width = 759.000000000000000000
         Size.Height = 147.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         RowCount = 0
-        Viewport.Width = 501.000000000000000000
-        Viewport.Height = 122.000000000000000000
+        Viewport.Width = 759.000000000000000000
+        Viewport.Height = 147.000000000000000000
       end
       object Grid2: TGrid
+        Align = Client
         CanFocus = True
         ClipChildren = True
-        Position.X = 56.000000000000000000
-        Position.Y = 254.000000000000000000
-        Size.Width = 505.000000000000000000
-        Size.Height = 227.000000000000000000
+        Size.Width = 759.000000000000000000
+        Size.Height = 423.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
         RowCount = 0
-        Viewport.Width = 501.000000000000000000
-        Viewport.Height = 202.000000000000000000
-      end
-      object Button1: TButton
-        Position.X = 584.000000000000000000
-        Position.Y = 286.000000000000000000
-        TabOrder = 2
-        Text = 'Button1'
-        OnClick = Button1Click
+        Viewport.Width = 759.000000000000000000
+        Viewport.Height = 423.000000000000000000
       end
       object NavigatorBindSourceDB1: TBindNavigator
-        Position.X = 88.000000000000000000
-        Position.Y = 32.000000000000000000
-        Size.Width = 240.000000000000000000
+        Align = Top
+        Size.Width = 759.000000000000000000
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 4
+        TabOrder = 3
         DataSource = BindSourceDB1
         xRadius = 4.000000000000000000
         yRadius = 4.000000000000000000
       end
-      object NavigatorBindSourceDB2: TBindNavigator
-        Position.X = 72.000000000000000000
-        Position.Y = 224.000000000000000000
-        Size.Width = 240.000000000000000000
-        Size.Height = 25.000000000000000000
+      object Layout1: TLayout
+        Align = Top
+        Position.Y = 172.000000000000000000
+        Size.Width = 759.000000000000000000
+        Size.Height = 27.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 5
-        DataSource = BindSourceDB2
-        xRadius = 4.000000000000000000
-        yRadius = 4.000000000000000000
+        TabOrder = 4
+        object NavigatorBindSourceDB2: TBindNavigator
+          Align = Client
+          Size.Width = 759.000000000000000000
+          Size.Height = 27.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          DataSource = BindSourceDB2
+          xRadius = 4.000000000000000000
+          yRadius = 4.000000000000000000
+        end
       end
     end
     object TabItem3: TTabItem
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 69.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -156,8 +154,8 @@ object Form53: TForm53
         Size.Height = 449.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 5
-        Viewport.Width = 357.000000000000000000
-        Viewport.Height = 429.000000000000000000
+        Viewport.Width = 361.000000000000000000
+        Viewport.Height = 449.000000000000000000
       end
       object WebBrowser1: TWebBrowser
         Size.Width = 321.000000000000000000
@@ -179,6 +177,13 @@ object Form53: TForm53
         TabOrder = 8
         Text = 'Button3'
         OnClick = Button3Click
+      end
+      object Image1: TImage
+        MultiResBitmap = <
+          item
+          end>
+        Position.X = 424.000000000000000000
+        Position.Y = 518.000000000000000000
       end
     end
   end

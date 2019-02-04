@@ -14,6 +14,7 @@ object dmFieldLogger: TdmFieldLogger
       'CharacterSet=UTF8'
       'DriverID=IB')
     ConnectedStoredUsage = []
+    Connected = True
     LoginPrompt = False
     Left = 112
     Top = 64
@@ -31,10 +32,10 @@ object dmFieldLogger: TdmFieldLogger
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object qProjectsPROJ_TITLE: TStringField
+    object qProjectsPROJ_TITLE: TWideStringField
       FieldName = 'PROJ_TITLE'
       Origin = 'PROJ_TITLE'
-      Size = 30
+      Size = 120
     end
     object qProjectsPROJ_DESC: TWideMemoField
       FieldName = 'PROJ_DESC'

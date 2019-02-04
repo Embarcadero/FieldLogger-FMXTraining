@@ -17,7 +17,7 @@ type
     qLogEntries: TFDQuery;
     dsProjects: TDataSource;
     qProjectsPROJ_ID: TIntegerField;
-    qProjectsPROJ_TITLE: TStringField;
+    qProjectsPROJ_TITLE: TWideStringField;
     qProjectsPROJ_DESC: TWideMemoField;
     qLogEntriesLOG_ID: TIntegerField;
     qLogEntriesPROJ_ID: TIntegerField;
@@ -47,6 +47,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure LoadRandomImage;
   end;
 
 var
@@ -58,6 +59,19 @@ implementation
 
 {$R *.dfm}
 
+uses
+  IOUtils;
+
+procedure TdmFieldLogger.LoadRandomImage;
+var
+  imgs: TArray<System.string>;
+  idx: Integer;
+begin
+  imgs := TDirectory.GetFiles('C:\Users\Jim\Documents\GitHub\FieldLogger-FMXTraining\ReportingDemo\RandomImages');
+  idx := Random(Length(imgs));
+  dmFieldLogger.qLogEntriesPicture.LoadFromFile(imgs[idx]);
+end;
+
 procedure TdmFieldLogger.DataModuleCreate(Sender: TObject);
 begin
   qProjects.Open();
@@ -66,6 +80,7 @@ end;
 
 procedure TdmFieldLogger.qLogEntriesAfterInsert(DataSet: TDataSet);
 begin
+  qLogEntriesLOG_ID.Value := Random(MaxInt);
   qLogEntriesTIMEDATESTAMP.AsDateTime := Now;
   qLogEntriesLONGITUDE.Value := 720 * Random - 360;
   qLogEntriesLATITUDE.Value := 720 * Random - 360;
@@ -84,6 +99,7 @@ begin
   qLogEntriesANGLE_Z.Value := 360 * Random;
   qLogEntriesMOTION.Value := 1000 * Random;
   qLogEntriesSPEED.Value := 100 * Random;
+  LoadRandomImage;
 end;
 
 end.
