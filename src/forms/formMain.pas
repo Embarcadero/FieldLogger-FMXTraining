@@ -17,7 +17,7 @@ uses
   Data.Bind.DBScope, FireDAC.Comp.DataSet, System.Actions, FMX.ActnList,
   FMX.ScrollBox, FMX.Memo, FMX.ListView, FMX.ListBox, FMX.MediaLibrary.Actions,
   FMX.StdActns, FMX.Media, FMX.Ani, System.Sensors, System.Sensors.Components,
-  fieldlogger.data, system.android.sensors;
+  fieldlogger.data;
 
 type
   TfrmMain = class(TForm)
@@ -268,10 +268,24 @@ var
   frmMain: TfrmMain;
 
 implementation
+
 uses
   IOUtils,
   strutils,
-  fieldlogger.authentication;
+  fieldlogger.authentication,
+{$IFDEF ANDROID}
+  System.Android.Sensors;
+{$ENDIF ANDROID}
+{$IFDEF IOS}
+  System.iOS.Sensors;
+{$ELSE}
+{$IFDEF MACOS}
+  System.Mac.Sensors;
+{$ENDIF MACOS}
+{$ENDIF IOS}
+{$IFDEF MSWINDOWS}
+  System.Win.Sensors;
+{$ENDIF}
 
 type
  EConnectFailed = class(Exception)
