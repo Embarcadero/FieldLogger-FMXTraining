@@ -472,7 +472,7 @@ end;
 procedure TfrmMain.SignInRectBTNClick(Sender: TObject);
 begin
   SignInText.Text := 'Autenticating...';
-  if TAuthentication.Authenticate(conn,UsernameEdit.Text,PasswordEdit.Text,[]) then begin
+  if TAuthentication.Authenticate(conn,UsernameEdit.Text,PasswordEdit.Text) then begin
     tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Normal);
   end else begin
     SignInText.Text := 'SIGN IN';
