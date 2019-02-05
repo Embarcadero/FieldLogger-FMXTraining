@@ -49,8 +49,9 @@ implementation
 {$R *.fmx}
 
 uses
-  IOUtils, FMX.Surfaces, FieldLogReportDM, System.NetEncoding;
+  IOUtils, FMX.Surfaces, FieldLogReportDM, System.NetEncoding, Data.DB;
 
+{
 // Based on code by Dave Nottage, Embarcadero MVP - delphiworlds.com
 function BitmapAsBase64(const ABitmap: TBitmap): string; overload;
 var
@@ -92,10 +93,10 @@ begin
       TNetEncoding.Base64.Encode(LInputStream, LOutputStream);
       Result := LOutputStream.DataString;
     finally
-      LOutputStream.Free;
+      LOutputStream.DisposeOf;
     end;
   finally
-    LInputStream.Free;
+    LInputStream.DisposeOf;
   end;
 end;
 
@@ -108,7 +109,7 @@ begin
     Surface.Assign(bitmap);
     TBitmapCodecManager.SaveToStream(mem, Surface, 'jpg');
   finally
-    Surface.Free;
+    Surface.DisposeOf;
   end;
   mem.Position := 0;
 end;
@@ -129,22 +130,53 @@ begin
       Bitmap.Canvas.EndScene;
     end;
   finally
-    img.Free;
+    img.DisposeOf;
   end;
   mem.Position := 0;
 end;
+}
 
 procedure TForm53.Button2Click(Sender: TObject);
 begin
-  Memo1.Lines.SaveToFile('test.html');
-  WebBrowser1.Navigate('file://' + GetCurrentDir + '/test.html');
+  //Memo1.Lines.SaveToFile('test.html');
+  WebBrowser1.LoadFromStrings(Memo1.Lines.Text, 'about:blank');
+  //WebBrowser1.Navigate('file://' + GetCurrentDir + '/test.html');
+end;
+
+function ResizeJpegField(const field: TBlobField; const maxWidth: integer): TByteDynArray;
+var
+  blob: TStream;
+  jpeg: TBitmap;
+begin
+  Assert(Assigned(field));
+
+  blob := nil;
+  jpeg := nil;
+  try
+    blob := field.DataSet.CreateBlobStream(field, TBlobStreamMode.bmRead);
+    jpeg := TBitmap.Create;
+    jpeg.LoadFromStream(blob);
+    blob.DisposeOf;
+    if jpeg.Width > maxWidth then
+      jpeg.Resize(maxWidth, Trunc(jpeg.Height / jpeg.Width * maxWidth));
+    blob := TMemoryStream.Create;
+    jpeg.SaveToStream(blob);
+    blob.Position := 0;
+    SetLength(result, blob.Size);
+    blob.Read(result[0], blob.Size);
+  finally
+    jpeg.DisposeOf;
+    blob.DisposeOf;
+  end;
 end;
 
 procedure TForm53.Button3Click(Sender: TObject);
 var
-  blob: TBlobStream;
+  jpegBytes: TByteDynArray;
 begin
-  Memo1.ClearContent;
+  Memo1.Lines.Clear;
+  Memo1.Repaint;
+  Application.ProcessMessages;
 
   Memo1.BeginUpdate;
   try
@@ -158,30 +190,20 @@ begin
 
     while not dmFieldLogger.qLogEntries.Eof do
     begin
-      blob := dmFieldLogger.qLogEntries.CreateBlobStream(
-        dmFieldLogger.qLogEntriesPICTURE, TBlobStreamMode.bmRead)
-      //mem := TMemoryStream.Create;
-      //jpg := TBitmap.Create;
-      try
-        //mem.Write(dmFieldLogger.qLogEntriesPICTURE.Value, dmFieldLogger.qLogEntriesPICTURE.Size);
-        Memo1.Lines.Add(format('<h2>%s</h2><p>%s</p>'+
-          '<img src="data:image/jpg;base64,%s" alt="%s" />',
-          [DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime),
-           TNetEncoding.HTML.Encode(dmFieldLogger.qLogEntriesNOTE.Value),
-           TNetEncoding.Base64.EncodeBytesToString(),
-           DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime)]));
+      jpegBytes := ResizeJpegField(dmFieldLogger.qLogEntriesPICTURE, 512);
 
-
-      finally
-        //jpg.Free;
-      end;
+      Memo1.Lines.Add(format('<h2>%s</h2><p>%s</p>'+
+        '<img src="data:image/jpg;base64,%s" alt="%s" />',
+        [DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime),
+         TNetEncoding.HTML.Encode(dmFieldLogger.qLogEntriesNOTE.Value),
+         TNetEncoding.Base64.EncodeBytesToString(jpegBytes),
+         DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime)]));
       dmFieldLogger.qLogEntries.Next;
     end;
+    Memo1.Lines.Add('</body></html>');
   finally
     Memo1.EndUpdate;
   end;
 end;
-
-
 
 end.
