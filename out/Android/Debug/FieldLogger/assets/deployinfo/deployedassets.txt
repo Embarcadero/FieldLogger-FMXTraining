@@ -1,6 +1,0 @@
-.\assets\internal\interbase\ibconfig
-.\assets\internal\interbase\interbase.msg
-.\assets\internal\interbase\oss_license_notice.txt
-.\assets\internal\interbase\license.txt
-.\assets\internal\interbase\license\reg_iblite.txt
-.\assets\internal\interbase\admin.ib
