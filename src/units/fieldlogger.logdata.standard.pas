@@ -114,7 +114,7 @@ begin
     end;
     qry.Refresh;
     qry.Last;
-    Result := qry.FieldByName('PROJ_ID').AsInteger;
+    Result := qry.FieldByName('LOG_ID').AsInteger;
   finally
     qry.DisposeOf;
   end;
