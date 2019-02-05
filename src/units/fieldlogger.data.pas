@@ -24,7 +24,7 @@ type
   ///  </summary>
   TProject = record
     ID: uint32;
-    Title: string[30];
+    Title: string;
     Description: string;
   end;
 

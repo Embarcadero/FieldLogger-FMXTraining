@@ -4,10 +4,10 @@
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
     <PropertyGroup>
-        <DeviceId Condition="'$(Platform)'=='Android'">ZX1G22W922</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android'">FA7CF1A00627</DeviceId>
         <DeviceId Condition="'$(Platform)'=='iOSDevice32'"/>
         <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
-        <DeviceId Condition="'$(Platform)'=='iOSSimulator'">376FB058-0061-4AB3-8902-DEB74AA659B0</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='iOSSimulator'">iPhone5</DeviceId>
     </PropertyGroup>
     <ItemGroup Condition="'$(Platform)'=='Win64'">
         <DeployFile Include="$(IBREDISTDIR)\win64_togo\interbase\license.txt" Condition="'$(Config)'=='Release'">

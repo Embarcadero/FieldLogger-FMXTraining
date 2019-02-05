@@ -17,7 +17,7 @@ uses
   Data.Bind.DBScope, FireDAC.Comp.DataSet, System.Actions, FMX.ActnList,
   FMX.ScrollBox, FMX.Memo, FMX.ListView, FMX.ListBox, FMX.MediaLibrary.Actions,
   FMX.StdActns, FMX.Media, FMX.Ani, System.Sensors, System.Sensors.Components,
-  fieldlogger.data;
+  fieldlogger.data, system.android.sensors;
 
 type
   TfrmMain = class(TForm)
@@ -228,6 +228,7 @@ type
     Label4: TLabel;
     btnDeleteEntry: TSpeedButton;
     tabReport: TTabItem;
+    conn: TFDConnection;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure SignInRectBTNClick(Sender: TObject);
     procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
@@ -251,11 +252,14 @@ type
     procedure LoadProjectsTab;
     procedure UpdateProject(Sender: TObject);
   private
+    FGeocoder: TGeocoder;
     CurrentLocation: TLocationCoord2D;
     CurrentProject: TProject;
     CurrentLogEntry: uint32;
     procedure LoadProjectDetailTab( ID: uint32 );
     procedure LoadEntryDetail(LogID: uint32);
+    procedure ReverseLocation(Lat, Long: double);
+    procedure OnGeocodeReverseEvent(const Address: TCivicAddress);
   public
     { Public declarations }
   end;
@@ -267,8 +271,7 @@ implementation
 uses
   IOUtils,
   strutils,
-  fieldlogger.authentication,
-  modMain;
+  fieldlogger.authentication;
 
 type
  EConnectFailed = class(Exception)
@@ -296,7 +299,7 @@ procedure TfrmMain.btnDeleteEntryClick(Sender: TObject);
 var
   LogData: ILogData;
 begin
-  LogData := TLogData.Create(dmMain.conn);
+  LogData := TLogData.Create(conn);
   if not assigned(LogData) then begin
     raise EConnectFailed.Create();
   end;
@@ -314,7 +317,7 @@ var
   ID: uint32;
 begin
   //- Insert new project
-  ProjectData := TProjectData.Create(dmMain.conn);
+  ProjectData := TProjectData.Create(conn);
   if not assigned(ProjectData) then begin
     raise EConnectFailed.Create;
   end;
@@ -344,7 +347,7 @@ var
   LogEntry: TLogEntry;
   ID: uint32;
 begin
-  LogData := TLogData.Create(dmMain.conn);
+  LogData := TLogData.Create(conn);
   if not assigned(LogData) then begin
     raise EConnectFailed.Create;
   end; 
@@ -381,7 +384,7 @@ begin
        exit;
    end;
   //- Current project changed, we better update it!
-  ProjectData := TProjectData.Create(dmMain.conn);
+  ProjectData := TProjectData.Create(conn);
   if not assigned(ProjectData) then begin
     raise EConnectFailed.Create();
   end;
@@ -401,23 +404,23 @@ begin
   tbcMain.TabPosition := TTabPosition.None;
   tbcMain.ActiveTab := tabWelcome;
   //- Configure our connection to the database.
-  dmMain.conn.LoginPrompt := False;
-  dmMain.conn.Params.Database := DataFilename;
+  conn.LoginPrompt := False;
+  conn.Params.Database := DataFilename;
   //- Ensure the database file already exists, if not, create it.
   if not FileExists(DataFilename) then begin
-    dmMain.conn.Params.Values['CreateDatabase'] := BoolToStr(True,True);
-    dmMain.conn.Connected := True;
+    conn.Params.Values['CreateDatabase'] := BoolToStr(True,True);
+    conn.Connected := True;
     for idx := 0 to pred(mmoCreateDatabase.Lines.Count) do begin
       if mmoCreateDatabase.Lines[idx].Trim<>'' then begin
-        dmMain.conn.ExecSQL(mmoCreateDatabase.Lines[idx].Trim);
+        conn.ExecSQL(mmoCreateDatabase.Lines[idx].Trim);
       end;
     end;
-    dmMain.conn.Params.Values['CreateDatabase'] := BoolToStr(False,True);
-    dmMain.conn.Connected := False;
+    conn.Params.Values['CreateDatabase'] := BoolToStr(False,True);
+    conn.Connected := False;
   end;
   //- Connect to the database.
-  dmMain.conn.Connected := True;
-  if not dmMain.conn.Connected then begin
+  conn.Connected := True;
+  if not conn.Connected then begin
     raise EConnectFailed.Create;
   end;
 end;
@@ -455,7 +458,7 @@ end;
 procedure TfrmMain.SignInRectBTNClick(Sender: TObject);
 begin
   SignInText.Text := 'Autenticating...';
-  if TAuthentication.Authenticate(dmMain.conn,UsernameEdit.Text,PasswordEdit.Text,[dmMain.qryProjects,dmMain.qryEntries]) then begin
+  if TAuthentication.Authenticate(conn,UsernameEdit.Text,PasswordEdit.Text,[]) then begin
     tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Normal);
   end else begin
     SignInText.Text := 'SIGN IN';
@@ -465,7 +468,6 @@ end;
 
 procedure TfrmMain.spedCancelNewProjectClick(Sender: TObject);
 begin
-  dmMain.qryProjects.Cancel;
   tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
 end;
 
@@ -487,7 +489,7 @@ procedure TfrmMain.spedProjDeleteClick(Sender: TObject);
 var
   ProjectData: IProjectData;
 begin
-  ProjectData := TProjectData.Create(dmMain.conn);
+  ProjectData := TProjectData.Create(conn);
   if not assigned(ProjectData) then begin
     raise EConnectFailed.Create();
   end;
@@ -517,7 +519,7 @@ var
   idx: integer;
 begin
   listViewProjects.Items.Clear;
-  ProjectData := TProjectData.Create(dmMain.conn);
+  ProjectData := TProjectData.Create(conn);
   if not assigned(ProjectData) then begin
     raise EConnectFailed.Create;
   end;
@@ -560,7 +562,7 @@ begin
     CurrentProject.ID := ID;
   end;
   //- Get Project data
-  ProjectData := TProjectData.Create(dmMain.conn);
+  ProjectData := TProjectData.Create(conn);
   if not assigned(ProjectData) then begin
     raise EConnectFailed.Create;
   end;
@@ -573,7 +575,7 @@ begin
   edtProjTitle.Text := CurrentProject.Title;
   mmoProjDesc.Lines.Text := CurrentProject.Description;
   //- Get log data for project
-  LogData := TLogData.Create(dmMain.conn);
+  LogData := TLogData.Create(conn);
   if not assigned(LogData) then begin
     raise EConnectFailed.Create;
   end;
@@ -586,6 +588,40 @@ begin
     Item.Tag := LogEntries[idx].ID;
     Item.Text := DateTimeToStr( LogEntries[idx].TimeDateStamp );
   end;
+end;
+
+procedure TfrmMain.OnGeocodeReverseEvent(const Address: TCivicAddress);
+begin
+  lblSubThoroughfare.Text := Address.SubThoroughfare;
+  lblThoroughfare.Text := Address.Thoroughfare;
+  lblSubLocality.Text := Address.SubLocality;
+  lblSubAdminArea.Text := Address.SubAdminArea;
+  lblZipCode.Text := Address.PostalCode;
+  lblLocality.Text := Address.Locality;
+  lblFeature.Text := Address.FeatureName;
+  lblCountry.Text := Address.CountryName;
+  lblCountryCode.Text := Address.CountryCode;
+  lblAdminArea.Text := Address.AdminArea;
+end;
+
+procedure TfrmMain.ReverseLocation( Lat, Long: double );
+var
+  NewLocation: TLocationCoord2D;
+begin
+  // Setup an instance of TGeocoder
+  if not Assigned(FGeocoder) then
+  begin
+    if Assigned(TGeocoder.Current) then
+      FGeocoder := TGeocoder.Current.Create;
+    if Assigned(FGeocoder) then
+      FGeocoder.OnGeocodeReverse := OnGeocodeReverseEvent;
+  end;
+
+  // Translate location to address
+  NewLocation.Latitude := Lat;
+  NewLocation.Longitude := Long;
+  if Assigned(FGeocoder) and not FGeocoder.Geocoding then
+    FGeocoder.GeocodeReverse(NewLocation);
 end;
 
 procedure TfrmMain.LoadEntryDetail( LogID: uint32 );
@@ -611,7 +647,7 @@ begin
   lblCountryCode.Text := '???';
   lblAdminArea.Text := '???';
   //- Get data
-  LogData := TLogData.Create(dmMain.conn);
+  LogData := TLogData.Create(conn);
   if not assigned(LogData) then begin
     raise EConnectFailed.Create;
   end;
@@ -640,7 +676,8 @@ begin
     Bitmap.DisposeOf;
   end;
   lblLongitude.Text := LogEntries[Found].Longitude.ToString;
-  lblLatitude.Text := LogEntries[Found].Latitude.ToString;    
+  lblLatitude.Text := LogEntries[Found].Latitude.ToString;
+  ReverseLocation( LogEntries[Found].Latitude, LogEntries[Found].Longitude );
 end;
 
 procedure TfrmMain.tbcMainChange(Sender: TObject);
@@ -659,8 +696,6 @@ begin
     end;
   end;
 end;
-
-
 
 
 end.
