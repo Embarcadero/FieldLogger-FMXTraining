@@ -371,12 +371,9 @@ begin
   LogEntry.TimeDateStamp := Now;
   LogEntry.setPicture(imgTakePicture.Bitmap);
   ID := LogData.CreateEntry(LogEntry);
-  //-     
+  //-
   tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
-   LoadEntryDetail(ID);
-  //- Disarm sensors.
-  CameraComponent1.Active := False;
-  LocationSensor1.Active := False;
+  LoadEntryDetail(ID);
 end;
 
 procedure TfrmMain.CameraComponent1SampleBufferReady(Sender: TObject; const ATime: TMediaTime);
@@ -454,8 +451,7 @@ begin
   tbcMain.SetActiveTabWithTransition(tabSignin,TTabTransition.Slide,TTabTransitionDirection.Normal);
 end;
 
-procedure TfrmMain.lstEntriesItemClick(const Sender: TObject;
-  const AItem: TListViewItem);
+procedure TfrmMain.lstEntriesItemClick(const Sender: TObject; const AItem: TListViewItem);
 begin
   tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Normal);
 end;
@@ -472,7 +468,7 @@ end;
 procedure TfrmMain.SignInRectBTNClick(Sender: TObject);
 begin
   SignInText.Text := 'Autenticating...';
-  if TAuthentication.Authenticate(conn,UsernameEdit.Text,PasswordEdit.Text,[]) then begin
+  if TAuthentication.Authenticate(conn,UsernameEdit.Text,PasswordEdit.Text) then begin
     tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Normal);
   end else begin
     SignInText.Text := 'SIGN IN';
