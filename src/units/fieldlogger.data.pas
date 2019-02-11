@@ -280,6 +280,7 @@ var
 begin
   MS := TMemoryStream.Create;
   try
+    aBitmap.Resize(1920, Trunc(aBitmap.Height / aBitmap.Width * 1920));
     aBitmap.SaveToStream(MS);
     MS.Position := 0;
     SetLength(ImageData,MS.Size);
