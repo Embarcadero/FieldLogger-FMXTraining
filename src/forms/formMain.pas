@@ -17,7 +17,7 @@ uses
   Data.Bind.DBScope, FireDAC.Comp.DataSet, System.Actions, FMX.ActnList,
   FMX.ScrollBox, FMX.Memo, FMX.ListView, FMX.ListBox, FMX.MediaLibrary.Actions,
   FMX.StdActns, FMX.Media, FMX.Ani, System.Sensors, System.Sensors.Components,
-  fieldlogger.data;
+  fieldlogger.data, FMX.WebBrowser;
 
 type
   TfrmMain = class(TForm)
@@ -229,6 +229,12 @@ type
     btnDeleteEntry: TSpeedButton;
     tabReport: TTabItem;
     conn: TFDConnection;
+    SpeedButton1: TSpeedButton;
+    Layout6: TLayout;
+    WebBrowser1: TWebBrowser;
+    ToolBar8: TToolBar;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure SignInRectBTNClick(Sender: TObject);
     procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
@@ -251,6 +257,8 @@ type
     procedure tbcMainChange(Sender: TObject);
     procedure LoadProjectsTab;
     procedure UpdateProject(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     FGeocoder: TGeocoder;
     CurrentLocation: TLocationCoord2D;
@@ -260,6 +268,7 @@ type
     procedure LoadEntryDetail(LogID: uint32);
     procedure ReverseLocation(Lat, Long: double);
     procedure OnGeocodeReverseEvent(const Address: TCivicAddress);
+    procedure GenerateReport;
   public
     { Public declarations }
   end;
@@ -273,7 +282,11 @@ uses
   IOUtils,
   strutils,
   fieldlogger.authentication,
+  System.NetEncoding,
+  System.Permissions,
+  FMX.DialogService,
 {$IFDEF ANDROID}
+  Androidapi.JNI.Os, Androidapi.JNI.JavaTypes, Androidapi.Helpers,
   System.Android.Sensors;
 {$ENDIF ANDROID}
 {$IFDEF IOS}
@@ -378,7 +391,11 @@ end;
 
 procedure TfrmMain.CameraComponent1SampleBufferReady(Sender: TObject; const ATime: TMediaTime);
 begin
-  CameraComponent1.SampleBufferToBitmap(imgTakePicture.Bitmap,TRUE);
+  // You have to Synchronize back to the UI thread
+  TThread.Synchronize(TThread.CurrentThread,
+    procedure begin
+      CameraComponent1.SampleBufferToBitmap(imgTakePicture.Bitmap, TRUE);
+    end);
 end;
 
 procedure TfrmMain.UpdateProject(Sender: TObject);
@@ -436,6 +453,43 @@ begin
   end;
 end;
 
+procedure TfrmMain.GenerateReport;
+var
+  report: TStringList;
+begin
+  report := TStringList.Create;
+  try
+     {
+
+    report.Add(format('<html><head><title>%s</title></head><body>',
+      [TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_TITLE.Value)]));
+    report.Add(format('<h1>%s</h1><p>%s</p>',
+      [TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_TITLE.Value),
+       TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_DESC.Value)]));
+
+    dmFieldLogger.qLogEntries.First;
+
+    while not dmFieldLogger.qLogEntries.Eof do
+    begin
+      jpegBytes := ResizeJpegField(dmFieldLogger.qLogEntriesPICTURE, 512);
+
+      Memo1.Lines.Add(format('<h2>%s</h2><p>%s</p>'+
+        '<img src="data:image/jpg;base64,%s" alt="%s" />',
+        [DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime),
+         TNetEncoding.HTML.Encode(dmFieldLogger.qLogEntriesNOTE.Value),
+         TNetEncoding.Base64.EncodeBytesToString(jpegBytes),
+         DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime)]));
+      dmFieldLogger.qLogEntries.Next;
+    end;
+    Memo1.Lines.Add('</body></html>');
+         }
+
+
+  finally
+    report.Free;
+  end;
+end;
+
 procedure TfrmMain.listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
 begin
   tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Normal);
@@ -484,8 +538,31 @@ end;
 procedure TfrmMain.spedNewEntryClick(Sender: TObject);
 begin
   //- Set sensors active.
+
+  {$IFDEF ANDROID}
+  PermissionsService.RequestPermissions([
+      JStringToString(TJManifest_permission.JavaClass.ACCESS_FINE_LOCATION),
+      JStringToString(TJManifest_permission.JavaClass.CAMERA)],
+    procedure(const APermissions: TArray<string>; const AGrantResults: TArray<TPermissionStatus>)
+    begin
+      if (Length(AGrantResults) = 2) and (AGrantResults[0] = TPermissionStatus.Granted)
+        and (AGrantResults[1] = TPermissionStatus.Granted) then
+      begin
+        { activate or deactivate the location sensor }
+        CameraComponent1.Active := True;
+        LocationSensor1.Active := True;
+      end
+      else
+      begin
+        CameraComponent1.Active := False;
+        LocationSensor1.Active := False;
+      end;
+    end);
+  {$ELSE}
   CameraComponent1.Active := True;
   LocationSensor1.Active := True;
+  {$ENDIF}
+
   //- Switch tab
   tbcMain.SetActiveTabWithTransition(tabNewEntry,TTabTransition.Slide,TTabTransitionDirection.Normal);
 end;
@@ -507,6 +584,17 @@ begin
     raise Exception.Create('Failed to delete project with ID '+CurrentProject.ID.ToString);
   end;
   tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+end;
+
+procedure TfrmMain.SpeedButton1Click(Sender: TObject);
+begin
+  tbcMain.SetActiveTabWithTransition(tabReport,TTabTransition.Slide,TTabTransitionDirection.Normal);
+  GenerateReport;
+end;
+
+procedure TfrmMain.SpeedButton2Click(Sender: TObject);
+begin
+  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
 end;
 
 procedure TfrmMain.speedButtonAddClick(Sender: TObject);

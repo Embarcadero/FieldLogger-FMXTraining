@@ -280,7 +280,11 @@ var
 begin
   MS := TMemoryStream.Create;
   try
-    aBitmap.Resize(1920, Trunc(aBitmap.Height / aBitmap.Width * 1920));
+    // resize the images to
+    if aBitmap.Height > aBitmap.Width then
+      aBitmap.Resize(Trunc(aBitmap.Width / aBitmap.Height * 512), 512)
+    else
+      aBitmap.Resize(512, Trunc(aBitmap.Height / aBitmap.Width * 512));
     aBitmap.SaveToStream(MS);
     MS.Position := 0;
     SetLength(ImageData,MS.Size);
