@@ -3,7 +3,7 @@ object dmFieldLogger: TdmFieldLogger
   OnCreate = DataModuleCreate
   Height = 439
   Width = 528
-  object FDConnection1: TFDConnection
+  object conn: TFDConnection
     Params.Strings = (
       'Database=C:\Users\Jim\Documents\EMBEDDEDIBLITE.IB'
       'User_Name=sysdba'
@@ -14,14 +14,13 @@ object dmFieldLogger: TdmFieldLogger
       'CharacterSet=UTF8'
       'DriverID=IB')
     ConnectedStoredUsage = []
-    Connected = True
     LoginPrompt = False
     Left = 112
     Top = 64
   end
   object qProjects: TFDQuery
     ActiveStoredUsage = []
-    Connection = FDConnection1
+    Connection = conn
     SQL.Strings = (
       'select * from projects')
     Left = 80
@@ -48,9 +47,11 @@ object dmFieldLogger: TdmFieldLogger
     AfterInsert = qLogEntriesAfterInsert
     MasterSource = dsProjects
     MasterFields = 'PROJ_ID'
-    Connection = FDConnection1
+    Connection = conn
     SQL.Strings = (
-      'select * from log_Entries where proj_id = :proj_id')
+      'select * from log_Entries where proj_id = :proj_id'
+      ''
+      'order by TimeDateStamp')
     Left = 144
     Top = 120
     ParamData = <
@@ -58,7 +59,8 @@ object dmFieldLogger: TdmFieldLogger
         Name = 'PROJ_ID'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
+        Size = 2
+        Value = 2
       end>
     object qLogEntriesLOG_ID: TIntegerField
       FieldName = 'LOG_ID'

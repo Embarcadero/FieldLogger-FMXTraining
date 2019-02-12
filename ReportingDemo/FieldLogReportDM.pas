@@ -8,11 +8,11 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.IB,
   FireDAC.Phys.IBDef, FireDAC.FMXUI.Wait, Data.DB, FireDAC.Comp.Client,
   FireDAC.Phys.IBLiteDef, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.DataSet;
+  FireDAC.DApt, FireDAC.Comp.DataSet, System.Types;
 
 type
   TdmFieldLogger = class(TDataModule)
-    FDConnection1: TFDConnection;
+    conn: TFDConnection;
     qProjects: TFDQuery;
     qLogEntries: TFDQuery;
     dsProjects: TDataSource;
@@ -53,6 +53,8 @@ type
 var
   dmFieldLogger: TdmFieldLogger;
 
+function ResizeJpegField(const field: TBlobField; const maxWidth: integer): TByteDynArray;
+
 implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
@@ -60,20 +62,66 @@ implementation
 {$R *.dfm}
 
 uses
-  IOUtils;
+  IOUtils, FMX.Graphics;
+
+function ResizeJpegField(const field: TBlobField; const maxWidth: integer): TByteDynArray;
+var
+  blob: TStream;
+  jpeg: TBitmap;
+begin
+  Assert(Assigned(field));
+
+  blob := nil;
+  jpeg := nil;
+  try
+    blob := field.DataSet.CreateBlobStream(field, TBlobStreamMode.bmRead);
+    jpeg := TBitmap.Create;
+    jpeg.LoadFromStream(blob);
+    blob.DisposeOf;
+    if jpeg.Width > maxWidth then
+      jpeg.Resize(maxWidth, Trunc(jpeg.Height / jpeg.Width * maxWidth));
+    blob := TMemoryStream.Create;
+    jpeg.SaveToStream(blob);
+    blob.Position := 0;
+    SetLength(result, blob.Size);
+    blob.Read(result[0], blob.Size);
+  finally
+    jpeg.DisposeOf;
+    blob.DisposeOf;
+  end;
+end;
 
 procedure TdmFieldLogger.LoadRandomImage;
 var
   imgs: TArray<System.string>;
+  jpeg: TBitmap;
   idx: Integer;
 begin
   imgs := TDirectory.GetFiles('C:\Users\Jim\Documents\GitHub\FieldLogger-FMXTraining\ReportingDemo\RandomImages');
   idx := Random(Length(imgs));
-  dmFieldLogger.qLogEntriesPicture.LoadFromFile(imgs[idx]);
+  jpeg := TBitmap.CreateFromFile(imgs[idx]);
+  try
+    // resize the images to 512 on the largest size
+    if jpeg.Height > jpeg.Width then
+      jpeg.Resize(Trunc(jpeg.Width / jpeg.Height * 512), 512)
+    else
+      jpeg.Resize(512, Trunc(jpeg.Height / jpeg.Width * 512));
+    dmFieldLogger.qLogEntriesPicture.Assign(jpeg);
+  finally
+    jpeg.DisposeOf;
+  end;
 end;
 
 procedure TdmFieldLogger.DataModuleCreate(Sender: TObject);
 begin
+  {$ifdef ANDROID}
+  conn.Params.Clear;
+  conn.Params.DriverID := 'IBLite';
+  conn.Params.Database := TPath.Combine(TPath.GetDocumentsPath, 'EMBEDDEDIBLITE.IB');
+  {$ENDIF}
+  conn.Params.UserName := 'sysdba';
+  conn.Params.Password := 'masterkey';
+  conn.Params.Values['CharacterSet'] := 'UTF8';
   qProjects.Open();
   qLogEntries.Open();
 end;
@@ -81,9 +129,9 @@ end;
 procedure TdmFieldLogger.qLogEntriesAfterInsert(DataSet: TDataSet);
 begin
   qLogEntriesLOG_ID.Value := Random(MaxInt);
-  qLogEntriesTIMEDATESTAMP.AsDateTime := Now;
-  qLogEntriesLONGITUDE.Value := 720 * Random - 360;
-  qLogEntriesLATITUDE.Value := 720 * Random - 360;
+  qLogEntriesTIMEDATESTAMP.AsDateTime := Now + (random(31) * (0.5-random));
+  qLogEntriesLONGITUDE.Value := Random + (179 - Random(360));
+  qLogEntriesLATITUDE.Value := Random + (89 - Random(180));
   qLogEntriesOR_X.Value := Random - Random(2);
   qLogEntriesOR_Y.Value := Random - Random(2);
   qLogEntriesOR_Z.Value := Random - Random(2);

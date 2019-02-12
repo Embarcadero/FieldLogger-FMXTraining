@@ -7,6 +7,8 @@ object Form53: TForm53
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object TabControl1: TTabControl
     Align = Client
@@ -80,7 +82,7 @@ object Form53: TForm53
         Size.Height = 423.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
-        RowCount = 0
+        RowCount = 5
         Viewport.Width = 759.000000000000000000
         Viewport.Height = 423.000000000000000000
       end
@@ -164,17 +166,10 @@ object Form53: TForm53
         Position.X = 408.000000000000000000
         Position.Y = 64.000000000000000000
       end
-      object Button2: TButton
-        Position.X = 320.000000000000000000
-        Position.Y = 22.000000000000000000
-        TabOrder = 7
-        Text = 'Button2'
-        OnClick = Button2Click
-      end
       object Button3: TButton
         Position.X = 152.000000000000000000
         Position.Y = 22.000000000000000000
-        TabOrder = 8
+        TabOrder = 7
         Text = 'Button3'
         OnClick = Button3Click
       end
@@ -190,14 +185,14 @@ object Form53: TForm53
   object BindSourceDB1: TBindSourceDB
     DataSet = dmFieldLogger.qProjects
     ScopeMappings = <>
-    Left = 472
-    Top = 320
+    Left = 176
+    Top = 352
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 28
-    Top = 77
+    Left = 177
+    Top = 318
     object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
@@ -228,7 +223,7 @@ object Form53: TForm53
   object BindSourceDB2: TBindSourceDB
     DataSet = dmFieldLogger.qLogEntries
     ScopeMappings = <>
-    Left = 504
-    Top = 416
+    Left = 176
+    Top = 384
   end
 end

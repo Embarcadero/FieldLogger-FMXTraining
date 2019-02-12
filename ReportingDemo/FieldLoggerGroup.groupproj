@@ -6,7 +6,10 @@
         <Projects Include="..\src\FieldLogger.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="FieldLoggerReporting.dproj">
+        <Projects Include="DataGeneration.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ReportingDemo.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -26,23 +29,32 @@
     <Target Name="FieldLogger:Make">
         <MSBuild Projects="..\src\FieldLogger.dproj" Targets="Make"/>
     </Target>
-    <Target Name="FieldLoggerReporting">
-        <MSBuild Projects="FieldLoggerReporting.dproj"/>
+    <Target Name="DataGeneration">
+        <MSBuild Projects="DataGeneration.dproj"/>
     </Target>
-    <Target Name="FieldLoggerReporting:Clean">
-        <MSBuild Projects="FieldLoggerReporting.dproj" Targets="Clean"/>
+    <Target Name="DataGeneration:Clean">
+        <MSBuild Projects="DataGeneration.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="FieldLoggerReporting:Make">
-        <MSBuild Projects="FieldLoggerReporting.dproj" Targets="Make"/>
+    <Target Name="DataGeneration:Make">
+        <MSBuild Projects="DataGeneration.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ReportingDemo">
+        <MSBuild Projects="ReportingDemo.dproj"/>
+    </Target>
+    <Target Name="ReportingDemo:Clean">
+        <MSBuild Projects="ReportingDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ReportingDemo:Make">
+        <MSBuild Projects="ReportingDemo.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="FieldLogger;FieldLoggerReporting"/>
+        <CallTarget Targets="FieldLogger;DataGeneration;ReportingDemo"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="FieldLogger:Clean;FieldLoggerReporting:Clean"/>
+        <CallTarget Targets="FieldLogger:Clean;DataGeneration:Clean;ReportingDemo:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="FieldLogger:Make;FieldLoggerReporting:Make"/>
+        <CallTarget Targets="FieldLogger:Make;DataGeneration:Make;ReportingDemo:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

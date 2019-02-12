@@ -280,7 +280,7 @@ var
 begin
   MS := TMemoryStream.Create;
   try
-    // resize the images to
+    // resize the images to 512 on the largest size
     if aBitmap.Height > aBitmap.Width then
       aBitmap.Resize(Trunc(aBitmap.Width / aBitmap.Height * 512), 512)
     else

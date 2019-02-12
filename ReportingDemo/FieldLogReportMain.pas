@@ -9,7 +9,9 @@ uses
   System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Controls, FMX.Layouts,
   Fmx.Bind.Navigator, Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope,
   FMX.ScrollBox, FMX.Grid, FMX.Controls.Presentation, FMX.Edit, FMX.TabControl,
-  FMX.StdCtrls, FMX.WebBrowser, FMX.Memo, FMX.Objects;
+  FMX.StdCtrls, FMX.WebBrowser, FMX.Memo, FMX.Objects,
+
+  System.Sensors, Generics.Collections;
 
 type
   TForm53 = class(TForm)
@@ -29,14 +31,18 @@ type
     NavigatorBindSourceDB2: TBindNavigator;
     Memo1: TMemo;
     WebBrowser1: TWebBrowser;
-    Button2: TButton;
     Button3: TButton;
     Layout1: TLayout;
     Image1: TImage;
-    procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
+    FGeocoders: TObjectList<TGeocoder>;
+    html: TStringList;
+    procedure OnGeocodeReverseEvent(const Address: TCivicAddress);
+    procedure ReverseLocation(Lat, Long: double);
   public
     { Public declarations }
   end;
@@ -49,161 +55,227 @@ implementation
 {$R *.fmx}
 
 uses
-  IOUtils, FMX.Surfaces, FieldLogReportDM, System.NetEncoding, Data.DB;
+  IOUtils, FMX.Surfaces, FieldLogReportDM, System.NetEncoding, Data.DB,
+{$IFDEF ANDROID}
+  Androidapi.JNI.Os, Androidapi.JNI.JavaTypes, Androidapi.Helpers,
+  System.Android.Sensors;
+{$ENDIF ANDROID}
+{$IFDEF IOS}
+  System.iOS.Sensors;
+{$ENDIF IOS}
+{$IFDEF MACOS}
+  System.Mac.Sensors;
+{$ENDIF MACOS}
+{$IFDEF MSWINDOWS}
+  System.Win.Sensors;
+{$ENDIF}
 
-{
-// Based on code by Dave Nottage, Embarcadero MVP - delphiworlds.com
-function BitmapAsBase64(const ABitmap: TBitmap): string; overload;
-var
-  LInputStream: TBytesStream;
-  LOutputStream: TStringStream;
-begin
-  Result := '';
-  if not(assigned(ABitmap)) or ABitmap.IsEmpty then
-    Exit;
-  LInputStream := TBytesStream.Create;
-  try
-    ABitmap.SaveToStream(LInputStream);
-    LInputStream.Position := 0;
-    LOutputStream := TStringStream.Create('');
+{$REGION 'stale code'}
+  {
+  // Based on code by Dave Nottage, Embarcadero MVP - delphiworlds.com
+  function BitmapAsBase64(const ABitmap: TBitmap): string; overload;
+  var
+    LInputStream: TBytesStream;
+    LOutputStream: TStringStream;
+  begin
+    Result := '';
+    if not(assigned(ABitmap)) or ABitmap.IsEmpty then
+      Exit;
+    LInputStream := TBytesStream.Create;
     try
-      TNetEncoding.Base64.Encode(LInputStream, LOutputStream);
-      Result := LOutputStream.DataString;
+      ABitmap.SaveToStream(LInputStream);
+      LInputStream.Position := 0;
+      LOutputStream := TStringStream.Create('');
+      try
+        TNetEncoding.Base64.Encode(LInputStream, LOutputStream);
+        Result := LOutputStream.DataString;
+      finally
+        LOutputStream.Free;
+      end;
     finally
-      LOutputStream.Free;
+      LInputStream.Free;
     end;
-  finally
-    LInputStream.Free;
   end;
-end;
 
-function GetAsBase64(const ABitmap: TBitmap): string; overload;
-var
-  LInputStream: TBytesStream;
-  LOutputStream: TStringStream;
-begin
-  Result := '';
-  if not(assigned(ABitmap)) or ABitmap.IsEmpty then Exit;
-  LInputStream := TBytesStream.Create;
-  try
-    ABitmap.SaveToStream(LInputStream);
-    LInputStream.Position := 0;
-    LOutputStream := TStringStream.Create('');
+  function GetAsBase64(const ABitmap: TBitmap): string; overload;
+  var
+    LInputStream: TBytesStream;
+    LOutputStream: TStringStream;
+  begin
+    Result := '';
+    if not(assigned(ABitmap)) or ABitmap.IsEmpty then Exit;
+    LInputStream := TBytesStream.Create;
     try
-      TNetEncoding.Base64.Encode(LInputStream, LOutputStream);
-      Result := LOutputStream.DataString;
+      ABitmap.SaveToStream(LInputStream);
+      LInputStream.Position := 0;
+      LOutputStream := TStringStream.Create('');
+      try
+        TNetEncoding.Base64.Encode(LInputStream, LOutputStream);
+        Result := LOutputStream.DataString;
+      finally
+        LOutputStream.DisposeOf;
+      end;
     finally
-      LOutputStream.DisposeOf;
+      LInputStream.DisposeOf;
     end;
-  finally
-    LInputStream.DisposeOf;
   end;
-end;
 
-procedure LoadJPEGSteam(bitmap: TBitmap; mem: TMemoryStream);
-var
-  surface: TBitmapSurface;
-begin
-  surface := TBitmapSurface.Create;
-  try
-    Surface.Assign(bitmap);
-    TBitmapCodecManager.SaveToStream(mem, Surface, 'jpg');
-  finally
-    Surface.DisposeOf;
-  end;
-  mem.Position := 0;
-end;
-
-procedure DisplayJPEGStream(bitmap: TBitmap; mem: TMemoryStream);
-var
-  img: TBitmap;
-begin
-  img := TBitmap.Create;
-  try
+  procedure LoadJPEGSteam(bitmap: TBitmap; mem: TMemoryStream);
+  var
+    surface: TBitmapSurface;
+  begin
+    surface := TBitmapSurface.Create;
+    try
+      Surface.Assign(bitmap);
+      TBitmapCodecManager.SaveToStream(mem, Surface, 'jpg');
+    finally
+      Surface.DisposeOf;
+    end;
     mem.Position := 0;
-    img.LoadFromStream(mem);
-    Bitmap.SetSize(img.Width, img.Height);
-    Bitmap.Canvas.BeginScene;
+  end;
+
+  procedure DisplayJPEGStream(bitmap: TBitmap; mem: TMemoryStream);
+  var
+    img: TBitmap;
+  begin
+    img := TBitmap.Create;
     try
-      Bitmap.Canvas.DrawBitmap(img, img.BoundsF, bitmap.BoundsF, 1);
+      mem.Position := 0;
+      img.LoadFromStream(mem);
+      Bitmap.SetSize(img.Width, img.Height);
+      Bitmap.Canvas.BeginScene;
+      try
+        Bitmap.Canvas.DrawBitmap(img, img.BoundsF, bitmap.BoundsF, 1);
+      finally
+        Bitmap.Canvas.EndScene;
+      end;
     finally
-      Bitmap.Canvas.EndScene;
+      img.DisposeOf;
     end;
-  finally
-    img.DisposeOf;
+    mem.Position := 0;
   end;
-  mem.Position := 0;
-end;
+  }
+
+{$ENDREGION}
+
+procedure TForm53.OnGeocodeReverseEvent(const Address: TCivicAddress);
+begin
+  ShowMessage('test');
+{
+  lblSubThoroughfare.Text := Address.SubThoroughfare;
+  lblThoroughfare.Text := Address.Thoroughfare;
+  lblSubLocality.Text := Address.SubLocality;
+  lblSubAdminArea.Text := Address.SubAdminArea;
+  lblZipCode.Text := Address.PostalCode;
+  lblLocality.Text := Address.Locality;
+  lblFeature.Text := Address.FeatureName;
+  lblCountry.Text := Address.CountryName;
+  lblCountryCode.Text := Address.CountryCode;
+  lblAdminArea.Text := Address.AdminArea;
 }
-
-procedure TForm53.Button2Click(Sender: TObject);
-begin
-  //Memo1.Lines.SaveToFile('test.html');
-  WebBrowser1.LoadFromStrings(Memo1.Lines.Text, 'about:blank');
-  //WebBrowser1.Navigate('file://' + GetCurrentDir + '/test.html');
 end;
 
-function ResizeJpegField(const field: TBlobField; const maxWidth: integer): TByteDynArray;
+procedure TForm53.ReverseLocation( Lat, Long: double );
 var
-  blob: TStream;
-  jpeg: TBitmap;
+  Geocoder: TGeocoder;
 begin
-  Assert(Assigned(field));
+  // Setup an instance of TGeocoder
+  Geocoder := FGeocoders.Items[ FGeocoders.Add( TGeocoder.Current.Create )];
 
-  blob := nil;
-  jpeg := nil;
-  try
-    blob := field.DataSet.CreateBlobStream(field, TBlobStreamMode.bmRead);
-    jpeg := TBitmap.Create;
-    jpeg.LoadFromStream(blob);
-    blob.DisposeOf;
-    if jpeg.Width > maxWidth then
-      jpeg.Resize(maxWidth, Trunc(jpeg.Height / jpeg.Width * maxWidth));
-    blob := TMemoryStream.Create;
-    jpeg.SaveToStream(blob);
-    blob.Position := 0;
-    SetLength(result, blob.Size);
-    blob.Read(result[0], blob.Size);
-  finally
-    jpeg.DisposeOf;
-    blob.DisposeOf;
+  if not Geocoder.Supported then
+    Exception.Create('Not supported.');
+
+  Geocoder.OnGeocodeReverse := OnGeocodeReverseEvent;
+
+  // Translate location to address
+  Geocoder.GeocodeReverse(TLocationCoord2D.Create(Lat, Long));
+  
+  for Geocoder in FGeocoders do
+  begin
+    if Geocoder.Geocoding then
+      ShowMessage('Geocoding!');
   end;
 end;
+
 
 procedure TForm53.Button3Click(Sender: TObject);
 var
   jpegBytes: TByteDynArray;
+
 begin
-  Memo1.Lines.Clear;
-  Memo1.Repaint;
-  Application.ProcessMessages;
-
-  Memo1.BeginUpdate;
+  html := TStringList.Create;
   try
-    Memo1.Lines.Add(format('<html><head><title>%s</title></head><body>',
-      [TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_TITLE.Value)]));
-    Memo1.Lines.Add(format('<h1>%s</h1><p>%s</p>',
-      [TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_TITLE.Value),
-       TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_DESC.Value)]));
+    html.BeginUpdate;
+    try
+      html.Add(format('<html><head><title>%s</title></head><body>',
+        [TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_TITLE.Value)]));
+      html.Add(format('<strong>Project</strong><h1>%s</h1><p><strong>Description:</strong>%s</p>',
+        [TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_TITLE.Value),
+         TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_DESC.Value)]));
+      html.Add('<p><strong>Log Entries:</strong></p>');
 
-    dmFieldLogger.qLogEntries.First;
+      {
+      dmFieldLogger.qLogEntries.First;
 
-    while not dmFieldLogger.qLogEntries.Eof do
-    begin
-      jpegBytes := ResizeJpegField(dmFieldLogger.qLogEntriesPICTURE, 512);
+      while not dmFieldLogger.qLogEntries.Eof do
+      begin
+        ReverseLocation(
+          dmFieldLogger.qLogEntriesLATITUDE.Value,
+          dmFieldLogger.qLogEntriesLONGITUDE.Value);
 
-      Memo1.Lines.Add(format('<h2>%s</h2><p>%s</p>'+
-        '<img src="data:image/jpg;base64,%s" alt="%s" />',
-        [DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime),
-         TNetEncoding.HTML.Encode(dmFieldLogger.qLogEntriesNOTE.Value),
-         TNetEncoding.Base64.EncodeBytesToString(jpegBytes),
-         DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime)]));
-      dmFieldLogger.qLogEntries.Next;
+        dmFieldLogger.qLogEntries.Next;
+      end;
+      }
+
+      dmFieldLogger.qLogEntries.First;
+
+      while not dmFieldLogger.qLogEntries.Eof do
+      begin
+        jpegBytes := ResizeJpegField(dmFieldLogger.qLogEntriesPICTURE, 512);
+
+        html.Add(format('<h2>%s</h2><p>%s</p>'+
+          '<img src="data:image/jpg;base64,%s" alt="%s" />',
+          [DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime),
+           TNetEncoding.HTML.Encode(dmFieldLogger.qLogEntriesNOTE.Value),
+           TNetEncoding.Base64.EncodeBytesToString(jpegBytes),
+           DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime)]));
+
+        html.Add('<table>');
+        html.Add(format('<tr><td>Lat, Long:</td><td>%f, %f</td></tr>',
+          [dmFieldLogger.qLogEntriesLATITUDE.Value,dmFieldLogger.qLogEntriesLONGITUDE.Value]));
+        html.Add(format('<tr><td>Orentation:</td><td>%f, %f, %f</td></tr>',
+          [dmFieldLogger.qLogEntriesOR_X.Value,dmFieldLogger.qLogEntriesOR_Y.Value,dmFieldLogger.qLogEntriesOR_Z.Value]));
+        html.Add(format('<tr><td>Heading:</td><td>%f, %f, %f</td></tr>',
+          [dmFieldLogger.qLogEntriesHEADING_X.Value, dmFieldLogger.qLogEntriesHEADING_Y.Value, dmFieldLogger.qLogEntriesHEADING_Z.Value]));
+        html.Add(format('<tr><td>Velocity:</td><td>%f, %f, %f</td></tr>',
+          [dmFieldLogger.qLogEntriesV_X.Value, dmFieldLogger.qLogEntriesV_Y.Value, dmFieldLogger.qLogEntriesV_Z.Value]));
+        html.Add(format('<tr><td>Angle:</td><td>%f, %f, %f</td></tr>',
+          [dmFieldLogger.qLogEntriesANGLE_X.Value, dmFieldLogger.qLogEntriesANGLE_Y.Value, dmFieldLogger.qLogEntriesANGLE_Z.Value]));
+        html.Add(format('<tr><td>Motion:</td><td>%f</td></tr>',[dmFieldLogger.qLogEntriesMOTION.Value]));
+        html.Add(format('<tr><td>Speed:</td><td>%f</td></tr>',[dmFieldLogger.qLogEntriesSPEED.Value]));
+        html.Add('</table><hr>');
+        dmFieldLogger.qLogEntries.Next;
+      end;
+
+      html.Add('</body></html>');
+      WebBrowser1.LoadFromStrings(html.Text, 'about:blank');
+      memo1.Text := html.Text;
+    finally
+      Memo1.EndUpdate;
     end;
-    Memo1.Lines.Add('</body></html>');
   finally
-    Memo1.EndUpdate;
+    html.free;
   end;
+end;
+
+procedure TForm53.FormCreate(Sender: TObject);
+begin
+  FGeocoders := TObjectList<TGeocoder>.Create;
+end;
+
+procedure TForm53.FormDestroy(Sender: TObject);
+begin
+  FGeocoders.Free;
 end;
 
 end.
