@@ -492,7 +492,8 @@ end;
 
 procedure TfrmMain.listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
 begin
-  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Normal);
+  tbcMain.SetActiveTabWithTransitionAsync(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Normal,
+    procedure begin end);
 end;
 
 procedure TfrmMain.LocationSensor1LocationChanged(Sender: TObject; const OldLocation, NewLocation: TLocationCoord2D );
