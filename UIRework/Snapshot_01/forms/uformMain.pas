@@ -176,9 +176,6 @@ type
     mmoNewProjDescription: TMemo;
     edtNewProjTitle: TEdit;
     LocationSensor1: TLocationSensor;
-    ToolBar6: TToolBar;
-    Rectangle15: TRectangle;
-    Label10: TLabel;
     ToolBar1: TToolBar;
     Rectangle16: TRectangle;
     Label1: TLabel;
@@ -249,6 +246,7 @@ type
     rectSignInColor: TRectangle;
     rectProjectsColor: TRectangle;
     Rectangle21: TRectangle;
+    Rectangle15: TRectangle;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
     procedure spedProjBackClick(Sender: TObject);

@@ -1,5 +1,5 @@
 ﻿[]
-Coordinates=1123,641,49,33
+Coordinates=1027,1124,58,33
 Visible=False
 
 [CameraComponent1]
@@ -472,10 +472,6 @@ Visible=False
 Coordinates=1324,834,75,33
 Visible=False
 
-[Rectangle15]
-Coordinates=1324,889,75,33
-Visible=False
-
 [Rectangle17]
 Coordinates=1324,999,75,33
 Visible=False
@@ -506,16 +502,8 @@ Visible=False
 Coordinates=362,1240,46,33
 Visible=False
 
-[Label10]
-Coordinates=421,718,52,33
-Visible=False
-
 [Label1]
 Coordinates=994,1208,46,33
-Visible=False
-
-[ToolBar6]
-Coordinates=1027,1124,58,33
 Visible=False
 
 [GaussianBlurEffect3]
