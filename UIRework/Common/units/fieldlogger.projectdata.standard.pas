@@ -5,11 +5,11 @@
 unit fieldlogger.projectdata.standard;
 
 interface
+
 uses
-  Data.DB
-, FireDAC.Comp.Client
-, fieldlogger.data
-;
+  Data.DB,
+  FireDAC.Comp.Client,
+  fieldlogger.data;
 
 type
   TProjectData = class( TInterfacedObject, IProjectData )
@@ -26,10 +26,10 @@ type
   end;
 
 implementation
+
 uses
   FireDAC.Stan.Param,
-  sysutils
-;
+  System.SysUtils;
 
 { TProjectData }
 
@@ -39,7 +39,8 @@ begin
   fConnection := Connection;
   //- Check that we have a valid connection which can connect to the database.
   ValidConnection := False;
-  if fConnection.Connected then begin
+  if fConnection.Connected then
+  begin
     ValidConnection := True;
     exit;
   end;
@@ -47,12 +48,14 @@ begin
   try
     fConnection.Connected := True;
   except
-    on E: Exception do begin
+    on E: Exception do
+    begin
       exit; //- ValidConnection remains false
     end;
   end;
   // Check connected
-  if not fConnection.Connected then begin
+  if not fConnection.Connected then
+  begin
     exit; // ValidConnection remains false.
   end;
   ValidConnection := True;
@@ -71,7 +74,8 @@ begin
     //- for this entry.
     qry.SQL.Text := 'SELECT * FROM PROJECTS;';
     qry.Active := True;
-    if not qry.Active then begin
+    if not qry.Active then
+    begin
       exit;
     end;
     qry.Append;
@@ -94,7 +98,8 @@ var
   idx: integer;
 begin
   Result := False;
-  if Length(Projects)=0 then begin
+  if Length(Projects)=0 then
+  begin
     Result := True;
     exit;
   end;
@@ -108,12 +113,14 @@ begin
         qry.Connection := fConnection;
         qry.Transaction := transaction;
         qry.SQL.Text := 'DELETE FROM PROJECTS WHERE PROJ_ID=:ID;';
-        for idx := 0 to pred(length(Projects)) do begin
+        for idx := 0 to pred(length(Projects)) do
+        begin
           qry.Params.ParamByName('ID').AsInteger := Projects[idx];
           try
             qry.ExecSQL;
           except
-            on E: Exception do begin
+            on E: Exception do
+            begin
               transaction.Rollback;
               raise; //<- For exception safe, replace this with exit, function will exit result=FALSE
             end;
@@ -148,23 +155,29 @@ begin
   qry := TFDQuery.Create(nil);
   try
     qry.Connection := fConnection;
-    if ID=0 then begin
+    if ID = 0 then
+    begin
       qry.SQL.Text := 'SELECT * FROM PROJECTS;';
-    end else begin
+    end
+    else
+    begin
       qry.SQL.Text := 'SELECT * FROM PROJECTS WHERE PROJ_ID=:ID;';
       qry.Params.ParamByName('ID').AsInteger := ID;
     end;
     qry.Active := True;
-    if not qry.Active then begin
+    if not qry.Active then
+    begin
       exit;
     end;
-    if qry.RecordCount=0 then begin
+    if qry.RecordCount=0 then
+    begin
       exit;
     end;
     SetLength(Projects,qry.RecordCount);
     idx := 0;
     qry.First;
-    while not qry.EOF do begin
+    while not qry.EOF do
+    begin
       Projects[idx].ID := qry.FieldByName('PROJ_ID').AsInteger;
       Projects[idx].Title := qry.FieldByName('PROJ_TITLE').AsString;
       Projects[idx].Description := qry.FieldByName('PROJ_DESC').AsString;
@@ -185,7 +198,8 @@ var
   idx: integer;
 begin
   Result := False;
-  if Length(Projects)=0 then begin
+  if Length(Projects)=0 then
+  begin
     Result := True;
     exit;
   end;
@@ -199,14 +213,16 @@ begin
         qry.Connection := fConnection;
         qry.Transaction := transaction;
         qry.SQL.Text := 'UPDATE PROJECTS SET PROJ_TITLE=:PROJ_TITLE, PROJ_DESC=:PROJ_DESC WHERE PROJ_ID=:ID;';
-        for idx := 0 to pred(length(projects)) do begin
+        for idx := 0 to pred(length(projects)) do
+        begin
           qry.Params.ParamByName('ID').AsInteger := Projects[idx].ID;
           qry.Params.ParamByName('PROJ_TITLE').AsString := Projects[idx].Title;
           qry.Params.ParamByName('PROJ_DESC').AsString := Projects[idx].Description;
           try
             qry.ExecSQL;
           except
-            on E: Exception do begin
+            on E: Exception do
+            begin
               transaction.Rollback;
               raise; //<- For exception safe, replace this with exit, function will exit result=FALSE
             end;

@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{5D872418-3A05-4229-B58A-A57B7EEAF467}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Snapshot_01\FieldLogger_S01.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="FieldLogger_S01">
+        <MSBuild Projects="Snapshot_01\FieldLogger_S01.dproj"/>
+    </Target>
+    <Target Name="FieldLogger_S01:Clean">
+        <MSBuild Projects="Snapshot_01\FieldLogger_S01.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FieldLogger_S01:Make">
+        <MSBuild Projects="Snapshot_01\FieldLogger_S01.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="FieldLogger_S01"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="FieldLogger_S01:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="FieldLogger_S01:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

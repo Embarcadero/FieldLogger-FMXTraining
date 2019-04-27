@@ -10,12 +10,12 @@
 unit fieldlogger.data;
 
 interface
+
 uses
-  FMX.Graphics
-, classes
-, Data.DB
-, FireDAC.Comp.Client
-;
+  FMX.Graphics,
+  System.Classes,
+  Data.DB,
+  FireDAC.Comp.Client;
 
 type
 {$region ' Project Data'}
@@ -221,9 +221,10 @@ type
   end;
 
 implementation
+
 uses
-  fieldlogger.projectdata.standard
-, fieldlogger.logdata.standard;
+  fieldlogger.projectdata.standard,
+  fieldlogger.logdata.standard;
 
 { TLogData }
 
@@ -232,7 +233,8 @@ var
   ValidConnection: Boolean;
 begin
   Result := fieldlogger.logdata.standard.TLogData.Create(Connection, ValidConnection );
-  if not ValidConnection then begin
+  if not ValidConnection then
+  begin
     Result := nil;
   end;
 end;
@@ -245,7 +247,8 @@ var
   ValidConnection: Boolean;
 begin
   Result := fieldlogger.projectdata.standard.TProjectData.Create( Connection, ValidConnection );
-  if not ValidConnection then begin
+  if not ValidConnection then
+  begin
     Result := nil;
   end;
 end;
@@ -258,12 +261,14 @@ var
   idx: uint32;
 begin
   Result := TBitmap.Create;
-  if Length(ImageData)=0 then begin
+  if Length(ImageData)=0 then
+  begin
     exit;
   end;
   MS := TMemoryStream.Create;
   try
-    for idx := 0 to pred(Length(ImageData)) do begin
+    for idx := 0 to pred(Length(ImageData)) do
+    begin
       MS.Write(ImageData[idx],sizeof(uint8));
     end;
     MS.Position := 0;
@@ -288,10 +293,12 @@ begin
     aBitmap.SaveToStream(MS);
     MS.Position := 0;
     SetLength(ImageData,MS.Size);
-    if Length(ImageData)=0 then begin
+    if Length(ImageData)=0 then
+    begin
       exit;
     end;
-    for idx := 0 to pred(Length(ImageData)) do begin
+    for idx := 0 to pred(Length(ImageData)) do
+    begin
       MS.Read(ImageData[idx],sizeof(uint8));
     end;
   finally

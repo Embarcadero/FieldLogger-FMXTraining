@@ -1,6 +1,7 @@
 unit fieldlogger.authentication;
 
 interface
+
 uses
   FireDAC.Comp.Client;
 

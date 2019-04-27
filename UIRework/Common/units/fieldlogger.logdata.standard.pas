@@ -5,11 +5,11 @@
 unit fieldlogger.logdata.standard;
 
 interface
+
 uses
-  Data.DB
-, FireDAC.Comp.Client
-, fieldlogger.data
-;
+  Data.DB,
+  FireDAC.Comp.Client,
+  fieldlogger.data;
 
 type
   TLogData = class( TInterfacedObject, ILogData )
@@ -26,12 +26,12 @@ type
   end;
 
 implementation
+
 uses
-  FMX.Graphics
-, FireDAC.Stan.Param
-, Classes
-, sysutils
-;
+  FMX.Graphics,
+  FireDAC.Stan.Param,
+  System.Classes,
+  System.SysUtils;
 
 constructor TLogData.Create(Connection: TFDConnection; out ValidConnection: Boolean);
 begin
@@ -39,7 +39,8 @@ begin
   fConnection := Connection;
   //- Check that we have a valid connection which can connect to the database.
   ValidConnection := False;
-  if fConnection.Connected then begin
+  if fConnection.Connected then
+  begin
     ValidConnection := True;
     exit;
   end;
@@ -47,12 +48,14 @@ begin
   try
     fConnection.Connected := True;
   except
-    on E: Exception do begin
+    on E: Exception do
+    begin
       exit; //- ValidConnection remains false
     end;
   end;
   // Check connected
-  if not fConnection.Connected then begin
+  if not fConnection.Connected then
+  begin
     exit; // ValidConnection remains false.
   end;
   ValidConnection := True;
@@ -73,7 +76,8 @@ begin
     //- for this entry.
     qry.SQL.Text := 'SELECT * FROM LOG_ENTRIES;';
     qry.Active := True;
-    if not qry.Active then begin
+    if not qry.Active then
+    begin
       exit;
     end;
     qry.Append;
@@ -127,7 +131,8 @@ var
   idx: integer;
 begin
   Result := False;
-  if Length(Entries)=0 then begin
+  if Length(Entries) = 0 then
+  begin
     Result := True;
     exit;
   end;
@@ -141,12 +146,14 @@ begin
         qry.Connection := fConnection;
         qry.Transaction := transaction;
         qry.SQL.Text := 'DELETE FROM LOG_ENTRIES WHERE LOG_ID=:ID;';
-        for idx := 0 to pred(length(Entries)) do begin
+        for idx := 0 to pred(length(Entries)) do
+        begin
           qry.Params.ParamByName('ID').AsInteger := Entries[idx];
           try
             qry.ExecSQL;
           except
-            on E: Exception do begin
+            on E: Exception do
+            begin
               transaction.Rollback;
               raise; //<- For exception safe, replace this with exit, function will exit result=FALSE
             end;
@@ -182,23 +189,29 @@ begin
   qry := TFDQuery.Create(nil);
   try
     qry.Connection := fConnection;
-    if PROJECT_ID=0 then begin
+    if PROJECT_ID = 0 then
+    begin
       qry.SQL.Text := 'SELECT * FROM LOG_ENTRIES;';
-    end else begin
+    end
+    else
+    begin
       qry.SQL.Text := 'SELECT * FROM LOG_ENTRIES WHERE PROJ_ID=:ID;';
       qry.Params.ParamByName('ID').AsInteger := PROJECT_ID;
     end;
     qry.Active := True;
-    if not qry.Active then begin
+    if not qry.Active then
+    begin
       exit;
     end;
-    if qry.RecordCount=0 then begin
+    if qry.RecordCount=0 then
+    begin
       exit;
     end;
     SetLength(Entries,qry.RecordCount);
     idx := 0;
     qry.First;
-    while not qry.EOF do begin
+    while not qry.EOF do
+    begin
       Entries[idx].ID := qry.FieldByName('LOG_ID').AsInteger;
       Entries[idx].ProjectID := qry.FieldByName('PROJ_ID').AsInteger;
       Entries[idx].Longitude := qry.FieldByName('LONGITUDE').AsFloat;
@@ -252,7 +265,8 @@ var
   MS: TMemoryStream;
 begin
   Result := False;
-  if Length(Entries)=0 then begin
+  if Length(Entries) = 0 then
+  begin
     Result := True;
     exit;
   end;
@@ -288,7 +302,8 @@ begin
           'NOTE=:NOTE, '+
           'PICTURE=:PICTURE '+
           '  WHERE LOG_ID=:ID';
-        for idx := 0 to pred(length(entries)) do begin
+        for idx := 0 to pred(length(entries)) do
+        begin
           qry.ParamByName('PROJ_ID').AsInteger := entries[idx].ProjectID;
           qry.ParamByName('LONGITUDE').AsFloat := entries[idx].Longitude;
           qry.ParamByName('LATITUDE').AsFloat := entries[idx].Latitude;
@@ -325,7 +340,8 @@ begin
           try
             qry.ExecSQL;
           except
-            on E: Exception do begin
+            on E: Exception do
+            begin
               transaction.Rollback;
               raise; //<- For exception safe, replace this with exit, function will exit result=FALSE
             end;
