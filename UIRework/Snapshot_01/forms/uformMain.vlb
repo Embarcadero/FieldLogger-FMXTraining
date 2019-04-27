@@ -1,5 +1,5 @@
 ﻿[]
-Coordinates=1096,1124,75,33
+Coordinates=1123,641,49,33
 Visible=False
 
 [CameraComponent1]
@@ -99,10 +99,6 @@ Visible=False
 
 [GradientAnimation10]
 Coordinates=948,557,118,33
-
-[Image1]
-Coordinates=800,200,49,33
-Visible=False
 
 [Label16]
 Coordinates=420,390,52,33
@@ -263,9 +259,6 @@ Coordinates=1135,576,118,33
 [ScrollBox1]
 Coordinates=1135,680,68,33
 Visible=False
-
-[GaussianBlurEffect1]
-Coordinates=1135,888,115,33
 
 [Label20]
 Coordinates=661,421,52,33
@@ -483,20 +476,12 @@ Visible=False
 Coordinates=1324,889,75,33
 Visible=False
 
-[Image3]
-Coordinates=273,990,49,33
-Visible=False
-
 [Rectangle17]
 Coordinates=1324,999,75,33
 Visible=False
 
 [GaussianBlurEffect4]
 Coordinates=1324,1054,115,33
-
-[Image5]
-Coordinates=1123,641,49,33
-Visible=False
 
 [ToolBar1]
 Coordinates=1324,1109,58,33

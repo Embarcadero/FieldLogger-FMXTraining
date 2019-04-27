@@ -110,8 +110,6 @@ type
     HeaderBackgroundRect: TRectangle;
     HeaderLabel: TLabel;
     tabSignin: TTabItem;
-    Image1: TImage;
-    GaussianBlurEffect1: TGaussianBlurEffect;
     tabProjects: TTabItem;
     tabProjectDetail: TTabItem;
     Splitter1: TSplitter;
@@ -194,11 +192,9 @@ type
     Rectangle18: TRectangle;
     Label6: TLabel;
     btnEntriesBack: TButton;
-    Image3: TImage;
     GaussianBlurEffect2: TGaussianBlurEffect;
     Image4: TImage;
     GaussianBlurEffect3: TGaussianBlurEffect;
-    Image5: TImage;
     GaussianBlurEffect4: TGaussianBlurEffect;
     Layout9: TLayout;
     Rectangle22: TRectangle;
@@ -250,6 +246,9 @@ type
     SpeedButton3: TSpeedButton;
     frameSignIn1: TframeSignIn;
     frameProjects1: TframeProjects;
+    rectSignInColor: TRectangle;
+    rectProjectsColor: TRectangle;
+    Rectangle21: TRectangle;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
     procedure spedProjBackClick(Sender: TObject);
@@ -268,6 +267,10 @@ type
     procedure btnNewEntryCancelClick(Sender: TObject);
     procedure spedProjDeleteClick(Sender: TObject);
     procedure btnDeleteEntryClick(Sender: TObject);
+    procedure frameProjects1listViewProjectsItemClick(const Sender: TObject; const
+        AItem: TListViewItem);
+    procedure frameSignIn1PasswordEditKeyDown(Sender: TObject; var Key: Word; var
+        KeyChar: Char; Shift: TShiftState);
     procedure frameSignIn1SignInTextClick(Sender: TObject);
     procedure tbcMainChange(Sender: TObject);
     procedure LoadProjectsTab;
@@ -482,6 +485,18 @@ begin
   end;
 end;
 
+procedure TfrmMain.frameProjects1listViewProjectsItemClick(const Sender:
+    TObject; const AItem: TListViewItem);
+begin
+  listViewProjectsItemClick(Sender, AItem);
+end;
+
+procedure TfrmMain.frameSignIn1PasswordEditKeyDown(Sender: TObject; var Key:
+    Word; var KeyChar: Char; Shift: TShiftState);
+begin
+  PasswordEditKeyDown(Sender, Key, KeyChar, Shift);
+end;
+
 procedure TfrmMain.frameSignIn1SignInTextClick(Sender: TObject);
 begin
   SignInRectBTNClick(Sender);
@@ -489,15 +504,14 @@ end;
 
 procedure TfrmMain.GenerateReport;
 var
-  report: TStringList;
+  LReport: TStringList;
 begin
-  report := TStringList.Create;
+  LReport := TStringList.Create;
   try
      {
-
-    report.Add(format('<html><head><title>%s</title></head><body>',
+    LReport.Add(format('<html><head><title>%s</title></head><body>',
       [TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_TITLE.Value)]));
-    report.Add(format('<h1>%s</h1><p>%s</p>',
+    LReport.Add(format('<h1>%s</h1><p>%s</p>',
       [TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_TITLE.Value),
        TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_DESC.Value)]));
 
@@ -517,10 +531,8 @@ begin
     end;
     Memo1.Lines.Add('</body></html>');
          }
-
-
   finally
-    report.Free;
+    LReport.Free;
   end;
 end;
 
@@ -645,7 +657,7 @@ end;
 
 procedure TfrmMain.TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
 begin
-  Image1.Bitmap.Assign(Image);
+  //Image1.Bitmap.Assign(Image);
 end;
 
 procedure TfrmMain.LoadProjectsTab;
