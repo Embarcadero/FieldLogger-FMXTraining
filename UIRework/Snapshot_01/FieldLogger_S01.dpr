@@ -9,12 +9,14 @@ uses
   fieldlogger.logdata.standard in '..\Common\units\fieldlogger.logdata.standard.pas',
   fieldlogger.projectdata.standard in '..\Common\units\fieldlogger.projectdata.standard.pas',
   uframeSignIn in 'frames\uframeSignIn.pas' {frameSignIn: TFrame},
-  uframeProjects in 'frames\uframeProjects.pas' {frameProjects: TFrame};
+  uframeProjects in 'frames\uframeProjects.pas' {frameProjects: TFrame},
+  dmConnection in '..\Common\dmConnection.pas' {DM: TDataModule};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TDM, DM);
   Application.Run;
 end.

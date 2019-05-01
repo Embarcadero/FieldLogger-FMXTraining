@@ -175,7 +175,6 @@ type
     Layout4: TLayout;
     mmoNewProjDescription: TMemo;
     edtNewProjTitle: TEdit;
-    LocationSensor1: TLocationSensor;
     ToolBar1: TToolBar;
     Rectangle16: TRectangle;
     Label1: TLabel;
@@ -234,7 +233,6 @@ type
     Label4: TLabel;
     btnDeleteEntry: TSpeedButton;
     tabReport: TTabItem;
-    conn: TFDConnection;
     SpeedButton1: TSpeedButton;
     Layout6: TLayout;
     WebBrowser1: TWebBrowser;
@@ -247,6 +245,7 @@ type
     rectProjectsColor: TRectangle;
     Rectangle21: TRectangle;
     Rectangle15: TRectangle;
+    LocationSensor1: TLocationSensor;
     procedure LoginBackgroundRectClick(Sender: TObject);
     procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
     procedure spedProjBackClick(Sender: TObject);
@@ -315,7 +314,7 @@ uses
 {$ENDIF MACOS}
 {$ENDIF IOS}
 {$IFDEF MSWINDOWS}
-  System.Win.Sensors;
+  System.Win.Sensors, dmConnection;
 {$ENDIF}
 
 type
@@ -344,7 +343,7 @@ procedure TfrmMain.btnDeleteEntryClick(Sender: TObject);
 var
   LogData: ILogData;
 begin
-  LogData := TLogData.Create(conn);
+  LogData := TLogData.Create(DM.conn);
   if not assigned(LogData) then
   begin
     raise EConnectFailed.Create();
@@ -364,7 +363,7 @@ var
   ID: uint32;
 begin
   //- Insert new project
-  ProjectData := TProjectData.Create(conn);
+  ProjectData := TProjectData.Create(DM.conn);
   if not assigned(ProjectData) then
   begin
     raise EConnectFailed.Create;
@@ -395,7 +394,7 @@ var
   LogEntry: TLogEntry;
   ID: uint32;
 begin
-  LogData := TLogData.Create(conn);
+  LogData := TLogData.Create(DM.conn);
   if not assigned(LogData) then
   begin
     raise EConnectFailed.Create;
@@ -436,7 +435,7 @@ begin
     exit;
   end;
   //- Current project changed, we better update it!
-  ProjectData := TProjectData.Create(conn);
+  ProjectData := TProjectData.Create(DM.conn);
   if not assigned(ProjectData) then
   begin
     raise EConnectFailed.Create();
@@ -458,26 +457,26 @@ begin
   tbcMain.TabPosition := TTabPosition.None;
   tbcMain.ActiveTab := tabSignin;
   //- Configure our connection to the database.
-  conn.LoginPrompt := False;
-  conn.Params.Database := DataFilename;
+  DM.conn.LoginPrompt := False;
+  DM.conn.Params.Database := DataFilename;
   //- Ensure the database file already exists, if not, create it.
   if not FileExists(DataFilename) then
   begin
-    conn.Params.Values['CreateDatabase'] := BoolToStr(True,True);
-    conn.Connected := True;
+    DM.conn.Params.Values['CreateDatabase'] := BoolToStr(True,True);
+    DM.conn.Connected := True;
     for idx := 0 to pred(mmoCreateDatabase.Lines.Count) do
     begin
       if mmoCreateDatabase.Lines[idx].Trim<>'' then
       begin
-        conn.ExecSQL(mmoCreateDatabase.Lines[idx].Trim);
+        DM.conn.ExecSQL(mmoCreateDatabase.Lines[idx].Trim);
       end;
     end;
-    conn.Params.Values['CreateDatabase'] := BoolToStr(False,True);
-    conn.Connected := False;
+    DM.conn.Params.Values['CreateDatabase'] := BoolToStr(False,True);
+    DM.conn.Connected := False;
   end;
   //- Connect to the database.
-  conn.Connected := True;
-  if not conn.Connected then
+  DM.conn.Connected := True;
+  if not DM.conn.Connected then
   begin
     raise EConnectFailed.Create;
   end;
@@ -566,7 +565,7 @@ end;
 procedure TfrmMain.SignInRectBTNClick(Sender: TObject);
 begin
   frameSignIn1.SignInText.Text := 'Autenticating...';
-  if TAuthentication.Authenticate(conn, frameSignIn1.UsernameEdit.Text, frameSignIn1.PasswordEdit.Text) then
+  if TAuthentication.Authenticate(DM.conn, frameSignIn1.UsernameEdit.Text, frameSignIn1.PasswordEdit.Text) then
   begin
     tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Normal);
   end
@@ -623,7 +622,7 @@ procedure TfrmMain.spedProjDeleteClick(Sender: TObject);
 var
   ProjectData: IProjectData;
 begin
-  ProjectData := TProjectData.Create(conn);
+  ProjectData := TProjectData.Create(DM.conn);
   if not assigned(ProjectData) then
   begin
     raise EConnectFailed.Create();
@@ -666,7 +665,7 @@ var
   idx: integer;
 begin
   frameProjects1.listViewProjects.Items.Clear;
-  ProjectData := TProjectData.Create(conn);
+  ProjectData := TProjectData.Create(DM.conn);
   if not assigned(ProjectData) then
   begin
     raise EConnectFailed.Create;
@@ -716,7 +715,7 @@ begin
     CurrentProject.ID := ID;
   end;
   //- Get Project data
-  ProjectData := TProjectData.Create(conn);
+  ProjectData := TProjectData.Create(DM.conn);
   if not assigned(ProjectData) then
   begin
     raise EConnectFailed.Create;
@@ -731,7 +730,7 @@ begin
   edtProjTitle.Text := CurrentProject.Title;
   mmoProjDesc.Lines.Text := CurrentProject.Description;
   //- Get log data for project
-  LogData := TLogData.Create(conn);
+  LogData := TLogData.Create(DM.conn);
   if not assigned(LogData) then
   begin
     raise EConnectFailed.Create;
@@ -806,7 +805,7 @@ begin
   lblCountryCode.Text := '???';
   lblAdminArea.Text := '???';
   //- Get data
-  LogData := TLogData.Create(conn);
+  LogData := TLogData.Create(DM.conn);
   if not assigned(LogData) then
   begin
     raise EConnectFailed.Create;

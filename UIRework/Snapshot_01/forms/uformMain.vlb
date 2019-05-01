@@ -1,5 +1,5 @@
 ﻿[]
-Coordinates=1027,1124,58,33
+Coordinates=0,0,97,33
 Visible=False
 
 [CameraComponent1]
@@ -416,9 +416,6 @@ Visible=False
 [dmMain.]
 Coordinates=930,70,149,33
 Visible=False
-
-[LocationSensor1]
-Coordinates=0,0,97,33
 
 [Rectangle22]
 Coordinates=527,906,75,33
