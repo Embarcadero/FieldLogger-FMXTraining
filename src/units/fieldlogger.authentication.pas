@@ -1,20 +1,23 @@
 unit fieldlogger.authentication;
 
 interface
+
 uses
   FireDAC.Comp.Client;
 
 type
   TAuthentication = class
   public
-    class function Authenticate(conn: TFDConnection; Username, Password: string ): boolean;
+    class function Authenticate(conn: TFDConnection;
+      Username, Password: string): boolean;
   end;
 
 implementation
 
 { TAuthentication }
 
-class function TAuthentication.Authenticate(conn: TFDConnection; Username, Password: string ): boolean;
+class function TAuthentication.Authenticate(conn: TFDConnection;
+  Username, Password: string): boolean;
 begin
   Result := False;
   conn.Connected := False;

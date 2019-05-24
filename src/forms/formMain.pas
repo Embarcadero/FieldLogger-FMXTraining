@@ -3,7 +3,8 @@ unit formMain;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.TabControl, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error,
   FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
@@ -12,266 +13,128 @@ uses
   FMX.StdCtrls, FMX.Edit, FMX.Objects, FMX.Layouts, FMX.MultiView, FMX.Effects,
   FMX.Filter.Effects, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
   FireDAC.DApt, FMX.ListView.Types, FMX.ListView.Appearances,
-  FMX.ListView.Adapters.Base, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
-  System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components,
-  Data.Bind.DBScope, FireDAC.Comp.DataSet, System.Actions, FMX.ActnList,
-  FMX.ScrollBox, FMX.Memo, FMX.ListView, FMX.ListBox, FMX.MediaLibrary.Actions,
+  FMX.ListView.Adapters.Base, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti,
+  System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
+  Data.Bind.DBScope, FireDAC.Comp.DataSet, FMX.ActnList,
+  FMX.ScrollBox, FMX.Memo, FMX.ListView, FMX.ListBox, System.Actions, FMX.Gestures,
   FMX.StdActns, FMX.Media, FMX.Ani, System.Sensors, System.Sensors.Components,
-  fieldlogger.data, FMX.WebBrowser;
+  FMX.WebBrowser, System.Devices, System.Threading, Math,
+  uReportingFrame, uNewProjectFrame, uNewEntryFrame, uEntryDetailsFrame,
+  uProjectDetailsFrame, uProjectsFrame, uSigninFrame, uProgressFrame,
+  fieldlogger.Data, System.Net.URLClient, System.Net.HttpClient,
+  System.Net.HttpClientComponent, IdBaseComponent, IdComponent, IdTCPConnection,
+  IdTCPClient, FMX.Platform, FMX.VirtualKeyboard;
 
 type
+  EConnectFailed = class(Exception)
+  public
+    constructor Create; reintroduce;
+  end;
   TfrmMain = class(TForm)
-    CameraComponent1: TCameraComponent;
     mmoCreateDatabase: TMemo;
     tbcMain: TTabControl;
-    tabWelcome: TTabItem;
-    sbSterling: TStyleBook;
-    BackgroundRect: TRectangle;
-    BackgroundImage: TImage;
-    BackgroundGaussianBlurEffect: TGaussianBlurEffect;
-    MenuLayout: TLayout;
-    LogoLayout: TLayout;
-    LogoImage: TImage;
-    MenuGridPanelLayout: TGridPanelLayout;
-    LearnLayout: TLayout;
-    LoginBackgroundRect: TRectangle;
-    LearnCenterLayout: TLayout;
-    LearnCircle: TCircle;
-    LearnImage: TImage;
-    LoginLabel: TLabel;
-    SupportLayout: TLayout;
-    SupportBackgroundRect: TRectangle;
-    SupportCenterLayout: TLayout;
-    SupportCircle: TCircle;
-    SupportImage: TImage;
-    SupportLabel: TLabel;
-    AdvocateLayout: TLayout;
-    AdvocateBackgroundRect: TRectangle;
-    AdvocateCenterLayout: TLayout;
-    AdvocateCircle: TCircle;
-    AdvocateImage: TImage;
-    AdvocateLabel: TLabel;
-    EventsLayout: TLayout;
-    EventsBackgroundRect: TRectangle;
-    EventsCenterLayout: TLayout;
-    EventsCircle: TCircle;
-    EventsImage: TImage;
-    EventsLabel: TLabel;
-    HeaderToolBar: TToolBar;
-    HeaderBackgroundRect: TRectangle;
-    HeaderLabel: TLabel;
-    MenuButton: TButton;
-    DrawerMultiView: TMultiView;
-    DrawerBackgroundRect: TRectangle;
-    TopImage: TImage;
     tabSignin: TTabItem;
-    Image1: TImage;
-    GaussianBlurEffect1: TGaussianBlurEffect;
-    VertScrollBox1: TVertScrollBox;
-    SignUpLayout: TLayout;
-    SignupTextBTN: TText;
-    SignInBackgroundRect: TRectangle;
-    FormLayout: TLayout;
-    UsernameEdit: TEdit;
-    UserImage: TImage;
-    PasswordEdit: TEdit;
-    LockImage: TImage;
-    SignInRectBTN: TRectangle;
-    SignInText: TText;
-    FormSpacerLayout: TLayout;
-    HeaderLayout: TLayout;
-    CenterLayout: TLayout;
-    LogoCircle: TCircle;
-    Image2: TImage;
-    Layout1: TLayout;
-    WelcomeLabel: TLabel;
     tabProjects: TTabItem;
     tabProjectDetail: TTabItem;
-    Splitter1: TSplitter;
     tabEntryDetail: TTabItem;
-    imgPicture: TImage;
-    ScrollBox1: TScrollBox;
-    Rectangle1: TRectangle;
-    GradientAnimation1: TGradientAnimation;
-    Label2: TLabel;
-    Rectangle2: TRectangle;
-    GradientAnimation2: TGradientAnimation;
-    Label7: TLabel;
-    lblLongitude: TLabel;
-    Rectangle3: TRectangle;
-    GradientAnimation3: TGradientAnimation;
-    Label9: TLabel;
-    lblLatitude: TLabel;
-    Rectangle4: TRectangle;
-    GradientAnimation4: TGradientAnimation;
-    Label11: TLabel;
-    Rectangle5: TRectangle;
-    GradientAnimation5: TGradientAnimation;
-    Label12: TLabel;
-    lblSubThoroughfare: TLabel;
-    Rectangle6: TRectangle;
-    GradientAnimation6: TGradientAnimation;
-    Label14: TLabel;
-    lblThoroughfare: TLabel;
-    Rectangle7: TRectangle;
-    GradientAnimation7: TGradientAnimation;
-    Label16: TLabel;
-    lblSubLocality: TLabel;
-    Rectangle8: TRectangle;
-    GradientAnimation8: TGradientAnimation;
-    Label18: TLabel;
-    lblSubAdminArea: TLabel;
-    Rectangle9: TRectangle;
-    GradientAnimation9: TGradientAnimation;
-    Label20: TLabel;
-    lblZipCode: TLabel;
-    Rectangle10: TRectangle;
-    GradientAnimation10: TGradientAnimation;
-    Label22: TLabel;
-    lblLocality: TLabel;
-    Rectangle11: TRectangle;
-    GradientAnimation11: TGradientAnimation;
-    Label24: TLabel;
-    lblFeature: TLabel;
-    Rectangle12: TRectangle;
-    GradientAnimation12: TGradientAnimation;
-    Label26: TLabel;
-    lblCountry: TLabel;
-    Rectangle13: TRectangle;
-    GradientAnimation13: TGradientAnimation;
-    Label28: TLabel;
-    lblCountryCode: TLabel;
-    Rectangle14: TRectangle;
-    GradientAnimation14: TGradientAnimation;
-    Label30: TLabel;
-    lblAdminArea: TLabel;
     tabNewEntry: TTabItem;
     tabNewProject: TTabItem;
-    Layout4: TLayout;
-    mmoNewProjDescription: TMemo;
-    edtNewProjTitle: TEdit;
     LocationSensor1: TLocationSensor;
-    ToolBar6: TToolBar;
-    Rectangle15: TRectangle;
-    Label10: TLabel;
-    Button1: TButton;
-    ToolBar1: TToolBar;
-    Rectangle16: TRectangle;
-    Label1: TLabel;
-    Button2: TButton;
-    speedButtonAdd: TSpeedButton;
-    ToolBar7: TToolBar;
-    Rectangle17: TRectangle;
-    Label13: TLabel;
-    Button3: TButton;
-    spedProjBack: TSpeedButton;
-    spedProjDelete: TSpeedButton;
-    ToolBar3: TToolBar;
-    Rectangle18: TRectangle;
-    Label6: TLabel;
-    Button4: TButton;
-    btnEntriesBack: TButton;
-    Image3: TImage;
-    GaussianBlurEffect2: TGaussianBlurEffect;
-    Image4: TImage;
-    GaussianBlurEffect3: TGaussianBlurEffect;
-    Image5: TImage;
-    GaussianBlurEffect4: TGaussianBlurEffect;
-    Layout7: TLayout;
-    Layout9: TLayout;
-    Rectangle22: TRectangle;
-    Circle2: TCircle;
-    Image7: TImage;
-    Layout8: TLayout;
-    Rectangle21: TRectangle;
-    Circle1: TCircle;
-    Image6: TImage;
-    mmoProjDesc: TMemo;
-    Label3: TLabel;
-    edtProjTitle: TEdit;
-    Label5: TLabel;
-    Rectangle23: TRectangle;
-    lstEntries: TListView;
-    Rectangle24: TRectangle;
-    listViewProjects: TListView;
-    Label8: TLabel;
-    Image8: TImage;
-    GaussianBlurEffect5: TGaussianBlurEffect;
-    ToolBar2: TToolBar;
-    Rectangle19: TRectangle;
-    Label17: TLabel;
-    Button5: TButton;
-    btnNewEntryCancel: TButton;
-    Layout3: TLayout;
-    imgTakePicture: TImage;
-    Rectangle25: TRectangle;
-    btnTakePicture: TButton;
-    Image10: TImage;
-    GaussianBlurEffect6: TGaussianBlurEffect;
-    Layout2: TLayout;
-    Rectangle20: TRectangle;
-    Circle3: TCircle;
-    Image9: TImage;
-    Layout5: TLayout;
-    Rectangle26: TRectangle;
-    Label21: TLabel;
-    ToolBar4: TToolBar;
-    Rectangle27: TRectangle;
-    Label23: TLabel;
-    Button7: TButton;
-    spedCancelNewProject: TSpeedButton;
-    ToolBar5: TToolBar;
-    Rectangle28: TRectangle;
-    Label19: TLabel;
-    Button6: TButton;
-    Label15: TLabel;
-    Label4: TLabel;
-    btnDeleteEntry: TSpeedButton;
     tabReport: TTabItem;
-    conn: TFDConnection;
-    SpeedButton1: TSpeedButton;
-    Layout6: TLayout;
-    WebBrowser1: TWebBrowser;
-    ToolBar8: TToolBar;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    procedure LoginBackgroundRectClick(Sender: TObject);
-    procedure SignInRectBTNClick(Sender: TObject);
-    procedure listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
-    procedure spedProjBackClick(Sender: TObject);
-    procedure PasswordEditKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
-    procedure TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
-    procedure lstEntriesItemClick(const Sender: TObject; const AItem: TListViewItem);
-    procedure FormShow(Sender: TObject);
-    procedure spedNewEntryClick(Sender: TObject);
-    procedure btnEntriesBackClick(Sender: TObject);
-    procedure CameraComponent1SampleBufferReady(Sender: TObject; const ATime: TMediaTime);
-    procedure btnTakePictureClick(Sender: TObject);
-    procedure speedButtonAddClick(Sender: TObject);
-    procedure spedCancelNewProjectClick(Sender: TObject);
-    procedure btnDoneClick(Sender: TObject);
-    procedure LocationSensor1LocationChanged(Sender: TObject; const OldLocation, NewLocation: TLocationCoord2D);
-    procedure btnNewEntryCancelClick(Sender: TObject);
-    procedure spedProjDeleteClick(Sender: TObject);
-    procedure btnDeleteEntryClick(Sender: TObject);
+    StellarStyleBook: TStyleBook;
+    ReportingFrame1: TReportingFrame;
+    mmoReport: TMemo;
+    mmoCSS: TMemo;
+    ProgressFrame: TProgressFrame;
+    VSB: TVertScrollBox;
+    NewEntryFrame1: TNewEntryFrame;
+    NewProjectFrame1: TNewProjectFrame;
+    WedgewoodLightSB: TStyleBook;
+    MaterialOxfordBlueSB: TStyleBook;
+    GestureManager1: TGestureManager;
+    ActionList1: TActionList;
+    ProjectsChangeTabAction: TChangeTabAction;
+    EntryDetailsFrame1: TEntryDetailsFrame;
+    ProjectDetailsFrame1: TProjectDetailsFrame;
+    NetHTTPClient: TNetHTTPClient;
+    DefaultImage: TImage;
+    IdTCPClient1: TIdTCPClient;
+    SigninFrame1: TSigninFrame;
+    CircleMD: TCircle;
+    FloatAnimationMD: TFloatAnimation;
+    ProjectsFrame1: TProjectsFrame;
+    procedure LocationSensor1LocationChanged(Sender: TObject;
+      const OldLocation, NewLocation: TLocationCoord2D);
     procedure tbcMainChange(Sender: TObject);
-    procedure LoadProjectsTab;
-    procedure UpdateProject(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormVirtualKeyboardHidden(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormVirtualKeyboardShown(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormFocusChanged(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     FGeocoder: TGeocoder;
-    CurrentLocation: TLocationCoord2D;
-    CurrentProject: TProject;
-    CurrentLogEntry: uint32;
-    procedure LoadProjectDetailTab( ID: uint32 );
-    procedure LoadEntryDetail(LogID: uint32);
-    procedure ReverseLocation(Lat, Long: double);
-    procedure OnGeocodeReverseEvent(const Address: TCivicAddress);
-    procedure GenerateReport;
+    FCurrentLocation: TLocationCoord2D;
+    FRunOnce: Boolean;
+    FKBBounds: TRectF;
+    FNeedOffset: Boolean;
+    FCurrentStyleId: Integer;
+    FX, FY: Single;
+    procedure CalcContentBoundsProc(Sender: TObject;
+                                    var ContentBounds: TRectF);
+    procedure RestorePosition;
+    procedure UpdateKBBounds;
+    procedure ApplicationIdle(Sender: TObject; var Done: Boolean);
+    procedure LoadEntryDetail(LogID: Integer);
+    procedure OnGeocodeReverseEvent(const AAddress: TCivicAddress);
   public
     { Public declarations }
+    CurrentProject: TProject;
+    CurrentLogEntry: Integer;
+    InternetConnectivity: IFuture <Boolean>;
+    procedure ShowActivity;
+    procedure HideActivity;
+    procedure ReverseLocation(Lat, Long: double);
+    procedure SignInComplete;
+    procedure SignOut;
+    procedure SetWelcomeScreen;
+    procedure SetNewProjectScreen;
+    procedure SetProjectScreen;
+    procedure SetBackToProjectScreen;
+    procedure SetProjectDetailScreen;
+    procedure SetBackToProjectDetailScreen;
+    procedure SetNewEntryDetailScreen;
+    procedure SetEntryDetailScreen;
+    procedure SetReportScreen;
+    procedure UpdateProject(const ATitle, ADesc: String);
+    procedure DeleteLogEntry;
+    procedure SaveNewEntry(ABitmap: TBitmap);
+    procedure NewProject(const ATitle, ADesc: String);
+    procedure LoadCurrentProject(AId: Integer);
+    procedure LoadProjectDetail(AId: Integer);
+    procedure NewProjectEntry;
+    procedure DeleteCurrentProject;
+    procedure ClearCurrentProject;
+    procedure UpdateLogEntries;
+    function GenerateMapURL(const Location,Address: string): string;
+    procedure DownloadStaticMap(const ALocation:String; AHeight, AWidth: Single; AImage: TImage);
+    function DetectInternet: Boolean;
+    function DetectInternetAsync: Boolean;
+    procedure SetDarkStyle;
+    procedure SetLightStyle;
+    function GetCurrentStyleId: Integer;
+    procedure MaterialDesignMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
   end;
+  const
+    BUSY = 1;
+    NOT_BUSY = 0;
+    NO_CONNECTIVITY = 'No connectivity to the server detected.';
+    // Get an API key from here: https://developers.google.com/maps/documentation/embed/get-api-key
+    GOOGLE_MAPS_EMBED_API_KEY = '';
+    // Get an API key from here: https://developers.google.com/maps/documentation/static-maps/get-api-key
+    GOOGLE_MAPS_STATIC_API_KEY = '';
 
 var
   frmMain: TfrmMain;
@@ -279,6 +142,7 @@ var
 implementation
 
 uses
+  uDataModule,
   IOUtils,
   strutils,
   fieldlogger.authentication,
@@ -290,27 +154,22 @@ uses
   System.Android.Sensors;
 {$ENDIF ANDROID}
 {$IFDEF IOS}
-  System.iOS.Sensors;
+System.iOS.Sensors;
 {$ELSE}
 {$IFDEF MACOS}
-  System.Mac.Sensors;
+System.Mac.Sensors;
 {$ENDIF MACOS}
 {$ENDIF IOS}
 {$IFDEF MSWINDOWS}
-  System.Win.Sensors;
+System.Win.Sensors;
 {$ENDIF}
 
-type
- EConnectFailed = class(Exception)
- public
-   constructor Create; reintroduce;
- end;
+
 
 constructor EConnectFailed.Create;
 begin
   inherited Create('Failed to connect to database.');
 end;
-
 
 {$R *.fmx}
 
@@ -318,483 +177,630 @@ function DataFilename: string;
 const
   cDatafileName = 'EMBEDDEDIBLITE.IB';
 begin
-  Result := TPath.GetDocumentsPath + TPath.DirectorySeparatorChar + cDatafileName;
+  Result := TPath.GetDocumentsPath + TPath.DirectorySeparatorChar +
+    cDatafileName;
 end;
 
-
-procedure TfrmMain.btnDeleteEntryClick(Sender: TObject);
-var
-  LogData: ILogData;
+procedure TfrmMain.MaterialDesignMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
-  LogData := TLogData.Create(conn);
-  if not assigned(LogData) then begin
-    raise EConnectFailed.Create();
-  end;
-  if not LogData.Delete([CurrentLogEntry]) then begin
-    raise
-      Exception.Create('Failed to delete log entry: '+CurrentLogEntry.ToString);
-  end;
-  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+  CircleMD.Parent := TControl(Sender);
+  CircleMD.Position.X := X-(CircleMD.Width/2);
+  FX := X;
+  CircleMD.Position.Y := Y-(CircleMD.Height/2);
+  FY := Y;
+  CircleMD.Width := 0;
+  CircleMD.Height := 0;
+  CircleMD.Visible := True;
+  FloatAnimationMD.StopValue := Max(TControl(Sender).Width,TControl(Sender).Height)*2;
 end;
 
-procedure TfrmMain.btnDoneClick(Sender: TObject);
-var
-  ProjectData: IProjectData;
-  Project: TProject;
-  ID: uint32;
+function TfrmMain.GetCurrentStyleId;
 begin
-  //- Insert new project
-  ProjectData := TProjectData.Create(conn);
-  if not assigned(ProjectData) then begin
-    raise EConnectFailed.Create;
-  end;
-  Project.Title := edtNewProjTitle.Text;
-  Project.Description := mmoNewProjDescription.Lines.Text;
-  ID := ProjectData.CreateProject(Project);
-  //- Switch tabs back to tabProjectDetail
-  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Normal);
-  LoadProjectDetailTab(ID);
+  Result := FCurrentStyleId;
 end;
 
-procedure TfrmMain.btnEntriesBackClick(Sender: TObject);
+procedure TfrmMain.SetDarkStyle;
 begin
-  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+  frmMain.StyleBook := MaterialOxfordBlueSB;
+  ProjectsFrame1.listViewProjects.ItemAppearanceObjects.ItemObjects.Text.TextColor := TAlphaColorRec.White;
+  ProjectsFrame1.listViewProjects.ItemAppearanceObjects.ItemObjects.Detail.TextColor := TAlphaColorRec.White;
+  ProjectsFrame1.AddProjectCircleBTN.Fill.Color := $FF00A1A1;
+  ProjectDetailsFrame1.lstEntries.ItemAppearanceObjects.ItemObjects.Text.TextColor := TAlphaColorRec.White;
+  ProjectDetailsFrame1.lstEntries.ItemAppearanceObjects.ItemObjects.Detail.TextColor := TAlphaColorRec.White;
+  ProjectDetailsFrame1.AddLogEntryCircleBTN.Fill.Color := $FF00A1A1;
+  EntryDetailsFrame1.AddLogEntryCircleBTN.Fill.Color := $FF00A1A1;
+  NewEntryFrame1.CameraImage.Visible := True;
+  NewEntryFrame1.CameraImageBlue.Visible := False;
+  FCurrentStyleId := 0;
 end;
 
-procedure TfrmMain.btnNewEntryCancelClick(Sender: TObject);
+procedure TfrmMain.SetLightStyle;
 begin
-  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
-  CameraComponent1.Active := False;
-  LocationSensor1.Active := False;
+  frmMain.StyleBook := WedgewoodLightSB;
+  ProjectsFrame1.listViewProjects.ItemAppearanceObjects.ItemObjects.Text.TextColor := $FF506580;
+  ProjectsFrame1.listViewProjects.ItemAppearanceObjects.ItemObjects.Detail.TextColor := $FF506580;
+  ProjectsFrame1.AddProjectCircleBTN.Fill.Color := $FFD9DEE5;
+  ProjectDetailsFrame1.lstEntries.ItemAppearanceObjects.ItemObjects.Text.TextColor := $FF506580;
+  ProjectDetailsFrame1.lstEntries.ItemAppearanceObjects.ItemObjects.Detail.TextColor := $FF506580;
+  ProjectDetailsFrame1.AddLogEntryCircleBTN.Fill.Color := $FFD9DEE5;
+  EntryDetailsFrame1.AddLogEntryCircleBTN.Fill.Color := $FFD9DEE5;
+  NewEntryFrame1.CameraImageBlue.Visible := True;
+  NewEntryFrame1.CameraImage.Visible := False;
+  FCurrentStyleId := 1;
 end;
 
-procedure TfrmMain.btnTakePictureClick(Sender: TObject);
-var
-  LogData: ILogData;
-  LogEntry: TLogEntry;
-  ID: uint32;
+procedure TfrmMain.SignInComplete;
 begin
-  LogData := TLogData.Create(conn);
-  if not assigned(LogData) then begin
-    raise EConnectFailed.Create;
-  end; 
-  LogEntry.ProjectID := CurrentProject.ID;
-  LogEntry.Latitude := CurrentLocation.Latitude;
-  LogEntry.Longitude := CurrentLocation.Longitude;
-  LogEntry.TimeDateStamp := Now;
-  LogEntry.setPicture(imgTakePicture.Bitmap);
-  ID := LogData.CreateEntry(LogEntry);
-  //-
-  tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
-  LoadEntryDetail(ID);
+  SetProjectScreen;
 end;
 
-procedure TfrmMain.CameraComponent1SampleBufferReady(Sender: TObject; const ATime: TMediaTime);
+procedure TfrmMain.SetWelcomeScreen;
 begin
-  // You have to Synchronize back to the UI thread
-  TThread.Synchronize(TThread.CurrentThread,
-    procedure begin
-      CameraComponent1.SampleBufferToBitmap(imgTakePicture.Bitmap, TRUE);
+  tbcMain.SetActiveTabWithTransitionAsync(tabSignin, TTabTransition.Slide,
+    TTabTransitionDirection.Normal,nil);
+end;
+
+procedure TfrmMain.SetNewProjectScreen;
+begin
+  NewProjectFrame1.ClearFields;
+  tbcMain.SetActiveTabWithTransitionAsync(tabNewProject, TTabTransition.Slide,
+    TTabTransitionDirection.Normal,nil);
+end;
+
+procedure TfrmMain.SetProjectDetailScreen;
+begin
+  tbcMain.SetActiveTabWithTransitionAsync(tabProjectDetail,
+    TTabTransition.Slide, TTabTransitionDirection.Normal,procedure begin
+
     end);
 end;
 
-procedure TfrmMain.UpdateProject(Sender: TObject);
-var
-  ProjectData: IProjectData;
-  Project: TProject;
+procedure TfrmMain.SetBackToProjectDetailScreen;
 begin
-  if CurrentProject.ID=0 then begin
-    exit;
-  end;
-  //- Only update if something actually changed.
-  if (Trim(CurrentProject.Title)=Trim(edtProjTitle.Text)) and
-     (Trim(CurrentProject.Description)=Trim(mmoProjDesc.Lines.Text)) then begin
-       exit;
-   end;
-  //- Current project changed, we better update it!
-  ProjectData := TProjectData.Create(conn);
-  if not assigned(ProjectData) then begin
-    raise EConnectFailed.Create();
-  end;
-  Project.ID := CurrentProject.ID;
-  Project.Title := edtProjTitle.Text;
-  Project.Description := mmoProjDesc.Lines.Text;
-  if not ProjectData.Update([Project]) then begin
-    raise Exception.Create('Failed to update project data.');
-  end;
+  tbcMain.SetActiveTabWithTransitionAsync(tabProjectDetail, TTabTransition.Slide,
+    TTabTransitionDirection.Reversed,nil);
+
+  {$IF NOT DEFINED(ANDROID)}
+  if LocationSensor1.Active then
+    LocationSensor1.Active := False;
+  {$ENDIF}
 end;
 
-procedure TfrmMain.FormShow(Sender: TObject);
-var
-  idx: uint32;
+procedure TfrmMain.SetProjectScreen;
 begin
-  //- Ensure we're on the welcome tab
-  tbcMain.TabPosition := TTabPosition.None;
-  tbcMain.ActiveTab := tabWelcome;
-  //- Configure our connection to the database.
-  conn.LoginPrompt := False;
-  conn.Params.Database := DataFilename;
-  //- Ensure the database file already exists, if not, create it.
-  if not FileExists(DataFilename) then begin
-    conn.Params.Values['CreateDatabase'] := BoolToStr(True,True);
-    conn.Connected := True;
-    for idx := 0 to pred(mmoCreateDatabase.Lines.Count) do begin
-      if mmoCreateDatabase.Lines[idx].Trim<>'' then begin
-        conn.ExecSQL(mmoCreateDatabase.Lines[idx].Trim);
-      end;
-    end;
-    conn.Params.Values['CreateDatabase'] := BoolToStr(False,True);
-    conn.Connected := False;
-  end;
-  //- Connect to the database.
-  conn.Connected := True;
-  if not conn.Connected then begin
-    raise EConnectFailed.Create;
-  end;
+  tbcMain.SetActiveTabWithTransitionAsync(tabProjects, TTabTransition.Slide,
+    TTabTransitionDirection.Normal,nil);
 end;
 
-procedure TfrmMain.GenerateReport;
-var
-  report: TStringList;
+procedure TfrmMain.SetBackToProjectScreen;
 begin
-  report := TStringList.Create;
-  try
-     {
+  tbcMain.SetActiveTabWithTransitionAsync(tabProjects, TTabTransition.Slide,
+    TTabTransitionDirection.Reversed,nil);
+end;
 
-    report.Add(format('<html><head><title>%s</title></head><body>',
-      [TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_TITLE.Value)]));
-    report.Add(format('<h1>%s</h1><p>%s</p>',
-      [TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_TITLE.Value),
-       TNetEncoding.HTML.Encode(dmFieldLogger.qProjectsPROJ_DESC.Value)]));
+procedure TfrmMain.SetEntryDetailScreen;
+begin
+  tbcMain.SetActiveTabWithTransitionAsync(tabEntryDetail, TTabTransition.Slide,
+    TTabTransitionDirection.Normal,nil);
+end;
 
-    dmFieldLogger.qLogEntries.First;
+procedure TfrmMain.ShowActivity;
+begin
+  ProgressFrame.ShowActivity;
+end;
 
-    while not dmFieldLogger.qLogEntries.Eof do
+procedure TfrmMain.HideActivity;
+begin
+  ProgressFrame.HideActivity;
+end;
+
+procedure TfrmMain.SetReportScreen;
+var
+LReport: String;
+LStyle: String;
+begin
+  ShowActivity;
+  mmoReport.Lines.Clear;
+  LStyle := mmoCSS.Lines.Text;
+
+  TTask.Run(procedure begin
+    LReport := mainDM.GenerateReport(LStyle, CurrentProject);
+
+    TThread.Synchronize(nil, procedure begin
+      mmoReport.Lines.Text := LReport;
+
+      HideActivity;
+
+      tbcMain.SetActiveTabWithTransitionAsync(tabReport, TTabTransition.Slide,
+        TTabTransitionDirection.Normal,procedure
+         begin
+           ReportingFrame1.WebBrowser1.Visible := True;
+           {$IF NOT DEFINED(MSWINDOWS)}
+           ReportingFrame1.WebBrowser1.URL := 'about:blank';
+           {$ENDIF}
+           ReportingFrame1.WebBrowser1.LoadFromStrings(mmoReport.Lines.Text,'');
+         end);
+    end);
+
+  end);
+end;
+
+procedure TfrmMain.SetNewEntryDetailScreen;
+begin
+  // - Switch tab
+  tbcMain.SetActiveTabWithTransition(tabNewEntry, TTabTransition.Slide,
+    TTabTransitionDirection.Normal);
+end;
+
+procedure TfrmMain.NewProjectEntry;
+begin
+  // - Set sensors active.
+{$IFDEF ANDROID}
+  PermissionsService.RequestPermissions
+    ([JStringToString(TJManifest_permission.JavaClass.ACCESS_FINE_LOCATION),JStringToString(TJManifest_permission.JavaClass.ACCESS_COARSE_LOCATION)],
+    procedure(const APermissions: TArray<string>;
+      const AGrantResults: TArray<TPermissionStatus>)
     begin
-      jpegBytes := ResizeJpegField(dmFieldLogger.qLogEntriesPICTURE, 512);
-
-      Memo1.Lines.Add(format('<h2>%s</h2><p>%s</p>'+
-        '<img src="data:image/jpg;base64,%s" alt="%s" />',
-        [DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime),
-         TNetEncoding.HTML.Encode(dmFieldLogger.qLogEntriesNOTE.Value),
-         TNetEncoding.Base64.EncodeBytesToString(jpegBytes),
-         DateTimeToStr(dmFieldLogger.qLogEntriesTIMEDATESTAMP.AsDateTime)]));
-      dmFieldLogger.qLogEntries.Next;
-    end;
-    Memo1.Lines.Add('</body></html>');
-         }
-
-
-  finally
-    report.Free;
-  end;
-end;
-
-procedure TfrmMain.listViewProjectsItemClick(const Sender: TObject; const AItem: TListViewItem);
-begin
-  tbcMain.SetActiveTabWithTransitionAsync(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Normal,
-    procedure begin end);
-end;
-
-procedure TfrmMain.LocationSensor1LocationChanged(Sender: TObject; const OldLocation, NewLocation: TLocationCoord2D );
-begin
-  CurrentLocation := NewLocation;
-end;
-
-procedure TfrmMain.LoginBackgroundRectClick(Sender: TObject);
-begin
-  tbcMain.SetActiveTabWithTransition(tabSignin,TTabTransition.Slide,TTabTransitionDirection.Normal);
-end;
-
-procedure TfrmMain.lstEntriesItemClick(const Sender: TObject; const AItem: TListViewItem);
-begin
-  tbcMain.SetActiveTabWithTransition(tabEntryDetail,TTabTransition.Slide,TTabTransitionDirection.Normal);
-end;
-
-procedure TfrmMain.PasswordEditKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
-begin
-  if Key=vkReturn then begin
-    SignInRectBTNClick(Sender);
-  end else if Key=vkTab then begin
-    PasswordEdit.SetFocus;
-  end;
-end;
-
-procedure TfrmMain.SignInRectBTNClick(Sender: TObject);
-begin
-  SignInText.Text := 'Autenticating...';
-  if TAuthentication.Authenticate(conn,UsernameEdit.Text,PasswordEdit.Text) then begin
-    tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Normal);
-  end else begin
-    SignInText.Text := 'SIGN IN';
-    ShowMessage('Invalid UserName/Password or Connection to IBLite database');
-  end;
-end;
-
-procedure TfrmMain.spedCancelNewProjectClick(Sender: TObject);
-begin
-  tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
-end;
-
-procedure TfrmMain.spedNewEntryClick(Sender: TObject);
-begin
-  //- Set sensors active.
-
-  {$IFDEF ANDROID}
-  PermissionsService.RequestPermissions([
-      JStringToString(TJManifest_permission.JavaClass.ACCESS_FINE_LOCATION),
-      JStringToString(TJManifest_permission.JavaClass.CAMERA)],
-    procedure(const APermissions: TArray<string>; const AGrantResults: TArray<TPermissionStatus>)
-    begin
-      if (Length(AGrantResults) = 2) and (AGrantResults[0] = TPermissionStatus.Granted)
-        and (AGrantResults[1] = TPermissionStatus.Granted) then
+      if (Length(AGrantResults) = 2) and
+        (AGrantResults[0] = TPermissionStatus.Granted) and
+        (AGrantResults[1] = TPermissionStatus.Granted) then
       begin
         { activate or deactivate the location sensor }
-        CameraComponent1.Active := True;
         LocationSensor1.Active := True;
       end
       else
       begin
-        CameraComponent1.Active := False;
         LocationSensor1.Active := False;
       end;
     end);
-  {$ELSE}
-  CameraComponent1.Active := True;
+{$ELSE}
   LocationSensor1.Active := True;
-  {$ENDIF}
-
-  //- Switch tab
-  tbcMain.SetActiveTabWithTransition(tabNewEntry,TTabTransition.Slide,TTabTransitionDirection.Normal);
+{$ENDIF}
+  SetNewEntryDetailScreen;
 end;
 
-procedure TfrmMain.spedProjBackClick(Sender: TObject);
+procedure TfrmMain.DeleteCurrentProject;
 begin
-  tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
+  mainDM.DeleteProject(CurrentProject.ID);
+  SetBackToProjectScreen;
 end;
 
-procedure TfrmMain.spedProjDeleteClick(Sender: TObject);
-var
-  ProjectData: IProjectData;
+procedure TfrmMain.ClearCurrentProject;
 begin
-  ProjectData := TProjectData.Create(conn);
-  if not assigned(ProjectData) then begin
-    raise EConnectFailed.Create();
-  end;
-  if not ProjectData.Delete([CurrentProject.ID]) then begin
-    raise Exception.Create('Failed to delete project with ID '+CurrentProject.ID.ToString);
-  end;
-  tbcMain.SetActiveTabWithTransition(tabProjects,TTabTransition.Slide,TTabTransitionDirection.Reversed);
-end;
-
-procedure TfrmMain.SpeedButton1Click(Sender: TObject);
-begin
-  tbcMain.SetActiveTabWithTransition(tabReport,TTabTransition.Slide,TTabTransitionDirection.Normal);
-  GenerateReport;
-end;
-
-procedure TfrmMain.SpeedButton2Click(Sender: TObject);
-begin
-  tbcMain.SetActiveTabWithTransition(tabProjectDetail,TTabTransition.Slide,TTabTransitionDirection.Reversed);
-end;
-
-procedure TfrmMain.speedButtonAddClick(Sender: TObject);
-begin
-  edtNewProjTitle.Text := '';
-  mmoNewProjDescription.Text := '';
-  tbcMain.SetActiveTabWithTransition(tabNewProject,TTabTransition.Slide,TTabTransitionDirection.Normal);
-end;
-
-procedure TfrmMain.TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
-begin
-  Image1.Bitmap.Assign(Image);
-end;
-
-procedure TfrmMain.LoadProjectsTab;
-var
-  ProjectData: IProjectData;
-  Projects: TArrayOfProject;
-  Item: TListViewItem;
-  idx: integer;
-begin
-  listViewProjects.Items.Clear;
-  ProjectData := TProjectData.Create(conn);
-  if not assigned(ProjectData) then begin
-    raise EConnectFailed.Create;
-  end;
-  ProjectData.Read(Projects);
-  if Length(Projects)=0 then begin
-    exit;
-  end;
-  for idx := 0 to pred(Length(Projects)) do begin
-    Item := listViewProjects.Items.AddItem;
-    Item.Tag := Projects[idx].ID;
-    Item.Text := Projects[idx].Title;
-  end;
-end;
-
-procedure TfrmMain.LoadProjectDetailTab( ID: uint32 );
-var
-  ProjectData: IProjectData;
-  Projects: TArrayOfProject;
-  LogData: ILogData;
-  LogEntries: TArrayOfLogEntry;
-  idx: integer;
-  Item: TListViewItem;
-begin
-  //- Clear data
-  edtProjTitle.Text := '';
-  edtProjTitle.Enabled := False;
-  mmoProjDesc.Lines.Text := '';
-  mmoProjDesc.Enabled := False;
-  lstEntries.Items.Clear;
   CurrentProject.ID := 0;
   CurrentProject.Title := '';
   CurrentProject.Description := '';
-  if ID=0 then begin
-    //- Check that there is a project selected.
-    if listViewProjects.ItemIndex<0 then begin
-      exit;
-    end;
-    CurrentProject.ID := listViewProjects.Items[listViewProjects.ItemIndex].Tag;
-  end else begin
-    CurrentProject.ID := ID;
-  end;
-  //- Get Project data
-  ProjectData := TProjectData.Create(conn);
-  if not assigned(ProjectData) then begin
-    raise EConnectFailed.Create;
-  end;
-  if ProjectData.Read(Projects,CurrentProject.ID) <> 1 then begin
-    exit;
-  end;
-  edtProjTitle.Enabled := True;
-  mmoProjDesc.Enabled := True;
-  CurrentProject := Projects[0];
-  edtProjTitle.Text := CurrentProject.Title;
-  mmoProjDesc.Lines.Text := CurrentProject.Description;
-  //- Get log data for project
-  LogData := TLogData.Create(conn);
-  if not assigned(LogData) then begin
-    raise EConnectFailed.Create;
-  end;
-  LogData.Read(LogEntries,CurrentProject.ID);
-  if Length(LogEntries)=0 then begin
-    exit;
-  end;
-  for idx := 0 to pred(Length(LogEntries)) do begin
-    Item := lstEntries.Items.AddItem;
-    Item.Tag := LogEntries[idx].ID;
-    Item.Text := DateTimeToStr( LogEntries[idx].TimeDateStamp );
-  end;
 end;
 
-procedure TfrmMain.OnGeocodeReverseEvent(const Address: TCivicAddress);
+procedure TfrmMain.LoadCurrentProject(AId: Integer);
+var
+  ProjectData: IProjectData;
+  Projects: TArrayOfProject;
 begin
-  lblSubThoroughfare.Text := Address.SubThoroughfare;
-  lblThoroughfare.Text := Address.Thoroughfare;
-  lblSubLocality.Text := Address.SubLocality;
-  lblSubAdminArea.Text := Address.SubAdminArea;
-  lblZipCode.Text := Address.PostalCode;
-  lblLocality.Text := Address.Locality;
-  lblFeature.Text := Address.FeatureName;
-  lblCountry.Text := Address.CountryName;
-  lblCountryCode.Text := Address.CountryCode;
-  lblAdminArea.Text := Address.AdminArea;
+  CurrentProject.ID := AId;
+
+  // - Get Project data
+  ProjectData := TProjectData.Create(mainDM.conn);
+  if not assigned(ProjectData) then
+  begin
+    raise EConnectFailed.Create;
+  end;
+  if ProjectData.Read(Projects, AId) <> 1 then
+  begin
+    exit;
+  end;
+  CurrentProject := Projects[0];
 end;
 
-procedure TfrmMain.ReverseLocation( Lat, Long: double );
+procedure TfrmMain.DeleteLogEntry;
+begin
+  mainDM.DeleteLogEntry(CurrentLogEntry, CurrentProject);
+  ProjectDetailsFrame1.UpdateLogEntries(CurrentProject);
+  SetBackToProjectDetailScreen;
+end;
+
+procedure TfrmMain.UpdateLogEntries;
+begin
+  ProjectDetailsFrame1.UpdateLogEntries(CurrentProject)
+end;
+
+procedure TfrmMain.SaveNewEntry(ABitmap: TBitmap);
+var
+  LID: Integer;
+begin
+  LID := mainDM.CreateNewLogEntry(ABitmap, CurrentProject, FCurrentLocation);
+  LoadEntryDetail(LID);
+  UpdateLogEntries;
+  tbcMain.SetActiveTabWithTransitionAsync(tabEntryDetail, TTabTransition.Slide,
+    TTabTransitionDirection.Reversed,nil);
+  NewEntryFrame1.ClearImage;
+end;
+
+procedure TfrmMain.NewProject(const ATitle, ADesc: String);
+var
+  ProjectData: IProjectData;
+  Project: TProject;
+  ID: Integer;
+begin
+  // - Insert new project
+  ProjectData := TProjectData.Create(mainDM.conn);
+  if not assigned(ProjectData) then
+  begin
+    raise EConnectFailed.Create;
+  end;
+  Project.Title := ATitle;
+  Project.Description := ADesc;
+  ID := ProjectData.CreateProject(Project);
+  // - Switch tabs back to tabProjectDetail
+
+  CurrentProject.ID := ID;
+  CurrentProject.Title := Project.Title;
+  CurrentProject.Description := Project.Description;
+
+  ProjectDetailsFrame1.LoadProjectDetail(CurrentProject);
+
+  SetProjectDetailScreen;
+end;
+
+procedure TfrmMain.LoadProjectDetail(AId: Integer);
+begin
+    ClearCurrentProject;
+    LoadCurrentProject(AId);
+    ProjectDetailsFrame1.LoadProjectDetail(CurrentProject);
+
+    SetProjectDetailScreen;
+end;
+
+
+procedure TfrmMain.UpdateProject(const ATitle, ADesc: String);
+var
+  ProjectData: IProjectData;
+  Project: TProject;
+begin
+  if CurrentProject.ID = 0 then
+  begin
+    exit;
+  end;
+  // - Only update if something actually changed.
+  if (Trim(CurrentProject.Title) = Trim(ATitle)) and
+    (Trim(CurrentProject.Description) = Trim(ADesc)) then
+  begin
+    exit;
+  end;
+  // - Current project changed, we better update it!
+  ProjectData := TProjectData.Create(mainDM.conn);
+  if not assigned(ProjectData) then
+  begin
+    raise EConnectFailed.Create();
+  end;
+  Project.ID := CurrentProject.ID;
+  Project.Title := ATitle;
+  Project.Description := ADesc;
+  if not ProjectData.Update([Project]) then
+  begin
+    raise Exception.Create('Failed to update project data.');
+  end;
+
+  ProjectsFrame1.LoadProjects;
+end;
+
+procedure TfrmMain.CalcContentBoundsProc(Sender: TObject;
+                                       var ContentBounds: TRectF);
+begin
+  if FNeedOffset and (FKBBounds.Top > 0) then
+  begin
+    ContentBounds.Bottom := Max(ContentBounds.Bottom,
+                                2 * ClientHeight - FKBBounds.Top);
+  end;
+end;
+
+procedure TfrmMain.RestorePosition;
+begin
+  VSB.ViewportPosition := PointF(VSB.ViewportPosition.X, 0);
+  tbcMain.Align := TAlignLayout.Client;
+  VSB.RealignContent;
+end;
+
+procedure TfrmMain.UpdateKBBounds;
+var
+  LFocused : TControl;
+  LFocusRect: TRectF;
+begin
+  FNeedOffset := False;
+  if Assigned(Focused) then
+  begin
+    LFocused := TControl(Focused.GetObject);
+    LFocusRect := LFocused.AbsoluteRect;
+    LFocusRect.Offset(VSB.ViewportPosition);
+    if (LFocusRect.IntersectsWith(TRectF.Create(FKBBounds))) and
+       (LFocusRect.Bottom > FKBBounds.Top) then
+    begin
+      FNeedOffset := True;
+      tbcMain.Align := TAlignLayout.Horizontal;
+      VSB.RealignContent;
+      Application.ProcessMessages;
+      VSB.ViewportPosition :=
+        PointF(VSB.ViewportPosition.X,
+               LFocusRect.Bottom - FKBBounds.Top);
+    end;
+  end;
+  if not FNeedOffset then
+    RestorePosition;
+end;
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+begin
+  // - Ensure we're on the welcome tab
+  tbcMain.TabPosition := TTabPosition.None;
+  tbcMain.ActiveTab := tabSignIn;
+
+  Application.OnIdle := ApplicationIdle;
+
+  {$IF DEFINED(ANDROID) OR DEFINED(IOS)}
+  VKAutoShowMode := TVKAutoShowMode.Always;
+  VSB.OnCalcContentBounds := CalcContentBoundsProc;
+  {$ENDIF}
+end;
+
+procedure TfrmMain.FormFocusChanged(Sender: TObject);
+begin
+  UpdateKBBounds;
+end;
+
+procedure TfrmMain.FormKeyDown(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+var
+  FService : IFMXVirtualKeyboardService;
+begin
+  if Key = vkHardwareBack then
+  begin
+    TPlatformServices.Current.SupportsPlatformService(IFMXVirtualKeyboardService, IInterface(FService));
+    if (FService <> nil) and (TVirtualKeyboardState.Visible in FService.VirtualKeyBoardState) then
+      begin
+        // do nothing
+      end
+    else
+      begin
+        if tbcMain.ActiveTab = tabProjects then
+          begin
+            SignOut;
+            Key := 0;
+          end;
+        if tbcMain.ActiveTab = tabProjectDetail then
+          begin
+            SetBackToProjectScreen;
+            Key := 0;
+          end;
+        if tbcMain.ActiveTab = tabEntryDetail then
+          begin
+            SetBackToProjectDetailScreen;
+            Key := 0;
+          end;
+        if tbcMain.ActiveTab = tabNewProject then
+          begin
+            SetBackToProjectScreen;
+            Key := 0;
+          end;
+        if tbcMain.ActiveTab = tabNewEntry then
+          begin
+            SetBackToProjectDetailScreen;
+            Key := 0;
+          end;
+        if tbcMain.ActiveTab = tabReport then
+          begin
+            SetBackToProjectDetailScreen;
+            Key := 0;
+          end;
+      end;
+  end
+
+end;
+
+procedure TfrmMain.FormVirtualKeyboardHidden(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  FKBBounds.Create(0, 0, 0, 0);
+  FNeedOffset := False;
+  RestorePosition;
+end;
+
+procedure TfrmMain.FormVirtualKeyboardShown(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  FKBBounds := TRectF.Create(Bounds);
+  FKBBounds.TopLeft := ScreenToClient(FKBBounds.TopLeft);
+  FKBBounds.BottomRight := ScreenToClient(FKBBounds.BottomRight);
+  UpdateKBBounds;
+end;
+
+function TfrmMain.DetectInternet: Boolean;
+begin
+  Result := False;
+  //offline test
+  //Exit;
+  try
+    IdTCPClient1.ReadTimeout := 6000;
+    IdTCPClient1.ConnectTimeout := 6000;
+    IdTCPClient1.Port := 80;
+    IdTCPClient1.Host := 'www.embarcadero.com';
+    IdTCPClient1.Connect;
+    IdTCPClient1.Disconnect;
+    Result := True;
+  except
+    Result := False;
+  end;
+end;
+
+function TfrmMain.DetectInternetAsync: Boolean;
+begin
+  InternetConnectivity := TTask.Future<Boolean>(
+    function:Boolean
+    begin
+      Result := DetectInternet;
+  end);
+  Result := InternetConnectivity.Value;
+end;
+
+
+procedure TfrmMain.ApplicationIdle(Sender: TObject; var Done: Boolean);
+var
+  SL: TStringList;
+begin
+  if FRunOnce=False then
+    begin
+      FRunOnce := True;
+
+      DetectInternetAsync;
+
+      ShowActivity;
+
+      SL := TStringList.Create;
+      SL.Text := mmoCreateDatabase.Lines.Text;
+      TTask.Run(procedure begin
+        try
+          mainDM.InitializeDatabase(DataFilename, SL);
+        finally
+          SL.Free;
+
+          TThread.Synchronize(nil,procedure begin
+            HideActivity;
+          end);
+        end;
+      end);
+    end;
+end;
+
+procedure TfrmMain.LocationSensor1LocationChanged(Sender: TObject;
+const OldLocation, NewLocation: TLocationCoord2D);
+begin
+  FCurrentLocation := NewLocation;
+end;
+
+procedure TfrmMain.SignOut;
+begin
+  CurrentProject.ID := 0;
+  tbcMain.SetActiveTabWithTransition(tabSignIn, TTabTransition.Slide,
+    TTabTransitionDirection.Reversed);
+end;
+
+
+procedure TfrmMain.OnGeocodeReverseEvent(const AAddress: TCivicAddress);
+begin
+  EntryDetailsFrame1.UpdateDetails(AAddress);
+end;
+
+procedure TfrmMain.ReverseLocation(Lat, Long: double);
 var
   NewLocation: TLocationCoord2D;
 begin
+
   // Setup an instance of TGeocoder
-  if not Assigned(FGeocoder) then
+  if not assigned(FGeocoder) then
   begin
-    if Assigned(TGeocoder.Current) then
+    if assigned(TGeocoder.Current) AND TGeoCoder.Current.Supported=True then
       FGeocoder := TGeocoder.Current.Create;
-    if Assigned(FGeocoder) then
+    if assigned(FGeocoder) then
       FGeocoder.OnGeocodeReverse := OnGeocodeReverseEvent;
   end;
 
   // Translate location to address
   NewLocation.Latitude := Lat;
   NewLocation.Longitude := Long;
-  if Assigned(FGeocoder) and not FGeocoder.Geocoding then
-    FGeocoder.GeocodeReverse(NewLocation);
+  if assigned(FGeocoder) and not FGeocoder.Geocoding then
+    begin
+      FGeocoder.GeocodeReverse(NewLocation);
+    end;
 end;
 
-procedure TfrmMain.LoadEntryDetail( LogID: uint32 );
-var
-  LogData: ILogData;
-  LogEntries: TArrayOfLogEntry;
-  Found: integer;
-  idx: integer;
-  Bitmap: TBitmap;
+procedure TfrmMain.LoadEntryDetail(LogID: Integer);
 begin
-  //- Init the tab
-  imgPicture.Bitmap.Clear(TAlphaColorRec.Null);
-  lblLongitude.Text := '???';
-  lblLatitude.Text := '???';
-  lblSubThoroughfare.Text := '???';
-  lblThoroughfare.Text := '???';
-  lblSubLocality.Text := '???';
-  lblSubAdminArea.Text := '???';
-  lblZipCode.Text := '???';
-  lblLocality.Text := '???';
-  lblFeature.Text := '???';
-  lblCountry.Text := '???';
-  lblCountryCode.Text := '???';
-  lblAdminArea.Text := '???';
-  //- Get data
-  LogData := TLogData.Create(conn);
-  if not assigned(LogData) then begin
-    raise EConnectFailed.Create;
-  end;
-  LogData.Read(LogEntries,CurrentProject.ID);
-  if Length(LogEntries)=0 then begin
-    exit;
-  end;
-  //- Loop through and find the log entry we want
-  CurrentLogEntry := 0;
-  Found := 0;
-  for idx := 0 to pred(length(LogEntries)) do begin
-    if LogEntries[idx].ID=LogID then begin
-      CurrentLogEntry := LogEntries[idx].ID;
-      Found := idx;
-      break;
-    end;
-  end;
-  if CurrentLogEntry=0 then begin
-    exit;
-  end;
-  //- Load the entry to the form.
-  Bitmap := LogEntries[Found].getPicture;
-  try
-    imgPicture.Bitmap.Assign(Bitmap);    
-  finally
-    Bitmap.DisposeOf;
-  end;
-  lblLongitude.Text := LogEntries[Found].Longitude.ToString;
-  lblLatitude.Text := LogEntries[Found].Latitude.ToString;
-  ReverseLocation( LogEntries[Found].Latitude, LogEntries[Found].Longitude );
+  EntryDetailsFrame1.LoadEntryDetail(LogID, CurrentProject);
 end;
 
 procedure TfrmMain.tbcMainChange(Sender: TObject);
 begin
-  if tbcMain.ActiveTab=tabProjects then begin
-    LoadProjectsTab;
-  end else if tbcMain.ActiveTab=tabProjectDetail then begin
-    LoadProjectDetailTab(0);
-  end else if tbcMain.ActiveTab=tabNewProject then begin
-    edtNewProjTitle.Text := '';
-    mmoNewProjDescription.Lines.Text := '';
-  end else if tbcMain.ActiveTab=tabEntryDetail then begin
-    if lstEntries.ItemIndex>=0 then begin
-      CurrentLogEntry := lstEntries.Items[lstEntries.ItemIndex].Tag;
+  if tbcMain.ActiveTab = tabProjects then
+  begin
+    ProjectsFrame1.LoadProjects;
+  end
+  else if tbcMain.ActiveTab = tabProjectDetail then
+  begin
+
+  end
+  else if tbcMain.ActiveTab = tabNewProject then
+  begin
+    NewProjectFrame1.ClearFields;
+  end
+  else if tbcMain.ActiveTab = tabEntryDetail then
+  begin
+    if ProjectDetailsFrame1.lstEntries.ItemIndex >= 0 then
+    begin
+      CurrentLogEntry := ProjectDetailsFrame1.lstEntries.Items[ProjectDetailsFrame1.lstEntries.ItemIndex].Tag;
       LoadEntryDetail(CurrentLogEntry);
     end;
   end;
 end;
 
+function TfrmMain.GenerateMapURL(const Location,Address: string): string;
+var
+PlaceStr: String;
+begin
+if Location<>'' then
+ PlaceStr := Location
+else
+ PlaceStr := Address;
+
+ if GOOGLE_MAPS_EMBED_API_KEY='' then
+  begin
+    // For development testing only.
+    Result := 'https://www.google.com/maps/place/'+TNetEncoding.URL.EncodeQuery(PlaceStr)+'/'
+  end
+ else
+  begin
+    Result := 'https://www.google.com/maps/embed/v1/place?key='+GOOGLE_MAPS_EMBED_API_KEY+'&q='+TNetEncoding.URL.EncodeQuery(PlaceStr);
+  end;
+end;
+
+procedure TfrmMain.DownloadStaticMap(const ALocation: String; AHeight, AWidth: Single; AImage: TImage);
+begin
+  AImage.WrapMode := TImageWrapMode.Fit;
+  AImage.Bitmap.Assign(DefaultImage.Bitmap);
+  if NetHTTPClient.Tag=NOT_BUSY then
+    begin
+      if InternetConnectivity.Value=True then
+       begin
+          NetHTTPClient.Tag := BUSY;
+          ITask(TTask.Create(
+            procedure
+            var
+            MS: TMemoryStream;
+            begin
+              try
+                MS := TMemoryStream.Create;
+                try
+                  NetHTTPClient.Get('https://maps.googleapis.com/maps/api/staticmap?center='+ALocation+'&zoom=15&scale=2&size='+AWidth.ToString+'x'+AHeight.ToString+'&key='+GOOGLE_MAPS_STATIC_API_KEY,MS);
+                  TThread.Synchronize(nil,
+                    procedure
+                    begin
+                      AImage.Bitmap.LoadFromStream(MS);
+                      AImage.WrapMode := TImageWrapMode.Stretch;
+                    end);
+                  MS.Clear;
+                finally
+                  MS.DisposeOf;
+                  MS := nil;
+                end;
+              finally
+
+                TThread.Synchronize(nil,
+                  procedure
+                  begin
+                    NetHTTPClient.Tag := NOT_BUSY;
+                  end);
+              end;
+            end)).Start;
+       end;
+    end;
+end;
 
 end.

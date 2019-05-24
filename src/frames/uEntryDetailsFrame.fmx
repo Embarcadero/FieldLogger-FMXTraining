@@ -1,0 +1,1832 @@
+object EntryDetailsFrame: TEntryDetailsFrame
+  Size.Width = 643.000000000000000000
+  Size.Height = 944.000000000000000000
+  Size.PlatformDefault = False
+  object Image5: TImage
+    MultiResBitmap.Height = 1326
+    MultiResBitmap.Width = 1306
+    MultiResBitmap.LoadSize = 2
+    MultiResBitmap = <
+      item
+      end>
+    Align = Contents
+    MarginWrapMode = Tile
+    Margins.Left = -400.000000000000000000
+    Margins.Top = -400.000000000000000000
+    Margins.Right = -400.000000000000000000
+    Margins.Bottom = -400.000000000000000000
+    Size.Width = 1443.000000000000000000
+    Size.Height = 1744.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object ToolBar3: TToolBar
+    Size.Width = 643.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object ToolBarBackgroundRect: TRectangle
+      Align = Contents
+      Fill.Color = x80FFFFFF
+      Size.Width = 643.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object Label6: TLabel
+      Align = Contents
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 643.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Log Entry'
+      TabOrder = 2
+    end
+    object btnEntriesBack: TButton
+      Align = Left
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowlefttoolbutton'
+      TabOrder = 0
+      Text = 'btnPrev'
+      OnClick = btnEntriesBackClick
+    end
+    object btnDeleteEntry: TSpeedButton
+      Align = Right
+      Position.X = 595.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'trashtoolbutton'
+      Text = 'speedButtonDelete'
+      OnClick = btnDeleteEntryClick
+    end
+  end
+  object VertScrollBox1: TVertScrollBox
+    Align = Client
+    Size.Width = 643.000000000000000000
+    Size.Height = 896.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 21
+    Viewport.Width = 643.000000000000000000
+    Viewport.Height = 896.000000000000000000
+    object imgPicture: TImage
+      MultiResBitmap = <
+        item
+          Width = 500
+          Height = 333
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000001F40000014D0806000000F6139D
+            37000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            029D49444154785EEDC1010D000000C2A0F74F6D0E3720000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000000000000000000F852032B
+            730001183DDDB00000000049454E44AE426082}
+        end>
+      Align = Top
+      Anchors = []
+      Margins.Left = 20.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 20.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 20.000000000000000000
+      Position.Y = 953.000000000000000000
+      Size.Width = 587.000000000000000000
+      Size.Height = 447.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object InfoLayout: TLayout
+      Align = Top
+      Position.Y = 209.000000000000000000
+      Size.Width = 627.000000000000000000
+      Size.Height = 681.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object YLIRectangle: TRectangle
+        Align = Top
+        Fill.Color = x44FFFFFF
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation1: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label2: TLabel
+          Align = Client
+          StyledSettings = [Family, FontColor]
+          Margins.Left = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Size.Width = 607.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = '(Default)'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          Text = 'Your Location Information'
+          TabOrder = 0
+        end
+      end
+      object LatitudeRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 48.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation3: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label9: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Latitude:'
+          TabOrder = 0
+        end
+        object lblLatitude: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TabOrder = 1
+        end
+      end
+      object LongitudeRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 96.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation2: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label7: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Longitude:'
+          TabOrder = 0
+        end
+        object lblLongitude: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TabOrder = 1
+        end
+      end
+      object ALIRectangle: TRectangle
+        Align = Top
+        Fill.Color = x44FFFFFF
+        Margins.Top = 5.000000000000000000
+        Position.Y = 149.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation4: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label11: TLabel
+          Align = Client
+          StyledSettings = [Family, FontColor]
+          Margins.Left = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Size.Width = 607.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = '(Default)'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          Text = 'Additional Location Information'
+          TabOrder = 0
+        end
+      end
+      object LocalityRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 389.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation10: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label22: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Locality:'
+          TabOrder = 0
+        end
+        object lblLocality: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object FeatureRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 341.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation11: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label24: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Feature:'
+          TabOrder = 0
+        end
+        object lblFeature: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object CountryRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 293.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation12: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label26: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Country:'
+          TabOrder = 0
+        end
+        object lblCountry: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object CountryCodeRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 245.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation13: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label28: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Country Code'
+          TabOrder = 0
+        end
+        object lblCountryCode: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object AdminAreaRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 197.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation14: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label30: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Admin Area:'
+          TabOrder = 0
+        end
+        object lblAdminArea: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object SubThoroughfareRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 581.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation5: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label12: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Sub-Thoroughfare:'
+          TabOrder = 0
+        end
+        object lblSubThoroughfare: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object ThoroughfareRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 629.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation6: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label14: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Thoroughfare:'
+          TabOrder = 0
+        end
+        object lblThoroughfare: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object SubLocalityRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 533.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation7: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label16: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Sub-Locality:'
+          TabOrder = 0
+        end
+        object lblSubLocality: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object SubAdminRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 485.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation8: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label18: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Sub-Admin Area:'
+          TabOrder = 0
+        end
+        object lblSubAdminArea: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object ZipRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 437.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object GradientAnimation9: TGradientAnimation
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'Fill.Gradient'
+          StartValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF858585
+              Offset = 0.437888205051422100
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StartValue.StartPosition.X = 0.500000000000000000
+          StartValue.StartPosition.Y = 1.000000000000000000
+          StartValue.StopPosition.X = 0.499999970197677600
+          StartValue.StopPosition.Y = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue.Points = <
+            item
+              Color = claBlack
+              Offset = 0.000000000000000000
+            end
+            item
+              Color = xFF3F3F3F
+              Offset = 0.248447209596633900
+            end
+            item
+              Color = claWhite
+              Offset = 1.000000000000000000
+            end>
+          StopValue.StartPosition.X = 0.500000000000000000
+          StopValue.StartPosition.Y = 1.000000000000000000
+          StopValue.StopPosition.X = 0.499999970197677600
+          StopValue.StopPosition.Y = 0.000000000000000000
+        end
+        object Label20: TLabel
+          Align = FitLeft
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 207.333389282226600000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Zip/PostCode:'
+          TabOrder = 0
+        end
+        object lblZipCode: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 409.666625976562500000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+    end
+    object ImageTitleRect: TRectangle
+      Align = Top
+      Fill.Color = x44FFFFFF
+      Margins.Top = 5.000000000000000000
+      Position.Y = 895.000000000000000000
+      Size.Width = 627.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object GradientAnimation15: TGradientAnimation
+        Duration = 0.200000002980232200
+        Loop = True
+        PropertyName = 'Fill.Gradient'
+        StartValue.Points = <
+          item
+            Color = claBlack
+            Offset = 0.000000000000000000
+          end
+          item
+            Color = xFF858585
+            Offset = 0.437888205051422100
+          end
+          item
+            Color = claWhite
+            Offset = 1.000000000000000000
+          end>
+        StartValue.StartPosition.X = 0.500000000000000000
+        StartValue.StartPosition.Y = 1.000000000000000000
+        StartValue.StopPosition.X = 0.499999970197677600
+        StartValue.StopPosition.Y = 0.000000000000000000
+        StartFromCurrent = True
+        StopValue.Points = <
+          item
+            Color = claBlack
+            Offset = 0.000000000000000000
+          end
+          item
+            Color = xFF3F3F3F
+            Offset = 0.248447209596633900
+          end
+          item
+            Color = claWhite
+            Offset = 1.000000000000000000
+          end>
+        StopValue.StartPosition.X = 0.500000000000000000
+        StopValue.StartPosition.Y = 1.000000000000000000
+        StopValue.StopPosition.X = 0.499999970197677600
+        StopValue.StopPosition.Y = 0.000000000000000000
+      end
+      object Label1: TLabel
+        Align = Client
+        StyledSettings = [Family, FontColor]
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Size.Width = 607.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = '(Default)'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Image'
+        TabOrder = 0
+      end
+    end
+    object Layout1: TLayout
+      Align = Top
+      Position.Y = 1410.000000000000000000
+      Size.Width = 627.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+    end
+    object Layout2: TLayout
+      Align = MostTop
+      Size.Width = 627.000000000000000000
+      Size.Height = 209.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      object BackgroundRect: TRectangle
+        Align = Client
+        Fill.Color = xFF95999F
+        Size.Width = 627.000000000000000000
+        Size.Height = 209.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Circle1: TCircle
+          Align = Client
+          Fill.Kind = None
+          Margins.Top = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 627.000000000000000000
+          Size.Height = 189.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          Stroke.Thickness = 4.000000000000000000
+          object LogoImage: TImage
+            MultiResBitmap.Height = 192
+            MultiResBitmap.Width = 192
+            MultiResBitmap.LoadSize = 2
+            MultiResBitmap = <
+              item
+                Width = 1024
+                Height = 1024
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000004000000040008060000007F1D2B
+                  83000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  36EF49444154785EEDDD7F88A4F77D1FF0DC91D5FDD89DBDD99D6B49493086E0
+                  3AA104E5AAFC86D6601AD3049C344D13FB64C5714CD226C43171258140085975
+                  E20AC79014A718D282E21FB114358D21D042D312286D080D694BE91FA10E85FE
+                  977F347B3B3B33F7835B67FA7C74CF49A7D3CDDEECCC33CF7CBFCFF7F5826576
+                  1E6CE924EDCEF3FD7EE6FB7ECF37000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000040C2FEEAAFFEEA6F565FCFC7637D09000000E892D8F41F1D1DFD8759
+                  258600F565000000A02B62F3FFF5AF7FFD4BB1F90FE38A5300000000D031F18E
+                  7FBDF77FC36BAFBDF63F0C01000000A02362933F1C0EBF56EFFBDFE2C68D1BBF
+                  6F0800000000998BCDFDDDDCFF3C713AA0FE9F03000000B989CDFFBDB9FF79F4
+                  0100000040C6E29DFD7A8FFF50FA000000002043B1999F97FB9F471F00000000
+                  642436F10FCBFDCF13A706EABF0C00000090AAD8FC2F92FB9F471F0000000064
+                  20DEC1AFF7F24BD30700000000098B4DFB6973FFF3E8030000008004C5667DD9
+                  DCFF3C719AA0FECB030000009B169BFF5572FFF3E8030000008084C43BF5F59E
+                  BD71FA000000002001B1396F2AF73F8F3E00000000D8A0D894379DFB9F274E19
+                  D47F5B000000A02DB1F95F47EE7F1E7D00000000B001F18E7CBD376F8D3E0000
+                  000068516CC2D79DFB9F471F00000000B42036DF6DE5FEE789D307F51F070000
+                  00685A6CFEDBCCFDCFA30F0080753B5B3F020094EAEAD9B3679FA8BFDF989DCA
+                  C1C1C12B8600000000D0B0D86C6F2AF73F8F3E0000000068506CB2379DFB9FA7
+                  FAB3E9030000008055C5E63F85DCFF3CFA000058071D0000408992C8FDCFA30F
+                  0000000056149BEAD472FFF3E8030000008025C4663AD5DCFF3CD59F591F0000
+                  00002C2A36FF29E7FEE7D10700405374000000A5483AF73F8F3E00009A620000
+                  00745E6C9EAF5DBBF6A1FA69760683C1955BB76EBD680800C02A0C0000804E8B
+                  4DF36432F9DCFEFEFEBBEA4B593A7FFEFC8F550F57EF3C03000000DE109BFF1C
+                  73FFF3E8030060154E0000005D9665EE7F1E7D0000ACC2000000E8A4D824E79C
+                  FB9F471F0000CB320000003A2736C75DC8FDCFA30F0080659CA91F01003A2136
+                  FFB3D9ECB92E1DFD7F9049657B7BFBB1EA9FF36BF52500389113000040D7742A
+                  F73F8F3E00004ECB000000E88CAEE6FEE7D10700C069180000009DD0F5DCFF3C
+                  FA000058940E0000207BA5E4FEE7D10700C0229C000000BAA088DCFF3CFA0000
+                  588401000090B5D272FFF3E80300E0610C0000806C959AFB9F471F000027D101
+                  000064A9F4DCFF3CFA000098C7090000205745E7FEE7D10700C03C0600004076
+                  E4FE4FA60F00800731000000B222F7BF187D0000DC4F070000900DB9FFD3D107
+                  00C0BD9C0000007222F77F0AFA0000B8970100009005B9FFE5E80300E02E0300
+                  00207972FFABD1070040D0010000244DEEBF19FA000070020000489DDC7F03F4
+                  010060000000244BEEBF59FA0000CA660000002449EE7F3DF40100944B070000
+                  901CB9FFF5D2070050262700008014C9FDAF913E008032190000004991FB6F87
+                  3E0080F218000000C990FB6F973E0080B2E80000009220F7BF19FA0000CAE104
+                  0000900AB9FF0DD00700500E03000060E3E4FE374B1F0040190C0000808D92FB
+                  4F833E0080EED30100006C8CDC7F5AF40100749B130000C026C9FD27441F0040
+                  B7190000001B119BCCE170F891FA2989D00700D05D06000040EB6273391E8F3F
+                  7FF9F2E577D69748883E00806ED2010000B42A36FFC7C7C7CF6F6D6D3D5E5F22
+                  41FA0000BAC7090000A06D576DFED3A70F00A07B0C000080D6C8FDE7451F0040
+                  B718000000AD90FBCF933E0080EED0010000AC9DDC7FDEF40100748313000040
+                  1BE4FE33A60F00A01B0C000080B592FBEF067D0000F933000000D646EEBF5BF4
+                  0100E44D070000B01672FFDDA40F00205F4E000000EB22F7DF41FA0000F26500
+                  0000344EEEBFDBF40100E4C90000006894DC7F19F40100E447070000D018B9FF
+                  B2E80300C88B1300004093E4FE0BA20F00202F0600004023E4FECBA40F00201F
+                  060000C0CAE4FECBA60F00200F3A00008095C8FD13F40100A4CF090000605572
+                  FFE80300C880010000B034B97FEEA50F00206D060000C052E4FE79107D0000E9
+                  D20100009C9ADC3F27D1070090262700008065C8FD33973E00803419000000A7
+                  22F7CF22F40100A4C70000005898DC3FA7A10F00202D3A00008085C8FDB30C7D
+                  0000E9700200005894DC3FA7A60F00201D060000C043C9FDB30A7D0000693000
+                  00004E24F74F13F401006C9E0E0000602EB97F9AA40F0060B39C0000004E22F7
+                  4F63F401006C96010000F04072FFAC833E0080CD31000000DE46EE9F75D20700
+                  B0193A000080B790FBA70DFA0000DAE7040000703FB97FD64E1F0040FB0C0000
+                  8037C8FDD3267D0000ED320000005E27F7CF26E80300688F0E000040EE9F8DD2
+                  0700D00E2700008020F7CFC6E803006887010000144EEE9F14E80300583F0300
+                  002898DC3F29D10700B05E3A0000A05072FFA4481F00C0FA38010000E592FB27
+                  39FA0000D6C70000000A24F74FCAF40100AC870100001446EE9F1CE80300689E
+                  0E00002888DC3F39D10700D02C270000A02C72FF64431F0040B30C0000A01072
+                  FFE4481F0040730C0000A00072FFE44C1F00403374000040C7C9FDD305FA0000
+                  56E7040000749FDC3FD9D30700B03A030000E830B97FBA441F00C06A0C0000A0
+                  A3E4FEE9227D0000CBD30100001D24F74F97E90300588E130000D04D72FF7496
+                  3E0080E518000040C7C8FD53027D0000A7670000001D22F74F49F401009C8E0E
+                  0000E808B97F4AA40F0060714E00004077C8FD531C7D00008B330000800E90FB
+                  A764FA000016630000009993FB077D00008BD00100001993FB8737E903003899
+                  1300009037B97FA8E903003899010000644AEE1FDE4E1F00C07C0600009021B9
+                  7F984F1F00C083E9000080CCC8FDC3C3E90300783B270000203F72FFF010FA00
+                  00DECE0000003222F70F8BD30700F0560600009009B97F383D7D00006FD20100
+                  001990FB87E5E90300B8C3090000C883DC3F2C491F00C01D0600009038B97F58
+                  9D3E0000030000489ADC3F34471F00503A1D00009028B97F689E3E00A0644E00
+                  0040BAE4FEA161FA0080921900004082E4FE617DF40100A532000080C4C8FDC3
+                  FAE903004AA40300001222F70FEDD1070094C6090000488BDC3FB4441F00501A
+                  0300004884DC3FB44F1F0050120300004880DC3F6C8E3E00A0143A000060C3E4
+                  FE61F3F401002570020000364FEE1F364C1F005002030000D820B97F48873E00
+                  A0EB0C00006043E4FE213DFA00802ED30100001B20F70FE9D207007495130000
+                  B01972FF90287D00405719000040CBE4FE217DFA00802E3200008016C9FD433E
+                  F401005DA30300005A22F70FF9D107007489130000D01EB97FC88C3E00A04B0C
+                  0000A00572FF902F7D004057180000C09AC9FD43FEF401005DA0030000D648EE
+                  1FBA431F00903B27000060BDE4FEA123F40100B9330000803591FB87EED10700
+                  E4CC000000D640EE1FBA4B1F00902B1D0000D030B97FE83E7D00408E9C000080
+                  E6C9FD43C7E9030072640000000D92FB8772E8030072630000000D91FB87F2E8
+                  030072A20300001A20F70FE5D20700E4C209002069B1A99A4EA79F71BC920CC8
+                  FD43A1A20F60341ABDEA5E05A4CE000048562CA46EDDBAF5A98B172F3E3D1C0E
+                  7FCFC28A54C5CF66B5F8FF68FD142850BFDF7F541F00903A0300206557CF9F3F
+                  FF93F1CDE5CB97BF633299FC0B0B2B52133F93474747BF552DFEDF515F020AA5
+                  0F00489D010090A4D8540D87C38FD54F5FD7EBF5FEFE6C36FB50FD14362E7E4E
+                  23F77FE9D2A5F7D49780C24DA7D3A70CAB8154190000C98985D36834FAEDCB95
+                  FAD21B2693C9D316562444EE1F780B7D0040CA0C0080A4C4822972FFFD7EFFFB
+                  EB4B6FB1BBBB7B411F0029A807553F5B3F0578833E0020550600406ADEC8FDCF
+                  137D00376EDCF8750B2B36257EF6EADCFFB7D49700DE421F00902203002019B1
+                  A9BA3FF73FCFC58B177F78369B3D630840DBE267EEF8F8F805B97FE061AE5FBF
+                  FEA4FB14901203002009B1401A8D462F3D28F73FCFD9B3677FA67AF0EE0A6D8B
+                  DCFF07EBEF01E6DADEDEEE1D1C1CBC620800A4C20000D8B85818D5B9FF1FA82F
+                  2DECF0F0F0031656B4A51E54C9FD030B1B0C0657F40100A930000052F0D0DCFF
+                  3C7B7B7BDF3E994C3E6761C5BAC5CF98DC3FB00C7D00402A0C00808D8A4DD5A2
+                  B9FF797ABDDEFBF401B04EF1B325F70FAC421F00900203006063622174DADCFF
+                  3CFA005833B97F6025FA0080141800001B110BA06573FFF3540BAB7F606145D3
+                  EA4195DC3FB0327D00C0A61900009BB274EE7F9E6A61F59DD5C2EA9F5B58D194
+                  F85992FB079AA40F00D8240300A075B1A95A35F73F4FB5B0FA87D58385152B8B
+                  9F53B97F601DA6D3E95386D5C026180000AD8A05CF6834FA4213B9FF79AABFFE
+                  CF5B58D100B97F602D762AD5BDEA55F72AA06D0600406B62A153E7FEBFAFBEB4
+                  16D55FFF9B62C86061C5B2EA4195DC3FB036D5BDEA517D0040DB0C008036359E
+                  FB9F27860C16562C237E66E4FE8136E80300DA76A67E0458ABD8540D87C33F5E
+                  E7D1FF39BE309BCD3E7DF6ECD9AFD5CF61AEF8398DDCBFA3FF405B2695EDEDED
+                  C7DCA78036380100AC5D6CAA460D7DDEFF127EBAFAF2EE0A8B92FB075A157D00
+                  070707AF38B106B4C1000058AB58D0D4B9FFC63EEFFFB40E0F0FAF5A58F130F5
+                  A0EAE7EAA700AD190C0657C4D68036180000EBD65AEE7F9EBDBDBD774FA7D3CF
+                  5A58314FFC6CD4B9FF6FAE2F01B44A1F00D0060300606D6253351E8F3F5E3FDD
+                  A89D9D9DF79F3973E6F1FA29BC217E4E7DDE3F9082E974FA946135B04E0600C0
+                  5AC4022672FFBBBBBBFBF5A58D9B4C264F5A58F10072FF4012F40100EB660000
+                  342E162E9BCEFD3F482CAC0E0F0FBF6C61C55DF5A0CAE7FD03C9D00700AC9301
+                  00B00E1BCFFDCFB3B7B7F7DDB76FDFFEB48515F133E0F3FE8114E90300D6C500
+                  0068546CAA86C3E1C7EAA7497AE491477EBC7AB0B02A58FC9CCAFD0329BB7EFD
+                  BAD81AD0380300A031B150D9E0E7FD9FCA6432F9B88555D1E4FE81A46D6F6FF7
+                  F401004D3300001A110B941473FFF3F47ABDFDC3C3C32F595895A71E54C9FD03
+                  C9D3070034CD0000684AB2B9FF79F6F6F6BE2786161656E588FFD672FF404EF4
+                  01004D32000056169BAA543EEFFFB4EAA185855501E2E754EE1FC8D1743A7DCA
+                  B01A68820100B0925890A4F679FFA715A58516564590FB07B2141F63AB0F0068
+                  820100B0B45888DCBE7DFB5772C9FDCF13A585A3D1E8B72DACBAAB1E54FD93FA
+                  294076A20FE0E6CD9B9F71AF0256610000ACE2EA238F3CF213F5F759EBF7FBDF
+                  AF0FA09BE2BF699DFBFF1BF525802C5DB870E147AB07B13560690600C0526253
+                  956BEE7F1E7D00DD133FA772FF4097E80300566100009C5A2C3C72CFFDCF3399
+                  4C3E6E61D52972FF40A7E80300566100009C4A2C3872FABCFFD3EAF57AFB8787
+                  875FB4B0CA5F3DA8F279FF40E7441F40752F7ED1BD0A382D0300E0B4B2FBBCFF
+                  D3DADBDBFBDEDBB76F7FDAC22A5FF1DFCEE7FD035D56DD8B7FAC7A105B034EC5
+                  000058586CAABA96FB9FE791471EF9F1EAC1C22A43F1732AF70F94401F00705A
+                  0600C0426281111F95D7C5DCFF3C93C9E4972DACB224F70F1421FA00AA7BF3AB
+                  EE55C0A20C0080878A85459DFBFFFEFA52117ABD5E5F1F405EEA4195DC3F508C
+                  EADEFCA83E0060510600C0223A9FFB9F27FA002CACF2F1977FF997CFCAFD03A5
+                  D107002CCA000038516C7C87C3E1C7EAA745B2B0CAC7D1D1D177D5DF0214E5FA
+                  F5EB4F1A56030F630000CC150B8938027FB9525F2A9685551EBEEDDBBEEDDFD4
+                  DF0214657B7BBB777070F08A7B1570120300E0816201111F851747E0EB4B45B3
+                  B0CAC36C36FBCA8D1B37FEA07E0A5094C16070456C0D3889010030CFD5FAA3F0
+                  A85958A5EFECD9B35F3B7FFEFCD3AFBDF6DAFFAE2F0114456C0D38C999FA11E0
+                  0DB1C11D8FC77F52D247FE9DD20B67CE9CF964FD3D098A9FE1C964F23F7BBDDE
+                  C5FA124031AAD7BFC9F6F6F6633114AD2F01BCCE0900E02D62E3747878F8259B
+                  FFF9AA75D5534E01A42D16BD3B3B3B9FA99F0214A57AFDDB198D46AFBA5701F7
+                  330000DE100B853AF7FF3DF5251EA05A576D1F1C1CFCAE8555F25ED6070094AA
+                  DFEF3F2AB606DCCF0000B897DCFF820683C177C6B0C4C22A5DFA0080D2E90300
+                  EE670000BC2E36B2E3F1F8E3F55316500F4B2CAC12164380C160F08FAA9FEDEB
+                  F52580A24CA753B135E00D0600C0DDDCFF17E5FE4F2F86261656698B2140AFD7
+                  FBB5FA294051A20FC0C7D80277190040E16241E0F3FE97174393D168F4050BAB
+                  B4CD66B3AFE803004AE5636C81BB0C0000B9FF15F5FBFDEF3B3E3E7EC1C22A5D
+                  FA0080D2E90300820100142C36AC72FFCDD8DADAFA60F5606195307D0040E9F4
+                  0100060050A85800F8BCFF668D46A38F5A58A52D86003B3B3B9FA99F0214A5EE
+                  03F031B6503003002850DCF87DDE7FF3FAFDFE3BC6E3F1E72DAC92F7B23E00A0
+                  54F131B6FA00A05C06005026B9FF35D9DDDD7DEFF1F1F1F31656E9D20700944E
+                  1F0094CB00000A131B53B9FFF5DADADA7ABC7AB0B04AD8DD3E80A3A3A31BF525
+                  80A2E803803219004041E246EFF3FEDB311C0E3F626195B6180254BF0BFA0080
+                  22D57D00AFB85741590C00A0107183F779FFEDB97CF9F23BF501A46F369B7D45
+                  1F0050AAC16070451F0094C50000CA21F7DF327D00E9D30700944E1F0094C500
+                  000A101B50B9FFCDD007903E7D0040E9F40140390C00A0E3E2862EF7BF59FA00
+                  D2A70F0028993E00288701007458DCC8E5FE372FFA008E8E8E7ECBC22A6DFA00
+                  8092E9038032180040B7C9FD27E2D2A54BEF393E3E7EC1C22A5DFA0080D2E903
+                  80EE3300808E8A8DE6643291FB4FC8D6D6D607AB070BAB84E903004AA70F00BA
+                  CD00003A286EDC91FBEFF57A72FF89198D463F6F6195367D0040C9F40140B719
+                  0040C7C40D5BEE3F5DFD7EFF9B46A3D14B165669D30700944C1F007497010074
+                  8FDC7FE2FAFDFE0FC490C6C22A5DFA0080D2E903806E3200800E890DA5DC7F1E
+                  EA218D8555C2EA3E807F5B3F05288E3E00E81E0300E888B841CBFDE76532997C
+                  C2C22A792F575F5FB8F32D4059F40140F718004007C48D59EE3F3FBD5EEF9285
+                  55DAE214C06C36FBF4F5EBD7FF5D7D09A028D10770F3E6CDCFB8574137180040
+                  37C8FD672A1656FA00D21643800B172EFC537D0040A9AAD7C01FAD1EC4D6A003
+                  0C002073B17194FBCF9B3E80F4E903004AA70F00BAC1000032163762B9FF6E18
+                  0E871FB3B04A9E3E00A058FA00A01B0C002053710396FBEF8ECB95A3A3A37F6D
+                  6195AE7BFA00FE7D7D09A028115BBB75EBD68BEE55902F0300C897DC7FC75CBA
+                  74E9EF1C1F1FBF606195AEBA0FE013D7AE5DFBF3FA124051CE9F3FFF63D583D8
+                  1A64CA000032141B44B9FF6EDADADAFA60F5606195B01802F4FBFDDFAD9F0214
+                  471F00E4CB00003213375CB9FF6E1B8D461FB5B04ADECBD57FA32FD6DF031445
+                  1F00E4CB00003212375AB9FFEEEBF7FBEF188FC7FFD2C22A5D710AE0CC9933BF
+                  AA0F0028953E00C8930100E445EEBF10BBBBBB7F6F369B3D6B61952E7D0040E9
+                  F401407E0C002013B1111C8FC772FF05A936981FAE1E2CAC12A60F0028DDF5EB
+                  D79F34AC867C18004006E2C61AB9FFDDDD5DB9FFC25CBB76ED431656C9D30700
+                  146B7B7BBBA70F00F2610000898B1BAADC7FB9F6F7F7DF35994C3E6761952E7D
+                  0040E9F401403E0C00207D72FF85EBF57AEF9BCD66CF5958A54B1F00503A7D00
+                  9007030048586CF82693C92FD74F2958B5C17CA27AB0B04A983E00A074D3E9F4
+                  29C36A489B0100242A6EA0F5E7FDF7EB4B144E1F4016F40100C5DAA9E80380B4
+                  19004082E2C629F7CFFDA20F603C1E7FDEC22A5DFA0080D2E90380B41900409A
+                  E4FE79A0DDDDDDF71E1F1F3F6F61952E7D0040E9F40140BA0C002031B1B193FB
+                  E7245B5B5B8F570F165609D30700944E1F00A4C900001212374AB97F16311A8D
+                  3E6A6195BCE80378A9FE1EA028D10750DDAB5E75AF82B418004022E20629F7CF
+                  A2FAFDFE3BF401A4ADEE0378511F0050AAEA5EF5A83E00488B0100A443EE9F53
+                  D107903E7D0040E9F401405A0C002001B18193FB6719FA00D2A70F00289D3E00
+                  488701006C58DC10E5FE59C5C1C1C14F5958252FFA00BE587F0F5094E803A8EE
+                  55AFB857C1E61900C006C58D50EE9F550D06836F9D4C26BF696195AEBA0FE057
+                  F50100A5AAEE5557F401C0E61900C066C9FDD3885EAFF783B3D9EC590BAB74E9
+                  03004AA70F0036CF00003624366A72FF34A9DA607EB87AB0B04A983E00A074FA
+                  0060B30C006003E2C627F7CF3A543F57572DAC92A70F0028963E00D82C030068
+                  59DCF0E4FE5997EAE7EADDD3E9F4B31656E9D20700944E1F006C8E0100B44FEE
+                  9FB5DAD9D979FF6C367BC6C22A5DF7F401FC9FFA124051F401C0661800408B62
+                  4326F74F1BAA0DE6CF540F165609ABFB005EAE9F0214471F00B4CF00005A1237
+                  38B97FDA54FDBC7DC0C22A79FA008062E90380F61900400BE2C626F74FDBAA9F
+                  B76FBF71E3C6AF5B58A54B1F00503A7D00D02E03006887DC3F1B71F1E2C51F9E
+                  CD66CF5A58A5EB9E3E803FAF2F0114451F00B4C70000D62C365E72FF6C52B5C1
+                  FC70F5606195B0BA0FE077EBA700C5D10700ED300080358A1B99DC3F29B876ED
+                  DA872CAC92A70F0028963E0068870100AC49DCC0E4FE49C5FEFEFEBB2693C9E7
+                  2CACD2A50F00289D3E00583F0300581FB97F92D2EBF5DE379BCD9EB3B04A973E
+                  00A074FA0060BD0C00600D628325F74F8AAA0DE613D5838555C2F40100A5D307
+                  00EB6300000D8B1B96DC3F291B0E871FB1B04A5EF401BC547F0F5094E803188D
+                  46AFBA5741F30C00A04171A392FB2775972F5F7EE7783CFEBC8555BAEA3E8017
+                  F50100A5EAF7FB8FEA0380E6190040B3E4FEC9C2EEEEEE7B8F8F8F9FB7B04A97
+                  3E00A074FA00A0790600D090D848C9FD9393ADADADC7AB070BAB84E903004AA7
+                  0F009A6500000D881B93DC3F39D2079085E803F862FD3D4051A20FE0E0E0E015
+                  F72A68860100AC286E4872FFE44A1F40FAEA3E805FD50700946A30185CD10700
+                  CD300080D5C9FD93B5BA0FE0050BAB74E903004AA70F009A6100002B880D93DC
+                  3F5DB0B5B5F5C1EAC1C22A61FA0080D2E90380D51900C092E20624F74F978C46
+                  A39FB5B04A9E3E00A058FA0060750600B084B8F1C8FDD335FD7EFF5B8E8E8E7E
+                  CBC22A5DFA0080D2E90380D51800C072E4FEE9A44B972EBD471F40DAF40100A5
+                  D30700CB330080538A8D91DC3F5DA60F207DFA0080D2E90380E51800C029C48D
+                  46EE9F128C46A39FB3B04A9E3E00A058FA0060390600B0A0B8C1C8FD538A7EBF
+                  FFCD474747FFCAC22A5DFA0080D2E90380D3330080C5C9FD53944B972EFD5D7D
+                  0069D30700944E1F009C8E01002C20364072FF94481F40FAF40100A5D307008B
+                  33008087881B8ADC3F25D30790057D0040B1F401C0E20C00E004712391FBA774
+                  FA00D2A70F00289D3E00588C01009C4CEE1F2AFA00D2A70F00289D3E00783803
+                  009823363A72FFF0267D00E9D30700944E1F009CCC00001E206E1C72FFF076FA
+                  00B2107D005FAEBF07288A3E0038990100DC276E1872FFF060FA00D257F7017C
+                  6A3C1EFFC7FA124051F401C07C0600F07672FF7082BA0FE0790BAB74C5106067
+                  67E7630707077F515F02288A3E0078300300B8476C68E4FEE1E1B6B6B61EAF1E
+                  2CAC12164380BDBDBDDFA99F0214471F00BC9D0100D4E20621F70F8B3B3838F8
+                  290BABE4E903008AA50F00DECE00002A716390FB87D3190C06DF3A994C7ED3C2
+                  2A5DF7F401FC617D09A028FA00E0AD0C00E00EB97F5842AFD7FBC1D96CF69C85
+                  55BAEA3E805FD20700944A1F00BCC90080E2C5C645EE1F96576D309FA81E2CAC
+                  12A60F00289D3E00B8C30080A2C58D40EE1F5657FD1E5DB5B04A9E3E00A058FA
+                  00E00E03008A153700B97F6846F57BF4EEC964F21B1656E9D20700944E1F0018
+                  005036B97F6850AFD7FBA16A83191F0F48A2F40100A5D30740E90C0028524C7E
+                  E5FEA179E3F1F869EFACA44D1F00503A7D0094CC0080E2C40BFEB56BD77E47EE
+                  1F9A57FD5E5D3C3C3CFC7D0BABE4451FC04BF5F70045893E80D168F4AA7B1525
+                  3200A028F1421FB9FFFDFDFDEFAA2F010DDBDBDBFB5B376FDEFC350BAB74D57D
+                  002FEA03004AD5EFF71FD50740890C00288DDC3FB4E0C2850B3F329BCD9EB5B0
+                  4A973E00A074FA0028910100C5888D88DC3FB4A7DA607EB87AB0B04A983E00A0
+                  74FA00288D0100458817769FF70FEDBB76EDDA872CAC92177D005FAEBF07284A
+                  F4011C1C1CBCE25E45290C00E8BC7841F779FFB019FBFBFBEF9A4C269FB3B04A
+                  57DD07F0297D0040A90683C1157D0094C2008012C8FDC306F57ABDF7CD66B3E7
+                  2CACD2A50F00289D3E004A610040A7C5866332997CA27E0A6C48B5C17CA27AB0
+                  B04A983E00A074FA00288101009D152FE075EEFF527D09D8A0E170F8110BABE4
+                  E903008AA50F80121800D049F1C22DF70F69B97CF9F23BC7E3F1E72DACD2A50F
+                  00289D3E00BACE0080AE92FB8704EDEEEEBEF7F8F8F8050BAB74DDED03180E87
+                  FFB7BE0450147D00749901009D131B0BB97F48D7D6D6D607AB070BAB84C51060
+                  7F7FFF4BF55380E2E803A0AB0C00E89478A196FB87F48D46A39FB3B04A9E3E00
+                  A058FA00E82A03003A235EA0E5FE210FFD7EFF9BF501A44D1F00503A7D007491
+                  01005D22F70F19A9FB009EB7B04AD7DD3E80838383BFA82F0114451F005D6300
+                  4027C40642EE1FF2B3B5B5F578F5606195B01802ECEDEDFD4EFD14A038FA00E8
+                  120300B2172FC872FF90AFD168F4510BABE4E903008AA50F802E3100206BF142
+                  2CF70F79EBF7FBEFD00790367D0040E9F401D0150600E44EEE1F3A401F40FAF4
+                  0100A5D3074017180090ADD828C8FD4377E803489F3E00A074FA00C89D010059
+                  8A175EB97FE81E7D0059D00700144B1F00B93300203BF1822BF70FDDA40F207D
+                  77FB008E8E8EFE537D09A028FA00C89901003992FB870E8B3E80D96CF69C8555
+                  BA6208D0EBF57E511F00502A7D00E4CA0080ACC48640EE1FBAAFDA603E513D58
+                  58254C1F00503A7D00E4C800806CC40BACDC3F94E3E0E0E0A72CAC92A70F0028
+                  963E007264004016E28555EE1FCA32180CBE753299FCA68555BAEEF6018CC7E3
+                  3FAC2F0114451F00B93100201772FF50A05EAFF783FA00D21643809D9D9D5FD2
+                  0700944A1F003931002079B1F097FB8772E903489F3E00A074FA00C885010049
+                  8B1752B97F401F4016F40100C5D207402E0C004856BC80CAFD03411F40FAF401
+                  00A5D307400E0C004899DC3FF086BA0FE0590BAB74E903004AA70F80D4190090
+                  A458E0CBFD03F7AB36981FAE1E2CAC12A60F00289D3E005266004072E205F3DA
+                  B56B5F91FB071EE4F0F0F0710BABE4451FC04BF5F70045893E80D168F4AA7B15
+                  2932002029F14219B9FFFDFDFDC7EA4B006FB1B7B71727847EC3C22A5D751FC0
+                  8BFA008052F5FBFD47F501902203005223F70F3C54AFD7FB217D0069D3070094
+                  4E1F002932002019B19097FB0716A50F207DFA0080D2E9032035060024215E18
+                  7DDE3F705AC3E1F0C72DAC92177D005FAEBF07284AF4011C1C1CBCE25E452A0C
+                  00D8B87841F479FFC0322E5FBEFC1DD3E9F4B31656E9AAFB003EA50F0028D560
+                  30B8A20F805418009002B97F60693B3B3BEFAF36988FD74F49903E00A074FA00
+                  488501001B159350B97F6055D5EB888C65E2F40100A5D307400A0C00D8987801
+                  94FB079AB0B3B3B32D6399057D0040B1F4019002030036225EF8E4FE8126C958
+                  A6EF6E1FC0D1D1D11FD597008AE25EC5A61900B02972FF40E3642CD31743805E
+                  AFF70BAFBDF6DAFFAB2F0114C5BD8A4D3200A07531F194FB07D6653A9D3EE99D
+                  95B4C510603018FC76FD14A038FA00D81403005A152F7472FFC03AEDECECF464
+                  2CB3F0F2EDDBB7BF527F0F50147D006CCA99FA11D62E5EE022F7EFE83FD0869B
+                  376F7EF5DCB973CFC4BBCDF5251213F785F178FCF9DDDDDDF7D697008AE25E45
+                  DB9C00A04D72FF406B642CD3A70F00289D7B156D3300A015F12E8FDC3FD03619
+                  CBF4E903004AE75E459B0C0058BB784193FB0736213296C3E1F0F72CAC92A70F
+                  0028963E00DAA40380B58A1732B97F60D36EDCB8F107E7CF9F7F5AC6325D71BF
+                  D00700944C1F006D7002807593FB0736EEC2850B3F72E6CC99C7EBA724481F00
+                  503A7D00B4C10080B5897773A6D3A9DC3F9084F178FCB4E39569D30700944E1F
+                  00EB6600C05AC40B57E4FE777676E4FE8124F47ABD8BFA00B2A00F0028963E00
+                  D6CD0080C6C50B56E4FEF7F6F6BEB7BE049084CB972F7FC7743AFDAC8555BAE2
+                  14C0377EE337BE707474F447F52580A20C06832BB76EDD7AD1BD8A753000601D
+                  E4FE8164EDECECBC5F1F40DAF40100A5D307C0BA1800D0A89854CAFD03A9D307
+                  903E7D0040E9F401B00E060034265EA0E4FE811CE803C8863E00A058FA005807
+                  03001A112F4C72FF404EF401A44F1F00503A7D0034CD0080A6C8FD03D9893E80
+                  EA41C63261FA0080D2E903A0490600AC2C269272FF40AE642CD3A70F00289D7B
+                  154D31006025F14224F70FE44CC6321BFA008062B957D114030096162F4072FF
+                  4017C858A6AFEE03F8F2743A7DADBE045014F72A9A6000C02AE4FE81CE90B14C
+                  572C76ABAFE72793C9CBDBDBDB97EBCB00C571AF625567EA473895588C4DA7D3
+                  3F75F41FE8926A8339AE3698DF15EF36D797D8B0B8DFC469330367803BAA7BD5
+                  A4BA573DE65EC5329C00E0D4623126F70F7451F5BAD693B14C477DBFF9B2CD3F
+                  C09BF401B00A27003815EFC40025B879F3E657CF9D3BF78C775736A35ED45E9D
+                  4C26BFDCEBF5FA77AE02702FF72A96E10400A725F70F749E8CE5E6DC1D349F39
+                  73E69336FF00F3B957B10C270058582CCAE4FE8152E803685FDC67E2C8FFDEDE
+                  DE77D7970038813E004ECB090016522FCAE4FE8162E803684FFC3BAEBEA2E5FF
+                  BFD9FC032C4E1F00A7E504000F152F2872FF40A9642CD7CB3D066075EE552CCA
+                  09001621F70F144BC6727D62F3AFE51F6075EE552CCA09004E148B33B97FA074
+                  D5EBE0F8E2C58BFA001A521F55D5F20FD0207D002CC20900E68A055A648A6CFE
+                  81D2550B2A7D000D897F875AFE019AA70F80453801C003C50BC7AD5BB75EAC8F
+                  13015091B15C4DDC5BB4FC03AC977B152771028079AEDAFC03BC958CE57262E3
+                  5F7D45CBFF9FDAFC03AC977B1527710280B789859ADC3FC083559BD8E9F6F6F6
+                  DFF6CECA62E29EA2E51FA05DFA0098C70900DE22166A72FF00F355AF8FDBC3E1
+                  F0F7E2F5B2BEC41CF1EF68341A7DC1E61FA05DFA0098C70900DE102F1072FF00
+                  8BB971E3C61F54AF974F7B77E5EDEA0567B4FC7FBCD7EBEDDFB90A40DBF40170
+                  3F2700B897DC3FC0822E5CB8F02367CE9C79BC7E4A2D36FFF7B4FCDBFC036C90
+                  3E00EEE70400AF8B059BDC3FC0E98CC7E3EBD5EBE615EFACDC11F79238F2DFEF
+                  F7BFAFBE04C086E903E05E4E00F0FA824DEE1FE0F47ABDDE457D0077EE23D5D7
+                  F3E3F1F84F6CFE01D2A20F807B390150B8782190FB07584DC97D00711FD1F20F
+                  903E7D0004270090FB075851F401CC66B3674B7B7725FE79B5FC03E4411F00C1
+                  00A060B1709B4EA79FA89F02B082B367CF7EB87A28626115F78FEACB917F80CC
+                  546BFFA74A1B56F3560600858A5F7CB97F80661D1E1E5EEDFAC22AFEF96EDFBE
+                  FD2BD1F2BFBBBBABE51F2023D107301A8D5E35042897014081E2173E72FF83C1
+                  E04A7D098006ECEDEDBDFBC68D1BBFDED58555FC73D547FE7FA2BE044066FAFD
+                  FEA3B11730042893014099E4FE01D6E4E2C58B3FDCB53E80F867A9BE1CF907E8
+                  087D00E5F229008589459CCFFB0758BFD96CF6C9B367CFBE503FCD56DC37E2C8
+                  BF77FD01BA6552D9DEDE7ECCA70294C5098082C4224EEE1FA01D8787871F88D7
+                  DDFA6996E2CFEFC83F4037451F40EC0D72BF57713A4E0014227EB17DDE3F40BB
+                  C6E3F11F56EBAB5FCAEDDD957A317875381C7EEC72E5CE5500BAE8E6CD9B5F3D
+                  77EEDC334E0294C1098072C8FD03B4ACD7EBBD6F369B3D97D3BB2BF167BDDBF2
+                  6FF30FD07DFA00CA6200508058CC4DA7D327EBA700B4E8ECD9B34F540F592CAC
+                  E27EE1C83F4079AABDC253390DAB599E0140C7C52F729DFBEFD5970068D9B56B
+                  D73E94F2C22AFE6CD5D7F3C3E1F08FB5FC0394471F403974007458FC02CBFD03
+                  A421D53E80B85768F90720E803E83E2700BA4DEE1F201129F601C49FC5917F00
+                  EED207D07D06001D158B3AB97F80B4A4D20710F788EAEBF9838383FFEAC83F00
+                  F7D207D06D06001D14BFB072FF0069DA741F40FCBDEFB6FC0F0683BF565F0680
+                  D7E903E83603808E895FD4C8FD578BBA2BF5250012B2BFBFFFAEC964F2B94D2C
+                  ACE2EFE9C83F000F137B89D8531802748F0140F7C8FD0324AEED3E80F8FB545F
+                  8EFC03B0307D00DDE453003A241678D3E9F4CF1CFD07C8C36C36FBE4D9B3675F
+                  A89FAE45DC1BB4FC03B08C49657B7BFB319F0AD01D4E0074442CF0E4FE01F232
+                  1C0E3F12AFDFF5D3C6C55F7B341ABD64F30FC032F401748F13001D10BF903EEF
+                  1F204F4747477FD4EBF57EA1C97757EA85DAD56AD1F68B8AFE0058D5CD9B37BF
+                  7AEEDCB9679C04C89F1300DD20F70F90A9DDDDDDF71E1F1F3FDFD4BB2BF1D7D1
+                  F20F4093F40174870140E662A1379D4E3F513F0520435B5B5B8F570F2B2FACE2
+                  9EA0E51F8075B87EFDFA934D0DABD91C03808CC52F609DFBBF545F022053C3E1
+                  F0A7975D58C5FFAFFA7AFEDAB56BFF45CB3F00EBB0BDBDDDD307903F1D00998A
+                  5F3CB97F806E198D46FF797777F71F9F266319F7032DFF00B4451F40DE9C00C8
+                  97DC3F40C75CBA74E93DB76EDDFAD4A2EFAEC4FF4ECB3F006DD207903703800C
+                  C5826F3A9D3E593F05A043AA85D54F560F272EACE23E507DDD3DF2FF03F56500
+                  6845B517796AD16135693100C84CFCA2F9BC7F806E1B8FC71F9FB7B08AEBC7C7
+                  C7FF2C5AFEF7F7F7FF7A7D19005A53ED4576F401E4C9002023F10B16B9FFC160
+                  70A5BE044007EDEEEEEE479BFFFD0BAB781E47FEB7B6B63E505F02808D883D49
+                  EC4D0C01F262009017B97F8042449BFFDD8555FDE5C83F0049D107901F9F0290
+                  8958FC4DA7D33F73F41FA02CD5EBFF4B5FFFFAD72F7AD71F80144D2ADBDBDB8F
+                  F954803C1800642036FF91B171F41F000048CDE1E1E1FFBA74E9D24F1A02A44F
+                  042071B1F997FB07000052D5EFF71FD50790070380F4C9FD03000049D3079007
+                  118084C9FD030000B9D007903E2700127537F76FF30F0000E4A0DABBECC41E46
+                  14205D4E0024E86EEEDFD17F00002037376FDEFCEAB973E79E7112203D4E00A4
+                  49EE1F0000C8923E807439019018B97F00002077FA00D2E4044042E4FE010080
+                  2ED007902627001221F70F0000748D3E80B43801900EB97F0000A053F401A4C5
+                  098004C8FD0300005DA50F201D4E006C98DC3F0000D065FA00D2E104C006C9FD
+                  030000A5D007B0794E006C96DC3F000050047D009BE704C086C8FD030000A5D1
+                  07B0594E006C80DC3F000050227D009BE50440CBE4FE010080D2E903D80C2700
+                  DA27F70F0000144D1FC0663801D022B97F0000803BF401B4CF098096C8FD0300
+                  00BC491F40FB9C006881DC3F0000C083E903688F1300ED90FB07000078007D00
+                  ED710260CDE2DDFFEBD7AFFFD9F6F6B6A3FF0000000FA00FA01D4E00ACD1DDDC
+                  BFCD3F0000C07CFA00DAE104C09AC8FD0300009C8E3E80F57202607DE4FE0100
+                  004E411FC07A3901B00672FF000000CBD107B03E4E00344CEE1F00006079FA00
+                  D6C7098006C9FD03000034431F40F39C006896DC3F00004003F40134CF098086
+                  C8FD030000344B1F40B39C006880DC3F000040F3F40134CB098015C9FD030000
+                  AC973E80663801B03AB97F00008035D207D00C27005620F70F0000D00E7D00AB
+                  7302604972FF000000EDD107B03A27009620F70F0000B019FA0096E704C072E4
+                  FE01000036401FC0F29C003825B97F000080CDD207B01C27004E41EE1F000060
+                  F3F4012CC7098005C9FD030000A4451FC0E93801B038B97F00008084E803381D
+                  27001620F70F000090267D008B7302E021E4FE010000D2A50F60714E009C40EE
+                  1F0000200FFA001ECE098093C9FD03000064401FC0C339013087DC3F0000405E
+                  F4019CCC09800790FB070000C88F3E80933901701FB97F000080BCE903783027
+                  00DE4EEE1F00002063FA001ECC09807BC8FD03000074833E80B77302A026F70F
+                  0000D01DFA00DECE09808ADC3F00004037E9037893130077C8FD03000074903E
+                  8037157F0240EE1F0000A0DBF401DC51F40900B97F000080EED3077047B12700
+                  E4FE010000CA527A1F40C92700E4FE0100000A527A1F40912700E4FE010000CA
+                  54721F40712700E4FE010000CA55721F40512700E4FE0100000825F601947602
+                  40EE1F00008022FB008A390120F70F0000C0BD4AEB0328E20480DC3F000000F7
+                  2BAD0FA0F32700E4FE0100003849297D00259C0090FB07000060AE52FA003A7D
+                  0220DEFD9F4EA7FF3D8E75D497000000E06D4AE803E8EC0980BBB97F9B7F0000
+                  001E26F68E5DEF03E8E40900B97F00000096D1E53E80AE9E0090FB070000E0D4
+                  BADC07D0B9130072FF000000ACA2AB7D009D3A0120F70F0000C0AA624FD9C53E
+                  80CE9C0090FB070000A0495DEB03E8D20900B97F0000001AD3B53E804E9C0090
+                  FB070000601DBAD40790FD0900B97F000000D625F69A5DE903C8FA0480DC3F00
+                  00006DE8421F40EE2700E4FE01000058BB2EF401647B0240EE1F00008036E5DE
+                  0790E50900B97F000000DA167BD09CFB00B23B0120F70F0000C026E5DA0790E3
+                  0900B97F0000003626D73E80AC4E00C8FD03000090821CFB00B2390120F70F00
+                  00402A626F9A5B1F40360380A3A3A35F180C0657EAA7000000B051B1478DBD6A
+                  FD3479D94400EAA94AD69FB908000040E7BC9CEBC70202000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  00000000000000000000D0A06FF886FF0FA79AED063E1EAAAC0000000049454E
+                  44AE426082}
+                FileName = 'C:\Users\Anonymous\Downloads\landscape-1024px.png'
+              end>
+            Align = Client
+            Margins.Left = 25.000000000000000000
+            Margins.Top = 25.000000000000000000
+            Margins.Right = 25.000000000000000000
+            Margins.Bottom = 25.000000000000000000
+            Size.Width = 577.000000000000000000
+            Size.Height = 139.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object MapImage: TImage
+          MultiResBitmap = <
+            item
+            end>
+          Align = Client
+          Size.Width = 627.000000000000000000
+          Size.Height = 209.000000000000000000
+          Size.PlatformDefault = False
+          WrapMode = Stretch
+        end
+      end
+    end
+  end
+  object Layout3: TLayout
+    Anchors = [akRight, akBottom]
+    Position.Y = 862.000000000000000000
+    Size.Width = 643.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 22
+    object AddLogEntryCircleBTN: TCircle
+      Align = Right
+      ClipChildren = True
+      Fill.Color = xFF00A1A1
+      Position.X = 512.000000000000000000
+      Size.Width = 131.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      OnClick = AddLogEntryCircleBTNClick
+      OnMouseDown = AddLogEntryCircleBTNMouseDown
+      object AddButton: TSpeedButton
+        Align = Center
+        HitTest = False
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'addtoolbutton'
+        Text = 'AddButton'
+      end
+      object ShadowEffect1: TShadowEffect
+        Distance = 3.000000000000000000
+        Direction = 45.000000000000000000
+        Softness = 0.300000011920929000
+        Opacity = 0.600000023841857900
+        ShadowColor = claBlack
+      end
+    end
+  end
+end

@@ -1,0 +1,437 @@
+object ProjectDetailsFrame: TProjectDetailsFrame
+  Size.Width = 610.000000000000000000
+  Size.Height = 591.000000000000000000
+  Size.PlatformDefault = False
+  object ToolBar7: TToolBar
+    Size.Width = 610.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 16
+    object ToolBarBackgroundRect: TRectangle
+      Align = Contents
+      Fill.Color = x80FFFFFF
+      Size.Width = 610.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object Label13: TLabel
+      Align = Contents
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 610.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Edit Project'
+      TabOrder = 1
+    end
+    object spedProjBack: TSpeedButton
+      Align = Left
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowlefttoolbutton'
+      Text = 'Go to tabProjectsList'
+      OnClick = spedProjBackClick
+    end
+    object spedProjDelete: TSpeedButton
+      Align = Right
+      Position.X = 562.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'trashtoolbutton'
+      OnClick = spedProjDeleteClick
+    end
+  end
+  object TabControl1: TTabControl
+    Align = Client
+    FullSize = True
+    Size.Width = 610.000000000000000000
+    Size.Height = 334.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 17
+    TabPosition = Bottom
+    OnChange = TabControl1Change
+    Sizes = (
+      610s
+      308s
+      610s
+      308s)
+    object DetailsTab: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 304.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Details'
+      ExplicitSize.cx = 304.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object Layout9: TLayout
+        Align = Client
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Margins.Bottom = 20.000000000000000000
+        Size.Width = 570.000000000000000000
+        Size.Height = 268.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Layout6: TLayout
+          Align = Top
+          Size.Width = 570.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object Label5: TLabel
+            Align = Client
+            StyledSettings = [Size, FontColor]
+            Margins.Left = 3.000000000000000000
+            Margins.Top = 3.000000000000000000
+            Margins.Right = 3.000000000000000000
+            Margins.Bottom = 3.000000000000000000
+            Size.Width = 564.000000000000000000
+            Size.Height = 26.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            Text = 'Project Title'
+            TabOrder = 0
+          end
+        end
+        object edtProjTitle: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 1
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          Position.Y = 32.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 570.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Size, FontColor]
+          OnKeyDown = edtProjTitleKeyDown
+          OnExit = edtProjTitleExit
+        end
+        object Label3: TLabel
+          Align = Top
+          StyledSettings = [Size, FontColor]
+          Margins.Left = 3.000000000000000000
+          Margins.Top = 3.000000000000000000
+          Margins.Right = 3.000000000000000000
+          Margins.Bottom = 3.000000000000000000
+          Position.X = 3.000000000000000000
+          Position.Y = 77.000000000000000000
+          Size.Width = 564.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          Text = 'Project Description'
+          TabOrder = 2
+        end
+        object mmoProjDesc: TMemo
+          Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+          DataDetectorTypes = []
+          Align = Client
+          Margins.Bottom = 20.000000000000000000
+          Size.Width = 570.000000000000000000
+          Size.Height = 98.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          OnExit = mmoProjDescExit
+          Viewport.Width = 570.000000000000000000
+          Viewport.Height = 98.000000000000000000
+        end
+        object GenReportButton: TButton
+          Align = Bottom
+          Position.Y = 219.000000000000000000
+          Size.Width = 570.000000000000000000
+          Size.Height = 49.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          Text = 'Generate Report'
+          OnClick = GenReportButtonClick
+        end
+      end
+    end
+    object EntriesTab: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 304.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Entries'
+      ExplicitSize.cx = 304.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object lstEntries: TListView
+        ItemAppearanceClassName = 'TImageListItemAppearance'
+        ItemEditAppearanceClassName = 'TImageListItemDeleteAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        Images = ImageList1
+        Align = Client
+        Size.Width = 610.000000000000000000
+        Size.Height = 308.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        StyleLookup = 'listviewstyle'
+        OnItemClick = lstEntriesItemClick
+        OnDeletingItem = lstEntriesDeletingItem
+      end
+    end
+  end
+  object Layout1: TLayout
+    Align = Top
+    Position.Y = 48.000000000000000000
+    Size.Width = 610.000000000000000000
+    Size.Height = 209.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 18
+    object Layout2: TLayout
+      Align = Contents
+      ClipChildren = True
+      Size.Width = 610.000000000000000000
+      Size.Height = 209.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object BackgroundRect: TRectangle
+        Align = Client
+        Fill.Color = xFF95999F
+        Size.Width = 610.000000000000000000
+        Size.Height = 209.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object BackgroundImage: TImage
+          MultiResBitmap.Height = 1326
+          MultiResBitmap.Width = 1306
+          MultiResBitmap = <
+            item
+            end>
+          Align = Contents
+          HitTest = False
+          MarginWrapMode = Tile
+          Margins.Left = -400.000000000000000000
+          Margins.Top = -400.000000000000000000
+          Margins.Right = -400.000000000000000000
+          Margins.Bottom = -400.000000000000000000
+          Size.Width = 1410.000000000000000000
+          Size.Height = 1009.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+    end
+    object Layout3: TLayout
+      Align = Bottom
+      Margins.Bottom = -25.000000000000000000
+      Position.Y = 184.000000000000000000
+      Size.Width = 610.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object AddLogEntryCircleBTN: TCircle
+        Align = Right
+        ClipChildren = True
+        Fill.Color = xFF00A1A1
+        Position.X = 446.000000000000000000
+        Size.Width = 164.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        OnClick = AddLogEntryCircleBTNClick
+        OnMouseDown = AddLogEntryCircleBTNMouseDown
+        object AddButton: TSpeedButton
+          Align = Center
+          HitTest = False
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'addtoolbutton'
+          Text = 'AddButton'
+        end
+        object ShadowEffect1: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+    end
+  end
+  object ImageList1: TImageList
+    Source = <
+      item
+        MultiResBitmap.Height = 96
+        MultiResBitmap.Width = 96
+        MultiResBitmap = <
+          item
+            Width = 96
+            Height = 96
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+              38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              06C449444154785EED9D5B681D4518C773725AAB541BB5522FB15E6AADC582B5
+              3E14B4B5F8203EA888E4CDBE086A5EC442A5E24B0A56F1D297AAEFD1576B3588
+              4F15B548C142BD1514110C0D056B4C2C36F19A6AAA27F1F765FFA982C69C73F6
+              9BD95D333F186667B2F3EDF7FD67666F6777D391482412894422914824161C35
+              E5A5657A7AFA2CD2E65AADB6656A6AEA32AA2E565A41B272837482344A3A69CB
+              AC3B4C7E88FC7DD2EF2C275A01C1EB887D57A3D178833441B92DAC2D69C06C51
+              ACCB7C622E10E96CC4DA8E68C3330A3A6236B1FD286989369798057D1621CC36
+              441ACDE40A876D836D3DCCE2226D7E618310F722CAD08C3A11B16DD211F7C88D
+              85071AD411E1854C8EE2C087E7C916D6F18180BB08FCC08C022540BE74C9BDA8
+              443F0D65DA7713EC7B9D9D9D6B54550AF06B9053D6DBF1CB4E61A311B50310FE
+              0A023D4C9076FE5E3AF06D04DF6EA6238EAB2A38D13A80E096D3011F11E02A55
+              9512FC3C46076CC4CF315505A5537950107E31697FD9C537CC47F3D57C565550
+              A27400F413D8462D971EF9DA9F952A0E537A2BA3A99298EF0A2318418F0104B0
+              84388E31A24A79D09D0FFC1FE178B00AFF2755E54EE85DD08EAA8A6FC8F7C7B2
+              521882CD00467E1723E81B8258AAAA4A420C13C4D0CD4CF85155AE049B0138BE
+              B3EAE21B1603B1F4A9E84E9019C0E85F8CD3E3387FAEAA2A0DB1FC4C2CCB9905
+              EE3FEE04990174C0DD21C4478849D23EECDF4F7103E902A50D56677FB37528BB
+              422CE7594C2A969F46A3F12A0EBB82CD7710F74A6D624E6C1DD67D5BCDDCC0E6
+              3E6DA2DCE06B8DF4C38CD74E10FC7332DF1434A9D1E699ACB51B1653D47B676D
+              C108DC94F9EB830929D32D43DB6765C6058B4DA6DD08710CD8AC3C3704FC2EFB
+              DF9D2AB60C6DFBCC868AB9E1207CAB16DD70EF00068ACB7D7E849B24E00748D3
+              AA6A196B4B7AD06CA92A17D859AD453742CC806B95E76580119CFBC7116C7C4D
+              36909572E3FE2352880EB85C792E18B9FBB5981B475B2B95BB11A203BC7E5B3D
+              A2DC032F5BCB94BB11A203ECC2C88311E51E78D93A5FB91B213AE037E579F13C
+              E7F6B2E57F95ADDC137B40D603976389F0B2E515DB19CADC01372AF7C0CBD6C2
+              E900AE27DC6E7E39DAAA44071C559E971E2E7CAED672DBC8464F56CA8D576C67
+              70EF002E7C3ED6622EB063BF27F793DA3E805A5BB361B654950BAFD882C2885B
+              47D06EB47A27F4EFD07C7766C5078B4DA6CB0B7E7622DAA9CC651F5ABD234A13
+              BB1DFD74D6DA07C5146297ED0FCEDA9365AE60B3A91F64587595AD9BB5F2039B
+              6F6913AE04F98101A11EAAD56AEE4F9661D72E84DED4BD9DCFC8BF22377DAE22
+              5F4F7E27790FFB6AF7C70AB1DD8BDD975474235407D883B8DFE17010FBB1211E
+              BBAD7D11F18CABCA8D20FB341CB5278B0F66A5FF050743886F043BA830625ED3
+              62E52196D7B5E84EB05D04D37629BBA131464EA55F0BB5E30E315C48279C5295
+              2BC166004E4F90EDCD4A95666F28F18DA0E7B5385EF967EC43C710FC2C85F3E7
+              416643A95EC86B16763F43F57ADDEB37EE7F25F8951DE2B77D2BA168F0BDED67
+              929A25F80CE0406C9F2118229879AF62CB043E1FC7E76BD805FDA1AA20049F01
+              1600E929152B033E3F195A7C23CA956AD56641ACD16F049F0186054240BB542C
+              3DF8BB2B86F846B47B35CC824E46D61774C45A5595127CB4B3B6EBE980295505
+              25CA0C302C2052DB0FDAC6021FFB62896F449B01B3705DF029236CBD8AA582D1
+              FF39E7FD37A8188568336016C40FFADA671E18F93BB4188DE81D40900718695E
+              4F2BBB613E3138DCDE256896E8BB208303F225047C94804BF11625BEFCC2C058
+              8D3FF6F9CBA8449F0106C17E4B7A5CC5C2315F8A10DF28640618CC821A23EF10
+              81DFA2AA42C007FB80D4263AA1ED3771F250580718047F1D1D61D706857C348F
+              ED37107E1DDB1F5455740AD905CDA2C0F764A542D853A4F846A133C060149EC3
+              2CB0AB4FF7D77FFE0BB63BCCE85FC3767F555521143A030C130021B6A9180DB6
+              F948D1E2970AAE905F612644C1B6A5CD164EE1BBA059D8252C439B2F199597AA
+              2A086C6794D1BF96EDFCA4AA42297C17348B09420AFF8DB65AEDBEB2885F4AD8
+              3D04FB9E34B65FD4661273814EF68DD14F66147304F18F9045F91668E5613FDD
+              8D602733E9F283AD316C56F6E38185806EB7215C2393B07DCC06E26F91D9442B
+              20DC13D2B16DCC86CC255A05FDEC75A70F32295B87B61F9295E64CAF92308257
+              22E4782669F3D0E67BDA7ABE6DBF7041C83B10B4E9E381AD6B6DD43CE101826E
+              97BEF362EBAA59C21306F6CBD2784E6C1DAD9EF0067DED3F2F1DCEA4FE27FA5B
+              FA8F792161F7B202A14F6492FF85D5D9DFB45A2224087D13829F96F626FE69AB
+              D39F133140F05EE96F07DD5E55276282F6F6318EDD2A26128944229148241289
+              4405E8E8F813E29CCCBD97CD7ABD0000000049454E44AE426082}
+            FileName = 
+              'C:\Users\Anonymous\Documents\Embarcadero\Studio\Projects\FieldLo' +
+              'gger-FMXTraining-master\baseline_location_on_white_48dp.png'
+          end>
+        Name = 'WhitePin'
+      end
+      item
+        MultiResBitmap.Height = 96
+        MultiResBitmap.Width = 96
+        MultiResBitmap = <
+          item
+            Width = 96
+            Height = 96
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+              38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              064E49444154785EEDDD5B6C14551800E0EE6DCECCD646A48A9A18154D68501F
+              8CA82F6AC078498C265844B26D34FA6055A0ADFA6657B005CAD647D38B128B89
+              176817822089D7008A415F84F06054C4C4A0265E28A21471E7B2BB5DE74FFE4D
+              A001DBEDFCFF396770BE84F4FF87EE74CEFC73CE9C9981695D24128944229148
+              2412F9DF89E1576D2D796AED7A53A49A0BB63B1F174D29994CD88DB31AF68D1D
+              1FDFBFE3B5EE55B8584B5A16A0B9AD675DDA122DFFD8EEB5B828907A4BFCE017
+              7074C770CF6A5CA40DAD0AB074F9DABE6422BEDC714B17E22252C248FE5D2A97
+              07DFD9D09DC545CA695180E627D7F4FA3BA7DD718B2C3B7E32611827BC627148
+              87E14979015A3B72470A8E7735A652F9C3DC9191FEAE6B3055425901FC71FEED
+              4A5DDD23982AE5EF844DFEF9E1514CA55252007FACDF5E2A4D3463AA856432BE
+              63DBAB2F2EC1541AE90558B6B2F763CF2BDD8BA9568430766D19CC4ADD36A905
+              C8AC5CBFCBF18A7763AA25D348EDCE0FBD700FA6ECE2F895DDD215BD3B75DFF9
+              00B611B615537609FCCACA3FE16E9E9898588AA9F6FC6D6D9ABF60D1BCEF0EEE
+              DD8E8BD848E901FE6CA715C3D090B5CDEC05C8B4F7FD8A61E8C8D876D621E8A1
+              A7D7E48AC5D27D98864EA95C6EB8FED63BC5A1037BF7E02272AC3D20114F3C83
+              616871B781AD0070B1E5154B694C430BDA006DC1941C5B0174BBD20D82B32D2C
+              0580BB9B189E37B8DAC4520053A4586F6CA52DE3F7C6D90DDB2C215E863F10C3
+              32FC6B165C6D62B915F1605B8F3F8DA6670A634F7E30FB9F57D399F6DC6EC7F5
+              EEC294D4BBC33DE4FB8B7C1ABAB8ADDBDFCAD8224CC940E3BFFE72CF5B989E13
+              7C4FD34D0BE7C662B11B711199A6050B63870F7EB6175312E443D09CC68B6EC6
+              904CAD47DECE8D6B1EE7385A39DA465E80F193A7488FFE4AA5F22686350BF2D9
+              B3A16E1B202F803F6FAEC73030B83F0F4733A63583CFC2ED654C03A36C5B15CB
+              2C880AC5C31199F7F66742DB029842FC86616094EBA2A66F01CCE427180646B9
+              2E6ADA16C0B65DB20B2BCA7551D3B600FE3C9E6C1A49B92E6ADA16206D9A9763
+              1818E5BAA8695B8082E391CDB929D7454DDB0238AE4B76D452AE8B9AB605002D
+              1DEB3FC570C628D6C189BC0096658C611898ED14172D7EA2FB0D4C6B069F8575
+              601A1865DBAAC80B600A8374CEED4F601EC3B066413E7B36D46D03E40538317E
+              EA7B0CC9D4FA7C018E7C8E67121C6D63991FAB7C2003633EE5B0733A8E5BDC2C
+              056869EF1BB35DF7124CC9C1E347CB34F7150AEE2F13954AE5827AF30ADB71EE
+              28D8DE65F82DE42C218E8D0E76CDC1940CCF2C285E378A110BD8D1C7FF3AF9B0
+              5FE4675DCF7B0E62CE9D0F2AB1CA0886A4D82ED1B986215538861FC0761D6009
+              E34F0C43CF34F8DAC2568072B9FC3A86A157AE4C6CC4901CDB1004CE9761886B
+              F8016C3D00D4A7C557188616771B587B00087B2FE03CFA016B0F001CF74F6491
+              B1EDEC05709CE23086A12363DBD9872090E9C81D751C8FFC2A9293691A63F981
+              ECA598B261EF01C075C3D70B646DB3941E005A3A73476D3B1CBD40D6D10FA4F4
+              00E00F411B30D49EEBCADB56693D00B474E47EB21DEF4A4CB56499C6CFA303D9
+              AB306527B50040F7EB02EE79FF64D286A0AAB4290E63A89DB465923FF19A8AF4
+              1E0074ED05B28F7E20BD07002395FA10436DA492C90F30944A490F009995B9E3
+              8EE7CDC65429B8DF9F1FCA36622A95921E006CCF1DC0503995DBA2AC07804C47
+              DFE78EE3DE86A912A629BEC80F74DD8EA9744A0B00549F90559C784FA76C08AA
+              4AC4E35B30944EE5CFAE52DE03808A97B7A64DE3C79181EC5C4C95D1A20040F6
+              50A47AE8A9523E0455A51209F617E455C9FC5953D1A60780D6CEBE6F6BF93D01
+              3391B6C4A191FEAEEB30554EAB0200EEA14897A1A74A9B21A8CADF3B2CFF0613
+              70AE7BA6B4EB0180E3FDD28691FC68EBD02AEDDEE0A8650100E5F9A0DE12DF6C
+              EEEFBA0153AD685B0040753ED06DDC3F9D76E78049A67C43D63450AC838DD63D
+              000479E5BD8ADF07502BED0B005A3B5F3A5CB09D79984E0B3C5E1CE97FBE0953
+              6D85A20020D3DE7B62BABFDECA14C9F1FCE0AA59986A2D340500D33D29EB7CD2
+              9D4CF793F019FCBDBA09C3739ACEF7E824543D002C5BB1EE3DAF58BE1FD33318
+              A9C4FB5B5F59FD00A6A110BA0200FF226DBF7F9176C63B3CD3963830D2DF750B
+              A6A111CA02804C7BEE98E37A17436C0AE38FFC6096ED3F8647CE014ECAB21FE4
+              4422914824128944229148307575FF02F3C02401CC1D01F50000000049454E44
+              AE426082}
+            FileName = 
+              'C:\Users\Anonymous\Documents\Embarcadero\Studio\Projects\FieldLo' +
+              'gger-FMXTraining-master\baseline_location_on_blue_48dp.png'
+          end>
+        Name = 'BluePin'
+      end>
+    Destination = <
+      item
+        Layers = <
+          item
+            Name = 'WhitePin'
+            SourceRect.Right = 96.000000000000000000
+            SourceRect.Bottom = 96.000000000000000000
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'BluePin'
+            SourceRect.Right = 96.000000000000000000
+            SourceRect.Bottom = 96.000000000000000000
+          end>
+      end>
+    Left = 520
+    Top = 168
+  end
+end

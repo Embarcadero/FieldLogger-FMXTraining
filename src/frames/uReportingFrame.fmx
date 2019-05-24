@@ -1,0 +1,74 @@
+object ReportingFrame: TReportingFrame
+  Size.Width = 589.000000000000000000
+  Size.Height = 678.000000000000000000
+  Size.PlatformDefault = False
+  object ToolBar8: TToolBar
+    Size.Width = 589.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object ToolBarBackgroundRect: TRectangle
+      Align = Contents
+      Fill.Color = x80FFFFFF
+      Size.Width = 589.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object Label6: TLabel
+      Align = Contents
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 589.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Report'
+      TabOrder = 1
+    end
+    object ShareButton: TSpeedButton
+      Align = Right
+      Margins.Top = -7.000000000000000000
+      Position.X = 541.000000000000000000
+      Position.Y = -7.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 55.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'actiontoolbutton'
+      Text = 'ShareAction'
+      OnClick = ShareButtonClick
+    end
+    object spedProjBack: TSpeedButton
+      Align = Left
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowlefttoolbutton'
+      Text = 'Go to tabProjectsList'
+      OnClick = spedProjBackClick
+    end
+  end
+  object WebBrowser1: TWebBrowser
+    EnableCaching = False
+    Align = Client
+    Size.Width = 589.000000000000000000
+    Size.Height = 630.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+  end
+  object SaveDialog: TSaveDialog
+    DefaultExt = 'html'
+    Filter = 'HTML Report Files|*.html'
+    Left = 448
+    Top = 112
+  end
+  object ActionList1: TActionList
+    Left = 264
+    Top = 232
+    object ShowShareSheetAction1: TShowShareSheetAction
+      Category = 'Media Library'
+    end
+  end
+end
