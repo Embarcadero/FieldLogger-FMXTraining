@@ -8,8 +8,8 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.IB,
   FireDAC.Phys.IBLiteDef, FireDAC.FMXUI.Wait, Data.DB, FireDAC.Comp.Client,
   FMX.Graphics, System.NetEncoding, FMX.ListView, FMX.ListView.Appearances,
-  fieldlogger.data, FireDAC.Comp.UI, System.Threading, System.Sensors,
-  FMX.Objects;
+  FireDAC.Comp.UI, System.Threading, System.Sensors, FMX.Objects,
+  FMX.VirtualKeyboard, FMX.Platform, fieldlogger.data;
 
 type
   TmainDM = class(TDataModule)
@@ -29,7 +29,7 @@ type
     function DeleteProject(AId: Integer): Boolean;
     function DeleteLogEntry(AId: Integer; AProject: TProject): Boolean;
     procedure LoadLogEntries(AId: Integer; AListView: TListView; AImageIndex: Integer; ABackgroundImage: TImage);
-    function CreateNewLogEntry(ABitmap: TBitmap; AProject: TProject; ALocation: TLocationCoord2D): Integer;
+    function CreateNewLogEntry(const ANote: String; ABitmap: TBitmap; AProject: TProject; ALocation: TLocationCoord2D): Integer;
     function GenerateReport(const AStyle: String; AProject: TProject): String;
   end;
   const
@@ -174,7 +174,7 @@ begin
   end);
 end;
 
-function TmainDM.CreateNewLogEntry(ABitmap: TBitmap; AProject: TProject; ALocation: TLocationCoord2D): Integer;
+function TmainDM.CreateNewLogEntry(const ANote: String; ABitmap: TBitmap; AProject: TProject; ALocation: TLocationCoord2D): Integer;
 var
   LogData: ILogData;
   LogEntry: TLogEntry;
@@ -190,6 +190,7 @@ begin
   LogEntry.Latitude := ALocation.Latitude;
   LogEntry.Longitude := ALocation.Longitude;
   LogEntry.TimeDateStamp := Now;
+  LogEntry.Note := ANote;
   MS := TMemoryStream.Create;
   try
     ABitmap.SaveToStream(MS);

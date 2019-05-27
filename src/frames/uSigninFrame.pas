@@ -7,7 +7,7 @@ uses
   System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Edit, FMX.Layouts, FMX.Controls.Presentation, FMX.Effects,
-  FMX.Filter.Effects, fieldlogger.authentication;
+  FMX.Filter.Effects, fieldlogger.authentication, System.ImageList, FMX.ImgList;
 
 type
   TSigninFrame = class(TFrame)
@@ -36,11 +36,16 @@ type
     DarkStyleLabel: TLabel;
     LightStyleLabel: TLabel;
     Layout3: TLayout;
+    GridPanelLayout1: TGridPanelLayout;
+    UserImageBlue: TImage;
+    LockImageBlue: TImage;
     procedure PasswordEditKeyDown(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);
     procedure SignInButtonClick(Sender: TObject);
     procedure DarkStyleLabelClick(Sender: TObject);
     procedure LightStyleLabelClick(Sender: TObject);
+    procedure UsernameEditKeyDown(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -98,6 +103,16 @@ begin
       end;
   end;
   SignInButton.Text := 'SIGN IN';
+end;
+
+procedure TSigninFrame.UsernameEditKeyDown(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  if Key = vkReturn then
+  begin
+    PasswordEdit.SetFocus;
+    Key := 0;
+  end;
 end;
 
 end.

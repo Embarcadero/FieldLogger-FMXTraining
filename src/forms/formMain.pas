@@ -41,28 +41,24 @@ type
     tabNewProject: TTabItem;
     LocationSensor1: TLocationSensor;
     tabReport: TTabItem;
-    StellarStyleBook: TStyleBook;
     ReportingFrame1: TReportingFrame;
     mmoReport: TMemo;
     mmoCSS: TMemo;
     ProgressFrame: TProgressFrame;
     VSB: TVertScrollBox;
     NewEntryFrame1: TNewEntryFrame;
-    NewProjectFrame1: TNewProjectFrame;
     WedgewoodLightSB: TStyleBook;
     MaterialOxfordBlueSB: TStyleBook;
-    GestureManager1: TGestureManager;
-    ActionList1: TActionList;
-    ProjectsChangeTabAction: TChangeTabAction;
-    EntryDetailsFrame1: TEntryDetailsFrame;
     ProjectDetailsFrame1: TProjectDetailsFrame;
     NetHTTPClient: TNetHTTPClient;
     DefaultImage: TImage;
     IdTCPClient1: TIdTCPClient;
-    SigninFrame1: TSigninFrame;
     CircleMD: TCircle;
     FloatAnimationMD: TFloatAnimation;
     ProjectsFrame1: TProjectsFrame;
+    SigninFrame1: TSigninFrame;
+    NewProjectFrame1: TNewProjectFrame;
+    EntryDetailsFrame1: TEntryDetailsFrame;
     procedure LocationSensor1LocationChanged(Sender: TObject;
       const OldLocation, NewLocation: TLocationCoord2D);
     procedure tbcMainChange(Sender: TObject);
@@ -110,7 +106,7 @@ type
     procedure SetReportScreen;
     procedure UpdateProject(const ATitle, ADesc: String);
     procedure DeleteLogEntry;
-    procedure SaveNewEntry(ABitmap: TBitmap);
+    procedure SaveNewEntry(const ANote: String; ABitmap: TBitmap);
     procedure NewProject(const ATitle, ADesc: String);
     procedure LoadCurrentProject(AId: Integer);
     procedure LoadProjectDetail(AId: Integer);
@@ -118,7 +114,6 @@ type
     procedure DeleteCurrentProject;
     procedure ClearCurrentProject;
     procedure UpdateLogEntries;
-    function GenerateMapURL(const Location,Address: string): string;
     procedure DownloadStaticMap(const ALocation:String; AHeight, AWidth: Single; AImage: TImage);
     function DetectInternet: Boolean;
     function DetectInternetAsync: Boolean;
@@ -131,8 +126,6 @@ type
     BUSY = 1;
     NOT_BUSY = 0;
     NO_CONNECTIVITY = 'No connectivity to the server detected.';
-    // Get an API key from here: https://developers.google.com/maps/documentation/embed/get-api-key
-    GOOGLE_MAPS_EMBED_API_KEY = '';
     // Get an API key from here: https://developers.google.com/maps/documentation/static-maps/get-api-key
     GOOGLE_MAPS_STATIC_API_KEY = '';
 
@@ -209,8 +202,12 @@ begin
   ProjectDetailsFrame1.lstEntries.ItemAppearanceObjects.ItemObjects.Detail.TextColor := TAlphaColorRec.White;
   ProjectDetailsFrame1.AddLogEntryCircleBTN.Fill.Color := $FF00A1A1;
   EntryDetailsFrame1.AddLogEntryCircleBTN.Fill.Color := $FF00A1A1;
-  NewEntryFrame1.CameraImage.Visible := True;
+  SignInFrame1.UserImageBlue.Visible := False;
+  SignInFrame1.UserImage.Visible := True;
+  SignInFrame1.LockImageBlue.Visible := False;
+  SignInFrame1.LockImage.Visible := True;
   NewEntryFrame1.CameraImageBlue.Visible := False;
+  NewEntryFrame1.CameraImage.Visible := True;
   FCurrentStyleId := 0;
 end;
 
@@ -224,8 +221,12 @@ begin
   ProjectDetailsFrame1.lstEntries.ItemAppearanceObjects.ItemObjects.Detail.TextColor := $FF506580;
   ProjectDetailsFrame1.AddLogEntryCircleBTN.Fill.Color := $FFD9DEE5;
   EntryDetailsFrame1.AddLogEntryCircleBTN.Fill.Color := $FFD9DEE5;
-  NewEntryFrame1.CameraImageBlue.Visible := True;
+  SignInFrame1.UserImage.Visible := False;
+  SignInFrame1.UserImageBlue.Visible := True;
+  SignInFrame1.LockImage.Visible := False;
+  SignInFrame1.LockImageBlue.Visible := True;
   NewEntryFrame1.CameraImage.Visible := False;
+  NewEntryFrame1.CameraImageBlue.Visible := True;
   FCurrentStyleId := 1;
 end;
 
@@ -334,6 +335,8 @@ end;
 
 procedure TfrmMain.NewProjectEntry;
 begin
+  NewEntryFrame1.ClearFields;
+
   // - Set sensors active.
 {$IFDEF ANDROID}
   PermissionsService.RequestPermissions
@@ -404,16 +407,16 @@ begin
   ProjectDetailsFrame1.UpdateLogEntries(CurrentProject)
 end;
 
-procedure TfrmMain.SaveNewEntry(ABitmap: TBitmap);
+procedure TfrmMain.SaveNewEntry(const ANote: String; ABitmap: TBitmap);
 var
   LID: Integer;
 begin
-  LID := mainDM.CreateNewLogEntry(ABitmap, CurrentProject, FCurrentLocation);
+  LID := mainDM.CreateNewLogEntry(ANote, ABitmap, CurrentProject, FCurrentLocation);
   LoadEntryDetail(LID);
   UpdateLogEntries;
   tbcMain.SetActiveTabWithTransitionAsync(tabEntryDetail, TTabTransition.Slide,
     TTabTransitionDirection.Reversed,nil);
-  NewEntryFrame1.ClearImage;
+  NewEntryFrame1.ClearFields;
 end;
 
 procedure TfrmMain.NewProject(const ATitle, ADesc: String);
@@ -693,7 +696,7 @@ procedure TfrmMain.ReverseLocation(Lat, Long: double);
 var
   NewLocation: TLocationCoord2D;
 begin
-
+{$IFNDEF ANDROID}
   // Setup an instance of TGeocoder
   if not assigned(FGeocoder) then
   begin
@@ -710,6 +713,7 @@ begin
     begin
       FGeocoder.GeocodeReverse(NewLocation);
     end;
+{$ENDIF}
 end;
 
 procedure TfrmMain.LoadEntryDetail(LogID: Integer);
@@ -741,30 +745,13 @@ begin
   end;
 end;
 
-function TfrmMain.GenerateMapURL(const Location,Address: string): string;
-var
-PlaceStr: String;
-begin
-if Location<>'' then
- PlaceStr := Location
-else
- PlaceStr := Address;
-
- if GOOGLE_MAPS_EMBED_API_KEY='' then
-  begin
-    // For development testing only.
-    Result := 'https://www.google.com/maps/place/'+TNetEncoding.URL.EncodeQuery(PlaceStr)+'/'
-  end
- else
-  begin
-    Result := 'https://www.google.com/maps/embed/v1/place?key='+GOOGLE_MAPS_EMBED_API_KEY+'&q='+TNetEncoding.URL.EncodeQuery(PlaceStr);
-  end;
-end;
-
 procedure TfrmMain.DownloadStaticMap(const ALocation: String; AHeight, AWidth: Single; AImage: TImage);
 begin
   AImage.WrapMode := TImageWrapMode.Fit;
   AImage.Bitmap.Assign(DefaultImage.Bitmap);
+
+  if GOOGLE_MAPS_STATIC_API_KEY='' then Exit;
+
   if NetHTTPClient.Tag=NOT_BUSY then
     begin
       if InternetConnectivity.Value=True then

@@ -1,5 +1,5 @@
 ﻿[]
-Coordinates=1139,108,133,36
+Coordinates=0,138,109,36
 Visible=False
 
 [dmMain.qryEntries]
@@ -53,7 +53,4 @@ Coordinates=0,0,111,36
 
 [tabReport]
 Coordinates=280,111,71,36
-
-[StellarStyleBook]
-Coordinates=0,138,109,36
 

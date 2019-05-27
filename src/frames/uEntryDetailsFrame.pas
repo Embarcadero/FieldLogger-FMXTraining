@@ -7,64 +7,52 @@ uses
   System.Variants, System.Sensors,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Ani, FMX.Objects, FMX.Layouts, FMX.Effects,
-  FMX.Filter.Effects, FMX.Platform, fieldlogger.data;
+  FMX.Filter.Effects, FMX.Platform, System.Permissions, FMX.Edit, fieldlogger.data
+{$IFDEF ANDROID}
+  , Androidapi.JNI.Os, Androidapi.JNI.JavaTypes, Androidapi.Helpers
+{$ENDIF ANDROID}
+  ;
 
 type
   TEntryDetailsFrame = class(TFrame)
     Image5: TImage;
     imgPicture: TImage;
-    YLIRectangle: TRectangle;
-    GradientAnimation1: TGradientAnimation;
-    Label2: TLabel;
     LongitudeRectangle: TRectangle;
-    GradientAnimation2: TGradientAnimation;
     Label7: TLabel;
     lblLongitude: TLabel;
     LatitudeRectangle: TRectangle;
-    GradientAnimation3: TGradientAnimation;
     Label9: TLabel;
     lblLatitude: TLabel;
     ALIRectangle: TRectangle;
-    GradientAnimation4: TGradientAnimation;
     Label11: TLabel;
     SubThoroughfareRectangle: TRectangle;
-    GradientAnimation5: TGradientAnimation;
     Label12: TLabel;
     lblSubThoroughfare: TLabel;
     ThoroughfareRectangle: TRectangle;
-    GradientAnimation6: TGradientAnimation;
     Label14: TLabel;
     lblThoroughfare: TLabel;
     SubLocalityRectangle: TRectangle;
-    GradientAnimation7: TGradientAnimation;
     Label16: TLabel;
     lblSubLocality: TLabel;
     SubAdminRectangle: TRectangle;
-    GradientAnimation8: TGradientAnimation;
     Label18: TLabel;
     lblSubAdminArea: TLabel;
     ZipRectangle: TRectangle;
-    GradientAnimation9: TGradientAnimation;
     Label20: TLabel;
     lblZipCode: TLabel;
     LocalityRectangle: TRectangle;
-    GradientAnimation10: TGradientAnimation;
     Label22: TLabel;
     lblLocality: TLabel;
     FeatureRectangle: TRectangle;
-    GradientAnimation11: TGradientAnimation;
     Label24: TLabel;
     lblFeature: TLabel;
     CountryRectangle: TRectangle;
-    GradientAnimation12: TGradientAnimation;
     Label26: TLabel;
     lblCountry: TLabel;
     CountryCodeRectangle: TRectangle;
-    GradientAnimation13: TGradientAnimation;
     Label28: TLabel;
     lblCountryCode: TLabel;
     AdminAreaRectangle: TRectangle;
-    GradientAnimation14: TGradientAnimation;
     Label30: TLabel;
     lblAdminArea: TLabel;
     ToolBar3: TToolBar;
@@ -75,7 +63,6 @@ type
     VertScrollBox1: TVertScrollBox;
     InfoLayout: TLayout;
     ImageTitleRect: TRectangle;
-    GradientAnimation15: TGradientAnimation;
     Label1: TLabel;
     Layout1: TLayout;
     Layout2: TLayout;
@@ -87,6 +74,11 @@ type
     ShadowEffect1: TShadowEffect;
     MapImage: TImage;
     BackgroundRect: TRectangle;
+    Rectangle1: TRectangle;
+    Rectangle2: TRectangle;
+    Label4: TLabel;
+    Label2: TLabel;
+    NoteEdit: TEdit;
     procedure btnDeleteEntryClick(Sender: TObject);
     procedure btnEntriesBackClick(Sender: TObject);
     procedure AddLogEntryCircleBTNClick(Sender: TObject);
@@ -94,6 +86,7 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Single);
   private
     { Private declarations }
+    procedure SetNote(const ANote: String);
   public
     { Public declarations }
     procedure UpdateDetails(const Address: TCivicAddress);
@@ -107,6 +100,11 @@ implementation
 
 uses
   formMain, uDataModule;
+
+procedure TEntryDetailsFrame.SetNote(const ANote: String);
+begin
+  NoteEdit.Text := ANote;
+end;
 
 procedure TEntryDetailsFrame.LoadEntryDetail(LogID: Integer; AProject: TProject);
 var
@@ -168,7 +166,13 @@ begin
   end;
   lblLongitude.Text := LogEntries[Found].Longitude.ToString;
   lblLatitude.Text := LogEntries[Found].Latitude.ToString;
-  frmMain.ReverseLocation(LogEntries[Found].Latitude, LogEntries[Found].Longitude);
+
+  SetNote(LogEntries[Found].Note);
+
+  try
+    frmMain.ReverseLocation(LogEntries[Found].Latitude, LogEntries[Found].Longitude);
+  except
+  end;
 
   DownloadStaticMap(lblLatitude.Text + ',' + lblLongitude.Text, MapImage.Height, MapImage.Width, MapImage);
 end;

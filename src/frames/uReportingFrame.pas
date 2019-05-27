@@ -40,15 +40,17 @@ uses
   ;
 
 procedure TReportingFrame.ShareButtonClick(Sender: TObject);
+{$IF DEFINED(MSWINDOWS)}
 var
 LPath: String;
+{$ENDIF}
 begin
-  {$IF DEFINED(MSWINDOWS)}
+  {$IF DEFINED(MSWINDOWS) OR (DEFINED(MACOS) AND NOT DEFINED(IOS))}
   if SaveDialog.Execute then
     begin
       frmMain.mmoReport.Lines.SaveToFile(SaveDialog.FileName);
       {$IF DEFINED(MSWINDOWS)}
-        LPAth := ExtractFilePath(SaveDialog.FileName);
+        LPath := ExtractFilePath(SaveDialog.FileName);
         ShellExecute(0, 'OPEN', PChar(LPath), '', '', SW_SHOWNORMAL);
       {$ENDIF}
     end;

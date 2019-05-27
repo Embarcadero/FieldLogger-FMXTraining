@@ -39,6 +39,9 @@ type
     ShadowEffect1: TShadowEffect;
     BackgroundRect: TRectangle;
     ImageList1: TImageList;
+    VertScrollBox1: TVertScrollBox;
+    Circle1: TCircle;
+    LogoImage: TImage;
     procedure spedProjBackClick(Sender: TObject);
     procedure spedProjDeleteClick(Sender: TObject);
     procedure edtProjTitleExit(Sender: TObject);

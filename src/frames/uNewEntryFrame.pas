@@ -8,7 +8,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Objects, FMX.Layouts, FMX.Effects,
   FMX.Filter.Effects, System.Actions, FMX.ActnList, FMX.StdActns,
-  FMX.MediaLibrary.Actions, FMX.MediaLibrary, FMX.Platform,
+  FMX.MediaLibrary.Actions, FMX.MediaLibrary, FMX.Platform, FMX.Edit,
   System.Permissions, FMX.DialogService, FMX.Ani, System.IOUtils
 {$IFDEF ANDROID}
   , Androidapi.JNI.Os, Androidapi.JNI.JavaTypes, Androidapi.Helpers,
@@ -43,6 +43,10 @@ type
     Layout5: TLayout;
     CameraImage: TImage;
     CameraImageBlue: TImage;
+    Layout6: TLayout;
+    edtLogEntryNote: TEdit;
+    Layout7: TLayout;
+    Label5: TLabel;
     procedure btnNewEntryCancelClick(Sender: TObject);
     procedure CaptureButtonClick(Sender: TObject);
     procedure ActionTakePhotoFromLibraryDidFinishTaking(Image: TBitmap);
@@ -61,7 +65,7 @@ type
     procedure TakePicturePermissionRequestResult(Sender: TObject; const APermissions: TArray<string>; const AGrantResults: TArray<TPermissionStatus>);
   public
     { Public declarations }
-    procedure ClearImage;
+    procedure ClearFields;
   end;
 
 implementation
@@ -69,10 +73,11 @@ implementation
 {$R *.fmx}
 
 uses
-  formMain;
+  formMain, uDataModule;
 
-procedure TNewEntryFrame.ClearImage;
+procedure TNewEntryFrame.ClearFields;
 begin
+  edtLogEntryNote.Text := '';
   ActionClearImage.Execute;
 end;
 
@@ -149,7 +154,7 @@ end;
 
 procedure TNewEntryFrame.LoadImageButtonClick(Sender: TObject);
 begin
-{$IFDEF MSWINDOWS}
+{$IF DEFINED(MSWINDOWS) OR (DEFINED(MACOS) AND NOT DEFINED(IOS))}
   if OpenDialog.Execute then
     begin
       if TFile.Exists(OpenDialog.FileName) then
@@ -205,7 +210,7 @@ procedure TNewEntryFrame.SaveButtonClick(Sender: TObject);
 begin
   if (ImageContainer.Bitmap.Width=0) AND (ImageContainer.Bitmap.Height=0) then
     ImageContainer.Bitmap.Assign(IrisImage.Bitmap);
-  frmMain.SaveNewEntry(ImageContainer.Bitmap);
+  frmMain.SaveNewEntry(edtLogEntryNote.Text, ImageContainer.Bitmap);
 end;
 
 end.
