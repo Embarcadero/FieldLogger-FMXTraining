@@ -1,0 +1,41 @@
+object ProjectDetailsFrame: TProjectDetailsFrame
+  Size.Width = 610.000000000000000000
+  Size.Height = 591.000000000000000000
+  Size.PlatformDefault = False
+  object ToolBar7: TToolBar
+    Size.Width = 610.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 16
+    object ToolBarBackgroundRect: TRectangle
+      Align = Contents
+      Fill.Color = x80FFFFFF
+      Size.Width = 610.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object Label13: TLabel
+      Align = Contents
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 610.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Edit Project'
+      TabOrder = 1
+    end
+    object spedProjBack: TSpeedButton
+      Align = Left
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowlefttoolbutton'
+      Text = 'Go to tabProjectsList'
+      OnClick = spedProjBackClick
+    end
+  end
+end

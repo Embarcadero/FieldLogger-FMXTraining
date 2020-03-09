@@ -1,0 +1,780 @@
+object EntryDetailsFrame: TEntryDetailsFrame
+  Size.Width = 643.000000000000000000
+  Size.Height = 944.000000000000000000
+  Size.PlatformDefault = False
+  object Image5: TImage
+    MultiResBitmap.Height = 1326
+    MultiResBitmap.Width = 1306
+    MultiResBitmap.LoadSize = 2
+    MultiResBitmap = <
+      item
+      end>
+    Align = Contents
+    MarginWrapMode = Tile
+    Margins.Left = -400.000000000000000000
+    Margins.Top = -400.000000000000000000
+    Margins.Right = -400.000000000000000000
+    Margins.Bottom = -400.000000000000000000
+    Size.Width = 1443.000000000000000000
+    Size.Height = 1744.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object ToolBar3: TToolBar
+    Size.Width = 643.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object ToolBarBackgroundRect: TRectangle
+      Align = Contents
+      Fill.Color = x80FFFFFF
+      Size.Width = 643.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object Label6: TLabel
+      Align = Contents
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 643.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Log Entry'
+      TabOrder = 2
+    end
+    object btnEntriesBack: TButton
+      Align = Left
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowlefttoolbutton'
+      TabOrder = 0
+      Text = 'btnPrev'
+      OnClick = btnEntriesBackClick
+    end
+    object btnDeleteEntry: TSpeedButton
+      Align = Right
+      Position.X = 595.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'trashtoolbutton'
+      Text = 'speedButtonDelete'
+      OnClick = btnDeleteEntryClick
+    end
+  end
+  object VertScrollBox1: TVertScrollBox
+    Align = Client
+    Size.Width = 643.000000000000000000
+    Size.Height = 896.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 21
+    Viewport.Width = 627.000000000000000000
+    Viewport.Height = 896.000000000000000000
+    object imgPicture: TImage
+      MultiResBitmap = <
+        item
+          Width = 500
+          Height = 333
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000001F40000014D0806000000F6139D
+            37000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            029D49444154785EEDC1010D000000C2A0F74F6D0E3720000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000000000000000000F852032B
+            730001183DDDB00000000049454E44AE426082}
+        end>
+      Align = Top
+      Anchors = []
+      Margins.Left = 20.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 20.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 20.000000000000000000
+      Position.Y = 1049.000000000000000000
+      Size.Width = 587.000000000000000000
+      Size.Height = 447.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object InfoLayout: TLayout
+      Align = Top
+      Position.Y = 305.000000000000000000
+      Size.Width = 627.000000000000000000
+      Size.Height = 681.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object LatitudeRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label9: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Latitude:'
+          TabOrder = 0
+        end
+        object lblLatitude: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TabOrder = 1
+        end
+      end
+      object LongitudeRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 48.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label7: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Longitude:'
+          TabOrder = 0
+        end
+        object lblLongitude: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TabOrder = 1
+        end
+      end
+      object ALIRectangle: TRectangle
+        Align = Top
+        Fill.Color = x44FFFFFF
+        Margins.Top = 5.000000000000000000
+        Position.Y = 101.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label11: TLabel
+          Align = Client
+          StyledSettings = [Family, FontColor]
+          Margins.Left = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Size.Width = 607.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = '(Default)'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          Text = 'Additional Location Info'
+          TabOrder = 0
+        end
+      end
+      object LocalityRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 341.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label22: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Locality:'
+          TabOrder = 0
+        end
+        object lblLocality: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object FeatureRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 293.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label24: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Feature:'
+          TabOrder = 0
+        end
+        object lblFeature: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object CountryRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 245.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label26: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Country:'
+          TabOrder = 0
+        end
+        object lblCountry: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object CountryCodeRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 197.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label28: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Country Code'
+          TabOrder = 0
+        end
+        object lblCountryCode: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object AdminAreaRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 149.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label30: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Admin Area:'
+          TabOrder = 0
+        end
+        object lblAdminArea: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object SubThoroughfareRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 533.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label12: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Sub-Thoroughfare:'
+          TabOrder = 0
+        end
+        object lblSubThoroughfare: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object ThoroughfareRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 581.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label14: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Thoroughfare:'
+          TabOrder = 0
+        end
+        object lblThoroughfare: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object SubLocalityRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 485.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label16: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Sub-Locality:'
+          TabOrder = 0
+        end
+        object lblSubLocality: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object SubAdminRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 437.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label18: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Sub-Admin Area:'
+          TabOrder = 0
+        end
+        object lblSubAdminArea: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+      object ZipRectangle: TRectangle
+        Align = Top
+        Fill.Kind = None
+        Position.Y = 389.000000000000000000
+        Size.Width = 627.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label20: TLabel
+          Align = Left
+          StyledSettings = [FontColor]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000953674316000
+          Size.Width = 172.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Trailing
+          Text = 'Zip/PostCode:'
+          TabOrder = 0
+        end
+        object lblZipCode: TLabel
+          Align = Client
+          StyledSettings = [FontColor]
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 445.000000000000000000
+          Size.Height = 38.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          Text = 'Your Location Information'
+          TabOrder = 1
+        end
+      end
+    end
+    object ImageTitleRect: TRectangle
+      Align = Top
+      Fill.Color = x44FFFFFF
+      Margins.Top = 5.000000000000000000
+      Position.Y = 991.000000000000000000
+      Size.Width = 627.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object Label1: TLabel
+        Align = Client
+        StyledSettings = [Family, FontColor]
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Size.Width = 607.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = '(Default)'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Image'
+        TabOrder = 0
+      end
+    end
+    object Layout1: TLayout
+      Align = Top
+      Position.Y = 1506.000000000000000000
+      Size.Width = 627.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+    end
+    object Layout2: TLayout
+      Align = MostTop
+      Size.Width = 627.000000000000000000
+      Size.Height = 209.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      object MapImage: TImage
+        MultiResBitmap = <
+          item
+          end>
+        Align = Client
+        Size.Width = 627.000000000000000000
+        Size.Height = 209.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object Rectangle1: TRectangle
+      Align = Top
+      Fill.Kind = None
+      Position.Y = 257.000000000000000000
+      Size.Width = 627.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object Label2: TLabel
+        Align = Left
+        StyledSettings = [FontColor]
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 172.000000000000000000
+        Size.Height = 38.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Trailing
+        Text = 'Note:'
+        TabOrder = 0
+      end
+      object NoteEdit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 1
+        ReadOnly = True
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 440.000000000000000000
+        Size.Height = 38.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object Rectangle2: TRectangle
+      Align = Top
+      Fill.Color = x44FFFFFF
+      Position.Y = 209.000000000000000000
+      Size.Width = 627.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object Label4: TLabel
+        Align = Client
+        StyledSettings = [Family, FontColor]
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Size.Width = 607.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = '(Default)'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Entry Info'
+        TabOrder = 0
+      end
+    end
+  end
+  object Layout3: TLayout
+    Anchors = [akRight, akBottom]
+    Position.Y = 862.000000000000000000
+    Size.Width = 643.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 22
+    object AddLogEntryCircleBTN: TCircle
+      Align = Right
+      ClipChildren = True
+      Position.X = 512.000000000000000000
+      Size.Width = 131.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      OnClick = AddLogEntryCircleBTNClick
+      object AddButton: TSpeedButton
+        Align = Center
+        HitTest = False
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'addtoolbutton'
+        Text = 'AddButton'
+      end
+    end
+  end
+end

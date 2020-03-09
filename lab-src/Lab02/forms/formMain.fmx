@@ -1,0 +1,754 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'Field Logger'
+  ClientHeight = 746
+  ClientWidth = 718
+  Quality = HighQuality
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnFocusChanged = FormFocusChanged
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 3
+  object mmoCreateDatabase: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Lines.Strings = (
+      
+        'CREATE TABLE "LOG_ENTRIES"  (   "LOG_ID"'#9'INTEGER NOT NULL,   "PR' +
+        'OJ_ID"'#9'INTEGER NOT NULL,   "PICTURE"'#9'BLOB SUB_TYPE 0 SEGMENT SIZ' +
+        'E 80,   "LONGITUDE"'#9'FLOAT DEFAULT 0,   "LATITUDE"'#9'FLOAT DEFAULT ' +
+        '0,   "TIMEDATESTAMP"'#9'TIMESTAMP,   "OR_X"'#9'FLOAT DEFAULT 0,   "OR_' +
+        'Y"'#9'FLOAT DEFAULT 0,   "OR_Z"'#9'FLOAT DEFAULT 0,   "OR_DISTANCE"'#9'FL' +
+        'OAT DEFAULT 0,   "HEADING_X"'#9'FLOAT DEFAULT 0,   "HEADING_Y"'#9'FLOA' +
+        'T DEFAULT 0,   "HEADING_Z"'#9'FLOAT DEFAULT 0,   "V_X"'#9'FLOAT DEFAUL' +
+        'T 0,   "V_Y"'#9'FLOAT DEFAULT 0,   "V_Z"'#9'FLOAT DEFAULT 0,   "ANGLE_' +
+        'X"'#9'FLOAT DEFAULT 0,   "ANGLE_Y"'#9'FLOAT DEFAULT 0,   "ANGLE_Z"'#9'FLO' +
+        'AT DEFAULT 0,   "MOTION"'#9'FLOAT DEFAULT 0,   "SPEED"'#9'FLOAT DEFAUL' +
+        'T 0,   "NOTE"'#9'BLOB SUB_TYPE TEXT SEGMENT SIZE 80,  PRIMARY KEY (' +
+        '"LOG_ID") );'
+      
+        'CREATE TABLE "PROJECTS"  (   "PROJ_ID"'#9'INTEGER NOT NULL,   "PROJ' +
+        '_TITLE"'#9'VARCHAR(30),   "PROJ_DESC"'#9'BLOB SUB_TYPE TEXT SEGMENT SI' +
+        'ZE 80,  PRIMARY KEY ("PROJ_ID") );'
+      
+        'ALTER TABLE "LOG_ENTRIES" ADD FOREIGN KEY ("PROJ_ID") REFERENCES' +
+        ' "PROJECTS" ("PROJ_ID") ON UPDATE SET DEFAULT ON DELETE CASCADE;'
+      'CREATE GENERATOR GENAUTOINC;'
+      'SET GENERATOR GENAUTOINC TO 1;'
+      
+        'CREATE TRIGGER AUTOINCPROJ FOR PROJECTS BEFORE INSERT AS begin  ' +
+        'new.PROJ_ID = GEN_ID(GENAUTOINC,1); end;'
+      
+        'CREATE TRIGGER AUTOINCLOG FOR LOG_ENTRIES BEFORE INSERT AS begin' +
+        '  new.LOG_ID = GEN_ID(GENAUTOINC,1); end;'
+      'CREATE ROLE "MGMTROLE";'
+      'CREATE ROLE "STAFFROLE";'
+      'GRANT "MGMTROLE" TO MANAGER;'
+      'GRANT "STAFFROLE" TO STAFF;')
+    Position.X = 48.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 49.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Visible = False
+    Viewport.Width = 36.000000000000000000
+    Viewport.Height = 36.000000000000000000
+  end
+  object VSB: TVertScrollBox
+    Align = Client
+    Size.Width = 718.000000000000000000
+    Size.Height = 746.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 21
+    Viewport.Width = 718.000000000000000000
+    Viewport.Height = 746.000000000000000000
+    object tbcMain: TTabControl
+      Align = Client
+      Size.Width = 718.000000000000000000
+      Size.Height = 746.000000000000000000
+      Size.PlatformDefault = False
+      TabHeight = 49.000000000000000000
+      TabIndex = 1
+      TabOrder = 0
+      TabPosition = PlatformDefault
+      OnChange = tbcMainChange
+      Sizes = (
+        718s
+        697s
+        718s
+        697s
+        718s
+        697s
+        718s
+        697s
+        718s
+        697s
+        718s
+        697s
+        718s
+        697s)
+      object tabSignin: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 102.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Signin'
+        ExplicitSize.cx = 71.000000000000000000
+        ExplicitSize.cy = 24.000000000000000000
+        inline SigninFrame1: TSigninFrame
+          Align = Client
+          Size.Width = 718.000000000000000000
+          Size.Height = 697.000000000000000000
+          Size.PlatformDefault = False
+          inherited ToolBar6: TToolBar
+            Size.Width = 718.000000000000000000
+            inherited ToolBarBackgroundRect: TRectangle
+              Size.Width = 718.000000000000000000
+            end
+            inherited Label10: TLabel
+              Size.Width = 718.000000000000000000
+            end
+          end
+          inherited VertScrollBox1: TVertScrollBox
+            Size.Width = 718.000000000000000000
+            Size.Height = 649.000000000000000000
+            Viewport.Width = 718.000000000000000000
+            Viewport.Height = 649.000000000000000000
+            inherited SignInBackgroundRect: TRectangle
+              Size.Width = 673.000000000000000000
+              inherited FormLayout: TLayout
+                Size.Width = 653.000000000000000000
+                inherited UsernameEdit: TEdit
+                  Size.Width = 626.000000000000000000
+                  inherited UserImage: TImage
+                    MultiResBitmap.Height = 48
+                    MultiResBitmap.Width = 48
+                    MultiResBitmap.LoadSize = 2
+                    MultiResBitmap = <
+                      item
+                        Width = 96
+                        Height = 96
+                        PNG = {
+                          89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                          38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                          09C649444154785EED9D6B8815551CC0F7DEBD7BF7BA0FD33473556AB5B27493
+                          1E9B29126596A9857D08CA548A84E84B61114245117D0A03432B2A0C4D0AC48C
+                          3E4691CF28CC071A94282AEAFA40CDD4B27DDDBDBBEEDAEF7FE7BF60A13B8F7B
+                          CECCBDEBFC603873CEDEF9BFCE999973CECC9C2D8B89898989898989898989B9
+                          EA48685A945CBC7871385B63229198D0D3D3732B45F5A475DDDDDD433A3B3B6B
+                          C957E47F5856D6954EA75BCACBCBCF2593C993E48F901EE0D8DDECEF64FF74FE
+                          57454851550001AB619B291B819E964AA546EB9F0AE2C2850B87A884CD54E4F7
+                          647F60BFCDF94B8C043D49B01FA3557FD3DCDCDC4EDE2AE86823F91A9DB34893
+                          6AC6D5070118C8B6884BC9D17C642200DD47B0E15536B99C5D1DE06C35DB5BD9
+                          6CF66F8D43E460CB396C7A83DD2A35B37F8293CFD0EA4E386E171FD8761C1BE7
+                          A9B9FD077C1BC3357EA3E366F183ADEB48EAD5FCD28616B5A0B5B5B5C571AD74
+                          686B6BFB47CE5875A3F4C0F801B4A42FD59F92051F569064D42DE358190760F0
+                          70926FD91AF305250E95B09DB1C3E36C7F6A91318C57002D7F2C039FF5151515
+                          376851BF009F9A18694FA7120E6991118C0E44087E435757D74FFD2DF8828CCA
+                          F1ED677C1CA7454630760648CB97E0A7D3E9EBB5C838B44299E3599348243693
+                          DD437A56CAB9E40D2569209DC6E5622E0DE04629B7015DD553C8BF1F3B0E6A51
+                          F410FC3A9B235A1DB1CE61D7F58C95DFF0DBB91C732C7FB005686887D1314C55
+                          460B860CC0A69D8E69E6A145AF4647B5AAF30C87D670EC1A478A79381BB79358
+                          EB1D790627BF704C320FB297A89AC02063A98A330EB257AA9A68A0652E505B8C
+                          8373AB554D41202A81ACB58E54F31083675555B8A07B8CAD11AE5EF37D5F76AE
+                          04B26A91795CC51B85117333F28D3CB7F005ADCADADC0E0ECD5135C640E67C15
+                          6F1C62B14ED58403CE3CA3BA8D430FA389C4F883126496DBECA9119340B3A8BE
+                          1D4551353D80C59A358EF6F37B346B0C647633925DAB59E31093F7A807DFCF13
+                          82B4B45718888CD07DE3E820CB0AC8DEA4BBC62126A3A8809734EB195F23615A
+                          FFC05C2E772493C90CD622E3E0C448CE0279B3C138D83F8A4A38AE59E3109B73
+                          959595F5E868D52257FC9E012FD80CBE80F1F9E9054B9CD1D40A047F080DE879
+                          CD7AC2F31980E07219828730D156492574EABE51380344768766AD20F355A954
+                          EA26F478BA8F793E03A8809921045FF4C8C49A2DAED3D41A04BF1E1FA66BD615
+                          3F15B040776DD3A0A90D6ED7D42AC4EA39DD75C5530520B08611DFA39AB50ABA
+                          A6E9AE716CCABE94F6F6F6D9E8F2D425F55A01336B6B6B0768D62A8C2AE7A2CF
+                          6FE7C015649623DBF808FB72D4D4D454A3CFD365C87305E8AE75B8CFDC88BEA7
+                          346B0C64CA839AD09ED4A16F96EEF689A75E90F47E4CBD28EB05F41D23580D7E
+                          FAD37D21E3177A277B9139528BAC83BE03E89337BAFBC4F50CA0268787197C41
+                          5A2A41FB4CB30581FDD463624598C11788D9587C70ED7579A980485E2D61343C
+                          976BF6FB9A0D84049F202C65F749A724745C63E75A01B49E09BA1B3A54C2AB54
+                          823C56ACD122CF10F85AB6AF90F1B21645816BEC5C2B00275CAF633621804F73
+                          4FD88B1D9E7A47FCA69CDFCE976B3EC71ABF99FB015BC6EAEE1571BD09D30237
+                          E3C854CD460A157154A694392B6556730F5BEFDC8E5C6BE5B59487A4AB29F710
+                          A7385A68081BB1F761CD5E16D70AC0E97DDC50223D0B4A15ED79F539B2773DA5
+                          6951437437C6279C01AEF35AAE15D0E97C8D1813805C2EE7DA7970AD00E8FD14
+                          34C63F959A5E112F151063112F15D0A5698C7F729A5E11D70A902FD07537C627
+                          959595AE735925D50D6D6B6B6BCD64328719079C222BCF8EB3F93F9495C954F9
+                          50C60123B2D9EC18990E768AA3C54B37D4CB406C1303B107351B26F291DC1682
+                          BD95FD5D6CBF63C789FC5F5CE0389978BB83AD914A99D2D1D131A5AAAA6A60FE
+                          8F21821D1BE4AB1ACD06830AF81C274281B3ED00FADEC5F02964CBD584824156
+                          8AED3EB6C5E838481A0AF852F88C2E725E77C4D9415EF0C5D04F09FA4455691D
+                          744D92E0B4B4B4B4AA195640CF2255191C843CA6F28CC265E12C8954EE205515
+                          3AF8762DDB9BDC37FECA1B651864CF5055C141C8F52ACF08CDCDCD17687D4BD8
+                          BD4655440EB60CC6A665D8D69D37D210C4CECC6B30A6AE9B2207A3EE51B14507
+                          B64DC6C62635B72090B35FC5F689A79130BD8F825F98A5856DA147702FB2766A
+                          51D1816DDBC4466CDDA6458141D646DD2D1C5AC6135AB181A03FBC0B192533A9
+                          87C983B0F937C7FA60E0EF6C15573808ABD695A67C23AB6071FC2D2AAA64C0E6
+                          F1D8DEA16EF8427A761C6FF63D2AE47EED88F707A7F3072AA2E4C0F64FD40D5F
+                          709C910F0CFF03352A6BACF986E326A9889203DB6540E81B8E7B44459803B949
+                          F97AD151E11D8C097D0AC014983FC8F1C23BF47E0E93B84EF1F4E2F979402291
+                          E849A5521F6AD60F25BBE81181F46D3BBDA865C4EAA266CD426BAE9505EEF255
+                          ED11BD09CBC4584981CD77617B56DDF004A3FB331C6777261605B2BAA02F6470
+                          C371D63F8E3005B60E0BF2492BC7153EF7E3067AAA827C754EBF7A0789EF37DC
+                          C28620D6CAB8C5B1DA3B52611C1BCA2BFC62E43CD5EB0B1CFB89A4682B01BFE4
+                          2DEA2D8EB5FEE0D870DFC2A3AF2B4B3BFA46CE048C2D8EB5762E01D364A1F040
+                          CBEE108BEF544C78A0B75E9676744CF0874E78DDA9A222075B1A835CF395F36C
+                          D1BC0A494B0EBC6684F43038FE45763DF7994D23BAB16161D0290781E3A35D69
+                          97D36FA5DA12088E9755576E5371A141E0C6A3F7C7BC1101C1F6E52A2E3AB023
+                          C3755D96EF0A0C2DB013673E2228752AD61AE81889AE8FD1D9A5EA0381CFBF90
+                          A4556CB4E0D4301D8217845C9608CE0AE4DDA5A28D81F84664AF2AE472D30BBE
+                          CA032A9B1F94FB87A0DD9CCBE54E3A26160E2D6C3732DF66575E2DF1FD0A25C7
+                          C8871A1349DF21607B488DC0CDFA04728D7D3367F4068861E37076633A9D367A
+                          29696F6F6FC96432F2244DD60A95477D7FB09D63BBF4C52C798DBE8E18C95729
+                          0DD96C76627575B5D13107BE9DA8A8A878181BF66951C118EF81C899C0A9BE3E
+                          954AF58FE5DF15CEC843F2925532996CD22223F83EB5DDC0C083183A994AD8A1
+                          45250FBE6CA5414D361D7CC1780508187A9A4A7880B3619516952CF8B01C5FA6
+                          72D9B1B98E913D70E05959DAD1B9859514E7B1BD7FFC3B131C19CD691C68EE28
+                          0AB0F53B92A2F8D2D228D2A2824C658705B6C982B1917E5B6C1DFCACC2C9D7F4
+                          DDD0A2409F642D620B673EBF18C0EF1A1C7E85BEB5CC8C4602BA6519FA856C45
+                          F1414724100759EF7F06D7DD35B65F1717F4757859127F3AD9C866627B89DC80
+                          4B2120556C1298590448FE99A79137EA1844EDA76BBC89AEA4FC33CF0DECF78E
+                          A023A7A82AE0FF5009F2E4EC6EB609548A4C318CA6AC8E6DA87E04DDFB1D6E4E
+                          3E8823B067D964D1D726827D8054FE9DEDAF94595D2F34262626262626262626
+                          2626C63B6565FF028654F898687DE41B0000000049454E44AE426082}
+                        FileName = 
+                          'C:\Users\Anonymous\Documents\Embarcadero\Studio\Projects\FieldLo' +
+                          'gger-FMXTraining-master\ic_account_circle_white_48dp.png'
+                      end>
+                  end
+                  inherited UserImageBlue: TImage
+                    MultiResBitmap.Height = 48
+                    MultiResBitmap.Width = 48
+                    MultiResBitmap.LoadSize = 2
+                    MultiResBitmap = <
+                      item
+                        Width = 96
+                        Height = 96
+                        PNG = {
+                          89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                          38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                          085349444154785EED9D796C14551CC777A6B3736CCB5125C63B2606A33126E2
+                          194583C67F3418A0405B4A4DBC28600B88890A851EDBD2528B31014A5B2C9868
+                          A2F4A058F1809818AE0422A2C118438C929878A10650A0DDD999DD9DB13FF935
+                          699AB673BDF766B6CCE79F7E7F2F4DBA7DDF9DF7DEFCE6BDDF44424242424242
+                          4242424242AE3838FC19484A5737B7C514F98EB3FF9CBFDFCC70B9D86C0B2EC7
+                          1C98967FD5898144E2D4AE2D9515D81C380265405179C39B3911B3484D656EC6
+                          26A228D19C5F3266A4BBA7BDFA756CF21DDF0D28581AAF8BC962E980AADF8A4D
+                          4C9065F9B4A62577F575C46BB1C9177C3360D18AC6B74C532FD3746E1236F982
+                          249A972211A1A3BBB5FA556C620A73038A5EDAB029C271157A2A1DC3A6400073
+                          86C0475B77B755ADC12626303560F1AA863309357D2D86814414A5333DAD95D7
+                          63481D260694AC6C3CA826538F6198152872F44067CBFA2730A40675038A5636
+                          FEA52753D7609855C414E1CF5D5BABAEC3900AD40C58B0ACBE2B6318C5186635
+                          3C17E9FAB0235E822151A8185058DEB82F954A3D85E184408CF29FF5B4D53C8D
+                          2131881B50B2B2E9889AD41EC570422189E2E1EED67544E732A20614AF6C3AA6
+                          25B587309C9028A278ACB375DD4C0C3D43CC0096DFFC9822FFC8F3DCC184AA9D
+                          BB1C4B571B86F978424DDEF6FF2F5086E49540C480A28A86FDBA9E7E12432A28
+                          92F47B52D7DEB14A1D406A231A95CA745DA3BA7A213527783680C56A47E0F9DD
+                          BD6FD71461688B85CBEA7BD2865188211548AC8E3C1B30AF2C6EA2A4C2473BE2
+                          9E3E63D03F1F8F3F5D01375928A9E0F59F034CD37C0F251520BD82D215AE0D80
+                          F402CD3B5C1876507A62EFCEBAE7048EDF83217120B7057D81A1635C1B4033B7
+                          0313AED3317F3C7A3B6A16425A0143E278E90B570678BDECAC80D50E4A62A86A
+                          7A274A2A145534FD81D2118EC758C8E7EBE9CC6B185281C4D83F1AB427E46854
+                          D8E4F47982F32B80E3A83EE0869B2C94C4C98B893FA1A402CF71E5286DE3C800
+                          788C48FB4916DCE1A2240F9773081515343D95071B0B30B4852303E0192E4A6A
+                          0CA51768A0269367515283E7538EFAC8B6010565F10D7E3F40CF06921A3705D2
+                          21185A62DB809822527920311248ACA1248E22CBD3505265F0EF2C4269896D03
+                          58EDDB81AC264AF2981926CFA59D64656D19E07462F102CD94727F429F8E923A
+                          85E50DCD28C7C59601B05D1025139C8CA17681390C2513A29CBD3EB36500ADBD
+                          9A63218BD28B2889A128C212944C48E8995B508E8BED398025AAA6DD00F97C0C
+                          3D53B87CC39EA06E08B33400B688A3640AA987297397D4BE9BCA64E663C894C5
+                          2F37B5A21C134B03607F3E4AE678CDDD40E7731CF72C86CCC98B29B7A31C134B
+                          03E070044A5F0013DC0C470B97D6F7FAD9F9C0858B030FA01C134B039C9E4CA1
+                          010C4790EEB5B33A82D50EA4CBD3A6B1009B7C03724328C7C432ED4B3B85EB06
+                          DC96727828B70377B8833770B3586D4B7182556A3D2B0DC826AC0C08E432F44A
+                          2234C06742037C2634C06742037C2634C06742037C26F0F701625448E44FCD3D
+                          3E90D04FBFBF79CD526C1E9767563777288A3CFDD7BFCF3F28F39C82CDBE9095
+                          3762B931E9BB4442FBB86F47BC1A9B3C51B0B4AE21260B7306D4D45DD8C40CCF
+                          06142CAFED67910FCA55E4931F6C5D7B0F8654295ED17452D3B4BB31A4069441
+                          E86EAD9B8CE1A858CE0150F2052571A03C8022499BE15BC2AAF381EE6D9533E0
+                          6FCAB2B80586386C26CE94C9F9967D676900D4DB4149941C81EFEBDB5E97D7B9
+                          ADF2156C624E57CBBAD53D6D55B9D11C7E2F3611A53FA1FE80724C2C872080E4
+                          3C3038D47C33F86DBF0FC340417A68B21AFF01A6CB50F8A605B5F301189AE0F0
+                          1D864CB06500549A42E91A38A5B27B7BCD3C0C030B9C7C84E11143D7C88AF433
+                          CA71B1650094F942E90A598A1E81532A18069E3DED35F3E1403686AE48A7D2B6
+                          1EA3DA9A03002FF3809DB13088B0F89F6DCF0150630DA5232449FA1665D60137
+                          84281DE1E490896D03A0C01D4A477011E300CAACC3C8445C7DF60155ED446989
+                          6D03A044C0E50277CE3053DC0B28B30E33927C1EA56D64C9BCB077475D1C434B
+                          6C1B7019A103856D34439FBA7845D39718660D252B9ABE82C31618DAC6C838EB
+                          23C793A3DBDC10AD824734282AAFFF544F19B331B48D9DDCCF481C5E0170823D
+                          6AB9DF7134E01F22B9E19616B0A3CE4DE703194370BC8FD6D5F21076A9B92D07
+                          E3A6F2092B6017B5DB8DBCA222FCD6B3B5EA260C6DE37A7DEE658D1CC4E1C86B
+                          9D3BB7F73A8E87A021A0AE264AC7C0255EBA6AE3710C7DA774D51B5F7BE97C39
+                          1AFD02A5635C5F0180D74AB8122FFE9B34B42D4E966D24995B561B57A4C86A37
+                          AB9D21BC56DAF564004022552DCBD2D1AE96CA4730644249C5C6A3AAAE3F8CA1
+                          6BBCA6595C0F414340D92E94AE4926B5996024D49EC3266A1456347C0E7F8B44
+                          E70FDEA9B9CA0E0CC7F31500B85D378F852249273AB7555A1E6E70028CF3036A
+                          F25E0C3D2388FC27BDAD357330740D110380E28A8D87345D9F8521119286A9DE
+                          983F79FFB98B97BE77FAA20538A81153E4D9839D3E039B8831B80039D4D9B29E
+                          C88172620600A4C6D5F180897B6A7EDE2933625CCA9886066D391C2F71117ED2
+                          85FE73777A9950ED407ABE226A0040E34A080A24BFF943789E84470215650541
+                          D887E18401C67CD29D0F103700E86DAF9A4D6275141806573B2426DCD1203E04
+                          8D241B5E5B32162C5E6742E50A180EBC8102C64E0CB306482FB078970CF52B60
+                          385EB2A8AC709BD5740BF52B6038F08D82D28EB027149B02033C4C11849C6696
+                          9D0F30BD02860345A0A0C01DED75BB15F00C171E23FAF57A43DF0C1802CA0F40
+                          8D35D6A7DC61EB08EC5EF02B133B84EF060C07CA7C41A529BBC58E9C02DB0561
+                          C75A6F7BF55A6CF29D40193012A8B703255FA0EA889DC217C381311DF6E7C316
+                          F120BFCE3624242424242424242424E44A2312F90F8624474481AC4840000000
+                          0049454E44AE426082}
+                        FileName = 
+                          'C:\Users\Anonymous\Documents\Embarcadero\Studio\Projects\FieldLo' +
+                          'gger-FMXTraining-master\ic_account_circle_blue_48dp.png'
+                      end>
+                  end
+                end
+                inherited PasswordEdit: TEdit
+                  Size.Width = 626.000000000000000000
+                  inherited LockImage: TImage
+                    MultiResBitmap.Height = 48
+                    MultiResBitmap.Width = 48
+                    MultiResBitmap.LoadSize = 2
+                    MultiResBitmap = <
+                      item
+                        Width = 96
+                        Height = 96
+                        PNG = {
+                          89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+                          38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                          059C49444154785EED9CCF6F1B4514C7B34EDC2624CE81C2A1D022905091A868
+                          2A511047148EDC41E28E5A894B0517FE01442F1C284DD2F42F8073517B80943F
+                          0024A482902AA11215551C682FEB807FC536DFE7FD56A2B5C73F7666F7D9DEF7
+                          915633B37EF376E6BD99D9D97DB6170CC3308CC212319D6ABADD6E09C79BC86E
+                          223D87E354ABD53A8EA3229F97CBE52A8EBFA228BA83E3279CBA85F4471C1DF9
+                          DC4849A7D33909635F6A369BF7914E04EAFCD96EB73F878EE7A9CE1817D8EF19
+                          186F378EE36662CEF4404703BA76E08863546F0C0386FAA056AB3DA4FD8251AF
+                          D71F40F7FBBC8CF124B0511923F55A62AEECC035B6912CF1B28600833C05C3DC
+                          E859280770AD6F311B5678F962037BC8C8BF9998263F70CDEB48D46782FA3614
+                          86B8562A953E64712C0E0F0F7F479DDF907D989C59388611FDEAD2D2D2CB2C8F
+                          05EA6C2F2E2E7EC462F1901B6E321E47833DFF5DC87F8CC3B9ADC46727707C82
+                          2DE83EAB8D04F2EFB17AB140C79F1D67B7836DE43F90BD88ECD8CB0564CBE208
+                          D4FDB7A76408D81DFD0DD9A759B53860E9D9A50D9CC84886714EB3CAC4A0EE19
+                          E8B847754ED0962BAC520C609893A31EB2B0E4FC01B913AC921AA87A419E8A13
+                          AD83415BEAB8D673AC32FFA0CF9792AE0F86CB4EEA91FF245079163A6B89F6C1
+                          60167C46F1F9067D2D61440E7DB703E35FA47830A0F6D344FB60B854CDC4CB49
+                          2F60DCB7922E0F46763B4882EFCFA1F3C8A8A5086D7B83E2B951629A279B4C07
+                          827DF995288A0E590C067436CBE5F2168B0381CC3BCCE646EE0EC0403BC7AC8B
+                          6F9866C1D74C078219F03AB3B9A1E18053CCF6C127DCFB2C0607237C1F4BDC3D
+                          16FB40DB5E6136377277000C709CD93EF87A2153B0C439AF8101E06C5B566838
+                          A0174674F0E8DD4E963C60DA076ED2EBCCE646EE0EA8542A656607D1649A250D
+                          A67DA06D4798CD8DDC1D603C8E394019738032E60065CC01CA98039431072813
+                          FCF56BA7D3D9C023FD05A49BB55AED458DBD7548AAD56A736565651F4FE97B51
+                          145D457A9B1F4D1730FAB28419E338EE203F9748DFD0C72D0CAEA3ECB6374166
+                          00DAB68C46DDC4E8789BA7E61AF4F516FAFA2E66449DA75213E41E80067D5914
+                          E30BE8EB26FAFC058B5E78CF003464E3E0E0E067ACF5F31FCEFB1FB83774D7D6
+                          D636E08C5F782A15DE3300CBCF85A2195F903EA3EFE7594C8DB7033003868618
+                          E719F4DD3B84E9ED00D96A325B38D0F797984D8DF7D221DB336607829DC24C2F
+                          4F59F7CF9E8495310728630E50C61CA08C394019738032E60065CC01CA980394
+                          310728630E5066E61C20F18776BBBDD36AB5EEC471DC9043F238B78DCFCE50AC
+                          38C8CBAA6150CC1BA81A1973CE22664BD54E28A607DBE184625E408D18FF8744
+                          E36820BB876499D5BD4834BAA1981E6C87138A7921239FEAC6466602AB7B4175
+                          4E28A607DBE18462A991357FD8B2E342EA80D7A8263554E78462A999FA9B30FA
+                          982AE61C2A669B3553EF008CE2D43167D4CDFD67A79332F50EF089398788D966
+                          8D3D882933F50E902FC6323B31A87B97D9A965EA1D502A95F6989D189FBA7931
+                          F50E88A2E8AA7C0D90C5B1419D0EEAEEB238BFF436C343A09817F25045756383
+                          3A9759DD0BAA7342313DD80E2714F302DBC9A37CBD301690FD0E49901F86241A
+                          DD504C0FB6C309C5BC812A791FB435E2651C44DA97910DF6AB9C44B31B8AA566
+                          E6BE9A28AF1770C9F3F290F5689F2FBB1DB9E1CA9A8FF4D79E6020B2EEDFCC39
+                          206FB2EE9F3D8829630E50C61CA08C394019738032E60065CC01CA9803943107
+                          28630E50C61CA08CF77B9A388E1B9519FF4FA0B454ABD5C6FAFABAD737F0BC67
+                          804FCC76D6091173F676C02CC45DB32244DFBD1D10A58CD9CE3AA162CE2166C0
+                          EDD5D5D51D160B03FABC1522F81324582231DB6EB77B030D2AC45FD7A0BFDFA3
+                          AFF29765DE7F361E641B8AC634A44168D8F63C2F47B2EC80AF42195F081E2E44
+                          031F8BD9628B1AECD72A1AC85633CB98B36118866118866118456361E13FC6EE
+                          165511F256DF0000000049454E44AE426082}
+                        FileName = 
+                          'C:\Users\Anonymous\Documents\Embarcadero\Studio\Projects\FieldLo' +
+                          'gger-FMXTraining-master\ic_lock_outline_white_48dp.png'
+                      end>
+                  end
+                  inherited LockImageBlue: TImage
+                    MultiResBitmap.Height = 48
+                    MultiResBitmap.Width = 48
+                    MultiResBitmap.LoadSize = 2
+                  end
+                end
+                inherited FormSpacerLayout: TLayout
+                  Size.Width = 653.000000000000000000
+                  inherited Label1: TLabel
+                    Size.Width = 643.000000000000000000
+                  end
+                end
+                inherited ErrorLabel: TLabel
+                  Size.Width = 647.000000000000000000
+                  TextSettings.Font.StyleExt = {00070000000000000004000000}
+                end
+                inherited SignInButton: TButton
+                  Size.Width = 653.000000000000000000
+                end
+              end
+            end
+            inherited HeaderLayout: TLayout
+              Size.Width = 713.000000000000000000
+            end
+            inherited Layout3: TLayout
+              Size.Width = 713.000000000000000000
+              inherited Layout2: TLayout
+                Size.Width = 713.000000000000000000
+                inherited GridPanelLayout1: TGridPanelLayout
+                  Size.Width = 713.000000000000000000
+                  ControlCollection = <
+                    item
+                      Column = 1
+                      Control = SigninFrame1.Label3
+                      Row = 0
+                    end>
+                  inherited Label3: TLabel
+                    Size.Width = 93.000000000000000000
+                  end
+                end
+              end
+              inherited Label2: TLabel
+                Size.Width = 707.000000000000000000
+              end
+            end
+          end
+        end
+      end
+      object tabProjects: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 102.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Projects'
+        ExplicitSize.cx = 80.000000000000000000
+        ExplicitSize.cy = 24.000000000000000000
+        inline ProjectsFrame1: TProjectsFrame
+          Align = Client
+          Size.Width = 718.000000000000000000
+          Size.Height = 697.000000000000000000
+          Size.PlatformDefault = False
+          inherited ToolBar1: TToolBar
+            Size.Width = 718.000000000000000000
+            inherited ToolBarBackgroundRect: TRectangle
+              Size.Width = 718.000000000000000000
+            end
+            inherited Label1: TLabel
+              Size.Width = 718.000000000000000000
+            end
+          end
+          inherited listViewProjects: TListView
+            Size.Width = 718.000000000000000000
+            Size.Height = 440.000000000000000000
+            ItemAppearanceObjects.ItemObjects.Text.Font.StyleExt = {00070000000000000004000000}
+          end
+          inherited Layout1: TLayout
+            Size.Width = 718.000000000000000000
+            inherited Layout3: TLayout
+              Size.Width = 718.000000000000000000
+              inherited AddProjectCircleBTN: TCircle
+                Position.X = 554.000000000000000000
+                inherited AddButton: TSpeedButton
+                  Size.Width = 48.000000000000000000
+                  Size.Height = 48.000000000000000000
+                end
+              end
+            end
+          end
+        end
+      end
+      object tabProjectDetail: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 102.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'PrjDetail'
+        ExplicitSize.cx = 69.000000000000000000
+        ExplicitSize.cy = 24.000000000000000000
+        inline ProjectDetailsFrame1: TProjectDetailsFrame
+          Align = Contents
+          Size.Width = 718.000000000000000000
+          Size.Height = 697.000000000000000000
+          Size.PlatformDefault = False
+          inherited ToolBar7: TToolBar
+            Size.Width = 718.000000000000000000
+            inherited ToolBarBackgroundRect: TRectangle
+              Size.Width = 718.000000000000000000
+            end
+            inherited Label13: TLabel
+              Size.Width = 718.000000000000000000
+            end
+            inherited spedProjDelete: TSpeedButton
+              Position.X = 670.000000000000000000
+            end
+          end
+          inherited TabControl1: TTabControl
+            Size.Width = 718.000000000000000000
+            Size.Height = 440.000000000000000000
+            TabHeight = 49.000000000000000000
+            Sizes = (
+              718s
+              391s
+              718s
+              391s)
+            inherited DetailsTab: TTabItem
+              Size.Width = 359.000000000000000000
+              Size.Height = 49.000000000000000000
+              ExplicitSize.cx = 304.000000000000000000
+              ExplicitSize.cy = 26.000000000000000000
+              inherited VertScrollBox1: TVertScrollBox
+                Size.Width = 718.000000000000000000
+                Size.Height = 391.000000000000000000
+                Viewport.Width = 718.000000000000000000
+                Viewport.Height = 391.000000000000000000
+                inherited Layout9: TLayout
+                  inherited Layout6: TLayout
+                    inherited Label5: TLabel
+                      TextSettings.Font.StyleExt = {00070000000000000004000000}
+                    end
+                  end
+                  inherited edtProjTitle: TEdit
+                    TextSettings.Font.StyleExt = {00070000000000000004000000}
+                  end
+                  inherited Label3: TLabel
+                    TextSettings.Font.StyleExt = {00070000000000000004000000}
+                  end
+                  inherited mmoProjDesc: TMemo
+                    Viewport.Width = 570.000000000000000000
+                    Viewport.Height = 98.000000000000000000
+                  end
+                end
+              end
+            end
+            inherited EntriesTab: TTabItem
+              Size.Width = 359.000000000000000000
+              Size.Height = 49.000000000000000000
+              ExplicitSize.cx = 304.000000000000000000
+              ExplicitSize.cy = 26.000000000000000000
+            end
+          end
+          inherited Layout1: TLayout
+            Size.Width = 718.000000000000000000
+            inherited BackgroundImage: TImage
+              Size.Width = 718.000000000000000000
+            end
+            inherited Layout3: TLayout
+              Size.Width = 718.000000000000000000
+              inherited AddLogEntryCircleBTN: TCircle
+                Position.X = 554.000000000000000000
+                inherited AddButton: TSpeedButton
+                  Size.Width = 48.000000000000000000
+                  Size.Height = 48.000000000000000000
+                end
+              end
+            end
+          end
+        end
+      end
+      object tabEntryDetail: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 102.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'EntryDetail'
+        ExplicitSize.cx = 95.000000000000000000
+        ExplicitSize.cy = 24.000000000000000000
+        inline EntryDetailsFrame1: TEntryDetailsFrame
+          Align = Client
+          Size.Width = 718.000000000000000000
+          Size.Height = 697.000000000000000000
+          Size.PlatformDefault = False
+          inherited ToolBar3: TToolBar
+            Size.Width = 718.000000000000000000
+            inherited ToolBarBackgroundRect: TRectangle
+              Size.Width = 718.000000000000000000
+            end
+            inherited Label6: TLabel
+              Size.Width = 718.000000000000000000
+            end
+          end
+        end
+      end
+      object tabNewEntry: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 102.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'NewEntry'
+        ExplicitSize.cx = 89.000000000000000000
+        ExplicitSize.cy = 26.000000000000000000
+        inline NewEntryFrame1: TNewEntryFrame
+          Align = Client
+          Size.Width = 718.000000000000000000
+          Size.Height = 697.000000000000000000
+          Size.PlatformDefault = False
+          inherited ToolBar2: TToolBar
+            Size.Width = 718.000000000000000000
+            inherited ToolBarBackgroundRect: TRectangle
+              Size.Width = 718.000000000000000000
+            end
+            inherited Label17: TLabel
+              Size.Width = 718.000000000000000000
+            end
+          end
+        end
+      end
+      object tabNewProject: TTabItem
+        AutoSize = False
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 102.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'NewProject'
+        ExplicitSize.cx = 69.000000000000000000
+        ExplicitSize.cy = 24.000000000000000000
+        inline NewProjectFrame1: TNewProjectFrame
+          Align = Client
+          Size.Width = 718.000000000000000000
+          Size.Height = 697.000000000000000000
+          Size.PlatformDefault = False
+          inherited Image10: TImage
+            MultiResBitmap.Height = 1326
+            MultiResBitmap.Width = 1306
+            MultiResBitmap.LoadSize = 2
+            Size.Width = 1518.000000000000000000
+            Size.Height = 1497.000000000000000000
+          end
+          inherited Layout2: TLayout
+            Size.Width = 678.000000000000000000
+            Size.Height = 400.000000000000000000
+            inherited Layout4: TLayout
+              Size.Width = 678.000000000000000000
+              Size.Height = 400.000000000000000000
+              inherited edtNewProjTitle: TEdit
+                TextSettings.Font.StyleExt = {00070000000000000004000000}
+                Size.Width = 678.000000000000000000
+              end
+              inherited mmoNewProjDescription: TMemo
+                Size.Width = 678.000000000000000000
+                Size.Height = 214.000000000000000000
+                Viewport.Width = 678.000000000000000000
+                Viewport.Height = 214.000000000000000000
+              end
+              inherited Layout5: TLayout
+                Position.Y = 343.000000000000000000
+                Size.Width = 672.000000000000000000
+                inherited CreateButton: TButton
+                  Size.Width = 672.000000000000000000
+                end
+              end
+              inherited Label15: TLabel
+                Size.Width = 678.000000000000000000
+                TextSettings.Font.StyleExt = {00070000000000000004000000}
+              end
+              inherited Label4: TLabel
+                Size.Width = 678.000000000000000000
+                TextSettings.Font.StyleExt = {00070000000000000004000000}
+              end
+            end
+          end
+          inherited ToolBar4: TToolBar
+            Size.Width = 718.000000000000000000
+            inherited ToolBarBackgroundRect: TRectangle
+              Size.Width = 718.000000000000000000
+            end
+            inherited Label23: TLabel
+              Size.Width = 718.000000000000000000
+            end
+          end
+          inherited Layout1: TLayout
+            Size.Width = 718.000000000000000000
+          end
+        end
+      end
+      object tabReport: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 106.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Reporting'
+        ExplicitSize.cx = 73.000000000000000000
+        ExplicitSize.cy = 24.000000000000000000
+        inline ReportingFrame1: TReportingFrame
+          Align = Client
+          Size.Width = 718.000000000000000000
+          Size.Height = 697.000000000000000000
+          Size.PlatformDefault = False
+          inherited ToolBar8: TToolBar
+            Size.Width = 718.000000000000000000
+            inherited ToolBarBackgroundRect: TRectangle
+              Size.Width = 718.000000000000000000
+            end
+            inherited Label6: TLabel
+              Size.Width = 718.000000000000000000
+              TabOrder = 2
+            end
+          end
+        end
+      end
+    end
+  end
+  inline ProgressFrame: TProgressFrame
+    Align = Contents
+    Size.Width = 718.000000000000000000
+    Size.Height = 746.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+    inherited BackgroundRectangle: TRectangle
+      Size.Width = 718.000000000000000000
+      Size.Height = 746.000000000000000000
+    end
+    inherited Label1: TLabel
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+  object DefaultImage: TImage
+    MultiResBitmap.Height = 192
+    MultiResBitmap.Width = 192
+    MultiResBitmap.LoadSize = 2
+    MultiResBitmap = <
+      item
+      end>
+    Position.X = 16.000000000000000000
+    Position.Y = 32.000000000000000000
+    Visible = False
+  end
+end

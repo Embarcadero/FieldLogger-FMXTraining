@@ -1,0 +1,41 @@
+object NewProjectFrame: TNewProjectFrame
+  Size.Width = 574.000000000000000000
+  Size.Height = 687.000000000000000000
+  Size.PlatformDefault = False
+  object ToolBar4: TToolBar
+    Size.Width = 574.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object ToolBarBackgroundRect: TRectangle
+      Align = Contents
+      Fill.Color = x80FFFFFF
+      Size.Width = 574.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object Label23: TLabel
+      Align = Contents
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 574.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'New Project'
+      TabOrder = 1
+    end
+    object spedCancelNewProject: TSpeedButton
+      Align = Left
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowlefttoolbutton'
+      Text = 'Go to tabProjectsList'
+      OnClick = spedCancelNewProjectClick
+    end
+  end
+end

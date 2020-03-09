@@ -1,0 +1,253 @@
+object ProjectDetailsFrame: TProjectDetailsFrame
+  Size.Width = 610.000000000000000000
+  Size.Height = 591.000000000000000000
+  Size.PlatformDefault = False
+  object ToolBar7: TToolBar
+    Size.Width = 610.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 16
+    object ToolBarBackgroundRect: TRectangle
+      Align = Contents
+      Fill.Color = x80FFFFFF
+      Size.Width = 610.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object Label13: TLabel
+      Align = Contents
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 610.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Edit Project'
+      TabOrder = 1
+    end
+    object spedProjBack: TSpeedButton
+      Align = Left
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowlefttoolbutton'
+      Text = 'Go to tabProjectsList'
+      OnClick = spedProjBackClick
+    end
+    object spedProjDelete: TSpeedButton
+      Align = Right
+      Position.X = 562.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'trashtoolbutton'
+      OnClick = spedProjDeleteClick
+    end
+  end
+  object TabControl1: TTabControl
+    Align = Client
+    FullSize = True
+    Size.Width = 610.000000000000000000
+    Size.Height = 334.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 17
+    TabPosition = Bottom
+    OnChange = TabControl1Change
+    Sizes = (
+      610s
+      308s
+      610s
+      308s)
+    object DetailsTab: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 304.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Details'
+      ExplicitSize.cx = 304.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object VertScrollBox1: TVertScrollBox
+        Align = Client
+        Size.Width = 610.000000000000000000
+        Size.Height = 308.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 610.000000000000000000
+        Viewport.Height = 308.000000000000000000
+        object Layout9: TLayout
+          Align = Top
+          Margins.Left = 20.000000000000000000
+          Margins.Top = 20.000000000000000000
+          Margins.Right = 20.000000000000000000
+          Margins.Bottom = 20.000000000000000000
+          Position.X = 20.000000000000000000
+          Position.Y = 20.000000000000000000
+          Size.Width = 570.000000000000000000
+          Size.Height = 268.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object Layout6: TLayout
+            Align = Top
+            Size.Width = 570.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object Label5: TLabel
+              Align = Client
+              StyledSettings = [Size, FontColor]
+              Margins.Left = 3.000000000000000000
+              Margins.Top = 3.000000000000000000
+              Margins.Right = 3.000000000000000000
+              Margins.Bottom = 3.000000000000000000
+              Size.Width = 564.000000000000000000
+              Size.Height = 26.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              Text = 'Project Title'
+              TabOrder = 0
+            end
+          end
+          object edtProjTitle: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Position.Y = 32.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 570.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Size, FontColor]
+            OnKeyDown = edtProjTitleKeyDown
+            OnExit = edtProjTitleExit
+          end
+          object Label3: TLabel
+            Align = Top
+            StyledSettings = [Size, FontColor]
+            Margins.Left = 3.000000000000000000
+            Margins.Top = 3.000000000000000000
+            Margins.Right = 3.000000000000000000
+            Margins.Bottom = 3.000000000000000000
+            Position.X = 3.000000000000000000
+            Position.Y = 77.000000000000000000
+            Size.Width = 564.000000000000000000
+            Size.Height = 21.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            Text = 'Project Description'
+            TabOrder = 2
+          end
+          object mmoProjDesc: TMemo
+            Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+            DataDetectorTypes = []
+            Align = Client
+            Margins.Bottom = 20.000000000000000000
+            Size.Width = 570.000000000000000000
+            Size.Height = 98.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            OnExit = mmoProjDescExit
+            Viewport.Width = 566.000000000000000000
+            Viewport.Height = 94.000000000000000000
+          end
+          object GenReportButton: TButton
+            Align = Bottom
+            Position.Y = 219.000000000000000000
+            Size.Width = 570.000000000000000000
+            Size.Height = 49.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 4
+            Text = 'Generate Report'
+            OnClick = GenReportButtonClick
+          end
+        end
+      end
+    end
+    object EntriesTab: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 304.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Entries'
+      ExplicitSize.cx = 304.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object lstEntries: TListView
+        ItemAppearanceClassName = 'TImageListItemAppearance'
+        ItemEditAppearanceClassName = 'TImageListItemDeleteAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        Align = Client
+        Size.Width = 610.000000000000000000
+        Size.Height = 308.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        StyleLookup = 'listviewstyle'
+        OnItemClick = lstEntriesItemClick
+        OnDeletingItem = lstEntriesDeletingItem
+      end
+    end
+  end
+  object Layout1: TLayout
+    Align = Top
+    Position.Y = 48.000000000000000000
+    Size.Width = 610.000000000000000000
+    Size.Height = 209.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 18
+    object BackgroundImage: TImage
+      MultiResBitmap = <
+        item
+        end>
+      Align = Contents
+      Size.Width = 610.000000000000000000
+      Size.Height = 209.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object Layout3: TLayout
+      Align = Bottom
+      Margins.Bottom = -25.000000000000000000
+      Position.Y = 184.000000000000000000
+      Size.Width = 610.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object AddLogEntryCircleBTN: TCircle
+        Align = Right
+        ClipChildren = True
+        Position.X = 446.000000000000000000
+        Size.Width = 164.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        OnClick = AddLogEntryCircleBTNClick
+        object AddButton: TSpeedButton
+          Align = Center
+          HitTest = False
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'addtoolbutton'
+          Text = 'AddButton'
+        end
+      end
+    end
+  end
+end

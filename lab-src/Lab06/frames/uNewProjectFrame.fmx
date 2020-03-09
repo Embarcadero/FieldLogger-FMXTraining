@@ -1,0 +1,158 @@
+object NewProjectFrame: TNewProjectFrame
+  Size.Width = 574.000000000000000000
+  Size.Height = 687.000000000000000000
+  Size.PlatformDefault = False
+  object Image10: TImage
+    MultiResBitmap.Height = 1326
+    MultiResBitmap.Width = 1306
+    MultiResBitmap.LoadSize = 2
+    MultiResBitmap = <
+      item
+      end>
+    Align = Contents
+    MarginWrapMode = Tile
+    Margins.Left = -400.000000000000000000
+    Margins.Top = -400.000000000000000000
+    Margins.Right = -400.000000000000000000
+    Margins.Bottom = -400.000000000000000000
+    Size.Width = 1374.000000000000000000
+    Size.Height = 1487.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Layout2: TLayout
+    Align = Client
+    Margins.Left = 20.000000000000000000
+    Margins.Top = 20.000000000000000000
+    Margins.Right = 20.000000000000000000
+    Margins.Bottom = 20.000000000000000000
+    Size.Width = 534.000000000000000000
+    Size.Height = 390.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Layout4: TLayout
+      Align = Client
+      Size.Width = 534.000000000000000000
+      Size.Height = 390.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object edtNewProjTitle: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 1
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Position.Y = 51.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 534.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+        OnKeyDown = edtNewProjTitleKeyDown
+      end
+      object mmoNewProjDescription: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Client
+        Margins.Top = 6.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 534.000000000000000000
+        Size.Height = 204.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Viewport.Width = 530.000000000000000000
+        Viewport.Height = 200.000000000000000000
+      end
+      object Layout5: TLayout
+        Align = Bottom
+        Margins.Left = 3.000000000000000000
+        Margins.Top = 3.000000000000000000
+        Margins.Right = 3.000000000000000000
+        Margins.Bottom = 3.000000000000000000
+        Position.X = 3.000000000000000000
+        Position.Y = 333.000000000000000000
+        Size.Width = 528.000000000000000000
+        Size.Height = 54.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        object CreateButton: TButton
+          Align = Client
+          Size.Width = 528.000000000000000000
+          Size.Height = 54.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Create'
+          OnClick = CreateButtonClick
+        end
+      end
+      object Label15: TLabel
+        Align = Top
+        StyledSettings = [Family, Size, FontColor]
+        Margins.Top = 20.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 534.000000000000000000
+        Size.Height = 21.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        Text = 'Project Title'
+        TabOrder = 2
+      end
+      object Label4: TLabel
+        Align = Top
+        StyledSettings = [Family, Size, FontColor]
+        Position.Y = 93.000000000000000000
+        Size.Width = 534.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        Text = 'Project Description'
+        TabOrder = 5
+      end
+    end
+  end
+  object ToolBar4: TToolBar
+    Size.Width = 574.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object ToolBarBackgroundRect: TRectangle
+      Align = Contents
+      Fill.Color = x80FFFFFF
+      Size.Width = 574.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object Label23: TLabel
+      Align = Contents
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 574.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'New Project'
+      TabOrder = 1
+    end
+    object spedCancelNewProject: TSpeedButton
+      Align = Left
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowlefttoolbutton'
+      Text = 'Go to tabProjectsList'
+      OnClick = spedCancelNewProjectClick
+    end
+  end
+  object Layout1: TLayout
+    Align = Top
+    Position.Y = 48.000000000000000000
+    Size.Width = 574.000000000000000000
+    Size.Height = 209.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+  end
+end
