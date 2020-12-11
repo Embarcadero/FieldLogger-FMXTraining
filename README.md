@@ -1,6 +1,8 @@
 # FieldLogger-FMXTraining
 Code to accompany a full-day training on building mobile apps with FireMonkey. 
 
+All of the code, slides, labs, etc. are free for reuse for any purposes. Just please link back here.
+
 ## Overview
 
 * Designed as a full day training
