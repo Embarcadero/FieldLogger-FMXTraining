@@ -1,10 +1,9 @@
-program FieldLogger;
+program FieldLogger01;
 
 uses
   System.StartUpCopy,
   FMX.Forms,
   formMain in 'forms\formMain.pas' {frmMain},
-  fieldlogger.data in 'units\fieldlogger.data.pas',
   uSigninFrame in 'frames\uSigninFrame.pas' {SigninFrame: TFrame},
   uProjectsFrame in 'frames\uProjectsFrame.pas' {ProjectsFrame: TFrame},
   uProjectDetailsFrame in 'frames\uProjectDetailsFrame.pas' {ProjectDetailsFrame: TFrame},

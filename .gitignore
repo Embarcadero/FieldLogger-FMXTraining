@@ -70,3 +70,4 @@ src/FMXFieldLogger.res
 out/
 
 ReportingDemo/RandomImages/.*
+*.prjmgc

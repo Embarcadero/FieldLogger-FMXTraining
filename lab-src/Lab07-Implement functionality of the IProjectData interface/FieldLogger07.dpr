@@ -1,10 +1,9 @@
-program FieldLogger;
+program FieldLogger07;
 
 uses
   System.StartUpCopy,
   FMX.Forms,
   formMain in 'forms\formMain.pas' {frmMain},
-  fieldlogger.authentication in 'units\fieldlogger.authentication.pas',
   fieldlogger.data in 'units\fieldlogger.data.pas',
   fieldlogger.projectdata.standard in 'units\fieldlogger.projectdata.standard.pas',
   fieldlogger.logdata.standard in 'units\fieldlogger.logdata.standard.pas',
@@ -16,8 +15,7 @@ uses
   uNewProjectFrame in 'frames\uNewProjectFrame.pas' {NewProjectFrame: TFrame},
   uReportingFrame in 'frames\uReportingFrame.pas' {ReportingFrame: TFrame},
   uDataModule in 'forms\uDataModule.pas' {mainDM: TDataModule},
-  uProgressFrame in 'frames\uProgressFrame.pas' {ProgressFrame: TFrame},
-  wwEmailWithAttachment in 'units\wwEmailWithAttachment.pas';
+  uProgressFrame in 'frames\uProgressFrame.pas' {ProgressFrame: TFrame};
 
 {$R *.res}
 

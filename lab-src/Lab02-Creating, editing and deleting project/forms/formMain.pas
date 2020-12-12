@@ -23,7 +23,7 @@ uses
   uProjectDetailsFrame, uProjectsFrame, uSigninFrame, uProgressFrame,
   fieldlogger.Data, System.Net.URLClient, System.Net.HttpClient,
   System.Net.HttpClientComponent, IdBaseComponent, IdComponent, IdTCPConnection,
-  IdTCPClient, FMX.Platform, FMX.VirtualKeyboard;
+  IdTCPClient, FMX.Platform, FMX.VirtualKeyboard, FMX.Memo.Types;
 
 type
   EConnectFailed = class(Exception)
@@ -59,16 +59,12 @@ type
     procedure FormFocusChanged(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
-  private
-    FGeocoder: TGeocoder;
-    FCurrentLocation: TLocationCoord2D;
-    FRunOnce: Boolean;
-    FKBBounds: TRectF;
-    FNeedOffset: Boolean;
-    FCurrentStyleId: Integer;
-    procedure CalcContentBoundsProc(Sender: TObject;
-                                    var ContentBounds: TRectF);
-    procedure RestorePosition;
+	private
+		FRunOnce: Boolean;
+		FKBBounds: TRectF;
+		FNeedOffset: Boolean;
+		FCurrentStyleId: Integer;
+		procedure RestorePosition;
     procedure UpdateKBBounds;
     procedure ApplicationIdle(Sender: TObject; var Done: Boolean);
   public
@@ -259,8 +255,6 @@ end;
 
 
 procedure TfrmMain.UpdateProject(const ATitle, ADesc: String);
-var
-  Project: TProject;
 begin
   if CurrentProject.ID = 0 then
   begin
@@ -274,16 +268,6 @@ begin
   end;
 
   ProjectsFrame1.LoadProjects;
-end;
-
-procedure TfrmMain.CalcContentBoundsProc(Sender: TObject;
-                                       var ContentBounds: TRectF);
-begin
-  if FNeedOffset and (FKBBounds.Top > 0) then
-  begin
-    ContentBounds.Bottom := Max(ContentBounds.Bottom,
-                                2 * ClientHeight - FKBBounds.Top);
-  end;
 end;
 
 procedure TfrmMain.RestorePosition;

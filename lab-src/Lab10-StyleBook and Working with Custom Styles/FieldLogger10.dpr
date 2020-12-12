@@ -1,4 +1,4 @@
-program FieldLogger;
+program FieldLogger10;
 
 uses
   System.StartUpCopy,
